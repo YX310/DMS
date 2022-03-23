@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>toolbar</title>
+		<link rel="stylesheet" th:href="@{/css/index.css}" />
+		<script th:src="@{/js/jquery.js}"></script>
+	</head>
+	<body>
+		<div id="toolbarBox" style="min-height: 48px;">
+			<div id="toolbar-container">
+				<div id="toolbar-container-left">
+					<div id="toolbar-logo">logo</div>
+					<div class="toolbar-f1">
+						<ul>我的工作台</ul>
+						<ul>概述</ul>
+						<ul>需求</ul>
+						<ul>缺陷</ul>
+						<ul>我的</ul>
+					</div>
+				</div>
+				
+				<div id="toolbar-container-middle">
+					<div class="toolbar-search">
+						<div class="toolbar-search-container">
+							<input id="toolbar-search-input" style="text-indent: 32px;"/>
+							<button id="toolbar-search-button">
+								<i></i>
+								<span>搜索</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div id="toolbar-container-right">
+					<div class="toolbar-user">
+						<div class="headimg_box">
+							<img src="../imgs/style_img/logimg.jpg"/>
+						</div>
+						<span>guanxiaomin</span>
+					</div>
+					<div class="toolbar-logout">
+						<a href="#">退出</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -21,6 +21,7 @@ a{
     line-height: 48px;
     margin: 0;
     padding: 0;
+    overflow: hidden; /*清除浮动*/
     /*border: 1px solid blueviolet;*/
 }
 

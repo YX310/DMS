@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thyemleaf.org">
+    <head>
+        <title>登陆</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
+        <script src="https://www.jq22.com/jquery/bootstrap-4.2.1.js"></script>
+        <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-4.2.1.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="../css/login.css" />
+
+        <style type="text/css">
+            #table1 td{ height:80px; border:white 20px solid;}
+        </style>
+    </head>
+
+
+    <body>
+        <div class="shadow mb-5 bg-light rounded login-top">
+            <div class="head">
+                <img src="logo.png"><span><h1>·</h1>登录</span>
+            </div>
+        </div>
+        <div class="login-box">
+            <div class="login">
+                <div class="login-other">
+                </div>
+                <div class="hr"><span>登录</span></div>
+                <div class="login-form">
+                    <form th:action="@{/checkLogin}" method="post">
+                        <table cellpadding="0" cellspacing="0" border="0" class="form_table" id="table1">
+                            <tr>
+                                <td valign="middle" align="right">
+                                    用户名:
+                                </td>
+                                <td valign="middle" align="left">
+                                    <input type="text" class="inputgri" name="userid"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="middle" align="right">
+                                    密码:
+                                </td>
+                                <td valign="middle" align="left">
+                                    <input type="password" class="inputgri" name="passwd"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="middle" align="right">
+                                    用户类型:
+                                </td>
+                                <td valign="middle" align="left">
+                                    管理员
+                                    <input type="radio" class="inputgri" name="user_role" value="管理员" checked="checked"/>
+                                    &nbsp; &nbsp;  项目经理
+                                    <input type="radio" class="inputgri" name="user_role" value="项目经理" />
+                                    &nbsp; &nbsp;  开发
+                                    <input type="radio" class="inputgri" name="user_role" value="开发" />
+                                    &nbsp; &nbsp;  测试
+                                    <input type="radio" class="inputgri" name="user_role" value="测试" />
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <input type="submit" class="btn btn-success btn-block" value="登 录"  style="width:200px;margin-left:100px;"/>
+                            <input type="button" class="btn btn-success btn-block" onclick="location.href='/to_register'" value="注 册"  style="width:200px;margin-left:100px;"/>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

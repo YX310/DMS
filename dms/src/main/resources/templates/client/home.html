@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<script src="js/jquery.js"></script>
+	</head>
+	<body>
+		<div id="toolbarBox" style="min-height: 48px;">
+			<div id="toolbar-container">
+				<div id="toolbar-container-left">
+					<div id="toolbar-logo">DMS</div>
+				</div>
+				
+				<div id="toolbar-container-middle">
+					<div class="toolbar-search">
+						<div class="toolbar-search-container">
+							<input id="toolbar-search-input" style="text-indent: 32px;"/>
+							<button id="toolbar-search-button">
+								<i></i>
+								<span>搜索</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div id="toolbar-container-right">
+					<div class="toolbar-user">
+						<div class="headimg_box">
+							<img src="../imgs/style_img/logimg.jpg"/>
+						</div>
+						<span th:if="${(session.userid)}!=null " th:text="${session.username}" class="usermsg"></span>
+					</div>
+					<div class="toolbar-logout">
+						<a href="/login">退出</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 项目列表 -->
+		<div class="project_box">
+			<div class="project_content">
+				<div class="title">
+					<h1>我加入的项目</h1>
+				</div>
+				<div class="content">
+					<div class="model">
+<!--						<div class="img">-->
+<!--							<img src="images/banner.jpg" />-->
+<!--						</div>-->
+						<div class="project_list">
+							<a href="/index">
+								<p class="p1">项目：project1</p>
+								<p class="p2">创建人：xiaomin</p>
+							</a>
+							<!--<p class="p3">2022-03-25</p>-->
+						</div>
+					</div>
+					<div class="model">11</div>
+					<div class="model">22</div>
+					<div class="model">33</div>
+					<div class="model">44</div>
+					<div class="model">55</div>
+					<div class="model">66</div>
+					<div class="model">77</div>
+					<div class="model">88</div>
+				</div>
+			</div>
+			<div class="more">查看更多</div>
+		</div>
+
+	</body>
+</html>

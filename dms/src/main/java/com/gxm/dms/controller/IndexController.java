@@ -20,6 +20,11 @@ public class IndexController {
         return "client/login";
     }
 
+    @GetMapping(value = {"/home"})
+    public String toHome(){
+        return "client/home";
+    }
+
     @GetMapping(value = {"/index"})
     public String toIndex(){
         return "client/index";

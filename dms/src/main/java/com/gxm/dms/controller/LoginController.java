@@ -27,27 +27,29 @@ public class LoginController {
             return "client/login";
         }else {
             if (user_role.equals("管理员")){
-                return indexController.toIndex();
+                return indexController.toHome();
             }else{
-                if(user_role.equals("项目经理")){
+                if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){
                     HttpSession session = request.getSession(true);
-                    session.setAttribute("z_userid", userid);
-                    session.setAttribute("z_username", user.getUsername());
-                    session.setAttribute("z_useremail", user.getEmail());
-                    return indexController.toIndex();
-                }else if (user_role.equals("开发")){
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("y_userid", userid);
-                    session.setAttribute("y_username", user.getUsername());
-                    session.setAttribute("y_useremail", user.getEmail());
-                    return indexController.toIndex();
-                }else if (user_role.equals("测试")){
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("y_userid", userid);
-                    session.setAttribute("y_username", user.getUsername());
-                    session.setAttribute("y_useremail", user.getEmail());
-                    return indexController.toIndex();
-                }else{
+                    session.setAttribute("userid", userid);
+                    session.setAttribute("username", user.getUsername());
+                    session.setAttribute("useremail", user.getEmail());
+                    return indexController.toHome();
+                }
+//                }else if (user_role.equals("开发")){
+//                    HttpSession session = request.getSession(true);
+//                    session.setAttribute("RD_userid", userid);
+//                    session.setAttribute("RD_username", user.getUsername());
+//                    session.setAttribute("RD_useremail", user.getEmail());
+//                    return indexController.toHome();
+//                }else if (user_role.equals("测试")){
+//                    HttpSession session = request.getSession(true);
+//                    session.setAttribute("QA_userid", userid);
+//                    session.setAttribute("QA_username", user.getUsername());
+//                    session.setAttribute("QA_useremail", user.getEmail());
+//                    return indexController.toHome();
+//                }
+                else{
                     return "client/login";
                 }
             }

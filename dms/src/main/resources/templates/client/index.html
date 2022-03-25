@@ -10,7 +10,7 @@
 		<div id="toolbarBox" style="min-height: 48px;">
 			<div id="toolbar-container">
 				<div id="toolbar-container-left">
-					<div id="toolbar-logo">logo</div>
+					<div id="toolbar-logo">DMS</div>
 					<div class="toolbar-f1">
 						<ul>我的工作台</ul>
 						<ul>概述</ul>
@@ -36,7 +36,7 @@
 						<div class="headimg_box">
 							<img src="../imgs/style_img/logimg.jpg"/>
 						</div>
-						<span>guanxiaomin</span>
+						<span th:if="${(session.userid)}!=null " th:text="${session.username}" class="usermsg"></span>
 					</div>
 					<div class="toolbar-logout">
 						<a href="/login">退出</a>

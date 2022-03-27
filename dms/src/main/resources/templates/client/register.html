@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thyemleaf.org">
+<head>
+    <title>注册</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
+    <script src="https://www.jq22.com/jquery/bootstrap-4.2.1.js"></script>
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-4.2.1.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../css/register.css" />
+
+    <style type="text/css">
+        #table1 td{  border:white 20px solid;}
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="register-top">
+    <div class="head">
+    	<span class="logo">DMS</span>
+        <span class="register_title">用户注册</span>
+    </div>
+</div>
+<div class="register-box">
+
+    <!-- 注册 -->
+
+    <div class="register">
+        <div class="register-other">
+        </div>
+        <div class="hr"><span>注册</span></div>
+        <div class="register-form">
+            <form th:action="@{/user/register}" method="post">
+                <table cellpadding="0" cellspacing="0" border="0" class="form_table" id="table1">
+                    <tr>
+                        <td valign="middle" align="right">
+                            用户名:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="username"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            真实姓名:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="realname"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="middle" align="right">
+                            密码:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="password" class="inputgri" name="password"/>
+                        </td>
+                    </tr>
+                    <tr>
+                                <td valign="middle" align="right">
+                                    用户类型:
+                                </td>
+                                <td valign="middle" align="left">
+                                    管理员
+                                    <input type="radio" class="inputgri" name="user_role" value="管理员" checked="checked"/>
+                                    &nbsp; &nbsp;  项目经理
+                                    <input type="radio" class="inputgri" name="user_role" value="项目经理" />
+                                    &nbsp; &nbsp;  开发
+                                    <input type="radio" class="inputgri" name="user_role" value="开发" />
+                                    &nbsp; &nbsp;  测试
+                                    <input type="radio" class="inputgri" name="user_role" value="测试" />
+                                </td>
+                            </tr>
+
+                    <tr>
+                        <td valign="middle" align="right">
+                            邮箱:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="email"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="middle" align="right">
+                            验证码:
+                            <img id="num" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="#" >换一张</a>
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="code"/>
+                        </td>
+                    </tr>
+
+
+                </table>
+                <p>
+                    <input type="submit" class="btn btn-success btn-block" value="提交 &raquo;" style="width:200px;margin-left:180px;"/>
+                    <input type="button" class="btn btn-success btn-block" onclick="location.href='/login'" value="登录 &raquo;"  style="width:200px;margin-left:180px;"/>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

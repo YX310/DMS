@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 @Controller
 public class LoginController {
@@ -56,4 +59,6 @@ public class LoginController {
         }
 
     }
+
+
 }

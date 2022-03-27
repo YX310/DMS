@@ -30,4 +30,9 @@ public class IndexController {
         return "client/index";
     }
 
+    @GetMapping(value = {"/register"})
+    public String toRegister(){
+        return "client/register";
+    }
+
 }

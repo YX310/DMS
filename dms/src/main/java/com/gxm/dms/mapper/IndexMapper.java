@@ -1,6 +1,7 @@
 package com.gxm.dms.mapper;
 import com.gxm.dms.model.domain.User;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,12 @@ public interface IndexMapper {
     public User checkLogin(String userid, String passwd, String user_role);
 
     //注册
-    @Select("insert into user values(#{username}, #{nickname},#{password},#{type},#{email})")
-    public String register(String username, String nickname, String password,String type, String email);
+    @Insert("insert into user values(#{user_id},#{username},#{nickname},#{password},#{user_role},#{head_img},#{company}," +
+            "#{position},#{employee_number},#{email})")
+    @Options(useGeneratedKeys = true,keyProperty = "user_id",keyColumn = "user_id")
+    public void register(User user);
 
+    // 检索重复username
+    @Select("select* from user where username=#{userid}")
+    public User checkUser(String userid);
 }

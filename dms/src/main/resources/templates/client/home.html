@@ -46,29 +46,28 @@
 					<h1>我加入的项目</h1>
 				</div>
 				<div class="content">
-					<div class="model">
+					<div class="model" th:each="n:${data.list}">
 <!--						<div class="img">-->
 <!--							<img src="images/banner.jpg" />-->
 <!--						</div>-->
 						<div class="project_list">
 							<a href="/index">
-								<p class="p1">项目：project1</p>
-								<p class="p2">创建人：xiaomin</p>
+								<p class="p1" th:text="${n.project_name}">项目：project1</p>
+								<p class="p2" th:text="${n.creator}">创建人：xiaomin</p>
 							</a>
 							<!--<p class="p3">2022-03-25</p>-->
 						</div>
 					</div>
-					<div class="model">11</div>
-					<div class="model">22</div>
-					<div class="model">33</div>
-					<div class="model">44</div>
-					<div class="model">55</div>
-					<div class="model">66</div>
-					<div class="model">77</div>
-					<div class="model">88</div>
 				</div>
 			</div>
-			<div class="more">查看更多</div>
+			<div class="more">
+				<div class="page">
+					<div th:each="num, numStat : ${#numbers.sequence(1,__${count}__)}">
+						<a th:if="${num} eq ${page}" style="background: rgba(71,149,243,1);color: white" th:href="${'/page/'+num}" th:text="${num}" ></a>
+						<a th:if="${num} ne ${page}" th:href="${'/page/'+num}" th:text="${num}" ></a>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</body>

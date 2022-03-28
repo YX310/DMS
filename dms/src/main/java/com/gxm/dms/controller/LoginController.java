@@ -30,14 +30,14 @@ public class LoginController {
             return "client/login";
         }else {
             if (user_role.equals("管理员")){
-                return indexController.toHome();
+                return indexController.toHome(request);
             }else{
                 if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){
                     HttpSession session = request.getSession(true);
                     session.setAttribute("userid", userid);
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("useremail", user.getEmail());
-                    return indexController.toHome();
+                    return indexController.toHome(request);
                 }
 //                }else if (user_role.equals("开发")){
 //                    HttpSession session = request.getSession(true);

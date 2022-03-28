@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class ProjectController {
@@ -19,12 +20,13 @@ public class ProjectController {
     private ProjectServiceImpl projectServiceImpl;
 
     // home页面（分页）
-    @GetMapping(value = "/project_list")
-    private String news(HttpServletRequest request) {
-        return this.news(request, 1, 5);
+    @GetMapping(value = "/home_project_list")
+    String project(HttpServletRequest request) {
+        return this.project(request, 1, 5);
     }
+
     @GetMapping("/page/{p}")
-    public String news(HttpServletRequest request,@PathVariable("p") int page,
+    public String project(HttpServletRequest request,@PathVariable("p") int page,
                        @RequestParam(value = "count", defaultValue = "5") int count){
         PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count);
         request.setAttribute("data", list);

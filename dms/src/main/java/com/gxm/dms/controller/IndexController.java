@@ -30,13 +30,13 @@ public class IndexController {
 //        return "client/home";
 //    }
 
-    // 初始化首页展示页面
-    @GetMapping(value = {"/home"})
-    public String toHome(HttpServletRequest request){
-        List<Project> list = projectMapper.selectAllProject();
-        request.setAttribute("data", list);
-        return "client/home";
-    }
+//    // 初始化首页展示页面
+//    @GetMapping(value = {"/home"})
+//    public String toHome(HttpServletRequest request){
+//        List<Project> list = projectMapper.selectAllProject();
+//        request.setAttribute("data", list);
+//        return "client/home";
+//    }
 
     @GetMapping(value = {"/index"})
     public String toIndex(){

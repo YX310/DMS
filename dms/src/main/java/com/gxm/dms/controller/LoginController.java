@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+
 
 @Controller
 public class LoginController {
@@ -19,6 +16,9 @@ public class LoginController {
     private IndexMapper mapper;
     @Autowired
     private IndexController indexController;
+    @Autowired
+    private ProjectController projectController;
+
 
 
     // 登陆检查
@@ -30,14 +30,14 @@ public class LoginController {
             return "client/login";
         }else {
             if (user_role.equals("管理员")){
-                return indexController.toHome(request);
+                return projectController.project(request);
             }else{
                 if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){
                     HttpSession session = request.getSession(true);
                     session.setAttribute("userid", userid);
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("useremail", user.getEmail());
-                    return indexController.toHome(request);
+                    return projectController.project(request);
                 }
 //                }else if (user_role.equals("开发")){
 //                    HttpSession session = request.getSession(true);

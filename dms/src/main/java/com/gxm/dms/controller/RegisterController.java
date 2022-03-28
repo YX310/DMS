@@ -15,18 +15,20 @@ public class RegisterController {
     private IndexMapper mapper;
     @Autowired
     private IndexController indexController;
+    @Autowired
+    private ProjectController projectController;
 
     @PostMapping(value = "/user/register")
     public String register(HttpSession session, HttpServletRequest request,User user) {
         // if has user
-        if (mapper.checkUser(user.getUsername()) != null) return indexController.toHome(request);
+        if (mapper.checkUser(user.getUsername()) != null) return projectController.project(request);
 
         // register
         mapper.register(user);
         // jump
         String role = user.getUser_role();
         if (role.equals("管理员")) {
-            return indexController.toHome(request);
+            return projectController.project(request);
         } else {
 
             if (role.equals("项目经理") || role.equals("开发") || role.equals("测试")) {
@@ -34,7 +36,7 @@ public class RegisterController {
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("useremail", user.getEmail());
                 // Now the page we return is the login page, but also can jump to the index page.
-                return indexController.toHome(request);
+                return projectController.project(request);
             }
         }
         return indexController.toRegister();

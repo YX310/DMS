@@ -36,14 +36,14 @@ public class ProjectServiceImpl implements ProjectService {
 //            session.setAttribute("user_id", user.getUser_id());
 //        return null;
 //    }
+
     // 查询项目列表
     @Override
-    public PageInfo<Project> selectProjectWithPage(Integer page, Integer count) {
+    public PageInfo<Project> selectProjectWithPage(Integer page, Integer count, String username) {
         PageHelper.startPage(page, count);
 //        List<Project> projectList = projectMapper.selectAllProject();//需要修改
-        List<Project> projectList = projectMapper.selectProjectWithUserId();//需要修改
-        PageInfo<Project> pageInfo=new PageInfo<>(projectList);
-        return pageInfo;
+        List<Project> projectList = projectMapper.selectProjectWithUserId(username);//需要修改
+        return new PageInfo<>(projectList);
     }
 
     // 根据项目id查询详情，并使用Redis进行缓存管理

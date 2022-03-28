@@ -250,3 +250,36 @@ a:hover{
 
     /* Safari and Chrome */
 }
+
+#num {
+    background: url("../imgs/style_img/code_bg.png");
+    font-family: Arial, serif;
+    font-style: italic;
+    color: blue;
+    font-size: 20px;
+    padding: 2px 3px;
+    letter-spacing: 3px;
+    font-weight: bolder;
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.input-code-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.input-code-text {
+    width: 50px;
+}
+
+#inputCodeContainer {
+    border: 0 !important;
+}
+
+.form_table {
+    margin: auto;
+}

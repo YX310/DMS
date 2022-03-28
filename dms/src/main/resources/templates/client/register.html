@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
     <script src="https://www.jq22.com/jquery/bootstrap-4.2.1.js"></script>
+    <script src="../js/register.js"></script>
+
     <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-4.2.1.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/register.css" />
 
@@ -33,7 +35,7 @@
         </div>
         <div class="hr"><span>注册</span></div>
         <div class="register-form">
-            <form th:action="@{/user/register}" method="post">
+            <form th:action="@{/user/register}" method="post" onsubmit="return validateCode()">
                 <table cellpadding="0" cellspacing="0" border="0" class="form_table" id="table1">
                     <tr>
                         <td valign="middle" align="right">
@@ -88,14 +90,13 @@
                     <tr>
                         <td valign="middle" align="right">
                             验证码:
-                            <img id="num" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="#" >换一张</a>
                         </td>
-                        <td valign="middle" align="left">
-                            <input type="text" class="inputgri" name="code"/>
+                        <td valign="middle" align="left" class="input-code-container" id="inputCodeContainer">
+                            <input type="text" class="input-code-text" name="code" id="inputCode"/>
+                            <div id="num" onclick="createCode()"></div>
+                            <a href="#" onclick="createCode()">换一张</a>
                         </td>
                     </tr>
-
 
                 </table>
                 <p>

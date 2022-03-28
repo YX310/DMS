@@ -25,13 +25,15 @@ public class LoginController {
 
     // 登陆检查
     @PostMapping(value = "/checkLogin")
-    public String checkLogin(HttpServletRequest request, @RequestParam("user_id") String user_id, @RequestParam("passwd") String passwd,
-                             @RequestParam("user_role") String user_role){
-        User user=mapper.checkLogin(user_id,passwd,user_role);
-        if(user==null){
+    public String checkLogin(HttpServletRequest request,
+                             @RequestParam("user_id") String user_id,
+                             @RequestParam("passwd") String passwd,
+                             @RequestParam("user_role") String user_role) {
+        User user = mapper.checkLogin(user_id, passwd, user_role);
+        if(user == null){
             return "client/login";
 //            return adminController.User(request);
-        }else {
+        } else {
             if (user_role.equals("管理员")){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user_id", user_id);
@@ -39,28 +41,14 @@ public class LoginController {
                 session.setAttribute("useremail", user.getEmail());
 //                return "back/user_list";
                 return adminController.User(request);
-            }else{
+            } else {
                 if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){
                     HttpSession session = request.getSession(true);
                     session.setAttribute("user_id", user_id);
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("useremail", user.getEmail());
                     return projectController.Project(request);
-                }
-//                }else if (user_role.equals("开发")){
-//                    HttpSession session = request.getSession(true);
-//                    session.setAttribute("RD_userid", user_id);
-//                    session.setAttribute("RD_username", user.getUsername());
-//                    session.setAttribute("RD_useremail", user.getEmail());
-//                    return indexController.toHome();
-//                }else if (user_role.equals("测试")){
-//                    HttpSession session = request.getSession(true);
-//                    session.setAttribute("QA_userid", user_id);
-//                    session.setAttribute("QA_username", user.getUsername());
-//                    session.setAttribute("QA_useremail", user.getEmail());
-//                    return indexController.toHome();
-//                }
-                else{
+                } else {
                     return "client/login";
                 }
             }

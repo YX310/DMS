@@ -2,6 +2,7 @@ package com.gxm.dms.controller;
 
 import com.gxm.dms.mapper.IndexMapper;
 import com.gxm.dms.model.domain.User;
+import com.gxm.dms.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,22 +16,28 @@ public class RegisterController {
     private IndexMapper mapper;
     @Autowired
     private IndexController indexController;
+    @Autowired(required = false)
+    private AdminController adminController;
     @Autowired
     private ProjectController projectController;
 
+
     @PostMapping(value = "/user/register")
-    public String register(HttpSession session, HttpServletRequest request,User user) {
+    public String register(HttpServletRequest request,User user) {
         // if has user
         if (mapper.checkUser(user.getUsername()) != null) return projectController.Project(request);
+
+        // check email
+        if (!Utils.checkEmail(user.getEmail())) return indexController.toRegister();
 
         // register
         mapper.register(user);
         // jump
         String role = user.getUser_role();
         if (role.equals("管理员")) {
-            return projectController.Project(request);
+            return adminController.User(request);
         } else {
-
+            HttpSession session = request.getSession(true);
             if (role.equals("项目经理") || role.equals("开发") || role.equals("测试")) {
                 session.setAttribute("user_id", user.getUser_id());
                 session.setAttribute("username", user.getUsername());

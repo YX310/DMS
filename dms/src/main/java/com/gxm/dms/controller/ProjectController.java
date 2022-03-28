@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ProjectController {
@@ -25,10 +26,13 @@ public class ProjectController {
     @GetMapping("/page/{p}")
     public String Project(HttpServletRequest request,@PathVariable("p") int page,
                        @RequestParam(value = "count", defaultValue = "5") int count){
-        PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count);
-        request.setAttribute("data", list);
-        request.setAttribute("page", page);
-        request.setAttribute("count",projectServiceImpl.selectProjectWithPage(page, count).getPages());
+        Object username = request.getSession(true).getAttribute("username");
+        if (username instanceof String) {
+            PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count, (String) username);
+            request.setAttribute("data", list);
+            request.setAttribute("page", page);
+            request.setAttribute("count", list.getPages());
+        }
         return "client/home";
     }
 

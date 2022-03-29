@@ -39,10 +39,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     // 查询项目列表
     @Override
-    public PageInfo<Project> selectProjectWithPage(Integer page, Integer count, String username) {
+    public PageInfo<Project> selectProjectWithPage(Integer page, Integer count, int user_id) {
         PageHelper.startPage(page, count);
 //        List<Project> projectList = projectMapper.selectAllProject();//需要修改
-        List<Project> projectList = projectMapper.selectProjectWithUserId(username);//需要修改
+        List<Project> projectList = projectMapper.selectProjectWithUserId(user_id);//需要修改
         return new PageInfo<>(projectList);
     }
 

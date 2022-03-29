@@ -36,7 +36,7 @@ public class LoginController {
         } else {
             if (user_role.equals("管理员")){
                 HttpSession session = request.getSession(true);
-                session.setAttribute("user_id", user_id);
+                session.setAttribute("user_id", user.getUser_id());
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("useremail", user.getEmail());
 //                return "back/user_list";
@@ -44,7 +44,7 @@ public class LoginController {
             } else {
                 if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){
                     HttpSession session = request.getSession(true);
-                    session.setAttribute("user_id", user_id);
+                    session.setAttribute("user_id", user.getUser_id());
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("useremail", user.getEmail());
                     return projectController.Project(request);

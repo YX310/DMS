@@ -14,10 +14,8 @@ public interface ProjectMapper {
 //    @Select("SELECT res.username,p.project_name FROM(SELECT u.username,up.project_id FROM USER AS u INNER JOIN user_and_project AS up WHERE u.user_id=up.user_id && u.username=#{session.user_id}) AS res \n" +
 //            "INNER JOIN project AS p WHERE res.project_id=p.project_id;")
 //    public List<Project> selectProjectWithUserId(Integer user_id);
-//    @Select("SELECT res.username,p.project_name FROM(SELECT u.username,up.project_id FROM USER AS u INNER JOIN user_and_project AS up WHERE u.user_id=up.user_id) AS res \n" +
-//            "INNER JOIN project AS p WHERE res.project_id=p.project_id;")
-    @Select("SELECT * FROM project WHERE creator=#{username}")
-    public List<Project> selectProjectWithUserId(String username);
+    @Select("SELECT * FROM project AS p INNER JOIN user_and_project AS up WHERE p.project_id=up.project_id and user_id=#{user_id}")
+    public List<Project> selectProjectWithUserId(int user_id);
 
     // 查询所有的项目信息
     @Select("SELECT * FROM project")

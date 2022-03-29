@@ -290,7 +290,7 @@ a{
 	color: rgba(71,149,243,1);
 }
 
-.project_box .more {
+.more {
 	float:left;
 	width: 20%;
 	height: 40px;
@@ -304,13 +304,13 @@ a{
 }
 
 /****end  project_list***/
-.project_box .page{
+.page{
 	float: left;
 	width: 100%;
 	height: 50px;
 	/*	border: 2px rgba(71,149,243,1) solid;*/
 }
-.project_box .page a{
+.page a{
 	text-decoration: none;
 	float: left;
 	margin-right: 20px;
@@ -322,7 +322,7 @@ a{
 	color: black;
 	line-height: 40px;
 }
-.project_box .page a:hover{
+.page a:hover{
 	background-color: rgba(71,149,243,1);
 	color: white;
 }

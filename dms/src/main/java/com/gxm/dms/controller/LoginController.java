@@ -16,6 +16,8 @@ public class LoginController {
     private IndexMapper mapper;
     @Autowired
     private IndexController indexController;
+    @Autowired(required = false)
+    private AdminController adminController;
     @Autowired
     private ProjectController projectController;
 
@@ -23,31 +25,37 @@ public class LoginController {
 
     // 登陆检查
     @PostMapping(value = "/checkLogin")
-    public String checkLogin(HttpServletRequest request, @RequestParam("userid") String userid, @RequestParam("passwd") String passwd,
+    public String checkLogin(HttpServletRequest request, @RequestParam("user_id") String user_id, @RequestParam("passwd") String passwd,
                              @RequestParam("user_role") String user_role){
-        User user=mapper.checkLogin(userid,passwd,user_role);
+        User user=mapper.checkLogin(user_id,passwd,user_role);
         if(user==null){
             return "client/login";
+//            return adminController.User(request);
         }else {
             if (user_role.equals("管理员")){
-                return projectController.project(request);
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user_id", user_id);
+                session.setAttribute("username", user.getUsername());
+                session.setAttribute("useremail", user.getEmail());
+//                return "back/user_list";
+                return adminController.User(request);
             }else{
                 if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){
                     HttpSession session = request.getSession(true);
-                    session.setAttribute("userid", userid);
+                    session.setAttribute("user_id", user_id);
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("useremail", user.getEmail());
-                    return projectController.project(request);
+                    return projectController.Project(request);
                 }
 //                }else if (user_role.equals("开发")){
 //                    HttpSession session = request.getSession(true);
-//                    session.setAttribute("RD_userid", userid);
+//                    session.setAttribute("RD_userid", user_id);
 //                    session.setAttribute("RD_username", user.getUsername());
 //                    session.setAttribute("RD_useremail", user.getEmail());
 //                    return indexController.toHome();
 //                }else if (user_role.equals("测试")){
 //                    HttpSession session = request.getSession(true);
-//                    session.setAttribute("QA_userid", userid);
+//                    session.setAttribute("QA_userid", user_id);
 //                    session.setAttribute("QA_username", user.getUsername());
 //                    session.setAttribute("QA_useremail", user.getEmail());
 //                    return indexController.toHome();

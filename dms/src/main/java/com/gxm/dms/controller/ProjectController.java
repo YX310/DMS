@@ -10,23 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 public class ProjectController {
     @Autowired
-    private IndexController indexController;
-    @Autowired
     private ProjectServiceImpl projectServiceImpl;
 
-    // home页面（分页）
+    // home页面（分页展示）
     @GetMapping(value = "/home_project_list")
-    String project(HttpServletRequest request) {
-        return this.project(request, 1, 5);
+    String Project(HttpServletRequest request) {
+        return this.Project(request, 1, 5);
     }
 
     @GetMapping("/page/{p}")
-    public String project(HttpServletRequest request,@PathVariable("p") int page,
+    public String Project(HttpServletRequest request,@PathVariable("p") int page,
                        @RequestParam(value = "count", defaultValue = "5") int count){
         PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count);
         request.setAttribute("data", list);

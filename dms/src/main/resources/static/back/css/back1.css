@@ -1,0 +1,98 @@
+a {
+  text-decoration: none;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+#contentWrapper {
+	margin-left: 0.5%;
+  width: 98%;
+  height: 500px;
+  /*position: relative;*/
+ float: left;
+}
+
+#contentLeft {
+  z-index: 10;
+  width: 20%;
+  height:520px;
+  /*position: fixed;*/
+  float: left;
+  margin-top: 2px;
+  left: 0;
+  background-color: rgba(207,210,206,0.15);
+  box-shadow: 0 1px 10px gray;
+}
+
+#contentRight {
+  /*padding: 1.3rem 2rem;*/
+  margin-top: 0;
+  width: 72%;
+  margin-left: 5%;
+  /*margin-left: 0px;*/
+  float: left;
+  /*border: 3px solid red;*/
+
+}
+
+#leftNavigation {
+  margin: 2rem 0;
+}
+#leftNavigation, #leftNavigation li ul {
+  list-style: none;
+  padding: 10px;
+}
+#leftNavigation li a {
+  font-size: 1.5em;
+  display: block;
+  padding: 0.8rem 1rem 0.8rem 3rem;
+  
+  color: rgba(58,129,116,1);/*外层标题颜色*/
+  border-bottom: solid 1.5px rgba(207,210,206,0.8); 
+  border-bottom-style:dashed;
+  
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: color 0.2s ease;
+  transition: color 0.2s ease;
+}
+#leftNavigation li a, #leftNavigation li a .leftNavIcon {
+  line-height: 120%;
+}
+#leftNavigation li a .leftNavIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  padding: 0.8rem 0;
+  text-align: center;
+}
+#leftNavigation li a:hover {
+	font-weight: bold;
+  color: #5dd5c8;
+}
+#leftNavigation li.active > a {/*外层标题按后的字体颜色*/
+	font-family:"微软雅黑";
+	font-size: 1.6em;
+  color: rgba(78,69,58,1);
+}
+#leftNavigation li.active ul {
+  display: block;
+}
+#leftNavigation > li.active {/*外层标题按后的背景颜色*/
+  background-color: rgba(29,122,226,0.3);
+}
+
+h2.heading {
+  font-size: 28px;
+  text-transform: uppercase;
+  /*font-weight: 300;*/
+  text-align: center;
+  color: #077ABC;
+  /*border-bottom: 1px solid #506982;*/
+  padding-bottom: 3px;
+  margin-bottom: 35px;
+}

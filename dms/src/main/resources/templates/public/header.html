@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>header</title>
+</head>
+<body>
+    <div class="header" th:fragment="header">
+        <div id="toolbarBox" style="min-height: 48px;">
+            <div id="toolbar-container">
+                <div id="toolbar-container-left">
+                    <div id="toolbar-logo">DMS</div>
+                </div>
+
+                <div id="toolbar-container-middle">
+                    <div class="toolbar-search">
+                        <div class="toolbar-search-container">
+                            <input id="toolbar-search-input" style="text-indent: 32px;"/>
+                            <button id="toolbar-search-button">
+                                <i></i>
+                                <span>搜索</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="toolbar-container-right">
+                    <div class="toolbar-user">
+                        <div class="headimg_box">
+                            <img src="../imgs/style_img/logimg.jpg"/>
+                        </div>
+                        <span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
+                    </div>
+                    <div class="toolbar-logout">
+                        <a href="/login">退出</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

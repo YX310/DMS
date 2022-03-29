@@ -1,0 +1,431 @@
+
+#pagebox{
+    /*background-color: rgba(207,210,206,0.15);*/
+    /*box-shadow: 0 1px 10px gray;*/
+    float: left;
+    width: 70%;
+    margin-left: 25%;
+    margin-top: 0;
+    /*border: 3px solid red;*/
+}
+.am-pagination {
+    /*position: relative*/
+    width: 100%;
+    float:left;
+
+}
+
+
+.am-pagination-default .am-pagination-next, .am-pagination-default .am-pagination-prev {
+    float: left;
+}
+
+.am-paragraph-default p, .am-paragraph-table-container table td a {
+    font-size: 1.4rem
+}
+
+.am-pagination-select > li > a {
+    line-height: 36px;
+    background-color: #eee;
+    padding: 0 15px;
+    border: 0;
+    color: #555
+}
+
+.am-pagination-select .am-pagination-select {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -35px;
+    width: 70px;
+    height: 36px;
+    text-align: center;
+    border-radius: 2px
+}
+
+.am-pagination-select .am-pagination-select select {
+    border: 0;
+    width: 70px;
+    border-radius: 2px;
+    background-color: #eee;
+    appearance: none;
+    padding-left: 18px
+}
+
+.am-pagination-one .am-pagination-select select, .am-pagination-select .am-pagination-select select {
+    display: block;
+    line-height: 36px;
+    height: 36px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #555
+}
+
+.am-pagination-one {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    /*border: 3px solid red;*/
+}
+
+.am-pagination-one > li > a {
+    line-height: 36px;
+    background-color: #fff;
+    padding: 0 15px;
+    color: #555
+}
+
+.am-pagination-one .am-pagination-select {
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -25px;
+    width: 50px;
+    height: 36px;
+    text-align: center
+}
+
+.am-pagination-one .am-pagination-select select {
+    width: 50px;
+    border-radius: 2px;
+    text-align: center;
+    appearance: none;
+    padding-left: 18px;
+    background: #fff;
+    border: 1px solid #dfdfdf
+}
+.am-pagination-select > li > a {
+    line-height: 36px;
+    background-color: #eee;
+    padding: 0 15px;
+    border: 0;
+    color: #555
+}
+
+.am-pagination-select .am-pagination-select {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -35px;
+    width: 70px;
+    height: 36px;
+    text-align: center;
+    border-radius: 0
+}
+
+.am-pagination-select .am-pagination-select select {
+    border: 0;
+    width: 70px;
+    border-radius: 0;
+    background-color: #eee;
+    appearance: none;
+    padding-left: 18px
+}
+
+.am-pagination-one .am-pagination-select select, .am-pagination-select .am-pagination-select select {
+    display: block;
+    line-height: 36px;
+    height: 36px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #555
+}
+
+.am-pagination-one {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center
+}
+
+.am-pagination-one > li > a {
+    line-height: 36px;
+    background-color: #fff;
+    padding: 0 15px;
+    color: #555
+}
+
+.am-pagination-one .am-pagination-select {
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -25px;
+    width: 50px;
+    height: 36px;
+    text-align: center
+}
+
+.am-pagination-one .am-pagination-select select {
+    width: 50px;
+    border-radius: 0;
+    text-align: center;
+    appearance: none;
+    padding-left: 18px;
+    background: #fff;
+    border: 1px solid #dfdfdf
+}
+.am-pagination {
+    padding-left: 0;
+    margin: 1.5rem 0;
+    list-style: none;
+    color: #999999;
+    text-align: left;
+}
+.am-pagination:before,
+.am-pagination:after {
+    content: " ";
+    display: table;
+}
+.am-pagination:after {
+    clear: both;
+}
+.am-pagination > li {
+    display: inline-block;
+}
+.am-pagination > li > a,
+.am-pagination > li > span {
+    position: relative;
+    display: block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    line-height: 1.2;
+    background-color: #ff8616;
+    /*box-shadow: 0 1px 5px gray;*/
+    border: 1px solid #dddddd;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+.am-pagination > li:last-child > a,
+.am-pagination > li:last-child > span {
+    margin-right: 0;
+}
+.am-pagination > li > a:hover,
+.am-pagination > li > span:hover,
+.am-pagination > li > a:focus,
+.am-pagination > li > span:focus {
+    background-color: #eeeeee;
+}
+.am-pagination > .am-active > a,
+.am-pagination > .am-active > span,
+.am-pagination > .am-active > a:hover,
+.am-pagination > .am-active > span:hover,
+.am-pagination > .am-active > a:focus,
+.am-pagination > .am-active > span:focus {
+    z-index: 2;
+    color: #ffffff;
+    background-color: #0e90d2;
+    border-color: #0e90d2;
+    cursor: default;
+}
+.am-pagination > .am-disabled > span,
+.am-pagination > .am-disabled > span:hover,
+.am-pagination > .am-disabled > span:focus,
+.am-pagination > .am-disabled > a,
+.am-pagination > .am-disabled > a:hover,
+.am-pagination > .am-disabled > a:focus {
+    color: #999999;
+    background-color: #ffffff;
+    border-color: #dddddd;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.am-pagination .am-pagination-prev {
+    float: left;
+}
+.am-pagination .am-pagination-prev a {
+    border-radius: 0;
+}
+.am-pagination .am-pagination-next {
+    float: right;
+}
+.am-pagination .am-pagination-next a {
+    border-radius: 0;
+}
+.am-pagination-centered {
+    text-align: center;
+}
+.am-pagination-right {
+    text-align: right;
+}
+.am-pagination {
+    position: relative;
+}
+/**
+  * Pagination Theme: jantent
+  */
+.am-pagination-default {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+.am-pagination-default .am-pagination-prev,
+.am-pagination-default .am-pagination-next {
+    float: none;
+}
+/**
+  * Pagination Theme: select
+  */
+.am-pagination-select {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+.am-pagination-select > li > a {
+    line-height: 36px;
+    background-color: #eeeeee;
+    padding: 0 15px;
+    border: 0;
+    color: #555555;
+}
+.am-pagination-select .am-pagination-select {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -35px;
+    width: 70px;
+    height: 36px;
+    text-align: center;
+    border-radius: 2px;
+}
+.am-pagination-select .am-pagination-select select {
+    display: block;
+    border: 0;
+    line-height: 36px;
+    width: 70px;
+    height: 36px;
+    border-radius: 2px;
+    color: #555555;
+    background-color: #eeeeee;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 18px;
+}
+/**
+  * Pagination Theme: one
+  */
+.am-pagination-one {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+.am-pagination-one > li > a {
+    line-height: 36px;
+    background-color: #ffffff;
+    padding: 0 15px;
+    color: #555555;
+}
+.am-pagination-one .am-pagination-select {
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -25px;
+    width: 50px;
+    height: 36px;
+    text-align: center;
+}
+.am-pagination-one .am-pagination-select select {
+    display: block;
+    line-height: 36px;
+    width: 50px;
+    height: 36px;
+    border-radius: 2px;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 18px;
+    background: #ffffff;
+    border: 1px solid #dfdfdf;
+    color: #555555;
+}
+.am-pagination-default {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+.am-pagination-default .am-pagination-prev,
+.am-pagination-default .am-pagination-next {
+    float: none;
+}
+/**
+  * Pagination Theme: select
+  */
+.am-pagination-select {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+.am-pagination-select > li > a {
+    line-height: 36px;
+    background-color: #eeeeee;
+    padding: 0 15px;
+    border: 0;
+    color: #555555;
+}
+.am-pagination-select .am-pagination-select {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -35px;
+    width: 70px;
+    height: 36px;
+    text-align: center;
+    border-radius: 2px;
+}
+.am-pagination-select .am-pagination-select select {
+    display: block;
+    border: 0;
+    line-height: 36px;
+    width: 70px;
+    height: 36px;
+    border-radius: 2px;
+    color: #555555;
+    background-color: #eeeeee;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 18px;
+}
+/**
+  * Pagination Theme: one
+  */
+.am-pagination-one {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+.am-pagination-one > li > a {
+    line-height: 36px;
+    background-color: #ffffff;
+    padding: 0 15px;
+    color: #555555;
+}
+.am-pagination-one .am-pagination-select {
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -25px;
+    width: 50px;
+    height: 36px;
+    text-align: center;
+}
+.am-pagination-one .am-pagination-select select {
+    display: block;
+    line-height: 36px;
+    width: 50px;
+    height: 36px;
+    border-radius: 2px;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 18px;
+    background: #ffffff;
+    border: 1px solid #dfdfdf;
+    color: #555555;
+}

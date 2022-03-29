@@ -30,7 +30,7 @@
 						<div class="headimg_box">
 							<img src="../imgs/style_img/logimg.jpg"/>
 						</div>
-						<span th:if="${(session.userid)}!=null " th:text="${session.username}" class="usermsg"></span>
+						<span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
 					</div>
 					<div class="toolbar-logout">
 						<a href="/login">退出</a>
@@ -52,8 +52,11 @@
 <!--						</div>-->
 						<div class="project_list">
 							<a href="/index">
+<!--							<a th:href="${projectCommons.permalink(n.id)}">-->
 								<p class="p1" th:text="${n.project_name}">项目：project1</p>
 								<p class="p2" th:text="${n.creator}">创建人：xiaomin</p>
+<!--								<p class="p1" th:text="${n.p.project_name}">项目：project1</p>-->
+<!--								<p class="p2" th:text="${n.res.username}">创建人：xiaomin</p>-->
 							</a>
 							<!--<p class="p3">2022-03-25</p>-->
 						</div>

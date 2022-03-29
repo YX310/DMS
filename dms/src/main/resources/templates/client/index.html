@@ -36,7 +36,7 @@
 						<div class="headimg_box">
 							<img src="../imgs/style_img/logimg.jpg"/>
 						</div>
-						<span th:if="${(session.userid)}!=null " th:text="${session.username}" class="usermsg"></span>
+						<span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
 					</div>
 					<div class="toolbar-logout">
 						<a href="/login">退出</a>

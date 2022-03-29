@@ -5,7 +5,10 @@ import com.gxm.dms.model.domain.Project;
 
 public interface ProjectService {
 
-    // 分页查询新闻资讯列表
+//    // 根据用户id查询项目
+//    public Project selectProjectWithUserId(Integer user_id);
+
+    // 分页查询项目列表
     public PageInfo<Project> selectProjectWithPage(Integer page, Integer count);
 
     // 根据项目id查询项目的详情

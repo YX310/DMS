@@ -10,59 +10,43 @@
     <script src="../js/jquery.js"></script>
 </head>
 <body>
-    <div th:replace="/public/header::header"></div>
-    <div id="contentWrapper">
+<div th:replace="/public/header::header"></div>
+<div id="contentWrapper">
 
-<!--        <div id="contentLeft">-->
-<!--            <ul id="leftNavigation">-->
-<!--                <li >-->
-<!--                    <a th:href="@{/login}"><i class="fa fa-coffee leftNavIcon"></i>****</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <a th:href="@{/list2}"><i class="fa fa-flask leftNavIcon"></i>****</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <a th:href="@{/list3}"><i class="fa fa-flask leftNavIcon"></i>****</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
+    <div id="contentRight">
+        <br/>
+        <h2 class="heading" >系统用户信息</h2>
+        <table class="table table-striped table-bordered table-hover text-center" style="text-align:center">
+            <tr style="text-align:center">
+                <th width="15%" >用户名</th>
+                <th width="12%" >用户角色</th>
+                <th width="15%" >用户职位</th>
+                <th width="15%" >邮箱</th>
+                <th width="30%" >操作</th>
+            </tr>
 
-        <div id="contentRight">
-            <br/>
-            <h2 class="heading" >系统用户信息</h2>
-            <table class="table table-striped table-bordered table-hover text-center" style="text-align:center">
-                <tr style="text-align:center">
-                    <th width="15%" >用户名</th>
-                    <th width="12%" >用户角色</th>
-                    <th width="15%" >用户职位</th>
-                    <th width="15%" >邮箱</th>
-                    <th width="30%" >操作</th>
-                </tr>
-
-                <tr th:each="n:${data2.list}">
-                    <td th:text="${n.username}"></td>
-                    <td th:text="${n.user_role}"></td>
-                    <td th:text="${n.position}"></td>
-                    <td th:text="${n.email}"></td>
-                    <td >
-<!--                        <a class="btn btn-primary" th:href="@{/toUpdate(id=${n.id})}">修改</a>-->
-<!--                        <a class="btn btn-danger" th:href="@{/delete(id=${n.id})}">删除</a>-->
-                        <a class="btn btn-primary">修改</a>
-                        <a class="btn btn-danger">删除</a>
-                    </td>
-                </tr>
-            </table>
+            <tr th:each="n:${data2.list}">
+                <td th:text="${n.username}"></td>
+                <td th:text="${n.user_role}"></td>
+                <td th:text="${n.user_position}"></td>
+                <td th:text="${n.email}"></td>
+                <td >
+                    <a class="btn btn-primary" th:href="@{/toUpdate(id=${n.user_id})}">修改</a>
+                    <a class="btn btn-danger" th:href="@{/delete(id=${n.user_id})}">删除</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- 分页信息 -->
+<div class="more">
+    <div class="page">
+        <div th:each="num, numStat : ${#numbers.sequence(1,__${count}__)}">
+            <a th:if="${num} eq ${page2}" style="background: rgba(71,149,243,1);color: white" th:href="${'/page2/'+num}" th:text="${num}" ></a>
+            <a th:if="${num} ne ${page2}" th:href="${'/page2/'+num}" th:text="${num}" ></a>
         </div>
     </div>
-    <!-- 分页信息 -->
-    <div class="more">
-        <div class="page">
-            <div th:each="num, numStat : ${#numbers.sequence(1,__${count}__)}">
-                <a th:if="${num} eq ${page2}" style="background: rgba(71,149,243,1);color: white" th:href="${'/page2/'+num}" th:text="${num}" ></a>
-                <a th:if="${num} ne ${page2}" th:href="${'/page2/'+num}" th:text="${num}" ></a>
-            </div>
-        </div>
-    </div>
+</div>
 
 </body>
 </html>

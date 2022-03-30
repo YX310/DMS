@@ -1,6 +1,22 @@
 package com.gxm.dms.model.domain;
 
 public class User {
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", username='" + username + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", user_role='" + user_role + '\'' +
+                ", head_img='" + head_img + '\'' +
+                ", company='" + company + '\'' +
+                ", user_position='" + user_position + '\'' +
+                ", employee_number='" + employee_number + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     private int user_id;
     private String username; //用户名（登录时使用）
     private String nickname; //昵称
@@ -8,7 +24,7 @@ public class User {
     private String user_role; //用户角色
     private String head_img;  //头像
     private String company;   //公司
-    private String position;  //职位
+    private String user_position;  //职位
     private String employee_number;  //工号
     private String email;
 
@@ -68,12 +84,12 @@ public class User {
         this.company = company;
     }
 
-    public String getPosition() {
-        return position;
+    public String getUser_position() {
+        return user_position;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setUser_position(String user_position) {
+        this.user_position = user_position;
     }
 
     public String getEmployee_number() {
@@ -91,7 +107,5 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
 }

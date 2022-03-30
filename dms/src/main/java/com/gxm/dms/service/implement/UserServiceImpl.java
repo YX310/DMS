@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User selectUserWithId(Integer user_id) {
         User user = null;
-        Object o = redisTemplate.opsForValue().get("User_" + user_id);
+        Object o = redisTemplate.opsForValue().get("user_" + user_id);
         if(o!=null){
             user=(User)o;
         }else{
@@ -43,4 +43,22 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    //删除用户
+    @Override
+    public void deleteUserWithId(Integer user_id) {
+        userMapper.deleteUserWithId(user_id);
+    }
+
+    //修改用户信息
+    @Override
+    public void updateUserWithId(User user) {
+        userMapper.updateUserWithId(user);
+    }
+
+    @Override
+    public User getUserId(Integer user_id) {
+        return userMapper.getUserId(user_id);
+    }
+
 }

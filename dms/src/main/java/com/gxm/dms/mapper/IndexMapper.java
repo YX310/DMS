@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @类名 IndexMapper
  * @描述 定义了一个相关数据库查询操作接口
  * @时间 2023-3
- * @创建者  官晓敏
  */
 
 @Component

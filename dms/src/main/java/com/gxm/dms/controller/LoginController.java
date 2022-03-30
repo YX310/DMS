@@ -22,7 +22,6 @@ public class LoginController {
     private ProjectController projectController;
 
 
-
     // 登陆检查
     @PostMapping(value = "/checkLogin")
     public String checkLogin(HttpServletRequest request,
@@ -32,7 +31,6 @@ public class LoginController {
         User user = mapper.checkLogin(user_id, passwd, user_role);
         if(user == null){
             return "client/login";
-//            return adminController.User(request);
         } else {
             if (user_role.equals("管理员")){
                 HttpSession session = request.getSession(true);

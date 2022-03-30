@@ -10,4 +10,12 @@ public interface UserService {
 
     // 根据用户id查询单个用户信息
     public User selectUserWithId(Integer user_id);
+
+    // 根据用户id删除单个用户信息
+    public void deleteUserWithId(Integer user_id);
+
+    // 根据用户id修改单个用户信息
+    public void updateUserWithId(User user);
+
+    User getUserId(Integer user_id);
 }

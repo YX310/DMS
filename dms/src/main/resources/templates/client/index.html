@@ -7,13 +7,13 @@
 		<script th:src="@{/js/jquery.js}"></script>
 	</head>
 	<body>
-		<div id="toolbarBox" style="min-height: 48px;">
+		<div id="toolbarBox" style="min-height: 48px;" th:fragment="header">
 			<div id="toolbar-container">
 				<div id="toolbar-container-left">
 					<div id="toolbar-logo">DMS</div>
 					<div class="toolbar-f1">
 						<ul>我的工作台</ul>
-						<ul>概述</ul>
+						<ul><a th:href="@{/toOverview(id=${session.project.project_id})}">概述</a></ul>
 						<ul>需求</ul>
 						<ul>缺陷</ul>
 						<ul><a th:href="@{/toMe(id=${session.user_id})}">我的</a></ul>
@@ -44,5 +44,6 @@
 				</div>
 			</div>
 		</div>
+<!--		<div th:replace="/public/header.html"></div>-->
 	</body>
 </html>

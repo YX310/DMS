@@ -1,6 +1,7 @@
 package com.gxm.dms.controller;
-import com.gxm.dms.mapper.ProjectMapper;
+import com.gxm.dms.model.domain.Project;
 import com.gxm.dms.model.domain.User;
+import com.gxm.dms.service.implement.ProjectServiceImpl;
 import com.gxm.dms.service.implement.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @Autowired
     private UserServiceImpl userServiceImpl;
+
+    @Autowired
+    private ProjectServiceImpl projectServiceImpl;
 
     @GetMapping(value = {"","/login"})
     public String toLogin(){
@@ -56,5 +60,10 @@ public class IndexController {
         return "client/me";
     }
 
-
+    @GetMapping(value = {"/toOverview"})
+    public String toOverView(Integer id, Model model){
+        Project project = projectServiceImpl.selectProjectDetailsWithId(id);
+        model.addAttribute("project", project);
+        return "client/overview";
+    }
 }

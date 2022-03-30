@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <title>toolbar</title>
+        <link rel="stylesheet" th:href="@{/css/index.css}" />
+        <script th:src="@{/js/jquery.js}"></script>
+    </head>
+    <body>
+        <div th:replace="/client/index::header"></div>
+
+<!--        content-->
+        <div>
+            <p th:text="${project.project_description}"></p>
+        </div>
+    </body>
+</html>

@@ -22,6 +22,6 @@ public interface ProjectMapper {
     public List<Project> selectAllProject();
 
     // 根据项目id查询项目信息
-    @Select("SELECT * FROM project WHERE id=#{project_id}")
+    @Select("SELECT * FROM project WHERE project_id=#{project_id}")
     public Project selectProjectWithProject_id(Integer project_id);
 }

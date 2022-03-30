@@ -24,8 +24,9 @@ public class ProjectController {
     }
 
     @GetMapping("/page/{p}")
-    public String Project(HttpServletRequest request,@PathVariable("p") int page,
-                       @RequestParam(value = "count", defaultValue = "5") int count){
+    public String Project(HttpServletRequest request,
+                          @PathVariable("p") int page,
+                          @RequestParam(value = "count", defaultValue = "5") int count){
         Integer user_id = (Integer) request.getSession(true).getAttribute("user_id");
         System.out.println("is int: " + user_id);
         PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count, user_id);
@@ -39,12 +40,8 @@ public class ProjectController {
     @GetMapping(value = "/project/{id}")
     public String getProjectById(@PathVariable("id") Integer id, HttpServletRequest request){
         Project project = projectServiceImpl.selectProjectDetailsWithId(id);
-        if(project!=null){
-            request.setAttribute("project",project);
-            return "client/login";
-        }else {
-            return "client/home";
-        }
+        System.out.println("project: " + project.getProject_id());
+        request.setAttribute("project", project);
+        return "client/index";
     }
-
 }

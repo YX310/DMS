@@ -44,13 +44,13 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    //删除用户
+    //删除用户（后台）
     @Override
     public void deleteUserWithId(Integer user_id) {
         userMapper.deleteUserWithId(user_id);
     }
 
-    //修改用户信息
+    //修改用户信息（后台）
     @Override
     public void updateUserWithId(User user) {
         userMapper.updateUserWithId(user);
@@ -59,6 +59,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserId(Integer user_id) {
         return userMapper.getUserId(user_id);
+    }
+
+    @Override
+    public void updateMeWithId(User user) {
+        userMapper.updateMeWithId(user);
     }
 
 }

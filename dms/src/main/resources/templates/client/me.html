@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>我的</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/me.css}" />
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+<body>
+<!--header-->
+    <div id="toolbarBox" style="min-height: 48px;">
+    <div id="toolbar-container">
+        <div id="toolbar-container-left">
+            <div id="toolbar-logo">DMS</div>
+            <div class="toolbar-f1">
+                <ul>我的工作台</ul>
+                <ul>概述</ul>
+                <ul>需求</ul>
+                <ul>缺陷</ul>
+                <ul><a th:href="@{/toMe(id=${session.user_id})}">我的</a></ul>
+            </div>
+        </div>
+
+        <div id="toolbar-container-middle">
+            <div class="toolbar-search">
+                <div class="toolbar-search-container">
+                    <input id="toolbar-search-input" style="text-indent: 32px;"/>
+                    <button id="toolbar-search-button">
+                        <i></i>
+                        <span>搜索</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="toolbar-container-right">
+            <div class="toolbar-user">
+                <div class="headimg_box">
+                    <img src="../imgs/style_img/logimg.jpg"/>
+                </div>
+                <span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
+            </div>
+            <div class="toolbar-logout">
+                <a href="/login">退出</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--me_content-->
+    <div id="main_me">
+        <div id="me_content">
+
+            <div id="contentLeft">
+                <div id="top">
+                    <span>个人中心</span>
+                </div>
+                <ul id="leftNavigation">
+
+                    <li>
+                        <a th:href="@{/toMe(id=${session.user_id})}">我的信息</a>
+                    </li>
+                    <li >
+                        <a th:href="@{/toUpdateMe(id=${session.user_id})}">修改信息</a>
+                    </li>
+                    <li >
+                        <a href="#">退出登录</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div id="contentRight">
+                <h2>账户信息</h2>
+                <input name="user_id" type="hidden" th:value="${user.user_id}"/>
+                <div id="right_top">
+                    <div class="head_img ui-form-row">
+                        <div class="ui-form-label">头像</div>
+                        <div class="ui-form-element">
+                            <img src="../imgs/style_img/logimg.jpg" style="width:30px;height: 30px;"/>
+                        </div>
+                    </div>
+
+                    <div class="username ui-form-row">
+                        <div class="ui-form-label">用户名</div>
+                        <div class="ui-form-element">
+                            <div class="text-input ui-input"><input name="username" placeholder="请输入用户名" th:value="${user.username}"/></div>
+                        </div>
+                    </div>
+
+                    <div class="username ui-form-row">
+                        <div class="ui-form-label">职位</div>
+                        <div class="ui-form-element">
+                            <div class="text-input ui-input"><input name="user_position" th:value="${user.user_position}"/></div>
+                        </div>
+                    </div>
+                    <div class="username ui-form-row">
+                        <div class="ui-form-label">工号</div>
+                        <div class="ui-form-element">
+                            <div class="text-input ui-input"><input name="employee_number" placeholder="请输入工号" th:value="${user.employee_number}"/></div>
+                        </div>
+                    </div>
+                    <div class="username ui-form-row">
+                        <div class="ui-form-label">邮箱</div>
+                        <div class="ui-form-element">
+                            <div class="text-input ui-input"><input name="email" placeholder="请输入邮箱" th:value="${user.email}"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

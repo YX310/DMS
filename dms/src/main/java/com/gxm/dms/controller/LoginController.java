@@ -14,13 +14,10 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private IndexMapper mapper;
-    @Autowired
-    private IndexController indexController;
     @Autowired(required = false)
     private AdminController adminController;
     @Autowired
     private ProjectController projectController;
-
 
     // 登陆检查
     @PostMapping(value = "/checkLogin")
@@ -37,7 +34,6 @@ public class LoginController {
                 session.setAttribute("user_id", user.getUser_id());
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("useremail", user.getEmail());
-//                return "back/user_list";
                 return adminController.User(request);
             } else {
                 if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){

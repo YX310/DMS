@@ -22,10 +22,10 @@
                 <ul id="leftNavigation">
 
                     <li>
-                        <a th:href="@{/toMe(id=${session.user_id})}">我的信息</a>
+                        <a th:href="@{/toMe(id=${user.user_id})}">我的信息</a>
                     </li>
                     <li >
-                        <a th:href="@{/toUpdateMe(id=${session.user_id})}">修改信息</a>
+                        <a th:href="@{/toUpdateMe(id=${user.user_id})}">修改信息</a>
                     </li>
                     <li >
                         <a href="#">退出登录</a>

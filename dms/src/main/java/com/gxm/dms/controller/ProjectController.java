@@ -33,7 +33,6 @@ public class ProjectController {
                           @PathVariable("p") int page,
                           @RequestParam(value = "count", defaultValue = "5") int count){
         Integer user_id = (Integer) request.getSession(true).getAttribute("user_id");
-        System.out.println("is int: " + user_id);
         PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count, user_id);
         request.setAttribute("data", list);
         request.setAttribute("page", page);
@@ -55,12 +54,11 @@ public class ProjectController {
     public String getProjectById(@PathVariable("id") Integer id, HttpServletRequest request){
         Project project = projectServiceImpl.selectProjectDetailsWithId(id);
         if(project!=null){
-            request.setAttribute("project",project);
-            return "client/overview";
+            request.getSession(true).setAttribute("project", project);
+            return "client/index";
         }else {
             return "client/home";
         }
     }
-
 
 }

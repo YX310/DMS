@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @类名 IndexController
  * @描述 一个对控制页面操作的类
@@ -50,7 +52,7 @@ public class IndexController {
 
     //(前台)用户信息
     @GetMapping("/toMe")
-    public String toMe(Integer id, Model model){
+    public String toMe(HttpServletRequest request, Integer id, Model model){
         User user = userServiceImpl.getUserId(id);
         model.addAttribute("user",user);
         return "client/me";
@@ -86,7 +88,7 @@ public class IndexController {
     }
 
     @GetMapping(value = {"/toOverview"})
-    public String toOverView(Integer id, Model model){
+    public String toOverView(HttpServletRequest request,  Integer id, Model model){
         //Project project = projectServiceImpl.selectProjectDetailsWithId(id);
         Project project = projectServiceImpl.getProjectId(id);
         model.addAttribute("project", project);

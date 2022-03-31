@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @类名 IndexController
@@ -18,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @Autowired
     private UserServiceImpl userServiceImpl;
+
+    @Autowired
+    private DefectController defectController;
 
     @GetMapping(value = {"","/login"})
     public String toLogin(){
@@ -55,6 +61,5 @@ public class IndexController {
         userServiceImpl.updateMeWithId(user);
         return "client/me";
     }
-
 
 }

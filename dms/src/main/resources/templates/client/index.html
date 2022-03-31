@@ -7,7 +7,7 @@
 		<script th:src="@{/js/jquery.js}"></script>
 	</head>
 	<body>
-		<div id="toolbarBox" style="min-height: 48px;">
+		<div th:fragment="header" id="toolbarBox" style="min-height: 48px;" >
 			<div id="toolbar-container">
 				<div id="toolbar-container-left">
 					<div id="toolbar-logo">DMS</div>
@@ -15,7 +15,7 @@
 						<ul>我的工作台</ul>
 						<ul>概述</ul>
 						<ul>需求</ul>
-						<ul>缺陷</ul>
+						<ul><a href="/defect_list">缺陷</a></ul>
 						<ul><a th:href="@{/toMe(id=${session.user_id})}">我的</a></ul>
 					</div>
 				</div>

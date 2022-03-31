@@ -1,6 +1,27 @@
 package com.gxm.dms.model.domain;
 
 public class Defect {
+    @Override
+    public String toString() {
+        return "Defect{" +
+                "defect_id=" + defect_id +
+                ", defect_name='" + defect_name + '\'' +
+                ", defect_description='" + defect_description + '\'' +
+                ", priority='" + priority + '\'' +
+                ", probability='" + probability + '\'' +
+                ", project_version='" + project_version + '\'' +
+                ", defect_creator='" + defect_creator + '\'' +
+                ", designated_person='" + designated_person + '\'' +
+                ", defect_module='" + defect_module + '\'' +
+                ", defect_type='" + defect_type + '\'' +
+                ", start_date='" + start_date + '\'' +
+                ", finish_date='" + finish_date + '\'' +
+                ", progress='" + progress + '\'' +
+                ", associated_defects='" + associated_defects + '\'' +
+                ", defect_document='" + defect_document + '\'' +
+                '}';
+    }
+
     private int defect_id;             //缺陷id
     private String defect_name;        //缺陷标题
     private String defect_description; //缺陷描述

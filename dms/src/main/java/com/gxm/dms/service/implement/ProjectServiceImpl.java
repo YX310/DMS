@@ -30,18 +30,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-//    public String getUserId(HttpSession session, HttpServletRequest request, User user) {
-//        // if has user
-//        if (mapper.checkUser(user.getUsername()) != null)
-//            session.setAttribute("user_id", user.getUser_id());
-//        return null;
-//    }
-
     // 查询项目列表
     @Override
     public PageInfo<Project> selectProjectWithPage(Integer page, Integer count, int user_id) {
         PageHelper.startPage(page, count);
-//        List<Project> projectList = projectMapper.selectAllProject();//需要修改
         List<Project> projectList = projectMapper.selectProjectWithUserId(user_id);//需要修改
         return new PageInfo<>(projectList);
     }
@@ -59,6 +51,11 @@ public class ProjectServiceImpl implements ProjectService {
             }
         }
         return project;
+    }
+
+    @Override
+    public Project getProjectId(Integer project_id) {
+        return projectMapper.getProjectId(project_id);
     }
 
 }

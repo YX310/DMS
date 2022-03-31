@@ -1,6 +1,18 @@
 package com.gxm.dms.model.domain;
 
 public class Project {
+    @Override
+    public String toString() {
+        return "Project{" +
+                "project_id=" + project_id +
+                ", project_name='" + project_name + '\'' +
+                ", creator='" + creator + '\'' +
+                ", creation_date='" + creation_date + '\'' +
+                ", project_description='" + project_description + '\'' +
+                ", project_member='" + project_member + '\'' +
+                '}';
+    }
+
     private int project_id;
     private String project_name; //项目名称
     private String creator; //创建者

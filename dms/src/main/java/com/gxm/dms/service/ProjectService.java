@@ -3,6 +3,7 @@ package com.gxm.dms.service;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dms.model.domain.Project;
 
+
 public interface ProjectService {
 
 //    // 根据用户id查询项目
@@ -13,4 +14,7 @@ public interface ProjectService {
 
     // 根据项目id查询项目的详情
     public Project selectProjectDetailsWithId(Integer project_id);
+
+    //获取home界面项目id
+    Project getProjectId(Integer project_id);
 }

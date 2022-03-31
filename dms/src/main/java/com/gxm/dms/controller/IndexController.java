@@ -1,4 +1,5 @@
 package com.gxm.dms.controller;
+import com.gxm.dms.mapper.ProjectMapper;
 import com.gxm.dms.model.domain.Project;
 import com.gxm.dms.model.domain.User;
 import com.gxm.dms.service.implement.ProjectServiceImpl;
@@ -7,7 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 /**
  * @类名 IndexController
@@ -19,9 +26,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @Autowired
     private UserServiceImpl userServiceImpl;
-
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
+    @Autowired
+    private ProjectMapper projectMapper;
+    @Autowired
+    private ProjectController projectController;
 
     @GetMapping(value = {"","/login"})
     public String toLogin(){
@@ -60,9 +70,25 @@ public class IndexController {
         return "client/me";
     }
 
+
+    //获取当前所选项目id
+    @GetMapping(value = "/getProjectId")
+    public String getProjectId(HttpServletRequest request,
+                               @RequestParam("project_id") Integer project_id) {
+        Project p  = projectMapper.getProjectId(project_id);
+        if(project_id == null){
+            return "client/home";
+        }else{
+            HttpSession session = request.getSession(true);
+            session.setAttribute("project_id", p.getProject_id());
+            return projectController.getProjectById(project_id,request);
+        }
+    }
+
     @GetMapping(value = {"/toOverview"})
     public String toOverView(Integer id, Model model){
-        Project project = projectServiceImpl.selectProjectDetailsWithId(id);
+        //Project project = projectServiceImpl.selectProjectDetailsWithId(id);
+        Project project = projectServiceImpl.getProjectId(id);
         model.addAttribute("project", project);
         return "client/overview";
     }

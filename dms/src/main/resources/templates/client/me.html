@@ -9,43 +9,7 @@
 </head>
 <body>
 <!--header-->
-    <div id="toolbarBox" style="min-height: 48px;">
-    <div id="toolbar-container">
-        <div id="toolbar-container-left">
-            <div id="toolbar-logo">DMS</div>
-            <div class="toolbar-f1">
-                <ul>我的工作台</ul>
-                <ul>概述</ul>
-                <ul>需求</ul>
-                <ul>缺陷</ul>
-                <ul><a th:href="@{/toMe(id=${session.user_id})}">我的</a></ul>
-            </div>
-        </div>
-
-        <div id="toolbar-container-middle">
-            <div class="toolbar-search">
-                <div class="toolbar-search-container">
-                    <input id="toolbar-search-input" style="text-indent: 32px;"/>
-                    <button id="toolbar-search-button">
-                        <i></i>
-                        <span>搜索</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="toolbar-container-right">
-            <div class="toolbar-user">
-                <div class="headimg_box">
-                    <img src="../imgs/style_img/logimg.jpg"/>
-                </div>
-                <span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
-            </div>
-            <div class="toolbar-logout">
-                <a href="/login">退出</a>
-            </div>
-        </div>
-    </div>
-</div>
+    <div th:replace="/client/index::header"></div>
 
 <!--me_content-->
     <div id="main_me">
@@ -58,10 +22,10 @@
                 <ul id="leftNavigation">
 
                     <li>
-                        <a th:href="@{/toMe(id=${session.user_id})}">我的信息</a>
+                        <a th:href="@{/toMe(id=${user.user_id})}">我的信息</a>
                     </li>
                     <li >
-                        <a th:href="@{/toUpdateMe(id=${session.user_id})}">修改信息</a>
+                        <a th:href="@{/toUpdateMe(id=${user.user_id})}">修改信息</a>
                     </li>
                     <li >
                         <a href="#">退出登录</a>

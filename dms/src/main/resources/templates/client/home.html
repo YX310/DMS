@@ -51,7 +51,7 @@
 <!--							<img src="images/banner.jpg" />-->
 <!--						</div>-->
 						<div class="project_list">
-							<a href="/index">
+							<a th:href="${'/project/'+n.project_id}">
 <!--							<a th:href="${projectCommons.permalink(n.id)}">-->
 								<p class="p1" th:text="${n.project_name}">项目：project1</p>
 								<p class="p2" th:text="${n.creator}">创建人：xiaomin</p>

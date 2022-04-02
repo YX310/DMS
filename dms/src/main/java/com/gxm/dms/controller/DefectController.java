@@ -3,11 +3,14 @@ package com.gxm.dms.controller;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dms.mapper.DefectMapper;
 import com.gxm.dms.model.domain.Defect;
+import com.gxm.dms.model.domain.User;
 import com.gxm.dms.service.implement.DefectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +42,7 @@ public class DefectController {
 
     // 缺陷详情查询
     @GetMapping(value = "/defect/{id}")
-    public String getDefectById(@PathVariable("id") Integer id, HttpServletRequest request){
+    public String getDefectById(@PathVariable("id") String id, HttpServletRequest request){
         Defect defect = defectServiceImpl.selectDefectWithId(id);
         if(defect!=null){
             request.setAttribute("defect",defect);
@@ -47,6 +50,18 @@ public class DefectController {
         }else {
             return "client/defect_list";
         }
+    }
+
+    //新建缺陷
+    @RequestMapping("/toAddDefect")
+    public String toAddDefect(){
+        return "client/add_defect";
+    }
+
+    @RequestMapping("/addDefect")
+    public String add(Defect defect){
+        defectServiceImpl.addDefect(defect);
+        return "redirect:/defect_list";
     }
 }
 

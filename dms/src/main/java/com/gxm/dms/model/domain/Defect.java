@@ -1,6 +1,25 @@
 package com.gxm.dms.model.domain;
 
 public class Defect {
+
+    private String defect_id;             //缺陷id
+    private String defect_name;        //缺陷标题
+    private String defect_description; //缺陷描述
+    private String priority;           //优先级
+    private String probability;        //出现概率
+    private String project_version;    //项目版本
+    private String defect_creator;     //创建人
+    private String designated_person;  //指派人
+    private String defect_module;      //缺陷所属模块
+    private String defect_type;        //缺陷类型
+    private String start_date;         //计划开始日期
+    private String finish_date;        //计划完成日期
+    private String progress;           //进度
+    private String associated_defects; //关联已有缺陷
+    private String defect_document;    //上传的文件
+    private String project_id;    //所属项目的id
+    private String defect_state;    //缺陷状态
+
     @Override
     public String toString() {
         return "Defect{" +
@@ -19,30 +38,17 @@ public class Defect {
                 ", progress='" + progress + '\'' +
                 ", associated_defects='" + associated_defects + '\'' +
                 ", defect_document='" + defect_document + '\'' +
+                ", project_id='" + project_id + '\'' +
+                ", defect_state='" + defect_state + '\'' +
                 '}';
     }
 
-    private int defect_id;             //缺陷id
-    private String defect_name;        //缺陷标题
-    private String defect_description; //缺陷描述
-    private String priority;           //优先级
-    private String probability;        //出现概率
-    private String project_version;    //项目版本
-    private String defect_creator;     //创建人
-    private String designated_person;  //指派人
-    private String defect_module;      //缺陷所属模块
-    private String defect_type;        //缺陷类型
-    private String start_date;         //计划开始日期
-    private String finish_date;        //计划完成日期
-    private String progress;           //进度
-    private String associated_defects; //关联已有缺陷
-    private String defect_document;    //上传的文件
 
-    public int getDefect_id() {
+    public String getDefect_id() {
         return defect_id;
     }
 
-    public void setDefect_id(int defect_id) {
+    public void setDefect_id(String defect_id) {
         this.defect_id = defect_id;
     }
 
@@ -156,5 +162,20 @@ public class Defect {
 
     public void setDefect_document(String defect_document) {
         this.defect_document = defect_document;
+    }
+    public String getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(String project_id) {
+        this.project_id = project_id;
+    }
+
+    public String getDefect_state() {
+        return defect_state;
+    }
+
+    public void setDefect_state(String defect_state) {
+        this.defect_state = defect_state;
     }
 }

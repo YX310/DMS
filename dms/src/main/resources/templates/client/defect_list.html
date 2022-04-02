@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>项目缺陷信息表</title>
-    <link rel="stylesheet" type="text/css" href="../css/home.css" />
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
     <link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
     <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
     <link th:href="@{/back/css/page.css}" rel="stylesheet"/>
@@ -56,6 +57,7 @@
             </tr>
         </table>
     </div>
+    <div><a th:href="@{/toAddDefect}">新建</a></div>
 </div>
 <!-- 分页信息 -->
 <div class="more">

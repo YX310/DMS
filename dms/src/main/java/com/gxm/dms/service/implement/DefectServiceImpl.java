@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -31,7 +32,7 @@ public class DefectServiceImpl implements DefectService {
     }
 
     @Override
-    public Defect selectDefectWithId(Integer defect_id) {
+    public Defect selectDefectWithId(String defect_id) {
         Defect defect = null;
         Object o = redisTemplate.opsForValue().get("defect_" + defect_id);
         if(o!=null){
@@ -43,5 +44,10 @@ public class DefectServiceImpl implements DefectService {
             }
         }
         return defect;
+    }
+
+    public void addDefect(Defect defect){
+        defect.setDefect_id(UUID.randomUUID().toString().toUpperCase());
+        defectMapper.addDefect(defect);
     }
 }

@@ -2,6 +2,7 @@ package com.gxm.dms.service;
 
 import com.github.pagehelper.PageInfo;
 import com.gxm.dms.model.domain.Defect;
+import com.gxm.dms.model.domain.User;
 
 public interface DefectService {
     // 分页查询缺陷列表
@@ -11,4 +12,12 @@ public interface DefectService {
     public Defect selectDefectWithId(String defect_id);
 
     void addDefect(Defect defect);
+
+    Defect getDefectId(String defect_id);
+
+    // 根据缺陷id修改单个缺陷信息(前台)
+    public void updateDefectWithId(Defect defect);
+
+    // 根据缺陷id删除单个缺陷信息
+    public void deleteDefectWithId(String defect_id);
 }

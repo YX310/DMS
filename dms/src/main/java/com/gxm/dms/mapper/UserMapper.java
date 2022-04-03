@@ -26,7 +26,7 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE user_id = #{user_id}")
     public User getUserId(Integer user_id);
 
-    //删除用户信息（后台）
+    //修改用户信息（后台）
     @Select("UPDATE user SET username = #{username}, user_role = #{user_role},user_position = #{user_position},email = #{email} WHERE user_id = #{user_id}")
     public void updateUserWithId(User user);
 

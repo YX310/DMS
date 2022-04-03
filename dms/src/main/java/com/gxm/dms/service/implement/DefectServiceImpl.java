@@ -50,4 +50,19 @@ public class DefectServiceImpl implements DefectService {
         defect.setDefect_id(UUID.randomUUID().toString().toUpperCase());
         defectMapper.addDefect(defect);
     }
+
+    @Override
+    public Defect getDefectId(String defect_id) {
+        return defectMapper.getDefectId(defect_id);
+    }
+
+    @Override
+    public void updateDefectWithId(Defect defect) {
+        defectMapper.updateDefectWithId(defect);
+    }
+
+    @Override
+    public void deleteDefectWithId(String defect_id) {
+        defectMapper.deleteDefectWithId(defect_id);
+    }
 }

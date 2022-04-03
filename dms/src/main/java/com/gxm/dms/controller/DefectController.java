@@ -63,5 +63,27 @@ public class DefectController {
         defectServiceImpl.addDefect(defect);
         return "redirect:/defect_list";
     }
+
+    //更新（修改）缺陷信息
+    @RequestMapping("/toUpdateDefect")
+    public String toUpdateDefect(String id, Model model){
+        Defect defect = defectServiceImpl.getDefectId(id);
+        model.addAttribute("defect",defect);
+        return "client/defect_update";
+    }
+    //修改缺陷信息
+    @RequestMapping("/updateDefect")
+    public String updateDefectWithId(Defect defect){
+        defectServiceImpl.updateDefectWithId(defect);
+        return "redirect:/defect_list"; //redirect重定向
+    }
+
+    //删除缺陷
+    @RequestMapping("/deleteDefect")
+    public String deleteUser(String id){
+        defectServiceImpl.deleteDefectWithId(id);
+        return "redirect:/defect_list"; //redirect重定向
+    }
+
 }
 

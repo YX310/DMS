@@ -26,7 +26,7 @@
                 <th width="15%" >指派人</th>
                 <th width="15%" >进度</th>
                 <!--<th width="15%" >创建时间</th>-->
-                <!--<th width="30%" >操作</th>-->
+                <th width="30%" >操作</th>
             </tr>
 <!--            <tr th:each="n: ${data3.list}">-->
 <!--                <td ></td>-->
@@ -50,10 +50,10 @@
                 <td th:text="${n.designated_person}"></td>
                 <td th:text="${n.progress}"></td>
                 <!--<td th:text="${n.start_date}"></td>-->
-                <!--<td >
-                    <a class="btn btn-primary" th:href="@{/toUpdate(id=${n.user_id})}">修改</a>
-                    <a class="btn btn-danger" th:href="@{/delete(id=${n.user_id})}">删除</a>
-                </td>-->
+                <td >
+                    <a class="btn btn-primary" th:href="@{/toUpdateDefect(id=${n.defect_id})}">修改</a>
+                    <a class="btn btn-danger" th:href="@{/deleteDefect(id=${n.defect_id})}">删除</a>
+                </td>
             </tr>
         </table>
     </div>

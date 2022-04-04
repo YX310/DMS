@@ -1,7 +1,6 @@
 package com.gxm.dms.mapper;
 
 import com.gxm.dms.model.domain.Project;
-import com.gxm.dms.model.domain.User;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -18,14 +17,14 @@ public interface ProjectMapper {
     public List<Project> selectProjectWithUserId(int user_id);
 
     // 查询所有的项目信息
-    @Select("SELECT * FROM project")
-    public List<Project> selectAllProject();
+    @Select("SELECT * FROM project WHERE project_id=#{project_id}")
+    public List<Project> selectProject(Integer project_id);
 
     // 根据项目id查询项目信息
-    @Select("SELECT * FROM project WHERE project_id=#{project_id}")
-    public Project selectProjectWithProject_id(Integer project_id);
+    @Select("SELECT project_id , project_name FROM project WHERE project_id=#{project_id}")
+        public Project selectProjectWithProject_id(Integer project_id);
 
-    //获取项目id
-    @Select("SELECT * FROM project WHERE project_id = #{project_id}")
+        //获取项目id
+        @Select("SELECT * FROM project WHERE project_id = #{project_id}")
     public Project getProjectId(Integer project_id);
 }

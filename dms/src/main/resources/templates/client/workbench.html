@@ -57,12 +57,11 @@
 			                <th width="20%" >标题</th>
 			               		
 			            </tr>			
-			            <tr th:each="n:${data4.list}">
+			            <tr th:each="n:${data4}">
 			                <td th:text="${n.defect_id}"></td>
-			                <td th:text="${n.project_id}"></td>
+			                <td th:text="${n.project_name}"></td>
 			                <td style="color: black;" th:text="${n.defect_state}">lala</td>
 			                <td th:text="${n.defect_name}"></td>
-			                
 			            </tr>
         			</table>
 				</div>
@@ -74,15 +73,13 @@
 			                <th width="10%" >项目</th>
 			                <th width="8%" >状态</th>
 			                <th width="20%" >标题</th>
-			               		
-			            </tr>			
-			            <tr >
-			                <td ></td>
-			                <td ></td>
-			                <td  style="color: black;">lala</td>
-			                <td ></td>
-			                
 			            </tr>
+						<tr th:each="n:${data5}">
+							<td th:text="${n.defect_id}"></td>
+							<td th:text="${n.project_name}"></td>
+							<td style="color: black;" th:text="${n.defect_state}">lala</td>
+							<td th:text="${n.defect_name}"></td>
+						</tr>
         			</table>
 				</div>
 			</div>

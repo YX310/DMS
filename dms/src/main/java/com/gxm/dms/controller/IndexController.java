@@ -2,6 +2,7 @@ package com.gxm.dms.controller;
 import com.gxm.dms.mapper.DefectMapper;
 import com.gxm.dms.mapper.ProjectMapper;
 import com.gxm.dms.model.domain.Defect;
+import com.gxm.dms.model.domain.DefectProject;
 import com.gxm.dms.model.domain.Project;
 import com.gxm.dms.model.domain.User;
 import com.gxm.dms.service.implement.DefectServiceImpl;
@@ -100,17 +101,12 @@ public class IndexController {
         return "client/overview";
     }
 
-//    @GetMapping(value = "/toWorkbench")
-//    public String toWorkbench() {
-//        return "client/workbench";
-//    }
     @GetMapping(value = "/toWorkbench")
-    public String toWorkbench(HttpServletRequest request,String defect_id,Integer id,Model model) {
-//        Defect defect = defectServiceImpl.getDefectId(defect_id);
-//        List<Defect> defect = defectMapper.selectDefect();
-//        model.addAttribute("defect",defect);
-        List<Defect> list=defectMapper.selectDesignatedPersonWithUserId(id);
-        request.setAttribute("data4", list);
+    public String toWorkbench(HttpServletRequest request,Integer id) {
+        List<DefectProject> list=defectMapper.selectDesignatedPersonWithUserId(id);
+        List<DefectProject> list2=defectMapper.selectDefectCreatorWithUserId(id);
+        request.setAttribute("data4", list); //指派给我的任务
+        request.setAttribute("data5", list2);//已报告的任务
         return "client/workbench";
     }
 }

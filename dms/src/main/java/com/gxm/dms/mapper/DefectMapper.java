@@ -1,8 +1,7 @@
 package com.gxm.dms.mapper;
 
 import com.gxm.dms.model.domain.Defect;
-import com.gxm.dms.model.domain.Project;
-import com.gxm.dms.model.domain.User;
+import com.gxm.dms.model.domain.DefectProject;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
@@ -43,7 +42,11 @@ public interface DefectMapper {
     public void deleteDefectWithId(String defect_id);
 
     //根据当前用户id查找被指派的任务
-    @Select("SELECT * FROM defect AS d INNER JOIN user AS u WHERE d.designated_person=u.username and user_id=#{user_id}")
-    public List<Defect> selectDesignatedPersonWithUserId(int user_id);
+    @Select("SELECT * FROM project AS p INNER JOIN defect AS d INNER JOIN USER AS u WHERE d.designated_person=u.username AND p.project_id=d.project_id AND user_id=#{user_id} ORDER BY defect_id DESC  LIMIT 10")
+    public List<DefectProject> selectDesignatedPersonWithUserId(int user_id);
+
+    //根据当前用户id查找当前用户报告的任务
+    @Select("SELECT * FROM project AS p INNER JOIN defect AS d INNER JOIN user AS u WHERE d.defect_creator=u.username and p.project_id=d.project_id and user_id=#{user_id} ORDER BY defect_id DESC LIMIT 10")
+    public List<DefectProject> selectDefectCreatorWithUserId(int user_id);
 
 }

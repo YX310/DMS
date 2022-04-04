@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>我的工作台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" th:href="@{/css/index.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+	<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/workbench.css}" />
+	<script th:src="@{/js/jquery.js}"></script>
+	<body>
+		<div id="toolbarBox" style="min-height: 48px;">
+			<div id="toolbar-container">
+				<div id="toolbar-container-left">
+					<div id="toolbar-logo">DMS</div>
+					<div class="toolbar-f1">
+						<ul><a th:href="@{/toWorkbench}">我的工作台</a></ul>
+						<ul><a th:href="@{/home_project_list}">我的项目</a></ul>
+					</div>
+				</div>
+				
+				<div id="toolbar-container-middle">
+					<div class="toolbar-search">
+						<div class="toolbar-search-container">
+							<input id="toolbar-search-input" style="text-indent: 32px;"/>
+							<button id="toolbar-search-button">
+								<i></i>
+								<span>搜索</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div id="toolbar-container-right">
+					<div class="toolbar-user">
+						<div class="headimg_box">
+							<img src="../imgs/style_img/logimg.jpg"/>
+						</div>
+						<span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
+					</div>
+					<div class="toolbar-logout">
+						<a href="/login">退出</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="workbench-box">
+			<div class="workbench-content">
+				<div class="workbench-content-left">
+					<p>指派给我的任务(数量)</p>
+					<table class="table table-striped table-bordered table-hover text-center" style="text-align:center;padding: 20px;">
+			            <tr style="text-align:center">
+			                <th width="5%">缺陷id</th>
+			                <th width="10%">项目</th>
+			                <th width="8%">状态</th>
+			                <th width="20%" >标题</th>
+			               		
+			            </tr>			
+			            <tr >
+			                <td ></td>
+			                <td ></td>
+			                <td style="color: black;">lala</td>
+			                <td ></td>
+			                
+			            </tr>
+        			</table>
+				</div>
+				<div class="workbench-content-right">
+					<p>已报告的任务(数量)</p>
+					<table class="table table-striped table-bordered table-hover text-center" style="text-align:center">
+			            <tr style="text-align:center">
+			                <th width="5%" >缺陷id</th>
+			                <th width="10%" >项目</th>
+			                <th width="8%" >状态</th>
+			                <th width="20%" >标题</th>
+			               		
+			            </tr>			
+			            <tr >
+			                <td ></td>
+			                <td ></td>
+			                <td  style="color: black;">lala</td>
+			                <td ></td>
+			                
+			            </tr>
+        			</table>
+				</div>
+			</div>
+			<br />
+		</div>
+	
+		
+	</body>
+</html>

@@ -94,4 +94,10 @@ public class IndexController {
         model.addAttribute("project", project);
         return "client/overview";
     }
+
+    @GetMapping(value = "/toWorkbench")
+    public String toWorkbench() {
+        return "client/workbench";
+    }
+
 }

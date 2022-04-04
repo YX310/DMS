@@ -12,7 +12,7 @@
 				<div id="toolbar-container-left">
 					<div id="toolbar-logo">DMS</div>
 					<div class="toolbar-f1">
-						<ul>我的工作台</ul>
+						<ul><a th:href="@{/toWorkbench}">我的工作台</a></ul>
 						<ul><a th:href="@{/toOverview(id=${session.project.project_id})}">概述</a></ul>
 						<ul>需求</ul>
 <!--						<ul><a href="/defect_list">缺陷</a></ul>-->

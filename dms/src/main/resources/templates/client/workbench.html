@@ -15,7 +15,7 @@
 				<div id="toolbar-container-left">
 					<div id="toolbar-logo">DMS</div>
 					<div class="toolbar-f1">
-						<ul><a th:href="@{/toWorkbench}">我的工作台</a></ul>
+						<ul><a th:href="@{/toWorkbench(id=${session.user_id})}">我的工作台</a></ul>
 						<ul><a th:href="@{/home_project_list}">我的项目</a></ul>
 					</div>
 				</div>
@@ -57,11 +57,11 @@
 			                <th width="20%" >标题</th>
 			               		
 			            </tr>			
-			            <tr >
-			                <td ></td>
-			                <td ></td>
-			                <td style="color: black;">lala</td>
-			                <td ></td>
+			            <tr th:each="n:${data4.list}">
+			                <td th:text="${n.defect_id}"></td>
+			                <td th:text="${n.project_id}"></td>
+			                <td style="color: black;" th:text="${n.defect_state}">lala</td>
+			                <td th:text="${n.defect_name}"></td>
 			                
 			            </tr>
         			</table>

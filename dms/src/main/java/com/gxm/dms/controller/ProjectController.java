@@ -1,7 +1,6 @@
 package com.gxm.dms.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.gxm.dms.mapper.ProjectMapper;
 import com.gxm.dms.model.domain.Project;
 import com.gxm.dms.service.implement.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

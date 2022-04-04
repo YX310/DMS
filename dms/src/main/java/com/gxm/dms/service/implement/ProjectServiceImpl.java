@@ -2,18 +2,14 @@ package com.gxm.dms.service.implement;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.gxm.dms.mapper.IndexMapper;
 import com.gxm.dms.mapper.ProjectMapper;
 import com.gxm.dms.model.domain.Project;
-import com.gxm.dms.model.domain.User;
 import com.gxm.dms.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**

@@ -1,7 +1,10 @@
 package com.gxm.dms.controller;
+import com.gxm.dms.mapper.DefectMapper;
 import com.gxm.dms.mapper.ProjectMapper;
+import com.gxm.dms.model.domain.Defect;
 import com.gxm.dms.model.domain.Project;
 import com.gxm.dms.model.domain.User;
+import com.gxm.dms.service.implement.DefectServiceImpl;
 import com.gxm.dms.service.implement.ProjectServiceImpl;
 import com.gxm.dms.service.implement.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 /**
@@ -28,12 +32,13 @@ public class IndexController {
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
     @Autowired
+    private DefectServiceImpl defectServiceImpl;
+    @Autowired
     private ProjectMapper projectMapper;
     @Autowired
     private ProjectController projectController;
-
     @Autowired
-    private DefectController defectController;
+    private DefectMapper defectMapper;
 
     @GetMapping(value = {"","/login"})
     public String toLogin(){
@@ -95,9 +100,17 @@ public class IndexController {
         return "client/overview";
     }
 
+//    @GetMapping(value = "/toWorkbench")
+//    public String toWorkbench() {
+//        return "client/workbench";
+//    }
     @GetMapping(value = "/toWorkbench")
-    public String toWorkbench() {
+    public String toWorkbench(HttpServletRequest request,String defect_id,Integer id,Model model) {
+//        Defect defect = defectServiceImpl.getDefectId(defect_id);
+//        List<Defect> defect = defectMapper.selectDefect();
+//        model.addAttribute("defect",defect);
+        List<Defect> list=defectMapper.selectDesignatedPersonWithUserId(id);
+        request.setAttribute("data4", list);
         return "client/workbench";
     }
-
 }

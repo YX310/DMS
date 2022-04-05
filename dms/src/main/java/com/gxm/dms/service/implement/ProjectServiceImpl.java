@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * @类名 ProjectServiceImpl
@@ -52,6 +54,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project getProjectId(Integer project_id) {
         return projectMapper.getProjectId(project_id);
+    }
+
+    @Override
+    public void addProject(Project project) {
+//        Random random = new Random();
+//        project.setProject_id(UUID.randomUUID().toString().toUpperCase());
+//        project.setProject_id(random.nextInt());
+        projectMapper.addProject(project);
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,18 @@ public class ProjectController {
         }else {
             return "client/home";
         }
+    }
+
+    //新建项目
+    @RequestMapping("/toAddProject")
+    public String toAddProject(){
+        return "client/add_project";
+    }
+
+    @RequestMapping("/addProject")
+    public String add(Project project){
+        projectServiceImpl.addProject(project);
+        return "redirect:/home_project_list";
     }
 
 }

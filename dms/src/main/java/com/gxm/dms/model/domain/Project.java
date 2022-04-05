@@ -20,6 +20,7 @@ public class Project {
     private String project_description; //项目描述
     private String project_member;  //项目成员
 
+
     public int getProject_id() {
         return project_id;
     }
@@ -27,7 +28,6 @@ public class Project {
     public void setProject_id(int project_id) {
         this.project_id = project_id;
     }
-
     public String getProject_name() {
         return project_name;
     }

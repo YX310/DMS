@@ -1,6 +1,8 @@
 package com.gxm.dms.mapper;
 
 import com.gxm.dms.model.domain.Project;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +26,12 @@ public interface ProjectMapper {
     @Select("SELECT project_id , project_name FROM project WHERE project_id=#{project_id}")
         public Project selectProjectWithProject_id(Integer project_id);
 
-        //获取项目id
-        @Select("SELECT * FROM project WHERE project_id = #{project_id}")
+    //获取项目id
+    @Select("SELECT * FROM project WHERE project_id = #{project_id}")
     public Project getProjectId(Integer project_id);
+
+    //新建项目
+    @Insert("INSERT INTO project values(#{project_id},#{project_name}, #{creator}, #{creation_date},#{project_description}, #{project_member})")
+    @Options(useGeneratedKeys = true,keyProperty = "project_id",keyColumn = "project_id")
+    public void addProject(Project project);
 }

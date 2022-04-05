@@ -17,4 +17,7 @@ public interface ProjectService {
 
     //获取home界面项目id
     Project getProjectId(Integer project_id);
+
+    //新建项目
+    public void addProject(Project project);
 }

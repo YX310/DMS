@@ -3,6 +3,7 @@ package com.gxm.dts.controller;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.model.domain.Defect;
+import com.gxm.dts.model.domain.DefectFile;
 import com.gxm.dts.service.implement.DefectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,6 +70,7 @@ public class DefectController {
     public String add(HttpServletRequest request,
                       Defect defect,
                       @RequestParam("defect_file") MultipartFile[] files) {
+        defectServiceImpl.addDefect(defect);
         System.out.println("defect: " + defect.toString());
         // 检查是否上传文件
         if (files.length > 0 && !("").equals(files[0].getOriginalFilename())) {
@@ -81,7 +83,6 @@ public class DefectController {
             }
 
             // 初始化文件路径
-            StringBuilder filePath = new StringBuilder();
             int i = 0;
             // 遍历存储
             for (MultipartFile file : files) {
@@ -93,16 +94,16 @@ public class DefectController {
                     file.transferTo(new File(folder, newName));
                     String fileRes = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + format + newName;
                     System.out.println("fileRes: " + fileRes);
-                    filePath.append(fileRes).append(",");
+                    DefectFile defectFile = new DefectFile();
+                    defectFile.setDefect_id(Integer.parseInt(defect.getDefect_id()));
+                    defectFile.setFile_path(fileRes);
+                    defectServiceImpl.addDefectFile(defectFile);
                     System.out.println("fileRes: " + ++i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            filePath.setLength(filePath.length() - 1);
-            defect.setDefect_document(filePath.toString());
         }
-        defectServiceImpl.addDefect(defect);
         System.out.println("defect: " + files.length);
         return "redirect:/defect_list";
     }

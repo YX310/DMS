@@ -7,9 +7,50 @@
     <link rel="stylesheet" th:href="@{/css/me.css}" />
     <script th:src="@{/js/jquery.js}"></script>
 </head>
+    <style type="text/css">
+        a{
+            text-decoration:none;
+            color: inherit;
+        }
+    </style>
 <body>
 <!--header-->
-    <div th:replace="/client/index::header"></div>
+<!--    <div th:replace="/client/index::header"></div>-->
+    <div id="toolbarBox" style="min-height: 48px;">
+    <div id="toolbar-container">
+        <div id="toolbar-container-left">
+            <div id="toolbar-logo">DTS</div>
+            <div class="toolbar-f1">
+                <ul><a th:href="@{/toWorkbench(id=${session.user_id})}">我的工作台</a></ul>
+                <ul><a th:href="@{/home_project_list}">我的项目</a></ul>
+            </div>
+        </div>
+
+        <div id="toolbar-container-middle">
+            <div class="toolbar-search">
+                <div class="toolbar-search-container">
+                    <input id="toolbar-search-input" style="text-indent: 32px;"/>
+                    <button id="toolbar-search-button">
+                        <i></i>
+                        <span>搜索</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="toolbar-container-right">
+            <div class="toolbar-user">
+                <div class="headimg_box">
+                    <img src="../imgs/style_img/logimg.jpg"/>
+                </div>
+                <!--						<span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>-->
+                <span ><a th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.user_id})}"></a></span>
+            </div>
+            <div class="toolbar-logout">
+                <a href="/login">退出</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--me_content-->
     <div id="main_me">

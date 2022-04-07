@@ -8,7 +8,6 @@
     <link rel="stylesheet" th:href="@{/css/index.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
     <link rel="stylesheet" th:href="@{/css/defect.css}"/>
-    <link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap-markdown.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/fileinput.min.css}"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -20,8 +19,8 @@
 </head>
 <body>
 <div th:replace="/client/index::header"></div>
-<div id="contentWrapper">
-    <div id="contentRight">
+<div class="defect-box">
+    <div class="defect-content">
         <div  class="container" style="width:100%;height:100%;margin-left:0px;" >
             <form name="add-form" th:action="@{/addDefect}" method="post">
                 <input name="defect_creator" type="hidden" th:value="${session.username}"/>

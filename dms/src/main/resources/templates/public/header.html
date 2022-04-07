@@ -9,7 +9,7 @@
         <div id="toolbarBox" style="min-height: 48px;">
             <div id="toolbar-container">
                 <div id="toolbar-container-left">
-                    <div id="toolbar-logo">DMS</div>
+                    <div id="toolbar-logo">DTS</div>
                     <div class="toolbar-f1">
                         <ul>我的工作台</ul>
                         <ul>
@@ -36,6 +36,7 @@
                             <img src="../imgs/style_img/logimg.jpg"/>
                         </div>
                         <span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
+<!--                        <span ><a th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.user_id})}"></a></span>-->
                     </div>
                     <div class="toolbar-logout">
                         <a href="/login">退出</a>

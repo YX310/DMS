@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>用户信息修改</title>
-    <link rel="stylesheet" type="text/css" href="../css/home.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
     <link th:href="@{/back/css/index.css}" rel="stylesheet"/>
-    <link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
     <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
 
     <script src="/back/js/jquery.min.js"></script>
@@ -13,16 +12,11 @@
 <body>
 
     <div th:replace="/public/header::header"></div>
-
-    <div id="contentWrapper">
-
-        <div id="contentRight">
-
-            <div  class="container" style="width:100%;height:100%;margin-left:0px;" >
+        <div class="userupdate-box">
+            <div class="userupdate-content">
                 <form th:action="@{/update}" method="post">
                     <h2 class="heading" >修改用户信息</h2>
                     <input name="user_id" type="hidden" th:value="${user.user_id}"/>
-
                     <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
                         <tr>
                             <td width="17%" align="center">用户名</td>
@@ -49,10 +43,7 @@
                     <button class="btn btn-primary btn-lg btn-block" type="submit">保存修改</button>
                 </form>
             </div>
-
         </div>
-
-    </div>
 
 </body>
 </html>

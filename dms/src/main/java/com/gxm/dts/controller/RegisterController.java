@@ -23,12 +23,18 @@ public class RegisterController {
 
 
     @PostMapping(value = "/user/register")
-    public String register(HttpServletRequest request,User user) {
+    public String register(HttpServletRequest request, User user) {
         // if has user
-        if (mapper.checkUser(user.getUsername()) != null) return projectController.Project(request);
+        if (mapper.checkUser(user.getUsername()) != null) {
+            request.setAttribute("error", "用户已存在!");
+            return indexController.toRegister();
+        }
 
         // check email
-        if (!Utils.checkEmail(user.getEmail())) return indexController.toRegister();
+        if (!Utils.checkEmail(user.getEmail())) {
+            request.setAttribute("error", "邮箱错误!");
+            return indexController.toRegister();
+        }
 
         // register
         mapper.register(user);

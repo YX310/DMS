@@ -247,8 +247,44 @@ a:hover{
     animation: login 1s;
     -webkit-animation: login 1s;
     display: block;
-
     /* Safari and Chrome */
+}
+
+@keyframes register_failed {
+    0% {
+        top: 0;
+        margin: 0 auto;
+    }
+    100% {
+        top: 50%;
+        margin: 0 auto;
+    }
+}
+
+@-webkit-keyframes register_failed
+    /* Safari and Chrome */
+{
+    0% {
+        right: 0;
+        margin: 0 auto;
+    }
+    100% {
+        top: 50%;
+        margin: 0 auto;
+    }
+}
+
+.register-failed {
+    position: fixed;
+    width: 555px;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 3px 10px 2px rgba(71,149,243,1);
+    animation: register_failed 1s;
+    -webkit-animation: register_failed 1s;
+    display: block;
 }
 
 #num {

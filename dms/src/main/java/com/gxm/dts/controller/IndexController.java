@@ -93,7 +93,7 @@ public class IndexController {
     }
 
     @GetMapping(value = {"/toOverview"})
-    public String toOverView(HttpServletRequest request,  Integer id, Model model){
+    public String toOverView(HttpServletRequest request, Integer id, Model model){
         //Project project = projectServiceImpl.selectProjectDetailsWithId(id);
         Project project = projectServiceImpl.getProjectId(id);
         model.addAttribute("project", project);

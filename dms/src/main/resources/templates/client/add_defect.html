@@ -26,7 +26,6 @@
             <form name="add-form" th:action="@{/addDefect}" onsubmit="uploadFile()" method="post" enctype="multipart/form-data">
                 <input name="project_id" type="hidden" th:value="${session.project.project_id}"/>
                 <input name="defect_creator" type="hidden" th:value="${session.username}"/>
-<!--            <form name="add-form">-->
                 <h2 class="heading" >新建缺陷</h2>
                 <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
 
@@ -38,7 +37,6 @@
                         <td align="center">描述</td>
                         <td >
                             <textarea  name="defect_description" data-provide="markdown" rows="10"></textarea>
-                            <!--<textarea id="editor-zh" name="content" rows="10"></textarea>-->
                         </td>
                     </tr>
 
@@ -106,16 +104,16 @@
                                 <option value="进行中">进行中</option>
                                 <option value="已解决">已解决</option>
                                 <option value="无法解决">无法解决</option>
+                                <option value="待反馈">待反馈</option>
+                                <option value="已拒绝">已拒绝</option>
                                 <option value="继续跟踪">继续跟踪</option>
                                 <option value="已关闭">已关闭</option>
                             </select>
                         </td>
                     </tr>
-
                     <tr>
                         <td align="center">文件</td>
                         <td>
-                            <!--<input  class="form-control" name="welfare" value="上传文件" type="button"/>-->
                             <input id="file-zh" name="defect_file" type="file" multiple="multiple" th:multiple="multiple" data-show-caption="true">
                         </td>
                     </tr>

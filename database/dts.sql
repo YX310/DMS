@@ -2,7 +2,8 @@
 SQLyog Ultimate v12.08 (64 bit)
 MySQL - 5.5.23 : Database - dts
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -112,6 +113,17 @@ CREATE TABLE `user_and_project` (
 /*Data for the table `user_and_project` */
 
 insert  into `user_and_project`(`id`,`user_id`,`project_id`) values (1,2,1),(2,2,3),(3,3,2);
+
+DROP TABLE IF EXISTS `defect_and_file_path`;
+
+CREATE TABLE `defect_and_file_path` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '缺陷和文件路径关系id',
+  `defect_id` int(10) NOT NULL COMMENT '缺陷id',
+  `file_path` char(100) NOT NULL COMMENT '文件路径',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `defect_and_file_path` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

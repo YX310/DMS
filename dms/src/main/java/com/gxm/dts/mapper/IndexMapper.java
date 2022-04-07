@@ -21,7 +21,7 @@ public interface IndexMapper {
     //注册
     @Insert("insert into user values(#{user_id},#{username},#{nickname},#{password},#{user_role},#{head_img},#{company}," +
             "#{user_position},#{employee_number},#{email})")
-    @Options(useGeneratedKeys = true,keyProperty = "user_id",keyColumn = "user_id")
+    @Options(useGeneratedKeys = true, keyProperty = "user_id",keyColumn = "user_id")
     public void register(User user);
 
     // 检索重复username

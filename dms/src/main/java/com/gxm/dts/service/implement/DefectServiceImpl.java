@@ -25,23 +25,25 @@ public class DefectServiceImpl implements DefectService {
     private RedisTemplate redisTemplate;
 
     @Override
-    public PageInfo<Defect> selectDefectWithPage(Integer page3, Integer count) {
-        PageHelper.startPage(page3, count);
+    public PageInfo<Defect> selectDefectWithPage(Integer page, Integer count) {
+        PageHelper.startPage(page, count);
         List<Defect> defectList = defectMapper.selectDefectWithPage();
-        PageInfo<Defect> pageInfo=new PageInfo<>(defectList);
-        return pageInfo;
+        return new PageInfo<>(defectList);
     }
 
     @Override
-    public Defect selectDefectWithId(String defect_id) {
-        Defect defect = null;
-        Object o = redisTemplate.opsForValue().get("defect_" + defect_id);
-        if(o!=null){
-            defect=(Defect)o;
-        }else{
-            defect = defectMapper.selectDefectWithId(defect_id);
-            if(defect!=null){
-                redisTemplate.opsForValue().set("defect_" + defect_id,defect);
+    public Defect selectDefectWithID(String defectID) {
+        Defect defect;
+        Object object = redisTemplate.opsForValue().get("defect_" + defectID);
+
+        // 检查redis 是否缓存对应 defectID 对象
+        if(object != null) {
+            defect = (Defect) object;
+        } else {
+            // 重新获取并保存
+            defect = defectMapper.selectDefectWithID(defectID);
+            if(defect != null) {
+                redisTemplate.opsForValue().set("defect_" + defectID, defect);
             }
         }
         return defect;
@@ -56,17 +58,17 @@ public class DefectServiceImpl implements DefectService {
     }
 
     @Override
-    public Defect getDefectId(String defect_id) {
-        return defectMapper.getDefectId(defect_id);
+    public Defect getDefectID(String defectID) {
+        return defectMapper.getDefectID(defectID);
     }
 
     @Override
-    public void updateDefectWithId(Defect defect) {
-        defectMapper.updateDefectWithId(defect);
+    public void updateDefectWithID(Defect defect) {
+        defectMapper.updateDefectWithID(defect);
     }
 
     @Override
-    public void deleteDefectWithId(String defect_id) {
-        defectMapper.deleteDefectWithId(defect_id);
+    public void deleteDefectWithID(String defectID) {
+        defectMapper.deleteDefectWithID(defectID);
     }
 }

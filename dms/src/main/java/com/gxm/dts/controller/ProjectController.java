@@ -28,9 +28,9 @@ public class ProjectController {
     @GetMapping("/page/{p}")
     public String Project(HttpServletRequest request,
                           @PathVariable("p") int page,
-                          @RequestParam(value = "count", defaultValue = "5") int count){
-        Integer user_id = (Integer) request.getSession(true).getAttribute("user_id");
-        PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count, user_id);
+                          @RequestParam(value = "count", defaultValue = "5") int count) {
+        Integer userID = (Integer) request.getSession(true).getAttribute("user_id");
+        PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count, userID);
         request.setAttribute("data", list);
         request.setAttribute("page", page);
         request.setAttribute("count", list.getPages());
@@ -39,12 +39,16 @@ public class ProjectController {
 
     // 项目详情查询
     @GetMapping(value = "/project/{id}")
-    public String getProjectById(@PathVariable("id") Integer id, HttpServletRequest request){
-        Project project = projectServiceImpl.selectProjectDetailsWithId(id);
-        if(project!=null){
+    public String getProjectById(HttpServletRequest request,
+                                 @PathVariable("id") Integer id) {
+        // 根据项目id查询具体项目
+        Project project = projectServiceImpl.selectProjectDetailsWithID(id);
+
+        // 检查项目是否存在加载对应界面
+        if(project != null) {
             request.getSession(true).setAttribute("project", project);
             return "client/index";
-        }else {
+        } else {
             return "client/home";
         }
     }

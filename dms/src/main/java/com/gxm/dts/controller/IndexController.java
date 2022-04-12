@@ -81,21 +81,21 @@ public class IndexController {
     //获取当前所选项目id
     @GetMapping(value = "/getProjectId")
     public String getProjectId(HttpServletRequest request,
-                               @RequestParam("project_id") Integer project_id) {
-        Project p  = projectMapper.getProjectId(project_id);
-        if(project_id == null){
+                               @RequestParam("project_id") Integer projectID) {
+        Project p  = projectMapper.getProjectId(projectID);
+        if(projectID == null) {
             return "client/home";
         }else{
             HttpSession session = request.getSession(true);
             session.setAttribute("project_id", p.getProject_id());
-            return projectController.getProjectById(project_id,request);
+            return projectController.getProjectById(request, projectID);
         }
     }
 
     @GetMapping(value = {"/toOverview"})
     public String toOverView(HttpServletRequest request, Integer id, Model model){
         //Project project = projectServiceImpl.selectProjectDetailsWithId(id);
-        Project project = projectServiceImpl.getProjectId(id);
+        Project project = projectServiceImpl.getProjectID(id);
         model.addAttribute("project", project);
         return "client/overview";
     }

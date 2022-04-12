@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @类名 ProjectServiceImpl
  * @描述 一个继承了ProjectService接口的类，用于执行相关操作
- * @时间 2020-3-38
+ * @时间 2022-3
  */
 
 @Service
@@ -28,30 +28,33 @@ public class ProjectServiceImpl implements ProjectService {
 
     // 查询项目列表
     @Override
-    public PageInfo<Project> selectProjectWithPage(Integer page, Integer count, int user_id) {
+    public PageInfo<Project> selectProjectWithPage(Integer page, Integer count, int userID) {
         PageHelper.startPage(page, count);
-        List<Project> projectList = projectMapper.selectProjectWithUserId(user_id);//需要修改
+        List<Project> projectList = projectMapper.selectProjectWithUserID(userID);//需要修改
         return new PageInfo<>(projectList);
     }
 
     // 根据项目id查询详情，并使用Redis进行缓存管理
-    public Project selectProjectDetailsWithId(Integer project_id){
-        Project project = null;
-        Object o = redisTemplate.opsForValue().get("Project_" + project_id);
-        if(o!=null){
-            project=(Project)o;
-        }else{
-            project = projectMapper.selectProjectWithProject_id(project_id);
-            if(project!=null){
-                redisTemplate.opsForValue().set("Project_" + project_id,project);
+    public Project selectProjectDetailsWithID(Integer projectID) {
+        Project project;
+        Object object = redisTemplate.opsForValue().get("Project_" + projectID);
+
+        // 检查redis 是否缓存对应id对象
+        if(object != null) {
+            project = (Project) object;
+        } else {
+            // 重新获取并保存
+            project = projectMapper.selectProjectWithProjectID(projectID);
+            if(project != null) {
+                redisTemplate.opsForValue().set("Project_" + projectID, project);
             }
         }
         return project;
     }
 
     @Override
-    public Project getProjectId(Integer project_id) {
-        return projectMapper.getProjectId(project_id);
+    public Project getProjectID(Integer projectID) {
+        return projectMapper.getProjectId(projectID);
     }
 
     @Override

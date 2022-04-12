@@ -27,6 +27,10 @@ public class DefectController {
     @Autowired
     private DefectServiceImpl defectServiceImpl;
 
+    @Value("${web.upload-path}")
+    private String uploadPath;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
+
     @GetMapping(value = "/defect_list")
     public String toDefect_list(HttpServletRequest request) {
         List<Defect> list=defectMapper.selectDefectWithPage();
@@ -35,30 +39,28 @@ public class DefectController {
     }
 
     @GetMapping("/page3/{p}")
-    public String Defect(HttpServletRequest request,@PathVariable("p") int page3,
-                       @RequestParam(value = "count", defaultValue = "5") int count){
-        PageInfo<Defect> list = defectServiceImpl.selectDefectWithPage(page3, count);
+    public String Defect(HttpServletRequest request,
+                         @PathVariable("p") int page,
+                         @RequestParam(value = "count", defaultValue = "5") int count) {
+        PageInfo<Defect> list = defectServiceImpl.selectDefectWithPage(page, count);
         request.setAttribute("data3", list);
-        request.setAttribute("page3", page3);
-        request.setAttribute("count",defectServiceImpl.selectDefectWithPage(page3, count).getPages());
+        request.setAttribute("page3", page);
+        request.setAttribute("count", list.getPages());
         return "client/defect_list";
     }
 
     // 缺陷详情查询
     @GetMapping(value = "/defect/{id}")
-    public String getDefectById(@PathVariable("id") String id, HttpServletRequest request){
-        Defect defect = defectServiceImpl.selectDefectWithId(id);
-        if(defect!=null){
+    public String getDefectById(HttpServletRequest request,
+                                @PathVariable("id") String id) {
+        Defect defect = defectServiceImpl.selectDefectWithID(id);
+        if(defect != null) {
             request.setAttribute("defect",defect);
             return "client/index";
-        }else {
+        } else {
             return "client/defect_list";
         }
     }
-
-    @Value("${web.upload-path}")
-    private String uploadPath;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 
     //新建缺陷
     @RequestMapping("/toAddDefect")
@@ -110,25 +112,24 @@ public class DefectController {
 
     //更新（修改）缺陷信息
     @RequestMapping("/toUpdateDefect")
-    public String toUpdateDefect(String id, Model model){
-        Defect defect = defectServiceImpl.getDefectId(id);
+    public String toUpdateDefect(String id, Model model) {
+        Defect defect = defectServiceImpl.getDefectID(id);
         model.addAttribute("defect",defect);
         return "client/defect_update";
     }
 
     //修改缺陷信息
     @RequestMapping("/updateDefect")
-    public String updateDefectWithId(Defect defect){
-        defectServiceImpl.updateDefectWithId(defect);
+    public String updateDefectWithId(Defect defect) {
+        defectServiceImpl.updateDefectWithID(defect);
         return "redirect:/defect_list"; //redirect重定向
     }
 
     //删除缺陷
     @RequestMapping("/deleteDefect")
-    public String deleteUser(String id){
-        defectServiceImpl.deleteDefectWithId(id);
+    public String deleteUser(String id) {
+        defectServiceImpl.deleteDefectWithID(id);
         return "redirect:/defect_list"; //redirect重定向
     }
-
 }
 

@@ -102,8 +102,8 @@ public class IndexController {
 
     @GetMapping(value = "/toWorkbench")
     public String toWorkbench(HttpServletRequest request,Integer id) {
-        List<DefectProject> list=defectMapper.selectDesignatedPersonWithUserId(id);
-        List<DefectProject> list2=defectMapper.selectDefectCreatorWithUserId(id);
+        List<DefectProject> list=defectMapper.selectDesignatedPersonWithUserID(id);
+        List<DefectProject> list2=defectMapper.selectDefectCreatorWithUserID(id);
         request.setAttribute("data4", list); //指派给我的任务
         request.setAttribute("data5", list2);//已报告的任务
         return "client/workbench";

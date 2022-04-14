@@ -31,8 +31,8 @@ public class DefectController {
     private String uploadPath;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 
-    @GetMapping(value = "/defect_list")
-    public String toDefect_list(HttpServletRequest request) {
+    @GetMapping(value = "/toDefectList")
+    public String toDefectList(HttpServletRequest request) {
         List<Defect> list=defectMapper.selectDefectWithPage();
         request.setAttribute("data3", list);
         return this.Defect(request, 1, 5);
@@ -46,7 +46,7 @@ public class DefectController {
         request.setAttribute("data3", list);
         request.setAttribute("page3", page);
         request.setAttribute("count", list.getPages());
-        return "client/defect_list";
+        return "client/defectList";
     }
 
     // 缺陷详情查询
@@ -54,18 +54,18 @@ public class DefectController {
     public String getDefectById(HttpServletRequest request,
                                 @PathVariable("id") String id) {
         Defect defect = defectServiceImpl.selectDefectWithID(id);
-        if(defect != null) {
-            request.setAttribute("defect",defect);
+        if (defect != null) {
+            request.setAttribute("defect", defect);
             return "client/index";
         } else {
-            return "client/defect_list";
+            return "client/defectList";
         }
     }
 
     //新建缺陷
     @RequestMapping("/toAddDefect")
     public String toAddDefect(){
-        return "client/add_defect";
+        return "client/addDefect";
     }
 
     @PostMapping("/addDefect")
@@ -107,29 +107,29 @@ public class DefectController {
             }
         }
         System.out.println("defect: " + files.length);
-        return "redirect:/defect_list";
+        return "redirect:/toDefectList";
     }
 
     //更新（修改）缺陷信息
     @RequestMapping("/toUpdateDefect")
     public String toUpdateDefect(String id, Model model) {
         Defect defect = defectServiceImpl.getDefectID(id);
-        model.addAttribute("defect",defect);
-        return "client/defect_update";
+        model.addAttribute("defect", defect);
+        return "client/defectUpdate";
     }
 
     //修改缺陷信息
     @RequestMapping("/updateDefect")
     public String updateDefectWithId(Defect defect) {
         defectServiceImpl.updateDefectWithID(defect);
-        return "redirect:/defect_list"; //redirect重定向
+        return "redirect:/toDefectList"; //redirect重定向
     }
 
     //删除缺陷
     @RequestMapping("/deleteDefect")
     public String deleteUser(String id) {
         defectServiceImpl.deleteDefectWithID(id);
-        return "redirect:/defect_list"; //redirect重定向
+        return "redirect:/toDefectList"; //redirect重定向
     }
 }
 

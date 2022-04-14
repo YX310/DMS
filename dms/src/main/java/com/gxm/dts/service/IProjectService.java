@@ -2,9 +2,10 @@ package com.gxm.dts.service;
 
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Project;
+import com.gxm.dts.model.domain.UserProject;
 
 
-public interface ProjectService {
+public interface IProjectService {
 
 //    // 根据用户id查询项目
 //    public Project selectProjectWithUserId(Integer userID);
@@ -13,11 +14,14 @@ public interface ProjectService {
     public PageInfo<Project> selectProjectWithPage(Integer page, Integer count, int userID);
 
     // 根据项目id查询项目的详情
-    public Project selectProjectDetailsWithID(Integer projectID);
+    public Project selectProjectDetailsWithId(Integer projectId);
 
     //获取home界面项目id
-    Project getProjectID(Integer projectID);
+    Project getProjectId(Integer projectId);
 
     //新建项目
     public void addProject(Project project);
+
+    //更新user_and_project表
+    public void addUserAndProject(UserProject userProject);
 }

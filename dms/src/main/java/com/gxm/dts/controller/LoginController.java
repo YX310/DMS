@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
     @Autowired
-    private IndexMapper mapper;
+    private IndexMapper indexMapper;
     @Autowired(required = false)
     private AdminController adminController;
     @Autowired
@@ -22,33 +22,31 @@ public class LoginController {
     // 登陆检查
     @PostMapping(value = "/checkLogin")
     public String checkLogin(HttpServletRequest request,
-                             @RequestParam("user_id") String user_id,
-                             @RequestParam("passwd") String passwd,
-                             @RequestParam("user_role") String user_role) {
-        User user = mapper.checkLogin(user_id, passwd, user_role);
-        if(user == null){
+                             @RequestParam("userId") String userId,
+                             @RequestParam("password") String password,
+                             @RequestParam("userRole") String userRole) {
+        User user = indexMapper.checkLogin(userId, password, userRole);
+        if (user == null) {
             return "client/login";
         } else {
-            if (user_role.equals("管理员")){
+            if (userRole.equals("管理员")) {
                 HttpSession session = request.getSession(true);
-                session.setAttribute("user_id", user.getUser_id());
+                session.setAttribute("userId", user.getUser_id());
                 session.setAttribute("username", user.getUsername());
-                session.setAttribute("useremail", user.getEmail());
+                session.setAttribute("email", user.getEmail());
                 return adminController.User(request);
             } else {
-                if(user_role.equals("项目经理") || user_role.equals("开发") || user_role.equals("测试")){
+                if (userRole.equals("项目经理") || userRole.equals("开发") || userRole.equals("测试")){
                     HttpSession session = request.getSession(true);
-                    session.setAttribute("user_id", user.getUser_id());
+                    session.setAttribute("userId", user.getUser_id());
                     session.setAttribute("username", user.getUsername());
-                    session.setAttribute("useremail", user.getEmail());
+                    session.setAttribute("email", user.getEmail());
                     return projectController.Project(request);
                 } else {
                     return "client/login";
                 }
             }
         }
-
     }
-
 
 }

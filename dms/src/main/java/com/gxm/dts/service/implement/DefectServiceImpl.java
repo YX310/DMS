@@ -5,22 +5,20 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectFile;
-import com.gxm.dts.service.DefectService;
+import com.gxm.dts.service.IDefectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
-public class DefectServiceImpl implements DefectService {
+public class DefectServiceImpl implements IDefectService {
 
     @Autowired
     private DefectMapper defectMapper;
-
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -37,12 +35,12 @@ public class DefectServiceImpl implements DefectService {
         Object object = redisTemplate.opsForValue().get("defect_" + defectID);
 
         // 检查redis 是否缓存对应 defectID 对象
-        if(object != null) {
+        if (object != null) {
             defect = (Defect) object;
         } else {
             // 重新获取并保存
             defect = defectMapper.selectDefectWithID(defectID);
-            if(defect != null) {
+            if (defect != null) {
                 redisTemplate.opsForValue().set("defect_" + defectID, defect);
             }
         }

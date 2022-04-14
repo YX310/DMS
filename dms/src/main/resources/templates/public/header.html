@@ -35,7 +35,7 @@
                         <div class="headimg_box">
                             <img src="../imgs/style_img/logimg.jpg"/>
                         </div>
-                        <span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>
+                        <span th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg"></span>
 <!--                        <span ><a th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.user_id})}"></a></span>-->
                     </div>
                     <div class="toolbar-logout">

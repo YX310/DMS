@@ -4,7 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.ProjectMapper;
 import com.gxm.dts.model.domain.Project;
-import com.gxm.dts.service.ProjectService;
+import com.gxm.dts.model.domain.UserProject;
+import com.gxm.dts.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ProjectServiceImpl implements ProjectService {
+public class ProjectServiceImpl implements IProjectService {
+
     @Autowired
     private ProjectMapper projectMapper;
     @Autowired
@@ -35,31 +37,37 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     // 根据项目id查询详情，并使用Redis进行缓存管理
-    public Project selectProjectDetailsWithID(Integer projectID) {
+    @Override
+    public Project selectProjectDetailsWithId(Integer projectId) {
         Project project;
-        Object object = redisTemplate.opsForValue().get("Project_" + projectID);
+        Object object = redisTemplate.opsForValue().get("Project_" + projectId);
 
         // 检查redis 是否缓存对应id对象
-        if(object != null) {
+        if (object != null) {
             project = (Project) object;
         } else {
             // 重新获取并保存
-            project = projectMapper.selectProjectWithProjectID(projectID);
-            if(project != null) {
-                redisTemplate.opsForValue().set("Project_" + projectID, project);
+            project = projectMapper.selectProjectWithProjectId(projectId);
+            if (project != null) {
+                redisTemplate.opsForValue().set("Project_" + projectId, project);
             }
         }
         return project;
     }
 
     @Override
-    public Project getProjectID(Integer projectID) {
-        return projectMapper.getProjectId(projectID);
+    public Project getProjectId(Integer projectId) {
+        return projectMapper.getProjectId(projectId);
     }
 
     @Override
     public void addProject(Project project) {
         projectMapper.addProject(project);
+    }
+
+    @Override
+    public void addUserAndProject(UserProject userProject) {
+        projectMapper.addUserAndProject(userProject);
     }
 
 }

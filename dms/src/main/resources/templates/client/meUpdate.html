@@ -20,8 +20,8 @@
         <div id="toolbar-container-left">
             <div id="toolbar-logo">DTS</div>
             <div class="toolbar-f1">
-                <ul><a th:href="@{/toWorkbench(id=${session.user_id})}">我的工作台</a></ul>
-                <ul><a th:href="@{/home_project_list}">我的项目</a></ul>
+                <ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>
+                <ul><a th:href="@{/homeProjectList}">我的项目</a></ul>
             </div>
         </div>
 
@@ -41,8 +41,7 @@
                 <div class="headimg_box">
                     <img src="../imgs/style_img/logimg.jpg"/>
                 </div>
-                <!--						<span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>-->
-                <span ><a th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.user_id})}"></a></span>
+                <span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
             </div>
             <div class="toolbar-logout">
                 <a href="/login">退出</a>

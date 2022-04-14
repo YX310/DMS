@@ -12,11 +12,10 @@
 				<div id="toolbar-container-left">
 					<div id="toolbar-logo">DTS</div>
 					<div class="toolbar-f1">
-						<ul><a th:href="@{/toWorkbench(id=${session.user_id})}">我的工作台</a></ul>
-						<ul><a th:href="@{/toOverview(id=${session.project.project_id})}">概述</a></ul>
+						<ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>
+						<ul><a th:href="@{/toOverview(id=${session.projectId})}">概述</a></ul>
 						<ul>需求</ul>
-<!--						<ul><a href="/defect_list">缺陷</a></ul>-->
-						<ul><a th:href="@{/defect_list(id=${session.project.project_id})}">缺陷</a></ul>
+						<ul><a th:href="@{/toDefectList(id=${session.projectId})}">缺陷</a></ul>
 <!--						<ul><a th:href="@{/toMe(id=${session.user_id})}">我的</a></ul>-->
 					</div>
 				</div>
@@ -37,8 +36,7 @@
 						<div class="headimg_box">
 							<img src="../imgs/style_img/logimg.jpg"/>
 						</div>
-<!--						<span th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg"></span>-->
-						<span ><a th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.user_id})}"></a></span>
+						<span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
 					</div>
 					<div class="toolbar-logout">
 						<a href="/login">退出</a>

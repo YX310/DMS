@@ -18,8 +18,8 @@ public class AdminController {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
-    // 用户列表页面（user_list）
-    @GetMapping(value = "/user_list")
+    // 用户列表页面（userList）
+    @GetMapping(value = "/toUserList")
     String User(HttpServletRequest request) {
         return this.User(request, 1, 5);
     }
@@ -31,18 +31,18 @@ public class AdminController {
         request.setAttribute("data2", list);
         request.setAttribute("page2", page2);
         request.setAttribute("count",userServiceImpl.selectUserWithPage(page2, count).getPages());
-        return "back/user_list";
+        return "back/userList";
     }
 
     // 用户详情查询
     @GetMapping(value = "/user/{id}")
     public String getUserById(@PathVariable("id") Integer id, HttpServletRequest request){
         User user = userServiceImpl.selectUserWithId(id);
-        if(user!=null){
-            request.setAttribute("user",user);
+        if (user != null) {
+            request.setAttribute("user", user);
             return "client/login";
-        }else {
-            return "back/user_list";
+        } else {
+            return "back/userList";
         }
     }
 
@@ -51,20 +51,21 @@ public class AdminController {
     public String toUpdate(Integer id, Model model){
         User user = userServiceImpl.getUserId(id);
         model.addAttribute("user",user);
-        return "/back/user_update";
+        return "back/userUpdate";
     }
+
     //修改用户信息
     @RequestMapping("/update")
     public String updateUserWithId(User user){
         userServiceImpl.updateUserWithId(user);
-        return "redirect:/user_list"; //redirect重定向
+        return "redirect:/toUserList"; //redirect重定向
     }
 
     //删除用户
     @RequestMapping("/delete")
     public String deleteUser(Integer id){
         userServiceImpl.deleteUserWithId(id);
-        return "redirect:/user_list"; //redirect重定向
+        return "redirect:/toUserList"; //redirect重定向
     }
 
 }

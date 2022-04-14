@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class RegisterController {
     @Autowired
-    private IndexMapper mapper;
+    private IndexMapper indexMapper;
     @Autowired
     private IndexController indexController;
     @Autowired(required = false)
@@ -25,7 +25,7 @@ public class RegisterController {
     @PostMapping(value = "/user/register")
     public String register(HttpServletRequest request, User user) {
         // if has user
-        if (mapper.checkUser(user.getUsername()) != null) {
+        if (indexMapper.checkUser(user.getUsername()) != null) {
             request.setAttribute("error", "用户已存在!");
             return indexController.toRegister();
         }
@@ -37,7 +37,7 @@ public class RegisterController {
         }
 
         // register
-        mapper.register(user);
+        indexMapper.register(user);
         // jump
         String role = user.getUser_role();
         if (role.equals("管理员")) {
@@ -45,9 +45,9 @@ public class RegisterController {
         } else {
             HttpSession session = request.getSession(true);
             if (role.equals("项目经理") || role.equals("开发") || role.equals("测试")) {
-                session.setAttribute("user_id", user.getUser_id());
+                session.setAttribute("userId", user.getUser_id());
                 session.setAttribute("username", user.getUsername());
-                session.setAttribute("useremail", user.getEmail());
+                session.setAttribute("email", user.getEmail());
                 // Now the page we return is the login page, but also can jump to the index page.
                 return projectController.Project(request);
             }

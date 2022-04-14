@@ -2,8 +2,7 @@
 SQLyog Ultimate v12.08 (64 bit)
 MySQL - 5.5.23 : Database - dts
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -40,11 +39,24 @@ CREATE TABLE `defect` (
   `project_id` int(10) DEFAULT NULL COMMENT '所属项目的id',
   `defect_state` char(10) DEFAULT NULL COMMENT '缺陷状态',
   PRIMARY KEY (`defect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `defect` */
 
-insert  into `defect`(`defect_id`,`defect_name`,`defect_description`,`priority`,`probability`,`project_version`,`defect_creator`,`designated_person`,`defect_module`,`defect_type`,`start_date`,`finish_date`,`progress`,`associated_defects`,`defect_document`,`project_id`,`defect_state`) values (1,'home路径错误','home路径错误','普通','10%','v0.8','cs','xiaoguan','home','功能问题','2022-03-30','2022-03-31','0',NULL,NULL,1,'进行中'),(3,'defect_test2','测试修改缺陷','较高','30%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'进行中'),(5,'工作台测试','工作台测试','较高','100%',NULL,'xiaomin','xiaomin',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'新建'),(7,'测试是否能输入项目id','测试是否能输入项目id','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建'),(8,'测试是否能输入创建者','测试是否能输入创建者','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建'),(9,'测试新建项目22','测试新建项目22','较高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,NULL,'新建');
+insert  into `defect`(`defect_id`,`defect_name`,`defect_description`,`priority`,`probability`,`project_version`,`defect_creator`,`designated_person`,`defect_module`,`defect_type`,`start_date`,`finish_date`,`progress`,`associated_defects`,`defect_document`,`project_id`,`defect_state`) values (1,'home路径错误2','','普通','10%','v0.8','cs','xiaoguan','home','功能问题','2022-03-30','2022-03-31','0',NULL,NULL,1,'新建'),(3,'defect_test2','测试修改缺陷','较高','30%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'进行中'),(5,'工作台测试','工作台测试','较高','100%',NULL,'xiaomin','xiaomin',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'新建'),(7,'测试是否能输入项目id','测试是否能输入项目id','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建'),(8,'测试是否能输入创建者','测试是否能输入创建者','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建'),(9,'测试新建项目22','测试新建项目22','较高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,NULL,'新建'),(10,'测试修改id','测试修改id','普通','10%',NULL,'xiaomin','xiaoguan',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,1,'新建');
+
+/*Table structure for table `defect_and_file_path` */
+
+DROP TABLE IF EXISTS `defect_and_file_path`;
+
+CREATE TABLE `defect_and_file_path` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '缺陷和文件路径关系id',
+  `defect_id` int(10) NOT NULL COMMENT '缺陷id',
+  `file_path` char(100) NOT NULL COMMENT '文件路径',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `defect_and_file_path` */
 
 /*Table structure for table `project` */
 
@@ -52,17 +64,17 @@ DROP TABLE IF EXISTS `project`;
 
 CREATE TABLE `project` (
   `project_id` int(20) NOT NULL AUTO_INCREMENT COMMENT '项目id',
-  `project_name` char(20) NOT NULL COMMENT '项目名称',
+  `project_name` char(50) NOT NULL COMMENT '项目名称',
   `creator` char(20) NOT NULL COMMENT '创建人',
   `creation_date` date DEFAULT NULL COMMENT '创建时间',
   `project_description` char(30) DEFAULT NULL COMMENT '项目描述',
   `project_member` char(50) DEFAULT NULL COMMENT '项目成员',
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `project` */
 
-insert  into `project`(`project_id`,`project_name`,`creator`,`creation_date`,`project_description`,`project_member`) values (1,'project1','xiaomin','2022-03-25','xiaomin的第一个项目','xiaomin'),(2,'project2','xiaoguan','2022-03-25','xiaoguan的第一个项目','xiaoguan'),(3,'project3','xiaomin','2022-03-25','xiaomin的第二个项目','xiaomin'),(4,'project4','xiaomin','2022-03-28','xiaomin的第三个项目','xiaomin'),(5,'project5','xiaomin','2022-03-28','xiaomin的第四个项目','xiaomin'),(6,'project6','xiaoguan','2022-03-28','xiaoguan的第二个项目','xiaoguan'),(7,'lalal','xiaomin',NULL,'测试sql语句','xiaomin'),(8,'测试新建项目2','xiaomin',NULL,'测试新建项目2','xiaomin');
+insert  into `project`(`project_id`,`project_name`,`creator`,`creation_date`,`project_description`,`project_member`) values (1,'project1','xiaomin','2022-03-25','xiaomin的第一个项目','xiaomin'),(2,'project2','xiaoguan','2022-03-25','xiaoguan的第一个项目','xiaoguan'),(3,'project3','xiaomin','2022-03-25','xiaomin的第二个项目','xiaomin'),(4,'project4','xiaomin','2022-03-28','xiaomin的第三个项目','xiaomin'),(5,'project5','xiaomin','2022-03-28','xiaomin的第四个项目','xiaomin'),(6,'project6','xiaoguan','2022-03-28','xiaoguan的第二个项目','xiaoguan'),(7,'lalal','xiaomin',NULL,'测试sql语句','xiaomin'),(8,'测试新建项目2','xiaomin',NULL,'测试新建项目2','xiaomin'),(9,'测试修改项目id','xiaomin',NULL,'测试修改项目id','xiaomin'),(10,'测试user_and_project表是否能插入数据','xiaomin',NULL,'测试user_and_project表是否能插入数据','xiaomin'),(11,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'测试user_and_project表是否能插入数据2','xiaomin'),(12,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'测试user_and_project表是否能插入数据2','xiaomin'),(13,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'project_id','xiaomin'),(14,'111','xiaomin',NULL,'111','xiaomin');
 
 /*Table structure for table `project_version` */
 
@@ -93,11 +105,11 @@ CREATE TABLE `user` (
   `employee_number` varchar(10) DEFAULT NULL COMMENT '工号',
   `email` char(20) DEFAULT NULL COMMENT '邮箱',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
-insert  into `user`(`user_id`,`username`,`nickname`,`password`,`user_role`,`head_img`,`company`,`user_position`,`employee_number`,`email`) values (2,'xiaomin',NULL,'0000','项目经理',NULL,NULL,'项目经理','66666','2352322148@qq.com'),(3,'xiaoguan',NULL,'0000','开发',NULL,NULL,'开发工程师',NULL,'2352322148@qq.com'),(4,'cs',NULL,'0000','测试',NULL,NULL,'测试工程师',NULL,'2352322148@qq.com'),(5,'lucy','露西','0000','项目经理',NULL,NULL,'项目经理',NULL,'2352322148@qq.com'),(6,'kkk','tom','0000','测试',NULL,NULL,'测试工程师',NULL,'2352322148@qq.com'),(10,'lalala','lalala','0000','项目经理',NULL,NULL,'项目经理',NULL,'2352322148@qq.com'),(11,'admin','admin','0000','管理员',NULL,NULL,'管理员',NULL,'2352322148@qq.com'),(12,'zz','zz','0000','管理员',NULL,NULL,NULL,NULL,'g611728@163.com');
+insert  into `user`(`user_id`,`username`,`nickname`,`password`,`user_role`,`head_img`,`company`,`user_position`,`employee_number`,`email`) values (2,'xiaomin',NULL,'0000','项目经理',NULL,NULL,'项目经理','66666','2352322148@qq.com'),(3,'xiaoguan',NULL,'0000','开发',NULL,NULL,'开发工程师',NULL,'2352322148@qq.com'),(4,'cs',NULL,'0000','测试',NULL,NULL,'测试工程师',NULL,'2352322148@qq.com'),(5,'lucy','露西','0000','项目经理',NULL,NULL,'项目经理',NULL,'2352322148@qq.com'),(6,'kkk','tom','0000','测试',NULL,NULL,'测试工程师',NULL,'2352322148@qq.com'),(10,'lalala','lalala','0000','项目经理',NULL,NULL,'项目经理',NULL,'2352322148@qq.com'),(11,'admin','admin','0000','管理员',NULL,NULL,'管理员',NULL,'2352322148@qq.com'),(13,'zzz','zzz','0000','项目经理',NULL,NULL,NULL,NULL,'2352322148@qq.com');
 
 /*Table structure for table `user_and_project` */
 
@@ -108,22 +120,11 @@ CREATE TABLE `user_and_project` (
   `user_id` int(10) NOT NULL COMMENT '用户id',
   `project_id` int(10) NOT NULL COMMENT '项目id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_and_project` */
 
-insert  into `user_and_project`(`id`,`user_id`,`project_id`) values (1,2,1),(2,2,3),(3,3,2);
-
-DROP TABLE IF EXISTS `defect_and_file_path`;
-
-CREATE TABLE `defect_and_file_path` (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '缺陷和文件路径关系id',
-  `defect_id` int(10) NOT NULL COMMENT '缺陷id',
-  `file_path` char(100) NOT NULL COMMENT '文件路径',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `defect_and_file_path` */
+insert  into `user_and_project`(`id`,`user_id`,`project_id`) values (1,2,1),(2,2,3),(3,3,2),(4,2,0),(5,2,0),(6,2,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

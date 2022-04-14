@@ -3,7 +3,7 @@ package com.gxm.dts.service;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 
-public interface DefectService {
+public interface IDefectService {
     // 分页查询缺陷列表
     public PageInfo<Defect> selectDefectWithPage(Integer page3, Integer count);
 

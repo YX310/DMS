@@ -3,7 +3,7 @@ package com.gxm.dts.service;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.User;
 
-public interface UserService {
+public interface IUserService {
 
     // 分页查询用户列表（后台）
     public PageInfo<User> selectUserWithPage(Integer page2, Integer count);

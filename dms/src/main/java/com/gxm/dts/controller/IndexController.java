@@ -4,7 +4,6 @@ import com.gxm.dts.mapper.ProjectMapper;
 import com.gxm.dts.model.domain.DefectProject;
 import com.gxm.dts.model.domain.Project;
 import com.gxm.dts.model.domain.User;
-import com.gxm.dts.service.implement.DefectServiceImpl;
 import com.gxm.dts.service.implement.ProjectServiceImpl;
 import com.gxm.dts.service.implement.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +31,6 @@ public class IndexController {
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
     @Autowired
-    private DefectServiceImpl defectServiceImpl;
-    @Autowired
     private ProjectMapper projectMapper;
     @Autowired
     private ProjectController projectController;
@@ -59,7 +56,7 @@ public class IndexController {
     @GetMapping("/toMe")
     public String toMe(HttpServletRequest request, Integer id, Model model){
         User user = userServiceImpl.getUserId(id);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "client/me";
     }
 
@@ -67,9 +64,10 @@ public class IndexController {
     @GetMapping("/toUpdateMe")
     public String toUpdateMe(Integer id, Model model){
         User user = userServiceImpl.getUserId(id);
-        model.addAttribute("user",user);
-        return "client/me_update";
+        model.addAttribute("user", user);
+        return "client/meUpdate";
     }
+
     //(前台)修改用户信息
     @RequestMapping("/updateMe")
     public String updateUserWithId(User user){
@@ -77,25 +75,24 @@ public class IndexController {
         return "client/me";
     }
 
-
     //获取当前所选项目id
     @GetMapping(value = "/getProjectId")
     public String getProjectId(HttpServletRequest request,
-                               @RequestParam("project_id") Integer projectID) {
-        Project p  = projectMapper.getProjectId(projectID);
-        if(projectID == null) {
+                               @RequestParam("projectId") Integer projectId) {
+        Project p  = projectMapper.getProjectId(projectId);
+        if (projectId == null) {
             return "client/home";
-        }else{
+        } else {
             HttpSession session = request.getSession(true);
-            session.setAttribute("project_id", p.getProject_id());
-            return projectController.getProjectById(request, projectID);
+            session.setAttribute("projectId", p.getProject_id());
+            return projectController.getProjectById(request, projectId);
         }
     }
 
     @GetMapping(value = {"/toOverview"})
     public String toOverView(HttpServletRequest request, Integer id, Model model){
         //Project project = projectServiceImpl.selectProjectDetailsWithId(id);
-        Project project = projectServiceImpl.getProjectID(id);
+        Project project = projectServiceImpl.getProjectId(id);
         model.addAttribute("project", project);
         return "client/overview";
     }

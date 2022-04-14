@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.UserMapper;
 import com.gxm.dts.model.domain.User;
-import com.gxm.dts.service.UserService;
+import com.gxm.dts.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
+
     @Autowired
     private UserMapper userMapper;
-
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -32,12 +32,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User selectUserWithId(Integer user_id) {
         User user = null;
-        Object o = redisTemplate.opsForValue().get("user_" + user_id);
-        if(o!=null){
-            user=(User)o;
-        }else{
+        Object object = redisTemplate.opsForValue().get("user_" + user_id);
+        if (object!=null) {
+            user=(User)object;
+        } else {
             user = userMapper.selectUserWithId(user_id);
-            if(user!=null){
+            if (user!=null) {
                 redisTemplate.opsForValue().set("user_" + user_id,user);
             }
         }

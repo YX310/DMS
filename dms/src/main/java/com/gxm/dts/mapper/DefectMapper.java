@@ -6,7 +6,6 @@ import com.gxm.dts.model.domain.DefectProject;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

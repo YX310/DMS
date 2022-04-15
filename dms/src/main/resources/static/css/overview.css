@@ -1,0 +1,68 @@
+#overview-box{
+	float: left;
+	width: 100%;
+	height: 100%;
+	margin-top:35px;
+	overflow: hidden;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+	/*border: 1px solid palevioletred;*/
+}
+.overview-content{
+	float: left;
+	width: 90%;
+	height: 100%;
+	margin-left: 5%;
+	overflow: hidden;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+	/*border: 1px solid #077ABC;*/
+}
+.overview-left{
+	float: left;
+	padding: 5px;
+	width: 66%;
+	background-color: white;
+	border: 3px solid white;
+	border-radius: 5px;
+}
+.project-title{
+	/*border: 1px solid yellow;*/
+}
+.project-title span{
+	/*color: palevioletred;*/
+	color: rgba(71,149,243,1);
+	font-size: 1.5em;
+	font-weight: bold;
+	/*border: 1px solid yellow;*/
+}
+.creator,.creation_date{
+	margin-top: 10px;
+	font-size: 0.9em;
+	color: darkgray;
+}
+.project-description-box{
+	height: 100%;
+	margin-top: 10px;
+	color: rgba(27,27,27,0.9);
+	/*border: 1px solid red;*/
+}
+.project-description-box>span{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: rgba(71,149,243,1);
+}
+.project-description{
+	text-indent: 1.2em;/*首行缩进*/
+	word-wrap:break-word;/*自动换行*/
+}
+
+.overview-right{
+	float: right;
+	width: 30%;
+	padding: 5px;
+	background-color: white;
+	border: 3px solid white;
+	border-radius: 5px;
+}
+

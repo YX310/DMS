@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectFile;
+import com.gxm.dts.model.domain.DefectProject;
 import com.gxm.dts.service.IDefectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -68,5 +69,15 @@ public class DefectServiceImpl implements IDefectService {
     @Override
     public void deleteDefectWithID(String defectID) {
         defectMapper.deleteDefectWithID(defectID);
+    }
+
+    @Override
+    public List<DefectProject> selectDesignatedPersonWithUserID(int user_id) {
+        return defectMapper.selectDesignatedPersonWithUserID(user_id);
+    }
+
+    @Override
+    public List<DefectProject> selectDefectCreatorWithUserID(int user_id) {
+        return defectMapper.selectDefectCreatorWithUserID(user_id);
     }
 }

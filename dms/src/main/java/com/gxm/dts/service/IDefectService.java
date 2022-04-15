@@ -2,6 +2,9 @@ package com.gxm.dts.service;
 
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
+import com.gxm.dts.model.domain.DefectProject;
+
+import java.util.List;
 
 public interface IDefectService {
     // 分页查询缺陷列表
@@ -19,4 +22,10 @@ public interface IDefectService {
 
     // 根据缺陷id删除单个缺陷信息
     public void deleteDefectWithID(String defectID);
+
+    //根据当前用户id查找被指派的任务
+    public List<DefectProject> selectDesignatedPersonWithUserID(int user_id);
+
+    //根据当前用户id查找当前用户报告的任务
+    public List<DefectProject> selectDefectCreatorWithUserID(int user_id);
 }

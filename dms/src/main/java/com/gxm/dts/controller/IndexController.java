@@ -4,6 +4,7 @@ import com.gxm.dts.mapper.ProjectMapper;
 import com.gxm.dts.model.domain.DefectProject;
 import com.gxm.dts.model.domain.Project;
 import com.gxm.dts.model.domain.User;
+import com.gxm.dts.service.implement.DefectServiceImpl;
 import com.gxm.dts.service.implement.ProjectServiceImpl;
 import com.gxm.dts.service.implement.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,9 @@ public class IndexController {
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
     @Autowired
-    private ProjectMapper projectMapper;
+    private DefectServiceImpl defectServiceImpl;
     @Autowired
     private ProjectController projectController;
-    @Autowired
-    private DefectMapper defectMapper;
 
     @GetMapping(value = {"","/login"})
     public String toLogin(){
@@ -78,14 +77,14 @@ public class IndexController {
     //获取当前所选项目id
     @GetMapping(value = "/getProjectId")
     public String getProjectId(HttpServletRequest request,
-                               @RequestParam("projectId") Integer projectId) {
-        Project p  = projectMapper.getProjectId(projectId);
-        if (projectId == null) {
+                               @RequestParam("projectId") Integer id) {
+        Project p  = projectServiceImpl.getProjectId(id);
+        if (id == null) {
             return "client/home";
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("projectId", p.getProject_id());
-            return projectController.getProjectById(request, projectId);
+            return projectController.getProjectById(request, id);
         }
     }
 
@@ -99,8 +98,8 @@ public class IndexController {
 
     @GetMapping(value = "/toWorkbench")
     public String toWorkbench(HttpServletRequest request,Integer id) {
-        List<DefectProject> list=defectMapper.selectDesignatedPersonWithUserID(id);
-        List<DefectProject> list2=defectMapper.selectDefectCreatorWithUserID(id);
+        List<DefectProject> list=defectServiceImpl.selectDesignatedPersonWithUserID(id);
+        List<DefectProject> list2=defectServiceImpl.selectDefectCreatorWithUserID(id);
         request.setAttribute("data4", list); //指派给我的任务
         request.setAttribute("data5", list2);//已报告的任务
         return "client/workbench";

@@ -22,7 +22,7 @@ public interface ProjectMapper {
     public List<Project> selectProject(Integer projectId);
 
     // 根据项目id查询项目信息
-    @Select("SELECT project_id , project_name FROM project WHERE project_id = #{projectId}")
+    @Select("SELECT * FROM project WHERE project_id = #{projectId}")
     public Project selectProjectWithProjectId(Integer projectId);
 
     //获取项目id
@@ -33,7 +33,6 @@ public interface ProjectMapper {
     @Insert({"INSERT INTO project values(#{project_id},#{project_name}, #{creator}, #{creation_date},#{project_description}, #{project_member})"})
     @Options(useGeneratedKeys = true, keyProperty = "project_id", keyColumn = "project_id")
     public void addProject(Project project);
-//    public void addProject(UserProject userProject);
 
     //更新user_and_project表
     @Insert("INSERT INTO user_and_project(user_id, project_id) values(#{user_id},#{project_id})")

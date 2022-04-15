@@ -23,13 +23,13 @@ public class ProjectController {
     // home页面（分页展示）
     @GetMapping(value = "/homeProjectList")
     String Project(HttpServletRequest request) {
-        return this.Project(request, 1, 5);
+        return this.Project(request, 1, 10);
     }
 
     @GetMapping("/page/{p}")
     public String Project(HttpServletRequest request,
                           @PathVariable("p") int page,
-                          @RequestParam(value = "count", defaultValue = "5") int count) {
+                          @RequestParam(value = "count", defaultValue = "10") int count) {
         Integer userId = (Integer) request.getSession(true).getAttribute("userId");
         PageInfo<Project> list = projectServiceImpl.selectProjectWithPage(page, count, userId);
         request.setAttribute("data", list);
@@ -48,6 +48,7 @@ public class ProjectController {
         // 检查项目是否存在加载对应界面
         if(project != null) {
             request.getSession(true).setAttribute("project", project);
+            System.out.println(project);
             return "client/index";
         } else {
             return "client/home";
@@ -63,6 +64,7 @@ public class ProjectController {
     @RequestMapping("/addProject")
     public String add(Project project, UserProject userProject){
         projectServiceImpl.addProject(project);
+        userProject.setProject_id(project.getProject_id());
         projectServiceImpl.addUserAndProject(userProject);//向user_and_project表插入数据
         return "redirect:/homeProjectList";
     }

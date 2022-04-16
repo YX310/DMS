@@ -1,5 +1,6 @@
 package com.gxm.dts.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.model.domain.Defect;
@@ -20,6 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
+
 @Controller
 public class DefectController {
     @Autowired
@@ -32,8 +35,13 @@ public class DefectController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 
     @GetMapping(value = "/toDefectList")
-    public String toDefectList(HttpServletRequest request) {
-        List<Defect> list=defectMapper.selectDefectWithPage();
+    public String toDefectList(HttpServletRequest request,
+                               Integer id) {
+        List<Defect> list = defectMapper.selectDefectWithProjectId(id);
+        System.out.println(id);
+        for (Defect defect : list) {
+            System.out.println(defect);
+        }
         request.setAttribute("data3", list);
         return this.Defect(request, 1, 5);
     }
@@ -42,7 +50,9 @@ public class DefectController {
     public String Defect(HttpServletRequest request,
                          @PathVariable("p") int page,
                          @RequestParam(value = "count", defaultValue = "5") int count) {
-        PageInfo<Defect> list = defectServiceImpl.selectDefectWithPage(page, count);
+        Object object = request.getSession(true).getAttribute(SESSION_PROJECT_ID);
+        PageInfo<Defect> list =
+                object != null ? defectServiceImpl.selectDefectWithPage(page, count, (Integer) object) : new PageInfo<>();
         request.setAttribute("data3", list);
         request.setAttribute("page3", page);
         request.setAttribute("count", list.getPages());
@@ -53,7 +63,7 @@ public class DefectController {
     @GetMapping(value = "/defect/{id}")
     public String getDefectById(HttpServletRequest request,
                                 @PathVariable("id") String id) {
-        Defect defect = defectServiceImpl.selectDefectWithID(id);
+        Defect defect = defectServiceImpl.selectDefectWithId(id);
         if (defect != null) {
             request.setAttribute("defect", defect);
             return "client/index";
@@ -113,7 +123,7 @@ public class DefectController {
     //更新（修改）缺陷信息
     @RequestMapping("/toUpdateDefect")
     public String toUpdateDefect(String id, Model model) {
-        Defect defect = defectServiceImpl.getDefectID(id);
+        Defect defect = defectServiceImpl.getDefectId(id);
         model.addAttribute("defect", defect);
         return "client/defectUpdate";
     }
@@ -121,14 +131,14 @@ public class DefectController {
     //修改缺陷信息
     @RequestMapping("/updateDefect")
     public String updateDefectWithId(Defect defect) {
-        defectServiceImpl.updateDefectWithID(defect);
+        defectServiceImpl.updateDefectWithId(defect);
         return "redirect:/toDefectList"; //redirect重定向
     }
 
     //删除缺陷
     @RequestMapping("/deleteDefect")
     public String deleteUser(String id) {
-        defectServiceImpl.deleteDefectWithID(id);
+        defectServiceImpl.deleteDefectWithId(id);
         return "redirect:/toDefectList"; //redirect重定向
     }
 }

@@ -15,16 +15,16 @@ public interface UserMapper {
     public List<User> selectUserWithPage();
 
     // 根据id查询用户信息
-    @Select("SELECT * FROM user WHERE id=#{user_id}")
-    public User selectUserWithId(Integer user_id);
+    @Select("SELECT * FROM user WHERE id=#{userId}")
+    public User selectUserWithId(Integer userId);
 
     // 根据id删除用户信息
-    @Select("DELETE FROM user WHERE user_id = #{user_id}")
-    public void deleteUserWithId(Integer user_id);
+    @Select("DELETE FROM user WHERE user_id = #{userId}")
+    public void deleteUserWithId(Integer userId);
 
     //获取用户id
-    @Select("SELECT * FROM user WHERE user_id = #{user_id}")
-    public User getUserId(Integer user_id);
+    @Select("SELECT * FROM user WHERE user_id = #{userId}")
+    public User getUserId(Integer userId);
 
     //修改用户信息（后台）
     @Select("UPDATE user SET username = #{username}, user_role = #{user_role},user_position = #{user_position},email = #{email} WHERE user_id = #{user_id}")

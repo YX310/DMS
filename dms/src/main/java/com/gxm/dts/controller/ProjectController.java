@@ -13,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
+import java.util.Map;
 
-
+import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
 
 @Controller
 public class ProjectController {
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
+
+    @Autowired
+    private IndexController mIndexController;
 
     // home页面（分页展示）
     @GetMapping(value = "/homeProjectList")
@@ -45,11 +50,10 @@ public class ProjectController {
                                  @PathVariable("id") Integer id) {
         // 根据项目id查询具体项目
         Project project = projectServiceImpl.selectProjectDetailsWithId(id);
-
         // 检查项目是否存在加载对应界面
         if(project != null) {
-            request.getSession(true).setAttribute("projectId", id);
             System.out.println(project);
+            request.getSession(true).setAttribute(SESSION_PROJECT_ID, id);
             return "redirect:/toOverview?id=" + id;
         } else {
             return "client/home";
@@ -93,6 +97,4 @@ public class ProjectController {
         projectServiceImpl.deleteProjectWithId(id);
         return "redirect:/homeProjectList"; //redirect重定向
     }
-
-
 }

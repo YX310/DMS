@@ -15,8 +15,8 @@ import java.util.List;
 public interface ProjectMapper {
 
     //查找当前登录用户加入的项目
-    @Select("SELECT * FROM project AS p INNER JOIN user_and_project AS up WHERE p.project_id=up.project_id and user_id=#{user_id}")
-    public List<Project> selectProjectWithUserID(int user_id);
+    @Select("SELECT * FROM project AS p INNER JOIN user_and_project AS up WHERE p.project_id=up.project_id and user_id=#{userId}")
+    public List<Project> selectProjectWithUserId(int userId);
 
     // 查询所有的项目信息
     @Select("SELECT * FROM project WHERE project_id = #{projectId}")

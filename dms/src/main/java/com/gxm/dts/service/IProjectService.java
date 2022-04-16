@@ -1,6 +1,7 @@
 package com.gxm.dts.service;
 
 import com.github.pagehelper.PageInfo;
+import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.Project;
 import com.gxm.dts.model.domain.UserProject;
 
@@ -24,4 +25,10 @@ public interface IProjectService {
 
     //更新user_and_project表
     public void addUserAndProject(UserProject userProject);
+
+    //更新（修改）项目信息
+    public void updateProjectWithId(Project project);
+
+    // 根据项目id删除项目信息
+    public void deleteProjectWithId(int projectId);
 }

@@ -11,13 +11,11 @@
     <body>
         <div th:replace="/client/index::header"></div>
 
-<!--        content-->
-        <div>
-            <p th:text="${project.project_description}"></p>
-        </div>
         <div id="overview-box">
             <div class="overview-content">
                 <div class="overview-left">
+                    <div class="update-project"><a th:href="@{/toUpdateProject(id=${session.projectId})}">编辑</a></div>
+                    <div class="update-project"><a th:href="@{/deleteProject(id=${session.projectId})}">删除</a></div>
                     <div class="project-title"><span th:text="${project.project_name}"></span></div>
                     <div class="creator"><span th:text="${'创建人：' + project.creator}"></span></div>
                     <div class="creation_date"><span th:text="${'创建时间：' + project.creation_date}"></span></div>

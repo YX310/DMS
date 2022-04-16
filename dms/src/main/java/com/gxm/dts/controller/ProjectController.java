@@ -6,6 +6,7 @@ import com.gxm.dts.model.domain.UserProject;
 import com.gxm.dts.service.implement.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +48,9 @@ public class ProjectController {
 
         // 检查项目是否存在加载对应界面
         if(project != null) {
-            request.getSession(true).setAttribute("project", project);
+            request.getSession(true).setAttribute("projectId", id);
             System.out.println(project);
-            return "client/index";
+            return "redirect:/toOverview?id=" + id;
         } else {
             return "client/home";
         }
@@ -68,5 +69,30 @@ public class ProjectController {
         projectServiceImpl.addUserAndProject(userProject);//向user_and_project表插入数据
         return "redirect:/homeProjectList";
     }
+
+    //更新（修改）项目信息
+    @RequestMapping("/toUpdateProject")
+    public String toUpdateProject(int id, Model model) {
+        Project project = projectServiceImpl.getProjectId(id);
+        model.addAttribute("project", project);
+        return "client/projectUpdate";
+    }
+
+    //修改项目信息
+    @RequestMapping("/updateProject")
+    public String updateDefectWithId(Project project) {
+        Integer id = project.getProject_id();
+        projectServiceImpl.updateProjectWithId(project);
+        System.out.println("执行了" + project);
+        return "redirect:/toOverview?id=" + id; //redirect重定向
+    }
+
+    //删除项目信息
+    @RequestMapping("/deleteProject")
+    public String deleteProject(int id) {
+        projectServiceImpl.deleteProjectWithId(id);
+        return "redirect:/homeProjectList"; //redirect重定向
+    }
+
 
 }

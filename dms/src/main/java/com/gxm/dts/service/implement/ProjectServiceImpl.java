@@ -70,4 +70,14 @@ public class ProjectServiceImpl implements IProjectService {
         projectMapper.addUserAndProject(userProject);
     }
 
+    @Override
+    public void updateProjectWithId(Project project) {
+        projectMapper.updateProjectWithId(project);
+    }
+
+    @Override
+    public void deleteProjectWithId(int projectId) {
+        projectMapper.deleteProjectWithId(projectId);
+    }
+
 }

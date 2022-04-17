@@ -82,6 +82,7 @@
 		<div style="width: 80%; margin-left: 10%;">
 			<form th:action="@{/updateDefect}" method="post">
 				<input name="defect_id" type="hidden" th:value="${defect.defect_id}"/>
+				<input name="project_id" type="hidden" th:value="${session.projectId}"/>
 				<table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
 
 					<tr>

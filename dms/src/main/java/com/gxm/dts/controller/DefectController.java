@@ -129,14 +129,14 @@ public class DefectController {
     @RequestMapping("/updateDefect")
     public String updateDefectWithId(Defect defect) {
         defectServiceImpl.updateDefectWithId(defect);
-        return "redirect:/toDefectList"; //redirect重定向
+        return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
     }
 
     //删除缺陷
     @RequestMapping("/deleteDefect")
-    public String deleteUser(String id) {
+    public String deleteUser(String id,Defect defect) {
         defectServiceImpl.deleteDefectWithId(id);
-        return "redirect:/toDefectList"; //redirect重定向
+        return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
     }
 }
 

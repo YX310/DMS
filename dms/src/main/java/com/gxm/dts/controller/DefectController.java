@@ -1,11 +1,11 @@
 package com.gxm.dts.controller;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectFile;
 import com.gxm.dts.service.implement.DefectServiceImpl;
+import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -37,11 +37,8 @@ public class DefectController {
     @GetMapping(value = "/toDefectList")
     public String toDefectList(HttpServletRequest request,
                                Integer id) {
+        if (Constant.DEBUG) System.out.println("project id: " + id);
         List<Defect> list = defectMapper.selectDefectWithProjectId(id);
-        System.out.println(id);
-        for (Defect defect : list) {
-            System.out.println(defect);
-        }
         request.setAttribute("data3", list);
         return this.Defect(request, 1, 5);
     }
@@ -83,7 +80,7 @@ public class DefectController {
                       Defect defect,
                       @RequestParam("defect_file") MultipartFile[] files) {
         defectServiceImpl.addDefect(defect);
-        System.out.println("defect: " + defect.toString());
+        if (Constant.DEBUG) System.out.println("defect: " + defect.toString());
         // 检查是否上传文件
         if (files.length > 0 && !("").equals(files[0].getOriginalFilename())) {
             // 初始化日期和存储路径
@@ -91,33 +88,33 @@ public class DefectController {
             File folder = new File(uploadPath + format);
             if (!folder.isDirectory()) {
                 boolean res = folder.mkdirs();
-                System.out.println("folder res: " + res);
+                if (Constant.DEBUG) System.out.println("folder res: " + res);
             }
 
             // 初始化文件路径
             int i = 0;
             // 遍历存储
             for (MultipartFile file : files) {
-                System.out.println("defect: " + file.getOriginalFilename());
+                if (Constant.DEBUG) System.out.println("defect: " + file.getOriginalFilename());
                 String oldName = file.getOriginalFilename();
                 if (oldName == null) oldName = "";
                 String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."));
                 try {
                     file.transferTo(new File(folder, newName));
                     String fileRes = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + format + newName;
-                    System.out.println("fileRes: " + fileRes);
+                    if (Constant.DEBUG) System.out.println("fileRes: " + fileRes);
                     DefectFile defectFile = new DefectFile();
                     defectFile.setDefect_id(Integer.parseInt(defect.getDefect_id()));
                     defectFile.setFile_path(fileRes);
                     defectServiceImpl.addDefectFile(defectFile);
-                    System.out.println("fileRes: " + ++i);
+                    if (Constant.DEBUG) System.out.println("fileRes: " + ++i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        System.out.println("defect: " + files.length);
-        return "redirect:/toDefectList";
+        if (Constant.DEBUG) System.out.println("defect: " + files.length);
+        return "redirect:/toDefectList?id=" + defect.getProject_id();
     }
 
     //更新（修改）缺陷信息

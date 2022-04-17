@@ -21,9 +21,6 @@ public class ProjectController {
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
 
-    @Autowired
-    private IndexController mIndexController;
-
     // home页面（分页展示）
     @GetMapping(value = "/homeProjectList")
     String Project(HttpServletRequest request) {

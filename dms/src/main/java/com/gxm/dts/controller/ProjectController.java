@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
-import java.util.Map;
 
 import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
 
@@ -54,7 +52,7 @@ public class ProjectController {
         if(project != null) {
             System.out.println(project);
             request.getSession(true).setAttribute(SESSION_PROJECT_ID, id);
-            return "redirect:/toOverview?id=" + id;
+            return "redirect:/toOverview?id=" + id; 
         } else {
             return "client/home";
         }

@@ -79,6 +79,8 @@ public class DefectController {
     public String add(HttpServletRequest request,
                       Defect defect,
                       @RequestParam("defect_file") MultipartFile[] files) {
+        if (("").equals(defect.getStart_date())) defect.setStart_date(null);
+        if (("").equals(defect.getFinish_date())) defect.setFinish_date(null);
         defectServiceImpl.addDefect(defect);
         if (Constant.DEBUG) System.out.println("defect: " + defect.toString());
         // 检查是否上传文件
@@ -122,14 +124,15 @@ public class DefectController {
     public String toUpdateDefect(String id, Model model) {
         Defect defect = defectServiceImpl.getDefectId(id);
         model.addAttribute("defect", defect);
-        System.out.println(defect.getDefect_description());
-        System.out.println(defect.getDefect_state());
         return "client/defectUpdate";
     }
 
     //修改缺陷信息
     @RequestMapping("/updateDefect")
     public String updateDefectWithId(Defect defect) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sdf.format(new Date());
+        defect.setUpdate_time(format);
         defectServiceImpl.updateDefectWithId(defect);
         return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
     }

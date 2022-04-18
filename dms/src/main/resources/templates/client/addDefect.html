@@ -27,6 +27,8 @@
             <form name="add-form" th:action="@{/addDefect}" onsubmit="uploadFile()" method="post" enctype="multipart/form-data">
                 <input name="project_id" type="hidden" th:value="${session.projectId}"/>
                 <input name="defect_creator" type="hidden" th:value="${session.username}"/>
+                <input name="start_date" type="hidden" value=""/>
+                <input name="finish_date" type="hidden" value=""/>
                 <input name="creation_time" type="hidden" id="time" value=""/>
                 <input name="update_time" type="hidden" id="time" value=""/>
                 <h2 class="heading" >新建缺陷</h2>

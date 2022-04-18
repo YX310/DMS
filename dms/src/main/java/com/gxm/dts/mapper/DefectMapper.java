@@ -32,7 +32,7 @@ public interface DefectMapper {
     public Defect getDefectId(String defectId);
 
     //新建缺陷
-    @Insert("INSERT INTO defect(defect_name, defect_description, priority,designated_person, probability, defect_type,defect_state,project_id,defect_creator,creation_time,update_time) VALUES(#{defect_name}, #{defect_description}, #{priority},#{designated_person}, #{probability}, #{defect_type},#{defect_state},#{project_id},#{defect_creator},#{creation_time},#{update_time})")
+    @Insert("INSERT INTO defect(defect_name, defect_description, priority,designated_person, probability, defect_type,start_date,finish_date,defect_state,project_id,defect_creator,creation_time,update_time) VALUES(#{defect_name}, #{defect_description}, #{priority},#{designated_person}, #{probability}, #{defect_type},#{start_date},#{finish_date},#{defect_state},#{project_id},#{defect_creator},#{creation_time},#{update_time})")
     @Options(useGeneratedKeys = true, keyProperty = "defect_id",keyColumn = "defect_id")
     public void addDefect(Defect defect);
 

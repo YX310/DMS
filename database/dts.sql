@@ -38,12 +38,15 @@ CREATE TABLE `defect` (
   `defect_document` char(50) DEFAULT NULL COMMENT '上传的文件',
   `project_id` int(10) DEFAULT NULL COMMENT '所属项目的id',
   `defect_state` char(10) DEFAULT NULL COMMENT '缺陷状态',
+  `creation_time` char(20) DEFAULT NULL COMMENT '创建时间',
+  `defect_record` longtext COMMENT '记录修改内容',
+  `update_time` char(20) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`defect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `defect` */
 
-insert  into `defect`(`defect_id`,`defect_name`,`defect_description`,`priority`,`probability`,`project_version`,`defect_creator`,`designated_person`,`defect_module`,`defect_type`,`start_date`,`finish_date`,`progress`,`associated_defects`,`defect_document`,`project_id`,`defect_state`) values (1,'home路径错误2','','普通','10%','v0.8','cs','xiaoguan','home','功能问题','2022-03-30','2022-03-31','0',NULL,NULL,1,'新建'),(3,'defect_test2','测试修改缺陷','较高','30%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'进行中'),(5,'工作台测试','工作台测试','较高','100%',NULL,'xiaomin','xiaomin',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'新建'),(7,'测试是否能输入项目id','测试是否能输入项目id','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建'),(8,'测试是否能输入创建者','测试是否能输入创建者','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建'),(9,'测试新建项目22','测试新建项目22','较高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,NULL,'新建'),(10,'测试修改id','测试修改id','普通','10%',NULL,'xiaomin','xiaoguan',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,1,'新建');
+insert  into `defect`(`defect_id`,`defect_name`,`defect_description`,`priority`,`probability`,`project_version`,`defect_creator`,`designated_person`,`defect_module`,`defect_type`,`start_date`,`finish_date`,`progress`,`associated_defects`,`defect_document`,`project_id`,`defect_state`,`creation_time`,`defect_record`,`update_time`) values (1,'home路径错误2','home路径错误啦啦啦','最高','100%','v0.8','cs','xiaoguan','home','接口问题','2022-03-30','2022-03-31','0',NULL,NULL,1,'进行中',NULL,NULL,NULL),(3,'defect_test2','测试修改缺陷','较高','30%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'进行中',NULL,NULL,NULL),(7,'测试是否能输入项目id','测试是否能输入项目id','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建',NULL,NULL,NULL),(9,'测试新建项目22','测试新建项目22','较高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,2,'新建',NULL,NULL,NULL),(14,'测试创建时间','测试创建时间\r\n                            ','普通','40%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'新建',NULL,NULL,NULL),(15,'测试创建时间2','测试创建时间2','最高','90%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建',NULL,NULL,NULL),(16,'测试创建时间3','测试创建时间3\r\n                            ','最高','100%',NULL,'xiaomin','xiaoguan',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建','',NULL,''),(17,'测试创建时间4','测试创建时间4','最高','100%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建','',NULL,''),(18,'测试创建时间5','测试是否能更新日期','最高','100%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题','2022-04-19','2022-04-21','0',NULL,NULL,1,'新建','2022-04-19 00:37:12',NULL,NULL);
 
 /*Table structure for table `defect_and_file_path` */
 
@@ -54,9 +57,11 @@ CREATE TABLE `defect_and_file_path` (
   `defect_id` int(10) NOT NULL COMMENT '缺陷id',
   `file_path` char(100) NOT NULL COMMENT '文件路径',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `defect_and_file_path` */
+
+insert  into `defect_and_file_path`(`id`,`defect_id`,`file_path`) values (1,12,'http://localhost:8080/2022/04/17/e8643661-b80b-42c2-9b36-b0e9aced9813.jpg'),(2,13,'http://localhost:8080/2022/04/17/06f697c9-1847-433a-bcf4-ca2527ec55b2.jpg');
 
 /*Table structure for table `project` */
 
@@ -66,15 +71,15 @@ CREATE TABLE `project` (
   `project_id` int(20) NOT NULL AUTO_INCREMENT COMMENT '项目id',
   `project_name` char(50) NOT NULL COMMENT '项目名称',
   `creator` char(20) NOT NULL COMMENT '创建人',
-  `creation_date` date DEFAULT NULL COMMENT '创建时间',
+  `creation_date` char(20) DEFAULT NULL COMMENT '创建时间',
   `project_description` char(30) DEFAULT NULL COMMENT '项目描述',
   `project_member` char(50) DEFAULT NULL COMMENT '项目成员',
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `project` */
 
-insert  into `project`(`project_id`,`project_name`,`creator`,`creation_date`,`project_description`,`project_member`) values (1,'project1','xiaomin','2022-03-25','xiaomin的第一个项目','xiaomin'),(2,'project2','xiaoguan','2022-03-25','xiaoguan的第一个项目','xiaoguan'),(3,'project3','xiaomin','2022-03-25','xiaomin的第二个项目','xiaomin'),(4,'project4','xiaomin','2022-03-28','xiaomin的第三个项目','xiaomin'),(5,'project5','xiaomin','2022-03-28','xiaomin的第四个项目','xiaomin'),(6,'project6','xiaoguan','2022-03-28','xiaoguan的第二个项目','xiaoguan'),(7,'lalal','xiaomin',NULL,'测试sql语句','xiaomin'),(8,'测试新建项目2','xiaomin',NULL,'测试新建项目2','xiaomin'),(9,'测试修改项目id','xiaomin',NULL,'测试修改项目id','xiaomin'),(10,'测试user_and_project表是否能插入数据','xiaomin',NULL,'测试user_and_project表是否能插入数据','xiaomin'),(11,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'测试user_and_project表是否能插入数据2','xiaomin'),(12,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'测试user_and_project表是否能插入数据2','xiaomin'),(13,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'project_id','xiaomin'),(14,'111','xiaomin',NULL,'111','xiaomin');
+insert  into `project`(`project_id`,`project_name`,`creator`,`creation_date`,`project_description`,`project_member`) values (1,'project1','xiaomin','2022-03-25','xiaomin的第一个项目','xiaomin'),(2,'project2','xiaoguan','2022-03-25','xiaoguan的第一个项目','xiaoguan'),(3,'project3','xiaomin','2022-03-25','xiaomin的第二个项目','xiaomin'),(4,'project4','xiaomin','2022-03-28','xiaomin的第三个项目','xiaomin'),(5,'project5','xiaomin','2022-03-28','xiaomin的第四个项目','xiaomin'),(6,'project6','xiaoguan','2022-03-28','xiaoguan的第二个项目','xiaoguan'),(7,'lalal','xiaomin',NULL,'测试sql语句','xiaomin'),(8,'测试新建项目2','xiaomin',NULL,'测试新建项目2','xiaomin'),(9,'测试修改项目id','xiaomin',NULL,'测试修改项目id','xiaomin'),(10,'测试user_and_project表是否能插入数据','xiaomin',NULL,'测试user_and_project表是否能插入数据','xiaomin'),(11,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'测试user_and_project表是否能插入数据2','xiaomin'),(12,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'测试user_and_project表是否能插入数据2','xiaomin'),(13,'测试user_and_project表是否能插入数据2','xiaomin',NULL,'project_id','xiaomin'),(14,'111','xiaomin',NULL,'111','xiaomin'),(15,'aaaa','xiaomin',NULL,'aaaa','xiaomin'),(16,'bbb','xiaomin',NULL,'bbb','xiaomin'),(17,'ccc','xiaomin',NULL,'ccc','xiaomin'),(18,'ddd','xiaomin',NULL,'ddd','xiaomin'),(19,'测试能否获取时间22','xiaomin','2022-04-15','测试能否获取时间22','xiaomin'),(21,'测试创建时间1','xiaomin','2022-04-19 h:m:s','测试创建时间1','xiaomin'),(22,'测试创建时间2','xiaomin','2022-04-19 h:m:s','测试创建时间2','xiaomin');
 
 /*Table structure for table `project_version` */
 
@@ -120,11 +125,11 @@ CREATE TABLE `user_and_project` (
   `user_id` int(10) NOT NULL COMMENT '用户id',
   `project_id` int(10) NOT NULL COMMENT '项目id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_and_project` */
 
-insert  into `user_and_project`(`id`,`user_id`,`project_id`) values (1,2,1),(2,2,3),(3,3,2),(4,2,0),(5,2,0),(6,2,0);
+insert  into `user_and_project`(`id`,`user_id`,`project_id`) values (1,2,1),(2,2,3),(3,3,2),(7,2,15),(8,2,16),(9,2,17),(10,2,18),(11,2,19),(12,2,20),(13,2,21),(14,2,22);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

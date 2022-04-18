@@ -19,11 +19,14 @@ public class Defect {
     private String defect_document;    //上传的文件
     private String project_id;    //所属项目的id
     private String defect_state;    //缺陷状态
+    private String creation_time;    //创建时间
+    private String defect_record;    //记录修改内容
+    private String update_time;    //记录修改时间
 
     @Override
     public String toString() {
         return "Defect{" +
-                "defect_id=" + defect_id +
+                "defect_id='" + defect_id + '\'' +
                 ", defect_name='" + defect_name + '\'' +
                 ", defect_description='" + defect_description + '\'' +
                 ", priority='" + priority + '\'' +
@@ -40,6 +43,9 @@ public class Defect {
                 ", defect_document='" + defect_document + '\'' +
                 ", project_id='" + project_id + '\'' +
                 ", defect_state='" + defect_state + '\'' +
+                ", creation_time='" + creation_time + '\'' +
+                ", defect_record='" + defect_record + '\'' +
+                ", update_time='" + update_time + '\'' +
                 '}';
     }
 
@@ -177,5 +183,27 @@ public class Defect {
 
     public void setDefect_state(String defect_state) {
         this.defect_state = defect_state;
+    }
+    public String getCreation_time() {
+        return creation_time;
+    }
+
+    public void setCreation_time(String creation_time) {
+        this.creation_time = creation_time;
+    }
+
+    public String getDefect_record() {
+        return defect_record;
+    }
+
+    public void setDefect_record(String defect_record) {
+        this.defect_record = defect_record;
+    }
+    public String getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
     }
 }

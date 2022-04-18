@@ -19,7 +19,7 @@ function t(){
 //	var ho=" AM";
 //	if (h>12 && h<24)
 //	var ho=" PM";
-    const tt = y + "-" + mm + "-" + d;
+    const tt = y + "-" + mm + "-" + d + " " + h + ":" + m + ":" + s;
     document.getElementById("time").value=tt;
 }
 setInterval('t()',500);

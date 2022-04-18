@@ -49,7 +49,7 @@ public class ProjectController {
         if(project != null) {
             System.out.println(project);
             request.getSession(true).setAttribute(SESSION_PROJECT_ID, id);
-            return "redirect:/toOverview?id=" + id; 
+            return "redirect:/toOverview?id=" + id;
         } else {
             return "client/home";
         }

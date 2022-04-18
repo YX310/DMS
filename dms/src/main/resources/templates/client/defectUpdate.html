@@ -100,59 +100,59 @@
 					<div class="defect-property-list1">
 						<div class="list-content1">
 							<span>优先级</span>
-							<select  name="priority" th:value="${defect.priority}">
-								<option value="最高">最高</option>
-								<option value="较高">较高</option>
-								<option value="普通">普通</option>
-								<option value="较低">较低</option>
-								<option value="最低">最低</option>
+							<select  name="priority">
+								<option th:selected="${defect.priority} eq '最高'">最高</option>
+								<option th:selected="${defect.priority} eq '较高'">较高</option>
+								<option th:selected="${defect.priority} eq '普通'">普通</option>
+								<option th:selected="${defect.priority} eq '较低'">较低</option>
+								<option th:selected="${defect.priority} eq '最低'">最低</option>
 							</select>
 						</div>
 						<div class="list-content2">
 							<span>概率</span>
-							<select name="probability" th:value="${defect.probability}">
-								<option value="10%">10%</option>
-								<option value="20%">20%</option>
-								<option value="30%">30%</option>
-								<option value="40%">40%</option>
-								<option value="50%">50%</option>
-								<option value="60%">60%</option>
-								<option value="70%">70%</option>
-								<option value="80%">80%</option>
-								<option value="90%">90%</option>
-								<option value="100%">100%</option>
+							<select name="probability">
+								<option th:selected="${defect.probability} eq '10%'">10%</option>
+								<option th:selected="${defect.probability} eq '20%'">20%</option>
+								<option th:selected="${defect.probability} eq '30%'">30%</option>
+								<option th:selected="${defect.probability} eq '40%'">40%</option>
+								<option th:selected="${defect.probability} eq '50%'">50%</option>
+								<option th:selected="${defect.probability} eq '60%'">60%</option>
+								<option th:selected="${defect.probability} eq '70%'">70%</option>
+								<option th:selected="${defect.probability} eq '80%'">80%</option>
+								<option th:selected="${defect.probability} eq '90%'">90%</option>
+								<option th:selected="${defect.probability} eq '100%'">100%</option>
 							</select>
 						</div>
 						<div class="list-content3">
 							<span>缺陷类型</span>
-							<select name="defect_type" th:value="${defect.defect_type}">
-								<option value="功能问题">功能问题</option>
-								<option value="性能问题">性能问题</option>
-								<option value="接口问题">接口问题</option>
-								<option value="安全问题">安全问题</option>
-								<option value="UI界面问题">UI界面问题</option>
-								<option value="易用性问题">易用性问题</option>
-								<option value="兼容性问题">兼容性问题</option>
-								<option value="数据问题">数据问题</option>
-								<option value="逻辑问题">逻辑问题</option>
-								<option value="需求问题">需求问题</option>
-								<option value="数据请求问题">数据请求问题</option>
-								<option value="成因相同">成因相同</option>
+							<select name="defect_type">
+								<option th:selected="${defect.defect_type} eq '功能问题'">功能问题</option>
+								<option th:selected="${defect.defect_type} eq '性能问题'">性能问题</option>
+								<option th:selected="${defect.defect_type} eq '接口问题'">接口问题</option>
+								<option th:selected="${defect.defect_type} eq '安全问题'">安全问题</option>
+								<option th:selected="${defect.defect_type} eq 'UI界面问题'">UI界面问题</option>
+								<option th:selected="${defect.defect_type} eq '易用性问题'">易用性问题</option>
+								<option th:selected="${defect.defect_type} eq '兼容性问题'">兼容性问题</option>
+								<option th:selected="${defect.defect_type} eq '数据问题'">数据问题</option>
+								<option th:selected="${defect.defect_type} eq '逻辑问题'">逻辑问题</option>
+								<option th:selected="${defect.defect_type} eq '需求问题'">需求问题</option>
+								<option th:selected="${defect.defect_type} eq '数据请求问题'">数据请求问题</option>
+								<option th:selected="${defect.defect_type} eq '成因相同'">成因相同</option>
 							</select>
 						</div>
 					</div>
 					<div class="defect-property-list2">
 						<div class="list-content1">
 							<span>状 态</span>
-							<select name="defect_state" th:value="${defect.defect_state}">
-								<option value="新建">新建</option>
-								<option value="进行中">进行中</option>
-								<option value="已解决">已解决</option>
-								<option value="无法解决">无法解决</option>
-								<option value="待反馈">待反馈</option>
-								<option value="已拒绝">已拒绝</option>
-								<option value="继续跟踪">继续跟踪</option>
-								<option value="已关闭">已关闭</option>
+							<select name="defect_state">
+								<option th:selected="${defect.defect_state} eq '新建'">新建</option>
+								<option th:selected="${defect.defect_state} eq '进行中'">进行中</option>
+								<option th:selected="${defect.defect_state} eq '已解决'">已解决</option>
+								<option th:selected="${defect.defect_state} eq '无法解决'">无法解决</option>
+								<option th:selected="${defect.defect_state} eq '待反馈'">待反馈</option>
+								<option th:selected="${defect.defect_state} eq '已拒绝'">已拒绝</option>
+								<option th:selected="${defect.defect_state} eq '继续跟踪'">继续跟踪</option>
+								<option th:selected="${defect.defect_state} eq '已关闭'">已关闭</option>
 							</select>
 						</div>
 						<div class="list-content2">
@@ -228,7 +228,7 @@
 						<td align="center">优先级</td>
 						<td>
 							<select required="required" name="priority" th:value="${defect.priority}">
-								<option value="最高" >最高</option>									
+								<option value="最高" >最高</option>
 								<option value="较高">较高</option>
 								<option value="普通" selected="selected">普通</option>
 								<option value="较低">较低</option>									

@@ -8,6 +8,7 @@
 	<link rel="stylesheet" th:href="@{/css/index.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
 	<link rel="stylesheet" th:href="@{/css/defect.css}"/>
+	<link rel="stylesheet" th:href="@{/css/updateDefect.css}"/>
 	<link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
 	<link rel="stylesheet" th:href="@{/css/bootstrap-markdown.min.css}"/>
 	<link rel="stylesheet" th:href="@{/css/fileinput.min.css}"/>
@@ -20,64 +21,190 @@
 </head>
 	<body>
 	<div th:replace="/client/index::header"></div>
-		<div style="width: 80%; margin-left: 10%;">
-			<h2 class="heading" >更新缺陷</h2>
-			<table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
-	
-				<tr>
-					<td width="20%" align="center">标题</td>
-					<td><span th:text="${defect.defect_name}"></span></td>
+<!--		<div style="width: 80%; margin-left: 10%;">-->
+<!--			<h2 class="heading" >更新缺陷</h2>-->
+<!--			<table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >-->
+<!--	-->
+<!--				<tr>-->
+<!--					<td width="20%" align="center">标题</td>-->
 <!--					<td><span th:text="${defect.defect_name}"></span></td>-->
-				</tr>
-				<tr>
-					<td align="center">描述</td>
-					<td >
-						<textarea name="defect_description" data-provide="markdown" rows="10" th:text="${defect.defect_description}"></textarea>
-						<!--<textarea id="editor-zh" name="content" rows="10"></textarea>-->
-					</td>
-				</tr>
+<!--&lt;!&ndash;					<td><span th:text="${defect.defect_name}"></span></td>&ndash;&gt;-->
+<!--				</tr>-->
+<!--				<tr>-->
+<!--					<td align="center">描述</td>-->
+<!--					<td >-->
+<!--						<textarea name="defect_description" data-provide="markdown" rows="10" th:text="${defect.defect_description}"></textarea>-->
+<!--						&lt;!&ndash;<textarea id="editor-zh" name="content" rows="10"></textarea>&ndash;&gt;-->
+<!--					</td>-->
+<!--				</tr>-->
 
-				<tr>
-					<td align="center">优先级</td>
-					<td>
-						<span th:text="${defect.priority}"></span>
-					</td>
-				</tr>
+<!--				<tr>-->
+<!--					<td align="center">优先级</td>-->
+<!--					<td>-->
+<!--						<span th:text="${defect.priority}"></span>-->
+<!--					</td>-->
+<!--				</tr>-->
 
-				<tr>
-					<td align="center">指派人</td>
-					<td><span th:text="${defect.designated_person}"></span></td>
-				</tr>
+<!--				<tr>-->
+<!--					<td align="center">指派人</td>-->
+<!--					<td><span th:text="${defect.designated_person}"></span></td>-->
+<!--				</tr>-->
 
-				<tr>
-					<td align="center">几率</td>
-					<td>
-						<span th:text="${defect.probability}"></span>
-					</td>
-				</tr>
+<!--				<tr>-->
+<!--					<td align="center">几率</td>-->
+<!--					<td>-->
+<!--						<span th:text="${defect.probability}"></span>-->
+<!--					</td>-->
+<!--				</tr>-->
 
-				<tr>
-					<td align="center">缺陷类型</td>
-					<td>
-						<span th:text="${defect.defect_type}"></span>
-					</td>
-				</tr>
+<!--				<tr>-->
+<!--					<td align="center">缺陷类型</td>-->
+<!--					<td>-->
+<!--						<span th:text="${defect.defect_type}"></span>-->
+<!--					</td>-->
+<!--				</tr>-->
 
-				<tr>
-					<td align="center">状态</td>
-					<td>
-						<span th:text="${defect.defect_state}"></span>
-					</td>
-				</tr>
-				
-				<tr>
-					<td align="center">文件</td>
-					<td>
-						<span></span>
-					</td>
-				</tr>
-			</table>	 
+<!--				<tr>-->
+<!--					<td align="center">状态</td>-->
+<!--					<td>-->
+<!--						<span th:text="${defect.defect_state}"></span>-->
+<!--					</td>-->
+<!--				</tr>-->
+<!--				-->
+<!--				<tr>-->
+<!--					<td align="center">文件</td>-->
+<!--					<td>-->
+<!--						<span></span>-->
+<!--					</td>-->
+<!--				</tr>-->
+<!--			</table>	 -->
+<!--		</div>-->
+
+<!--	新加入-->
+	<div id="updateDefect-box">
+		<div class="updateDefect-content">
+			<div class="updateDefect-left">
+				<div class="defect-title"><span th:text="${defect.defect_name}">缺陷名称</span></div>
+				<div class="creator"><span>负责人：xiaomin</span></div>
+				<div class="creation_date" ><span>创建时间：2022-04-15</span></div>
+				<br /><hr />
+				<div class="defect-description-box">
+					<span>描述</span>
+					<div class="defect-description">
+							<textarea  name="defect_description" data-provide="markdown" rows="10" cols="140" th:text="${defect.defect_description}" style="background-color: white;">
+                            </textarea>
+					</div>
+				</div>
+				<div class="defect-property-box">
+					<span>属性</span>
+					<div class="defect-property-list1">
+						<div class="list-content1">
+							<span>优先级</span>
+							<select  name="priority" th:value="${defect.priority}">
+								<option value="最高">最高</option>
+								<option value="较高">较高</option>
+								<option value="普通">普通</option>
+								<option value="较低">较低</option>
+								<option value="最低">最低</option>
+							</select>
+						</div>
+						<div class="list-content2">
+							<span>概率</span>
+							<select name="probability" th:value="${defect.probability}">
+								<option value="10%">10%</option>
+								<option value="20%">20%</option>
+								<option value="30%">30%</option>
+								<option value="40%">40%</option>
+								<option value="50%">50%</option>
+								<option value="60%">60%</option>
+								<option value="70%">70%</option>
+								<option value="80%">80%</option>
+								<option value="90%">90%</option>
+								<option value="100%">100%</option>
+							</select>
+						</div>
+						<div class="list-content3">
+							<span>缺陷类型</span>
+							<select name="defect_type" th:value="${defect.defect_type}">
+								<option value="功能问题">功能问题</option>
+								<option value="性能问题">性能问题</option>
+								<option value="接口问题">接口问题</option>
+								<option value="安全问题">安全问题</option>
+								<option value="UI界面问题">UI界面问题</option>
+								<option value="易用性问题">易用性问题</option>
+								<option value="兼容性问题">兼容性问题</option>
+								<option value="数据问题">数据问题</option>
+								<option value="逻辑问题">逻辑问题</option>
+								<option value="需求问题">需求问题</option>
+								<option value="数据请求问题">数据请求问题</option>
+								<option value="成因相同">成因相同</option>
+							</select>
+						</div>
+					</div>
+					<div class="defect-property-list2">
+						<div class="list-content1">
+							<span>状 态</span>
+							<select name="defect_state" th:value="${defect.defect_state}">
+								<option value="新建">新建</option>
+								<option value="进行中">进行中</option>
+								<option value="已解决">已解决</option>
+								<option value="无法解决">无法解决</option>
+								<option value="待反馈">待反馈</option>
+								<option value="已拒绝">已拒绝</option>
+								<option value="继续跟踪">继续跟踪</option>
+								<option value="已关闭">已关闭</option>
+							</select>
+						</div>
+						<div class="list-content2">
+							<span>指派人</span>
+							<input name="designated_person" required="required" th:value="${defect.designated_person}"/>
+						</div>
+						<div class="list-content3">
+							<span>进度</span>
+							<input name="progress" required="required" th:value="${defect.progress}"/>
+						</div>
+
+					</div>
+					<div class="defect-property-list3">
+						<div class="list-content1">
+							<span>开始日期</span>
+							<input  name="start_date" type="date" th:value="${defect.start_date}"/>
+						</div>
+						<div class="list-content2">
+							<span>截止日期</span>
+							<input name="finish_date" type="date" th:value="${defect.finish_date}"/>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="defect-property-box other-information-box">
+					<span>其他信息</span>
+					<div class="defect-property-list1">
+						<div class="list-content1">
+							<span>所属项目</span>
+							<input name="project_name" th:value="${defect.project_id}"/>
+						</div>
+						<div class="list-content2">
+							<span>创建者</span>
+							<input name="defect_creator"  required="required" disabled="disabled" th:value="${defect.defect_creator}"/>
+						</div>
+						<div class="list-content3">
+							<span>更新时间</span>
+							<input name="" type="text" required="required" disabled="disabled" value="2022-04-18"/>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+			<div class="updateDefect-right">
+				<span>变更记录</span></br>
+				<span style="color: rgba(71,149,243,1);word-wrap:break-word;">lalala</span>
+			</div>
 		</div>
+	</div>
+<!--	新加入-->
 		<br /><br /><br />
 		<div style="width: 80%; margin-left: 10%;">
 			<form th:action="@{/updateDefect}" method="post">

@@ -1,0 +1,143 @@
+body{
+	background-color: #f6f6f8 !important;
+}
+#updateDefect-box{
+	float: left;
+	width: 100%;
+	height: 100%;
+	margin-top:35px ;
+	overflow: hidden;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/*border: 1px solid palevioletred;*/
+}
+input{outline:none;}
+.updateDefect-content{
+	float: left;
+	width: 90%;
+	height: 100%;
+	margin-left: 5%;
+	overflow: hidden;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/*border: 1px solid #077ABC;*/
+}
+.updateDefect-left{
+	float: left;
+	padding: 5px;
+	width: 66%;
+	background-color: white;
+	border: 3px solid white;
+	border-radius: 5px;
+}
+.defect-title{
+	/*border: 1px solid yellow;*/
+}
+.defect-title span{
+	/*color: palevioletred;*/
+	color: rgba(71,149,243,1);
+	font-size: 1.5em;
+	font-weight: bold;
+	/*border: 1px solid yellow;*/
+}
+.creator,.creation_date{
+	float: left;
+	margin-top: 10px;
+	font-size: 1em;
+	color: darkgray;
+}
+.creation_date{
+	margin-left: 20px;
+}
+.defect-description-box{
+	margin-top: 10px;
+	color: rgba(27,27,27,0.9);
+	/*border: 1px solid red;*/
+}
+.defect-description-box>span,.defect-property-box>span{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: rgba(71,149,243,1);
+}
+.defect-description{
+	height: 280px;
+	overflow:auto;
+	word-wrap:break-word;/*自动换行*/
+	/*border: 1px solid red;*/
+}
+.defect-property-box{
+	margin-top: 10px;
+	overflow:hidden;
+	word-wrap:break-word;/*自动换行*/
+	/*border: 1px solid red;*/
+}
+.defect-property-list1,.defect-property-list2,.defect-property-list3{
+	float: left;
+	width: 100%;
+	height: 50px;
+	font-size: 1em;
+	line-height:50px;
+	/*border: 1px solid red;*/
+}
+.list-content1,.list-content2,.list-content3{
+	float: left;
+	width: 33%;
+	/*border: 1px solid palevioletred;*/
+}
+.list-content3{
+	float: right;
+}
+.defect-property-box span{
+	float: left;
+	display: block;
+	width: 80px;
+	/*border: 1px solid palevioletred;*/
+}
+.defect-property-box select{
+	/*margin-left: 1%;*/
+	font-size: 0.9em;
+	width: 160px;
+	height: 35px;
+	border: 1px solid transparent;
+	background: white;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+.defect-property-box select:hover,.defect-property-box input:hover{
+	appearance:auto;
+	border: 1px solid rgba(71,149,243,.7);
+	border-radius: 3px;
+}
+.defect-property-box select:focus,.defect-property-box input:focus{
+	appearance:auto;
+	border: 1px solid rgba(71,149,243,.7);
+	box-shadow: 3px 3px 5px #C5C5C5;
+	border-radius: 3px;
+}
+.defect-property-box input{
+	/*margin-left: 1%;*/
+	font-size: 1em;
+	width: 160px;
+	height: 35px;
+	overflow: hidden;
+	border: 1px solid transparent;
+	background: white;
+}
+
+.list-content2{
+	/*margin-left: 1%;*/
+}
+.other-information-box{
+	height: 180px;
+}
+
+.updateDefect-right{
+	float: right;
+	width: 30%;
+	padding: 5px;
+	background-color: white;
+	border: 3px solid white;
+	border-radius: 5px;
+}
+

@@ -122,6 +122,8 @@ public class DefectController {
     public String toUpdateDefect(String id, Model model) {
         Defect defect = defectServiceImpl.getDefectId(id);
         model.addAttribute("defect", defect);
+        System.out.println(defect.getDefect_description());
+        System.out.println(defect.getDefect_state());
         return "client/defectUpdate";
     }
 
@@ -134,9 +136,12 @@ public class DefectController {
 
     //删除缺陷
     @RequestMapping("/deleteDefect")
-    public String deleteUser(String id,Defect defect) {
+    public String deleteUser(HttpServletRequest request,
+                             String id) {
+        Object object = request.getSession().getAttribute(SESSION_PROJECT_ID);
+        int projectId = object != null ? (int) object : Integer.parseInt("");
         defectServiceImpl.deleteDefectWithId(id);
-        return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
+        return "redirect:/toDefectList?id=" + projectId; //redirect重定向
     }
 }
 

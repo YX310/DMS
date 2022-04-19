@@ -1,9 +1,12 @@
 package com.gxm.dts.mapper;
+import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @类名 IndexMapper
@@ -27,4 +30,7 @@ public interface IndexMapper {
     // 检索重复username
     @Select("select* from user where username=#{user_id}")
     public User checkUser(String userId);
+
+    @Select("SELECT * FROM defect WHERE project_id=#{projectId}")
+    public List<Defect> queryDefectNum(int projectId);
 }

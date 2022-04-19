@@ -3,6 +3,7 @@ package com.gxm.dts.controller;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectFile;
+import com.gxm.dts.model.domain.UpdateDefect;
 import com.gxm.dts.service.implement.DefectServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -118,19 +120,38 @@ public class DefectController {
 
     //更新（修改）缺陷信息
     @RequestMapping("/toUpdateDefect")
-    public String toUpdateDefect(String id, Model model) {
+    public String toUpdateDefect(HttpSession session,
+                                 String id,
+                                 Model model) {
         Defect defect = defectServiceImpl.getDefectId(id);
         model.addAttribute("defect", defect);
+        session.setAttribute("defect", defect);
+        List<UpdateDefect> updateDefects = defectServiceImpl.selectUpdateDefectWithDefectId(Integer.parseInt(id));
+        StringBuilder updateContent = new StringBuilder();
+        for (UpdateDefect updateDefect : updateDefects) updateContent.append(updateDefect.getRecord_content()).append("<br/>");
+        model.addAttribute("updateContent", updateContent);
         return "client/defectUpdate";
     }
 
     //修改缺陷信息
     @RequestMapping("/updateDefect")
-    public String updateDefectWithId(Defect defect) {
+    public String updateDefectWithId(HttpSession session,
+                                     Defect defect,
+                                     UpdateDefect updateDefect) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
         defect.setUpdate_time(format);
         defectServiceImpl.updateDefectWithId(defect);
+        updateDefect.setUpdate_time(System.currentTimeMillis());
+        Object object = session.getAttribute("defect");
+        System.out.println("id: " + updateDefect.getDefect_id());
+        System.out.println("id: " + updateDefect.getUpdate_time());
+        if (object != null) {
+            Defect oldDefect = (Defect) object;
+            updateDefect.setRecord_content(oldDefect.diff(defect));
+            defectServiceImpl.addUpdateDefect(updateDefect);
+
+        }
         return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
     }
 
@@ -143,5 +164,9 @@ public class DefectController {
         defectServiceImpl.deleteDefectWithId(id);
         return "redirect:/toDefectList?id=" + projectId; //redirect重定向
     }
+
+    //查询变更记录
+
+
 }
 

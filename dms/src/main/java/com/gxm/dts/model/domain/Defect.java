@@ -23,6 +23,44 @@ public class Defect {
     private String defect_record;    //记录修改内容
     private String update_time;    //记录修改时间
 
+    public String diff(Defect defect) {
+        String diff = ""
+                + "" + compareResult(this.defect_name, defect.getDefect_name())
+                + compareResult(this.defect_description, defect.getDefect_description())
+                + compareResult(this.priority, defect.getPriority())
+                + compareResult(this.probability, defect.getProbability())
+                + compareResult(this.designated_person, defect.getDesignated_person())
+                + compareResult(this.start_date, defect.getStart_date())
+                + compareResult(this.finish_date, defect.getFinish_date())
+                + compareResult(this.progress, defect.getProgress())
+                + compareResult(this.associated_defects, defect.getAssociated_defects())
+                + compareResult(this.defect_state, defect.getDefect_state())
+                ;
+
+        return diff;
+    }
+
+    private String compareFileString(String source, String target) {
+        String res = "";
+        if (source.length() < target.length()) {
+            res = "上传了 " + target.substring(source.length()) + "\n";
+        }
+        return res;
+    }
+
+    private String compareResult(String source, String target) {
+        String res = "";
+        if(source == null || target == null) {
+            if(source == null && target == null) return res;
+            if(source == null && target != null) return "填写了 " + target;
+            if(source != null && target == null) return "删除了 " + source;
+        }
+        if (!source.equals(target)) {
+            res = source + " 变更为 " + target + "";
+        }
+        return res;
+    }
+
     @Override
     public String toString() {
         return "Defect{" +

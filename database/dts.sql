@@ -46,7 +46,7 @@ CREATE TABLE `defect` (
 
 /*Data for the table `defect` */
 
-insert  into `defect`(`defect_id`,`defect_name`,`defect_description`,`priority`,`probability`,`project_version`,`defect_creator`,`designated_person`,`defect_module`,`defect_type`,`start_date`,`finish_date`,`progress`,`associated_defects`,`defect_document`,`project_id`,`defect_state`,`creation_time`,`defect_record`,`update_time`) values (1,'home路径错误2','home路径错误啦啦啦','最高','100%','v0.8','cs','xiaoguan','home','接口问题','2022-03-30','2022-03-31','30%',NULL,NULL,1,'进行中',NULL,NULL,'2022-04-19 16:30:18'),(3,'defect_test2','测试修改缺陷','较高','30%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'进行中',NULL,NULL,NULL),(7,'测试是否能输入项目id','测试是否能输入项目id','最高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,3,'新建',NULL,NULL,NULL),(9,'测试新建项目22','测试新建项目22','较高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,2,'新建',NULL,NULL,NULL),(14,'测试创建时间','测试创建时间\r\n                            ','普通','40%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'新建',NULL,NULL,NULL),(15,'测试创建时间2','测试创建时间2','最高','90%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建',NULL,NULL,NULL),(16,'测试创建时间3','测试创建时间3\r\n                            ','最高','100%',NULL,'xiaomin','xiaoguan',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建','',NULL,''),(17,'测试创建时间4','测试创建时间4','最高','100%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建','',NULL,''),(18,'测试创建时间5','测试是否能更新日期','最高','100%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题','2022-04-19','2022-04-21','0',NULL,NULL,1,'新建','2022-04-19 00:37:12',NULL,'2022-04-19 01:15:18'),(19,'测试新建缺陷2','测试新建缺陷2','较高','50%',NULL,'xiaomin','xiaoguan',NULL,'数据请求问题','2022-04-19','2022-04-27','0',NULL,NULL,1,'新建','2022-04-19 01:36:20',NULL,'2022-04-19 01:36:51'),(20,'测试新建缺陷4','测试新建缺陷444','较高','30%',NULL,'xiaomin','xiaoguan',NULL,'数据请求问题','2022-04-19','2022-04-20','10%',NULL,NULL,3,'进行中','2022-04-19 15:56:26',NULL,'2022-04-19 15:57:31');
+insert  into `defect`(`defect_id`,`defect_name`,`defect_description`,`priority`,`probability`,`project_version`,`defect_creator`,`designated_person`,`defect_module`,`defect_type`,`start_date`,`finish_date`,`progress`,`associated_defects`,`defect_document`,`project_id`,`defect_state`,`creation_time`,`defect_record`,`update_time`) values (1,'home路径错误2','home路径错误啦啦啦','最高','100%','v0.8','cs','xiaoguan','home','接口问题','2022-03-30','2022-03-31','30%',NULL,NULL,1,'进行中',NULL,NULL,'2022-04-19 21:24:32'),(3,'defect_test2','测试修改缺陷','较高','30%',NULL,'xiaomin','xiaoguan',NULL,'接口问题','2022-04-19','2022-04-20','100%',NULL,NULL,1,'已关闭',NULL,NULL,'2022-04-19 22:17:14'),(7,'测试是否能输入项目id','测试是否能输入项目id11222333','最高','60%',NULL,'xiaomin','xiaomin',NULL,'功能问题','2022-04-19','2022-04-20','10%',NULL,NULL,3,'进行中',NULL,NULL,'2022-04-19 23:41:22'),(9,'测试新建项目22','测试新建项目22','较高','100%',NULL,'xiaomin','xiaomin',NULL,'功能问题',NULL,NULL,'0',NULL,NULL,2,'新建',NULL,NULL,NULL),(14,'测试创建时间','测试创建时间\r\n                            ','普通','40%',NULL,'xiaomin','xiaoguan',NULL,'接口问题',NULL,NULL,'0',NULL,NULL,1,'新建',NULL,NULL,NULL),(15,'测试创建时间2','测试创建时间2','最高','90%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建',NULL,NULL,NULL),(16,'测试创建时间3','测试创建时间3\r\n                            ','最高','100%',NULL,'xiaomin','xiaoguan',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建','',NULL,''),(17,'测试创建时间4','测试创建时间4','最高','100%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题',NULL,NULL,'0',NULL,NULL,1,'新建','',NULL,''),(18,'测试创建时间5','测试是否能更新日期','最高','100%',NULL,'xiaomin','xiaomin',NULL,'数据请求问题','2022-04-19','2022-04-21','0',NULL,NULL,1,'新建','2022-04-19 00:37:12',NULL,'2022-04-19 01:15:18'),(19,'测试新建缺陷2','测试新建缺陷2','较高','50%',NULL,'xiaomin','xiaoguan',NULL,'数据请求问题','2022-04-19','2022-04-27','0',NULL,NULL,1,'新建','2022-04-19 01:36:20',NULL,'2022-04-19 01:36:51'),(20,'测试新建缺陷4','测试新建缺陷111119993333','较高','50%',NULL,'xiaomin','xiaoguan',NULL,'数据请求问题','2022-04-19','2022-04-20','30%',NULL,NULL,3,'进行中','2022-04-19 15:56:26',NULL,'2022-04-19 23:58:23');
 
 /*Table structure for table `defect_and_file_path` */
 
@@ -62,6 +62,22 @@ CREATE TABLE `defect_and_file_path` (
 /*Data for the table `defect_and_file_path` */
 
 insert  into `defect_and_file_path`(`id`,`defect_id`,`file_path`) values (1,12,'http://localhost:8080/2022/04/17/e8643661-b80b-42c2-9b36-b0e9aced9813.jpg'),(2,13,'http://localhost:8080/2022/04/17/06f697c9-1847-433a-bcf4-ca2527ec55b2.jpg'),(3,20,'http://localhost:8080/2022/04/19/31906bea-8165-4898-bd4e-4a5a1773b1be.jpg');
+
+/*Table structure for table `defect_update_record` */
+
+DROP TABLE IF EXISTS `defect_update_record`;
+
+CREATE TABLE `defect_update_record` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `defect_id` int(20) NOT NULL COMMENT '缺陷id',
+  `update_time` char(30) DEFAULT NULL COMMENT '变更时间',
+  `record_content` longtext COMMENT '变更内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `defect_update_record` */
+
+insert  into `defect_update_record`(`id`,`defect_id`,`update_time`,`record_content`) values (1,20,'1650383903914','测试新建缺陷11111999 变更为 测试新建缺陷111119993333\n70% 变更为 50%\n20% 变更为 30%\n');
 
 /*Table structure for table `demand` */
 
@@ -84,11 +100,11 @@ CREATE TABLE `demand` (
   `demand_creator` char(20) DEFAULT NULL COMMENT '创建人',
   `demand_document` char(50) DEFAULT NULL COMMENT '上传的文件',
   PRIMARY KEY (`demand_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `demand` */
 
-insert  into `demand`(`demand_id`,`project_id`,`demand_name`,`demand_description`,`designated_person`,`demand_state`,`priority`,`progress`,`start_date`,`finish_date`,`creation_time`,`demand_record`,`update_time`,`demand_creator`,`demand_document`) values (1,2,'测试是否显示列表','测试是否显示列表','xiaomin',NULL,NULL,'0',NULL,NULL,'2022-04-19 15:35:26',NULL,'2022-04-19 15:35:26','xiaomin',NULL),(2,1,'测试新建需求',NULL,'xiaoguan',NULL,'较高','10%','','','2022-04-19 15:45:36',NULL,'2022-04-19 15:45:36','xiaomin',NULL),(3,1,'测试新建需求',NULL,'xiaoguan',NULL,'普通','10%','2022-04-19','2022-04-25','2022-04-19 15:35:26',NULL,'2022-04-19 15:35:26','xiaomin',NULL),(5,3,'测试新建需求22','测试修改需求333                           ','xiaoguan','进行中','普通','20%','2022-04-19','2022-04-20','2022-04-19 15:45:36',NULL,'2022-04-19 16:04:55','xiaomin',NULL),(6,3,'测试新建需求3','测试新建需求3333                           ','xiaoguan','进行中','较高','35%','2022-04-19','2022-04-19','2022-04-19 16:05:32',NULL,'2022-04-19 16:06:08','xiaomin',NULL);
+insert  into `demand`(`demand_id`,`project_id`,`demand_name`,`demand_description`,`designated_person`,`demand_state`,`priority`,`progress`,`start_date`,`finish_date`,`creation_time`,`demand_record`,`update_time`,`demand_creator`,`demand_document`) values (1,2,'测试是否显示列表','测试是否显示列表','xiaomin',NULL,NULL,'0',NULL,NULL,'2022-04-19 15:35:26',NULL,'2022-04-19 15:35:26','xiaomin',NULL),(2,1,'测试新建需求','','xiaoguan','新建','较高','10%','','','2022-04-19 15:45:36',NULL,'2022-04-19 21:25:41','xiaomin',NULL),(3,1,'测试新建需求','','xiaoguan','新建','普通','10%','2022-04-19','2022-04-25','2022-04-19 15:35:26',NULL,'2022-04-19 21:22:05','xiaomin',NULL),(5,3,'测试新建需求22','测试修改需求333                           ','xiaoguan','进行中','普通','20%','2022-04-19','2022-04-20','2022-04-19 15:45:36',NULL,'2022-04-19 16:04:55','xiaomin',NULL),(6,3,'测试新建需求3','测试新建需求3333                           ','xiaoguan','进行中','较高','35%','2022-04-19','2022-04-19','2022-04-19 16:05:32',NULL,'2022-04-19 16:06:08','xiaomin',NULL),(7,1,'sda','                            ','xiaoguan','新建','普通','0','','','2022-04-19 21:19:28',NULL,'2022-04-19 21:21:54','xiaomin',NULL),(8,1,'sda','                            ','xiaoguan',NULL,'普通','0',NULL,NULL,'2022-04-19 21:22:15',NULL,'2022-04-19 21:22:15','xiaomin',NULL);
 
 /*Table structure for table `demand_and_file_path` */
 

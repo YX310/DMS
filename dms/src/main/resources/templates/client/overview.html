@@ -43,15 +43,15 @@
                                 </tr>
                                 <tr>
                                     <td>缺陷</td>
-                                    <td>11</td>
-                                    <td>22</td>
-                                    <td>33</td>
+                                    <td th:text="${allDefectNum - closedDefectNum}"></td>
+                                    <td th:text="${closedDefectNum}"></td>
+                                    <td th:text="${allDefectNum}"></td>
                                 </tr>
                                 <tr>
                                     <td>需求</td>
-                                    <td>44</td>
-                                    <td>55</td>
-                                    <td>66</td>
+                                    <td th:text="${allDemandNum - closedDemandNum}"></td>
+                                    <td th:text="${closedDemandNum}"></td>
+                                    <td th:text="${allDemandNum}"></td>
                                 </tr>
                             </table>
                         </div>

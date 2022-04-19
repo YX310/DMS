@@ -1,10 +1,9 @@
 package com.gxm.dts.controller;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.mapper.ProjectMapper;
-import com.gxm.dts.model.domain.DefectProject;
-import com.gxm.dts.model.domain.Project;
-import com.gxm.dts.model.domain.User;
+import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DefectServiceImpl;
+import com.gxm.dts.service.implement.DemandServiceImpl;
 import com.gxm.dts.service.implement.ProjectServiceImpl;
 import com.gxm.dts.service.implement.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -36,6 +37,8 @@ public class IndexController {
     private DefectServiceImpl defectServiceImpl;
     @Autowired
     private ProjectController projectController;
+    @Autowired
+    private DemandServiceImpl demandServiceImpl;
 
     @GetMapping(value = {"","/login"})
     public String toLogin(){
@@ -94,6 +97,26 @@ public class IndexController {
         //Project project = projectServiceImpl.selectProjectDetailsWithId(id);
         Project project = projectServiceImpl.getProjectId(id);
         model.addAttribute("project", project);
+        List<Defect> defects = defectServiceImpl.selectDefectWithProjectId(id);
+        List<Demand> demands = demandServiceImpl.selectDemandWithProjectId(id);
+        int closedDefectNum = 0;
+        int allDefectNum = defects.size();
+        int closedDemandNum = 0;
+        int allDemandNum = demands.size();
+        for (Defect defect : defects) {
+            if ("已关闭".equals(defect.getDefect_state())) {
+                closedDefectNum++;
+            }
+        }
+        for (Demand demand : demands) {
+            if ("已关闭".equals(demand.getDemand_state())) {
+                closedDemandNum++;
+            }
+        }
+        model.addAttribute("allDefectNum", allDefectNum);
+        model.addAttribute("closedDefectNum", closedDefectNum);
+        model.addAttribute("allDemandNum", allDemandNum);
+        model.addAttribute("closedDemandNum", closedDemandNum);
         System.out.println(project);
         return "client/overview";
     }

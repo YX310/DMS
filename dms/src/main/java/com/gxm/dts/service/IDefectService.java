@@ -3,6 +3,10 @@ package com.gxm.dts.service;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectProject;
+import com.gxm.dts.model.domain.UpdateDefect;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -30,4 +34,10 @@ public interface IDefectService {
 
     //根据当前用户id查找当前用户报告的任务
     public List<DefectProject> selectDefectCreatorWithUserId(int userId);
+
+    //查询defect_update_record表
+    public List<UpdateDefect> selectUpdateDefectWithDefectId(int defectId);
+
+    //向defect_update_record表插入数据
+    public void addUpdateDefect(UpdateDefect updateDefect);
 }

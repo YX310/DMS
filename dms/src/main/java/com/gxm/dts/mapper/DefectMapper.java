@@ -3,6 +3,7 @@ package com.gxm.dts.mapper;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectFile;
 import com.gxm.dts.model.domain.DefectProject;
+import com.gxm.dts.model.domain.UpdateDefect;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -60,4 +61,13 @@ public interface DefectMapper {
     //根据当前项目Id查找缺陷
     @Select("SELECT * FROM defect WHERE project_id=#{projectId}")
     public List<Defect> selectDefectWithProjectId(int projectId);
+
+    //查询defect_update_record表
+    @Select("SELECT * FROM defect_update_record WHERE defect_id=#{defectId}")
+    public List<UpdateDefect> selectUpdateDefectWithDefectId(int defectId);
+
+    //向defect_update_record表插入数据
+    @Insert("INSERT INTO defect_update_record(defect_id, update_time, record_content) values(#{defect_id},#{update_time},#{record_content})")
+    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
+    public void addUpdateDefect(UpdateDefect updateDefect);
 }

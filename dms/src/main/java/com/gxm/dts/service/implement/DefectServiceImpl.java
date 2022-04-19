@@ -48,6 +48,11 @@ public class DefectServiceImpl implements IDefectService {
         return defect;
     }
 
+    @Override
+    public List<Defect> selectDefectWithProjectId(int projectId) {
+        return defectMapper.selectDefectWithProjectId(projectId);
+    }
+
     public void addDefect(Defect defect){
         defectMapper.addDefect(defect);
     }

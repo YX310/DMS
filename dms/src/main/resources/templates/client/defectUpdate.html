@@ -7,18 +7,21 @@
 	<title>更新缺陷</title>
 	<link rel="stylesheet" th:href="@{/css/index.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-	<link rel="stylesheet" th:href="@{/css/defect.css}"/>
 	<link rel="stylesheet" th:href="@{/css/updateDefect.css}"/>
 	<link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
 	<link rel="stylesheet" th:href="@{/css/bootstrap-markdown.min.css}"/>
 	<link rel="stylesheet" th:href="@{/css/fileinput.min.css}"/>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="../js/jquery.js"></script>
-	<script type="text/javascript" src="../js/bootstrap-markdown.js" ></script>
-	<script type="text/javascript" src="../js/fileinput.min.js" ></script>
-	<script type="text/javascript" src="../js/zh.js" ></script>
+	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/bootstrap-markdown.js}"></script>
+	<script th:src="@{/js/zh.js}"></script>
+	<script th:src="@{/js/fileinput.min.js}"></script>
 	<script th:src="@{/js/getTime.js}"></script>
-
+	<style type="text/css">
+		body{font-size: 1.3em;}
+		th,td{font-size: 1em;}
+		a{text-decoration:none;color: inherit;}
+	</style>
 </head>
 	<body>
 	<div th:replace="/client/index::header"></div>
@@ -128,7 +131,7 @@
 						<div class="defect-property-list1">
 							<div class="list-content1">
 								<span>所属项目</span>
-								<input name="project_name" th:value="${defect.project_id}"/>
+								<input name="project_name" disabled="disabled" th:value="${defect.project_id}"/>
 							</div>
 							<div class="list-content2">
 								<span>创建者</span>

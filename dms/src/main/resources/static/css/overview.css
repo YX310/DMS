@@ -56,7 +56,16 @@
 	text-indent: 1.2em;/*首行缩进*/
 	word-wrap:break-word;/*自动换行*/
 }
-
+.statistical-box{
+	margin: 20px 0;
+	box-shadow:  3px 3px 5px #C5C5C5;
+	color: rgba(71,149,243,1);
+	border: 1px solid #C5C5C5;
+}
+.statistical-content p{
+	font-size: 1.2em;
+	font-weight: bold;
+}
 .overview-right{
 	float: right;
 	width: 30%;

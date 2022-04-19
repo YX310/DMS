@@ -1,9 +1,9 @@
 package com.gxm.dts.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.gxm.dts.model.domain.Defect;
-import com.gxm.dts.model.domain.DefectFile;
-import com.gxm.dts.service.implement.DefectServiceImpl;
+import com.gxm.dts.model.domain.Demand;
+import com.gxm.dts.model.domain.DemandFile;
+import com.gxm.dts.service.implement.DemandServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,63 +23,62 @@ import java.util.UUID;
 import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
 
 @Controller
-public class DefectController {
+public class DemandController {
     @Autowired
-    private DefectServiceImpl defectServiceImpl;
-
+    private DemandServiceImpl demandServiceImpl;
     @Value("${web.upload-path}")
     private String uploadPath;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 
-    @GetMapping(value = "/toDefectList")
-    public String toDefectList(HttpServletRequest request,
+    @GetMapping(value = "/toDemandList")
+    public String toDemandList(HttpServletRequest request,
                                Integer id) {
         if (Constant.DEBUG) System.out.println("project id: " + id);
-        List<Defect> list = defectServiceImpl.selectDefectWithProjectId(id);
-        request.setAttribute("data3", list);
-        return this.Defect(request, 1, 5);
+        List<Demand> list = demandServiceImpl.selectDemandWithProjectId(id);
+        request.setAttribute("data4", list);
+        return this.Demand(request, 1, 5);
     }
 
-    @GetMapping("/page3/{p}")
-    public String Defect(HttpServletRequest request,
+    @GetMapping("/page4/{p}")
+    public String Demand(HttpServletRequest request,
                          @PathVariable("p") int page,
                          @RequestParam(value = "count", defaultValue = "5") int count) {
         Object object = request.getSession(true).getAttribute(SESSION_PROJECT_ID);
-        PageInfo<Defect> list =
-                object != null ? defectServiceImpl.selectDefectWithPage(page, count, (Integer) object) : new PageInfo<>();
-        request.setAttribute("data3", list);
-        request.setAttribute("page3", page);
+        PageInfo<Demand> list =
+                object != null ? demandServiceImpl.selectDemandWithPage(page, count, (Integer) object) : new PageInfo<>();
+        request.setAttribute("data4", list);
+        request.setAttribute("page4", page);
         request.setAttribute("count", list.getPages());
-        return "client/defectList";
+        return "client/demandList";
     }
 
     // 缺陷详情查询
-    @GetMapping(value = "/defect/{id}")
-    public String getDefectById(HttpServletRequest request,
-                                @PathVariable("id") String id) {
-        Defect defect = defectServiceImpl.selectDefectWithId(id);
-        if (defect != null) {
-            request.setAttribute("defect", defect);
+    @GetMapping(value = "/demand/{id}")
+    public String getDemandById(HttpServletRequest request,
+                                @PathVariable("id") int id) {
+        Demand demand = demandServiceImpl.selectDemandWithId(id);
+        if (demand != null) {
+            request.setAttribute("demand", demand);
             return "client/index";
         } else {
-            return "client/defectList";
+            return "client/demandList";
         }
     }
 
     //新建缺陷
-    @RequestMapping("/toAddDefect")
-    public String toAddDefect(){
-        return "client/addDefect";
+    @RequestMapping("/toAddDemand")
+    public String toAddDemand(){
+        return "client/addDemand";
     }
 
-    @PostMapping("/addDefect")
+    @PostMapping("/addDemand")
     public String add(HttpServletRequest request,
-                      Defect defect,
-                      @RequestParam("defect_file") MultipartFile[] files) {
-        if (("").equals(defect.getStart_date())) defect.setStart_date(null);
-        if (("").equals(defect.getFinish_date())) defect.setFinish_date(null);
-        defectServiceImpl.addDefect(defect);
-        if (Constant.DEBUG) System.out.println("defect: " + defect.toString());
+                      Demand demand,
+                      @RequestParam("demand_file") MultipartFile[] files) {
+        if (("").equals(demand.getStart_date())) demand.setStart_date(null);
+        if (("").equals(demand.getFinish_date())) demand.setFinish_date(null);
+        demandServiceImpl.addDemand(demand);
+        if (Constant.DEBUG) System.out.println("demand: " + demand.toString());
         // 检查是否上传文件
         if (files.length > 0 && !("").equals(files[0].getOriginalFilename())) {
             // 初始化日期和存储路径
@@ -94,7 +93,7 @@ public class DefectController {
             int i = 0;
             // 遍历存储
             for (MultipartFile file : files) {
-                if (Constant.DEBUG) System.out.println("defect: " + file.getOriginalFilename());
+                if (Constant.DEBUG) System.out.println("demand: " + file.getOriginalFilename());
                 String oldName = file.getOriginalFilename();
                 if (oldName == null) oldName = "";
                 String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."));
@@ -102,46 +101,47 @@ public class DefectController {
                     file.transferTo(new File(folder, newName));
                     String fileRes = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + format + newName;
                     if (Constant.DEBUG) System.out.println("fileRes: " + fileRes);
-                    DefectFile defectFile = new DefectFile();
-                    defectFile.setDefect_id(Integer.parseInt(defect.getDefect_id()));
-                    defectFile.setFile_path(fileRes);
-                    defectServiceImpl.addDefectFile(defectFile);
+                    DemandFile demandFile = new DemandFile();
+                    demandFile.setDemand_id(demand.getDemand_id());
+                    demandFile.setFile_path(fileRes);
+                    demandServiceImpl.addDemandFile(demandFile);
                     if (Constant.DEBUG) System.out.println("fileRes: " + ++i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        if (Constant.DEBUG) System.out.println("defect: " + files.length);
-        return "redirect:/toDefectList?id=" + defect.getProject_id();
+        if (Constant.DEBUG) System.out.println("demand: " + files.length);
+        return "redirect:/toDemandList?id=" + demand.getProject_id();
     }
 
     //更新（修改）缺陷信息
-    @RequestMapping("/toUpdateDefect")
-    public String toUpdateDefect(String id, Model model) {
-        Defect defect = defectServiceImpl.getDefectId(id);
-        model.addAttribute("defect", defect);
-        return "client/defectUpdate";
+    @RequestMapping("/toUpdateDemand")
+    public String toUpdateDemand(int id, Model model) {
+        Demand demand = demandServiceImpl.getDemandId(id);
+        model.addAttribute("demand", demand);
+        return "client/demandUpdate";
     }
 
     //修改缺陷信息
-    @RequestMapping("/updateDefect")
-    public String updateDefectWithId(Defect defect) {
+    @RequestMapping("/updateDemand")
+    public String updateDemandWithId(Demand demand) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
-        defect.setUpdate_time(format);
-        defectServiceImpl.updateDefectWithId(defect);
-        return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
+        demand.setUpdate_time(format);
+        demandServiceImpl.updateDemandWithId(demand);
+        return "redirect:/toDemandList?id=" + demand.getProject_id(); //redirect重定向
     }
 
     //删除缺陷
-    @RequestMapping("/deleteDefect")
-    public String deleteDefect(HttpServletRequest request,
-                             String id) {
+    @RequestMapping("/deleteDemand")
+    public String deleteDemand(HttpServletRequest request,
+                             int id) {
         Object object = request.getSession().getAttribute(SESSION_PROJECT_ID);
         int projectId = object != null ? (int) object : Integer.parseInt("");
-        defectServiceImpl.deleteDefectWithId(id);
-        return "redirect:/toDefectList?id=" + projectId; //redirect重定向
+        demandServiceImpl.deleteDemandWithId(id);
+        return "redirect:/toDemandList?id=" + projectId; //redirect重定向
     }
-}
 
+
+}

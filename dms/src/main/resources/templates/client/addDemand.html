@@ -27,27 +27,23 @@
 <div class="defect-box">
     <div class="defect-content">
         <div  class="container" style="width:100%;height:100%;margin-left:0px;" >
-            <form name="add-form" th:action="@{/addDefect}" onsubmit="uploadFile()" method="post" enctype="multipart/form-data">
+            <form name="add-form" th:action="@{/addDemand}" onsubmit="uploadFile()" method="post" enctype="multipart/form-data">
                 <input name="project_id" type="hidden" th:value="${session.projectId}"/>
-                <input name="defect_creator" type="hidden" th:value="${session.username}"/>
+                <input name="demand_creator" type="hidden" th:value="${session.username}"/>
                 <input name="start_date" type="hidden" value=""/>
                 <input name="finish_date" type="hidden" value=""/>
                 <input name="creation_time" type="hidden" id="time" value=""/>
                 <input name="update_time" type="hidden" id="time2" value=""/>
-                <h2 class="heading" >新建缺陷</h2>
+                <h2 class="heading" >新建需求</h2>
                 <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
                     <tr>
                         <td width="20%" align="center">标题</td>
-                        <td><input id="postinput" class="form-control" name="defect_name"  required="required" value="sda"/></td>
+                        <td><input id="postinput" class="form-control" name="demand_name"  required="required" value="sda"/></td>
                     </tr>
                     <tr>
                         <td align="center">描述</td>
                         <td >
-                            <textarea  name="defect_description" data-provide="markdown" rows="10">
-                                [操作步骤]
-                                [预期结果]
-                                [实际结果]
-                                实际结果:
+                            <textarea  name="demand_description" data-provide="markdown" rows="10" cols="140">
                             </textarea>
                         </td>
                     </tr>
@@ -71,44 +67,6 @@
                     </tr>
 
                     <tr>
-                        <td align="center">几率</td>
-                        <td>
-                            <select name="probability">
-                                <option value="10%" selected="selected">10%</option>
-                                <option value="20%">20%</option>
-                                <option value="30%">30%</option>
-                                <option value="40%">40%</option>
-                                <option value="50%">50%</option>
-                                <option value="60%">60%</option>
-                                <option value="70%">70%</option>
-                                <option value="80%">80%</option>
-                                <option value="90%">90%</option>
-                                <option value="100%">100%</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td align="center">缺陷类型</td>
-                        <td>
-                            <select name="defect_type">
-                                <option value="功能问题" selected="selected">功能问题</option>
-                                <option value="性能问题">性能问题</option>
-                                <option value="接口问题">接口问题</option>
-                                <option value="安全问题">安全问题</option>
-                                <option value="UI界面问题">UI界面问题</option>
-                                <option value="易用性问题">易用性问题</option>
-                                <option value="兼容性问题">兼容性问题</option>
-                                <option value="数据问题">数据问题</option>
-                                <option value="逻辑问题">逻辑问题</option>
-                                <option value="需求问题">需求问题</option>
-                                <option value="数据请求问题">数据请求问题</option>
-                                <option value="成因相同">成因相同</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td align="center">状态</td>
                         <td>
                             <select name="defect_state">
@@ -126,7 +84,7 @@
                     <tr>
                         <td align="center">文件</td>
                         <td>
-                            <input id="file-zh" name="defect_file" type="file" multiple="multiple" th:multiple="multiple" data-show-caption="true">
+                            <input id="file-zh" name="demand_file" type="file" multiple="multiple" th:multiple="multiple" data-show-caption="true">
                         </td>
                     </tr>
                 </table>

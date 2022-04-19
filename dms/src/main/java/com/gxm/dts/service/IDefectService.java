@@ -13,6 +13,8 @@ public interface IDefectService {
     // 根据缺陷id查询单个缺陷信息
     public Defect selectDefectWithId(String defectId);
 
+    public List<Defect> selectDefectWithProjectId(int projectId);
+
     void addDefect(Defect defect);
 
     Defect getDefectId(String defectId);

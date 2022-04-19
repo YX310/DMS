@@ -21,5 +21,6 @@ function t(){
 //	var ho=" PM";
     const tt = y + "-" + mm + "-" + d + " " + h + ":" + m + ":" + s;
     document.getElementById("time").value=tt;
+    document.getElementById("time2").value=tt;
 }
 setInterval('t()',500);

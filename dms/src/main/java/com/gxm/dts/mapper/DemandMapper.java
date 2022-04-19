@@ -1,0 +1,45 @@
+package com.gxm.dts.mapper;
+
+import com.gxm.dts.model.domain.Demand;
+import com.gxm.dts.model.domain.DemandFile;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+@org.apache.ibatis.annotations.Mapper
+public interface DemandMapper {
+
+    // 根据id查询缺陷信息
+    @Select("SELECT * FROM demand WHERE id=#{demandId}")
+    public Demand selectDemandWithId(int demandId);
+
+    //获取缺陷id
+    @Select("SELECT * FROM demand WHERE demand_id = #{demandId}")
+    public Demand getDemandId(int demandId);
+
+    //根据当前项目Id查找需求
+    @Select("SELECT * FROM demand WHERE project_id=#{projectId}")
+    public List<Demand> selectDemandWithProjectId(int projectId);
+
+    //新建需求
+    @Insert("INSERT INTO demand(project_id, demand_name, demand_description,designated_person, demand_state, priority,start_date,finish_date,creation_time,demand_record,update_time,demand_creator) VALUES(#{project_id}, #{demand_name}, #{demand_description},#{designated_person}, #{demand_state}, #{priority},#{start_date},#{finish_date},#{creation_time},#{demand_record},#{update_time},#{demand_creator})")
+    @Options(useGeneratedKeys = true, keyProperty = "demand_id",keyColumn = "demand_id")
+    public void addDemand(Demand demand);
+
+    //新增文件
+    @Insert("INSERT INTO demand_and_file_path(demand_id, file_path) values(#{demand_id},#{file_path})")
+    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
+    public void addDemandFile(DemandFile demandFile);
+
+    //修改需求信息
+    @Select("UPDATE demand SET demand_name = #{demand_name}, demand_description = #{demand_description},designated_person = #{designated_person},demand_state = #{demand_state},priority = #{priority},progress = #{progress},start_date = #{start_date},finish_date = #{finish_date},update_time = #{update_time} WHERE demand_id = #{demand_id}")
+    public void updateDemandWithId(Demand demand);
+
+    // 根据id删除需求信息
+    @Select("DELETE FROM demand WHERE demand_id = #{demandId}")
+    public void deleteDemandWithId(int demandId);
+}

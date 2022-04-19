@@ -7,7 +7,13 @@
 		<link rel="stylesheet" th:href="@{/css/index.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
 		<link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
+		<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
 		<script th:src="@{/js/jquery.js}"></script>
+		<style type="text/css">
+			body{font-size: 1.3em;}
+			th,td{text-align: center;font-size: 1em;}
+			a{text-decoration:none;color: inherit;}
+		</style>
 	</head>
 	<body>
 		<div id="toolbarBox" style="min-height: 48px;">
@@ -51,7 +57,7 @@
 				<div class="title">
 					<h1>我加入的项目</h1>
 				</div>
-				<div class="create-project"><a href="/toAddProject">新建</a></div>
+				<div class="create-project" style="margin-top: -55px;"><a href="/toAddProject">新建</a></div>
 				<div class="content">
 					<div class="model" th:each="n:${data.list}">
 						<div class="project_list">
@@ -59,7 +65,6 @@
 								<p class="p1" th:text="${n.project_name}">项目：project1</p>
 								<p class="p2" th:text="${n.creator}">创建人：xiaomin</p>
 							</a>
-							<!--<p class="p3">2022-03-25</p>-->
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>更新需求</title>
+	<link rel="stylesheet" th:href="@{/css/index.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+	<link rel="stylesheet" th:href="@{/css/updateDefect.css}"/>
+	<link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
+	<link rel="stylesheet" th:href="@{/css/bootstrap-markdown.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/fileinput.min.css}"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/bootstrap-markdown.js}"></script>
+	<script th:src="@{/js/zh.js}"></script>
+	<script th:src="@{/js/fileinput.min.js}"></script>
+	<script th:src="@{/js/getTime.js}"></script>
+	<style type="text/css">
+		body{font-size: 1.3em;}
+		th,td{font-size: 1em;}
+		a{text-decoration:none;color: inherit;}
+	</style>
+</head>
+	<body>
+	<div th:replace="/client/index::header"></div>
+
+	<form th:action="@{/updateDemand}" method="post">
+		<input name="demand_id" type="hidden" th:value="${demand.demand_id}"/>
+		<input name="project_id" type="hidden" th:value="${session.projectId}"/>
+		<input name="demand_name" type="hidden" th:value="${demand.demand_name}"/>
+		<div id="updateDefect-box">
+			<div class="updateDefect-content">
+				<div class="updateDefect-left">
+					<div class="defect-title"><span th:text="${demand.demand_name}">需求名称</span></div>
+					<div class="creator"><span>负责人：xiaomin</span></div>
+					<div class="creation_date" ><span th:text="${'创建时间：' + demand.creation_time}"></span></div>
+					<br /><hr />
+					<div class="defect-description-box">
+						<span>描述</span>
+						<div class="defect-description">
+								<textarea  name="demand_description" data-provide="markdown" rows="10" cols="140" th:text="${demand.demand_description}" style="background-color: white;">
+								</textarea>
+						</div>
+					</div>
+					<div class="defect-property-box">
+						<span>属性</span>
+						<div class="defect-property-list1">
+							<div class="list-content1">
+								<span>优先级</span>
+								<select  name="priority">
+									<option th:selected="${demand.priority} eq '最高'">最高</option>
+									<option th:selected="${demand.priority} eq '较高'">较高</option>
+									<option th:selected="${demand.priority} eq '普通'">普通</option>
+									<option th:selected="${demand.priority} eq '较低'">较低</option>
+									<option th:selected="${demand.priority} eq '最低'">最低</option>
+								</select>
+							</div>
+							<div class="list-content2">
+								<span>状 态</span>
+								<select name="demand_state">
+									<option th:selected="${demand.demand_state} eq '新建'">新建</option>
+									<option th:selected="${demand.demand_state} eq '进行中'">进行中</option>
+									<option th:selected="${demand.demand_state} eq '已解决'">已解决</option>
+									<option th:selected="${demand.demand_state} eq '无法解决'">无法解决</option>
+									<option th:selected="${demand.demand_state} eq '待反馈'">待反馈</option>
+									<option th:selected="${demand.demand_state} eq '已拒绝'">已拒绝</option>
+									<option th:selected="${demand.demand_state} eq '继续跟踪'">继续跟踪</option>
+									<option th:selected="${demand.demand_state} eq '已关闭'">已关闭</option>
+								</select>
+							</div>
+							<div class="list-content3">
+								<span>指派人</span>
+								<input name="designated_person" required="required" th:value="${demand.designated_person}"/>
+							</div>
+						</div>
+						<div class="defect-property-list2">
+							<div class="list-content1">
+								<span>进度</span>
+								<input name="progress" required="required" th:value="${demand.progress}"/>
+							</div>
+							<div class="list-content2">
+								<span>开始日期</span>
+								<input  name="start_date" type="date" th:value="${demand.start_date}"/>
+							</div>
+							<div class="list-content3">
+								<span>截止日期</span>
+								<input name="finish_date" type="date" th:value="${demand.finish_date}"/>
+							</div>
+
+						</div>
+					</div>
+					<hr />
+					<div class="defect-property-box other-information-box">
+						<span>其他信息</span>
+						<div class="defect-property-list1">
+							<div class="list-content1">
+								<span>所属项目</span>
+								<input name="project_name" disabled="disabled" th:value="${demand.project_id}"/>
+							</div>
+							<div class="list-content2">
+								<span>创建者</span>
+								<input name="demand_creator"  required="required" disabled="disabled" th:value="${demand.demand_creator}"/>
+							</div>
+							<div class="list-content3">
+								<span>更新时间</span>
+								<input name="update_time" type="text" required="required" disabled="disabled"  th:value="${demand.update_time}"/>
+							</div>
+							<button class="btn btn-primary btn-lg btn-block" style="width: 130px; float: left;margin-top: 50px;margin-left: 26%" type="reset">重置</button>
+							<button class="btn btn-primary btn-lg btn-block" style="width: 130px; float: left;margin-top: 50px;margin-left: 20%;"type="submit">保存</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="updateDefect-right">
+					<span>变更记录</span></br>
+					<span style="color: rgba(71,149,243,1);word-wrap:break-word;">lalala</span>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+
+		<script type="text/javascript">
+		$(function(){
+			$("#editor-zh").markdown({language:'zh'})
+		})
+		
+		$('#file-zh').fileinput({
+	        language: 'zh',
+	        uploadUrl: '#',
+	   });	    
+		</script>	
+	</body>
+</html>

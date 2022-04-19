@@ -5,8 +5,14 @@
         <title>概述</title>
         <link rel="stylesheet" th:href="@{/css/index.css}" />
         <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+        <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
         <link rel="stylesheet" th:href="@{/css/overview.css}" />
         <script th:src="@{/js/jquery.js}"></script>
+        <style type="text/css">
+            body{font-size: 1.3em;}
+            th,td{text-align: center;font-size: 1em;}
+            a{text-decoration:none;color: inherit;}
+        </style>
     </head>
     <body>
         <div th:replace="/client/index::header"></div>
@@ -23,6 +29,31 @@
                         <span>项目描述</span>
                         <div class="project-description">
                             <span th:text="${project.project_description}"></span>
+                        </div>
+                    </div>
+                    <div class="statistical-box">
+                        <div class="statistical-content">
+                            <p>任务统计</p>
+                            <table class="table table-striped table-bordered table-hover text-center" style="text-align:center;padding: 20px;">
+                                <tr>
+                                    <th width="10%">类型</th>
+                                    <th width="20%">打开</th>
+                                    <th width="20%" >已关闭</th>
+                                    <th width="20%" >合计</th>
+                                </tr>
+                                <tr>
+                                    <td>缺陷</td>
+                                    <td>11</td>
+                                    <td>22</td>
+                                    <td>33</td>
+                                </tr>
+                                <tr>
+                                    <td>需求</td>
+                                    <td>44</td>
+                                    <td>55</td>
+                                    <td>66</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

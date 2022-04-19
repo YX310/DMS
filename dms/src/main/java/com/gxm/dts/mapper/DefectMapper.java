@@ -42,7 +42,7 @@ public interface DefectMapper {
     public void addDefectFile(DefectFile defectFile);
 
     //修改缺陷信息（前台）
-    @Select("UPDATE defect SET defect_name = #{defect_name}, defect_description = #{defect_description},priority = #{priority},designated_person = #{designated_person},probability = #{probability},defect_type = #{defect_type},defect_state = #{defect_state},start_date = #{start_date},finish_date = #{finish_date},update_time = #{update_time} WHERE defect_id = #{defect_id}")
+    @Select("UPDATE defect SET defect_name = #{defect_name}, defect_description = #{defect_description},priority = #{priority},designated_person = #{designated_person},progress = #{progress},probability = #{probability},defect_type = #{defect_type},defect_state = #{defect_state},start_date = #{start_date},finish_date = #{finish_date},update_time = #{update_time} WHERE defect_id = #{defect_id}")
     public void updateDefectWithId(Defect defect);
 
     // 根据id删除缺陷信息

@@ -9,6 +9,11 @@
 	<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/workbench.css}" />
 	<script th:src="@{/js/jquery.js}"></script>
+	<style type="text/css">
+		body{font-size: 1.3em;}
+		th,td{text-align: center;font-size: 1em;}
+		a{text-decoration:none;color: inherit;}
+	</style>
 	<body>
 		<div id="toolbarBox" style="min-height: 48px;">
 			<div id="toolbar-container">
@@ -36,7 +41,6 @@
 						<div class="headimg_box">
 							<img src="../imgs/style_img/logimg.jpg"/>
 						</div>
-<!--						<span th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg"></span>-->
 						<span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
 					</div>
 					<div class="toolbar-logout">

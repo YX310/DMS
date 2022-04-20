@@ -17,6 +17,7 @@
 	<script th:src="@{/js/zh.js}"></script>
 	<script th:src="@{/js/fileinput.min.js}"></script>
 	<script th:src="@{/js/getTime.js}"></script>
+	<script th:src="@{/js/autoHeight.js}"></script>
 	<style type="text/css">
 		body{font-size: 1.3em;}
 		th,td{font-size: 1em;}
@@ -30,6 +31,7 @@
 		<input name="defect_id" type="hidden" th:value="${defect.defect_id}"/>
 		<input name="project_id" type="hidden" th:value="${session.projectId}"/>
 		<input name="defect_name" type="hidden" th:value="${defect.defect_name}"/>
+		<input name="update_person" type="hidden" th:value="${session.username}"/>
 		<div id="updateDefect-box">
 			<div class="updateDefect-content">
 				<div class="updateDefect-left">
@@ -117,11 +119,11 @@
 						<div class="defect-property-list3">
 							<div class="list-content1">
 								<span>开始日期</span>
-								<input  name="start_date" type="date" th:value="${defect.start_date}"/>
+								<input  name="start_date" type="date" required="required" th:value="${defect.start_date}"/>
 							</div>
 							<div class="list-content2">
 								<span>截止日期</span>
-								<input name="finish_date" type="date" th:value="${defect.finish_date}"/>
+								<input name="finish_date" type="date" required="required" th:value="${defect.finish_date}"/>
 							</div>
 						</div>
 					</div>
@@ -147,16 +149,19 @@
 					</div>
 				</div>
 
-				<div class="updateDefect-right">
-					<span>变更记录</span></br>
-					<span style="color: rgba(71,149,243,1);word-wrap:break-word;" th:text="${updateContent}">
-					</span>
+				<div class="updateDefect-right" style="max-height: 814px; overflow:auto;">
+					<span style="color: rgba(71,149,243,1);font-size: 1.5em;font-weight: bold;">变更记录</span><br/>
+					<div th:each="n:${updateDefects}" ><br/>
+						<span style="font-size: 1.2em;color: gray;" th:text="${'由 ' + n.update_person + ' 更新于 '+ #dates.format(n.update_time,'yyyy-MM-dd HH:mm:ss')}"></span>
+						<textarea style="color: rgba(71,149,243,1);word-wrap: break-word;border: 0; resize: none;overflow: hidden;"
+								  cols="46"  autoHeight="true" readonly="readonly" disabled="disabled"
+								  th:text="${n.record_content}"></textarea>
+					</div>
 				</div>
 			</div>
 		</div>
 
 	</form>
-
 
 		<script type="text/javascript">
 		$(function(){
@@ -166,7 +171,8 @@
 		$('#file-zh').fileinput({
 	        language: 'zh',
 	        uploadUrl: '#',
-	   });	    
+	   });
+
 		</script>	
 	</body>
 </html>

@@ -4,6 +4,7 @@ public class UpdateBase {
     private int id;
     private long update_time;
     private String record_content;
+    private String update_person;
 
     public int getId() {
         return id;
@@ -27,6 +28,13 @@ public class UpdateBase {
 
     public void setRecord_content(String record_content) {
         this.record_content = record_content;
+    }
+    public String getUpdate_person() {
+        return update_person;
+    }
+
+    public void setUpdate_person(String update_person) {
+        this.update_person = update_person;
     }
 
 }

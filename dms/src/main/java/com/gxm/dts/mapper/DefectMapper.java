@@ -67,7 +67,7 @@ public interface DefectMapper {
     public List<UpdateDefect> selectUpdateDefectWithDefectId(int defectId);
 
     //向defect_update_record表插入数据
-    @Insert("INSERT INTO defect_update_record(defect_id, update_time, record_content) values(#{defect_id},#{update_time},#{record_content})")
+    @Insert("INSERT INTO defect_update_record(defect_id, update_time, record_content,update_person) values(#{defect_id},#{update_time},#{record_content},#{update_person})")
     @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
     public void addUpdateDefect(UpdateDefect updateDefect);
 }

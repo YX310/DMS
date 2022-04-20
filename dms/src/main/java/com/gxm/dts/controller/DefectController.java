@@ -3,6 +3,7 @@ package com.gxm.dts.controller;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectFile;
+import com.gxm.dts.model.domain.DefectProject;
 import com.gxm.dts.model.domain.UpdateDefect;
 import com.gxm.dts.service.implement.DefectServiceImpl;
 import com.gxm.dts.util.Constant;
@@ -121,6 +122,7 @@ public class DefectController {
     //更新（修改）缺陷信息
     @RequestMapping("/toUpdateDefect")
     public String toUpdateDefect(HttpSession session,
+                                 HttpServletRequest request,
                                  String id,
                                  Model model) {
         Defect defect = defectServiceImpl.getDefectId(id);
@@ -128,8 +130,9 @@ public class DefectController {
         session.setAttribute("defect", defect);
         List<UpdateDefect> updateDefects = defectServiceImpl.selectUpdateDefectWithDefectId(Integer.parseInt(id));
         StringBuilder updateContent = new StringBuilder();
-        for (UpdateDefect updateDefect : updateDefects) updateContent.append(updateDefect.getRecord_content()).append("<br/>");
+        for (UpdateDefect updateDefect : updateDefects) updateContent.append(updateDefect.getRecord_content());
         model.addAttribute("updateContent", updateContent);
+        request.setAttribute("updateDefects", updateDefects);
         return "client/defectUpdate";
     }
 
@@ -150,8 +153,8 @@ public class DefectController {
             Defect oldDefect = (Defect) object;
             updateDefect.setRecord_content(oldDefect.diff(defect));
             defectServiceImpl.addUpdateDefect(updateDefect);
-
         }
+
         return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
     }
 

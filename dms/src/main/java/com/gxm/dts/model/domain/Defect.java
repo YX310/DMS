@@ -24,17 +24,16 @@ public class Defect {
     private String update_time;    //记录修改时间
 
     public String diff(Defect defect) {
-        String diff = ""
-                + "" + compareResult(this.defect_name, defect.getDefect_name())
-                + compareResult(this.defect_description, defect.getDefect_description())
-                + compareResult(this.priority, defect.getPriority())
-                + compareResult(this.probability, defect.getProbability())
-                + compareResult(this.designated_person, defect.getDesignated_person())
-                + compareResult(this.start_date, defect.getStart_date())
-                + compareResult(this.finish_date, defect.getFinish_date())
-                + compareResult(this.progress, defect.getProgress())
-                + compareResult(this.associated_defects, defect.getAssociated_defects())
-                + compareResult(this.defect_state, defect.getDefect_state())
+        String diff = compareResult("缺陷标题:", this.defect_name, defect.getDefect_name())
+                + compareResult("描述:", this.defect_description, defect.getDefect_description())
+                + compareResult("优先级:", this.priority,defect.getPriority())
+                + compareResult("出现概率:", this.probability,  defect.getProbability())
+                + compareResult( "指派人:", this.designated_person,   defect.getDesignated_person())
+                + compareResult("计划开始日期:", this.start_date,  defect.getStart_date())
+                + compareResult("计划完成日期:", this.finish_date,  defect.getFinish_date())
+                + compareResult("进度:", this.progress,  defect.getProgress())
+                + compareResult("关联已有缺陷:" ,  this.associated_defects,  defect.getAssociated_defects())
+                + compareResult("缺陷状态:", this.defect_state,  defect.getDefect_state())
                 ;
 
         return diff;
@@ -48,15 +47,15 @@ public class Defect {
         return res;
     }
 
-    private String compareResult(String source, String target) {
+    private String compareResult(String title,String source, String target) {
         String res = "";
         if(source == null || target == null) {
             if(source == null && target == null) return res;
-            if(source == null && target != null) return "填写了 " + target;
-            if(source != null && target == null) return "删除了 " + source;
+            if(source == null && target != null) return "\n\n" + "填写了 " + title  + "\n" + target + "\n";
+            if(source != null && target == null) return "\n\n" + "删除了 " + title  + "\n" + source + "\n";
         }
         if (!source.equals(target)) {
-            res = source + " 变更为 " + target + "";
+            res =  "\n\n" + title + "\n" + "由 " + source + " 变更为 " + target ;
         }
         return res;
     }

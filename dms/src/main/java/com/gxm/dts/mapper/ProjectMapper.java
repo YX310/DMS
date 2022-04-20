@@ -1,8 +1,6 @@
 package com.gxm.dts.mapper;
 
-import com.gxm.dts.model.domain.Defect;
-import com.gxm.dts.model.domain.Project;
-import com.gxm.dts.model.domain.UserProject;
+import com.gxm.dts.model.domain.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -47,4 +45,13 @@ public interface ProjectMapper {
     // 根据id删除项目信息
     @Select("DELETE FROM project WHERE project_id = #{project_id}")
     public void deleteProjectWithId(int project_id);
+
+    //更新user_and_project表
+    @Insert("INSERT INTO user_and_project(user_id, project_id) values(#{user_id},#{project_id})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    public void addProjectMember(ProjectMember projectMember);
+
+    //查询项目成员
+    @Select("SELECT * FROM USER WHERE user_id IN (SELECT user_id FROM user_and_project WHERE project_id = #{project_id})")
+    public List<User> findProjectMemberByProjectId(Integer projectId);
 }

@@ -1,9 +1,10 @@
 package com.gxm.dts.service;
 
 import com.github.pagehelper.PageInfo;
-import com.gxm.dts.model.domain.Defect;
-import com.gxm.dts.model.domain.Project;
-import com.gxm.dts.model.domain.UserProject;
+import com.gxm.dts.model.domain.*;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 
 public interface IProjectService {
@@ -29,6 +30,12 @@ public interface IProjectService {
     //更新（修改）项目信息
     public void updateProjectWithId(Project project);
 
-    // 根据项目id删除项目信息
+    //根据项目id删除项目信息
     public void deleteProjectWithId(int projectId);
+
+    //更新user_and_project表
+    public void addProjectMember(ProjectMember projectMember);
+
+    //查询项目成员
+    public List<User> findProjectMemberByProjectId(Integer projectId);
 }

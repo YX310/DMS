@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DemandMapper;
 import com.gxm.dts.model.domain.Demand;
 import com.gxm.dts.model.domain.DemandFile;
+import com.gxm.dts.model.domain.UpdateDemand;
 import com.gxm.dts.service.IDemandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -74,6 +75,16 @@ public class DemandServiceImpl implements IDemandService {
     @Override
     public void deleteDemandWithId(int demandId) {
         demandMapper.deleteDemandWithId(demandId);
+    }
+
+    @Override
+    public List<UpdateDemand> selectUpdateDemandWithDemandId(int demandId) {
+        return demandMapper.selectUpdateDemandWithDemandId(demandId);
+    }
+
+    @Override
+    public void addUpdateDemand(UpdateDemand updateDemand) {
+        demandMapper.addUpdateDemand(updateDemand);
     }
 
 

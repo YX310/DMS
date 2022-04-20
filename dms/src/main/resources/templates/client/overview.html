@@ -60,7 +60,19 @@
 
                 <div class="overview-right">
                     <span>项目成员</span></br>
-                    <span style="color: rgba(71,149,243,1);word-wrap:break-word;" th:text="${project.project_member}"></span>
+<!--                    <span style="color: rgba(71,149,243,1);word-wrap:break-word;" th:text="${project.project_member}"></span>-->
+                    <span th:hidden="${PMName.size()==0}">项目经理</span>
+                    <div th:each="n:${PMName}">
+                        <textarea th:text="${n}"></textarea>
+                    </div>
+                    <span th:hidden="${PMName.size()==0}">开发工程师</span>
+                    <div th:each="n:${RDName}">
+                        <textarea th:text="${n}"></textarea>
+                    </div>
+                    <span th:hidden="${PMName.size()==0}">测试工程师</span>
+                    <div th:each="n:${QAName}">
+                        <textarea th:text="${n}"></textarea>
+                    </div>
                 </div>
             </div>
         </div>

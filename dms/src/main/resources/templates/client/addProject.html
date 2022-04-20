@@ -7,9 +7,13 @@
 	<title>新建项目</title>
 	<link rel="stylesheet" th:href="@{/css/index.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/jquery-tagsinput.min.css}" />
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
 	<script th:src="@{/js/getTime.js}"></script>
+	<script th:src="@{/js/jquery-tagsinput.js}"></script>
 	<style type="text/css">
 		body{font-size: 1.3em;}
 		th,td{font-size: 1em;}
@@ -72,12 +76,31 @@
 
 					<tr>
 						<td align="center">添加成员</td>
-						<td><input  class="form-control" name="project_member" type="text" required="required"/></td>
+<!--						<td><input  class="form-control" name="project_member" type="text" required="required"/></td>-->
+						<td>
+							<div class="htmleaf-container">
+
+								<div class="container">
+									<div class="row">
+										<div  class="col-sm-12">
+											<div class="form-group">
+												<input data-role='tags-input' required="required" name="project_member" value=""/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
 					</tr>
 
 				</table>
 				<button class="btn btn-primary btn-lg btn-block" type="submit">创建</button>
 			</form>
 		</div>
+		<script>
+			$(document).ready(function() {
+				$('[data-role="tags-input"]').tagsInput();
+			});
+		</script>
 	</body>
 </html>

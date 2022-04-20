@@ -1,9 +1,14 @@
 package com.gxm.dts.model.domain;
 
-public class UserProject extends Project {
+public class ProjectMember {
     private int id;
     private int user_id;
     private int project_id;
+
+    public ProjectMember(int user_id, int project_id) {
+        this.user_id = user_id;
+        this.project_id = project_id;
+    }
 
     public int getId() {
         return id;
@@ -21,22 +26,14 @@ public class UserProject extends Project {
         this.user_id = user_id;
     }
 
-    @Override
     public int getProject_id() {
         return project_id;
     }
 
-    @Override
     public void setProject_id(int project_id) {
         this.project_id = project_id;
     }
 
-    @Override
-    public String toString() {
-        return "UserProject " + super.toString() + " {" +
-                "id=" + id +
-                ", user_id=" + user_id +
-                ", project_id=" + project_id +
-                '}';
-    }
+
+
 }

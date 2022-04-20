@@ -21,7 +21,8 @@ function t(){
 //	var ho=" PM";
     const tt = y + "-" + mm + "-" + d + " " + h + ":" + m + ":" + s;
     document.getElementById("time").value=tt;
-    document.getElementById("time2").value=tt;
+    const timeInput = document.getElementById("time2")
+    if(timeInput) timeInput.value = tt;
 }
 //将时间戳转化成年月日时分秒
 function formatDate (value) {

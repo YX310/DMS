@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,7 +95,6 @@ public class IndexController {
 
     @GetMapping(value = {"/toOverview"})
     public String toOverView(HttpServletRequest request, Integer id, Model model){
-        //Project project = projectServiceImpl.selectProjectDetailsWithId(id);
         Project project = projectServiceImpl.getProjectId(id);
         model.addAttribute("project", project);
         List<Defect> defects = defectServiceImpl.selectDefectWithProjectId(id);
@@ -118,6 +118,24 @@ public class IndexController {
         model.addAttribute("allDemandNum", allDemandNum);
         model.addAttribute("closedDemandNum", closedDemandNum);
         System.out.println(project);
+        List<User> projectMember = projectServiceImpl.findProjectMemberByProjectId(id);
+        List<String> PM = new ArrayList<>();
+        List<String> RD = new ArrayList<>();
+        List<String> QA = new ArrayList<>();
+//        Map<String, List<String>> map = new HashMap<>();
+//        map.put("项目经理", new ArrayList<>());
+//        map.put("开发", new ArrayList<>());
+//        map.put("测试", new ArrayList<>());
+        for(User user : projectMember) {
+//            map.get(user.getUser_role()).add(user.getUsername());
+            if (user.getUser_role().equals("项目经理")) {PM.add(user.getUsername());}
+            if (user.getUser_role().equals("开发")) {RD.add(user.getUsername());}
+            if (user.getUser_role().equals("测试")) {QA.add(user.getUsername());}
+        }
+
+        model.addAttribute("PMName", PM);
+        model.addAttribute("RDName", RD);
+        model.addAttribute("QAName", QA);
         return "client/overview";
     }
 

@@ -34,4 +34,6 @@ public interface UserMapper {
     @Select("UPDATE user SET username = #{username}, user_position = #{user_position},employee_number = #{employee_number},email = #{email} WHERE user_id = #{user_id}")
     public void updateMeWithId(User user);
 
+    @Select("SELECT user_id FROM user WHERE username = #{username}")
+    public int findUserIdByUsername(String username);
 }

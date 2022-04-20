@@ -21,4 +21,6 @@ public interface IUserService {
 
     // 根据用户id修改单个用户信息(前台)
     public void updateMeWithId(User user);
+
+    public int findUserIdByUsername(String username);
 }

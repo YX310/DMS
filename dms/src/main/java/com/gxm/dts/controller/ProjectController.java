@@ -2,8 +2,10 @@ package com.gxm.dts.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Project;
+import com.gxm.dts.model.domain.ProjectMember;
 import com.gxm.dts.model.domain.UserProject;
 import com.gxm.dts.service.implement.ProjectServiceImpl;
+import com.gxm.dts.service.implement.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
 public class ProjectController {
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
+    @Autowired
+    private UserServiceImpl userServiceImpl;
 
     // home页面（分页展示）
     @GetMapping(value = "/homeProjectList")
@@ -65,7 +69,16 @@ public class ProjectController {
     public String add(Project project, UserProject userProject){
         projectServiceImpl.addProject(project);
         userProject.setProject_id(project.getProject_id());
-        projectServiceImpl.addUserAndProject(userProject);//向user_and_project表插入数据
+        System.out.println("userProject" + userProject);
+        //向user_and_project表插入数据
+        projectServiceImpl.addProjectMember(new ProjectMember(userProject.getUser_id(), userProject.getProject_id()));
+        String[] projectMembers = project.getProject_member().split(";");
+        for (String projectMember : projectMembers) {
+            int userId = userServiceImpl.findUserIdByUsername(projectMember);
+            if (userId != userProject.getUser_id()) {
+                projectServiceImpl.addProjectMember(new ProjectMember(userId, project.getProject_id()));
+            }
+        }
         return "redirect:/homeProjectList";
     }
 

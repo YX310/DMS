@@ -66,4 +66,9 @@ public class UserServiceImpl implements IUserService {
         userMapper.updateMeWithId(user);
     }
 
+    @Override
+    public int findUserIdByUsername(String username) {
+        return userMapper.findUserIdByUsername(username);
+    }
+
 }

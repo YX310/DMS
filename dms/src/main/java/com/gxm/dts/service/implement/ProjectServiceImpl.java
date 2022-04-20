@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.ProjectMapper;
 import com.gxm.dts.model.domain.Project;
+import com.gxm.dts.model.domain.ProjectMember;
+import com.gxm.dts.model.domain.User;
 import com.gxm.dts.model.domain.UserProject;
 import com.gxm.dts.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +80,16 @@ public class ProjectServiceImpl implements IProjectService {
     @Override
     public void deleteProjectWithId(int projectId) {
         projectMapper.deleteProjectWithId(projectId);
+    }
+
+    @Override
+    public void addProjectMember(ProjectMember projectMember) {
+        projectMapper.addProjectMember(projectMember);
+    }
+
+    @Override
+    public List<User> findProjectMemberByProjectId(Integer projectId) {
+        return projectMapper.findProjectMemberByProjectId(projectId);
     }
 
 }

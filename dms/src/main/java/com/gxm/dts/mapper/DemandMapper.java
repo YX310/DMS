@@ -2,6 +2,7 @@ package com.gxm.dts.mapper;
 
 import com.gxm.dts.model.domain.Demand;
 import com.gxm.dts.model.domain.DemandFile;
+import com.gxm.dts.model.domain.UpdateDemand;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -42,4 +43,13 @@ public interface DemandMapper {
     // 根据id删除需求信息
     @Select("DELETE FROM demand WHERE demand_id = #{demandId}")
     public void deleteDemandWithId(int demandId);
+
+    //查询demand_update_record表
+    @Select("SELECT * FROM demand_update_record WHERE demand_id=#{demandId}")
+    public List<UpdateDemand> selectUpdateDemandWithDemandId(int demandId);
+
+    //向demand_update_record表插入数据
+    @Insert("INSERT INTO demand_update_record(demand_id, update_time, record_content,update_person) values(#{demand_id},#{update_time},#{record_content},#{update_person})")
+    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
+    public void addUpdateDemand(UpdateDemand updateDemand);
 }

@@ -8,10 +8,17 @@
         <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
         <link rel="stylesheet" th:href="@{/css/overview.css}" />
         <script th:src="@{/js/jquery.js}"></script>
+        <script th:src="@{/js/autoHeight.js}"></script>
         <style type="text/css">
             body{font-size: 1.3em;}
             th,td{text-align: center;font-size: 1em;}
             a{text-decoration:none;color: inherit;}
+            textarea{
+                color: rgba(71,149,243,1);word-wrap: break-word;border: 0; resize: none;overflow: hidden;
+            }
+            .project-member-box{
+                display: inline-block;background-color:#EFEFEF4D; word-wrap: break-word;padding: 5px;width: 100%;
+            }
         </style>
     </head>
     <body>
@@ -20,9 +27,13 @@
         <div id="overview-box">
             <div class="overview-content">
                 <div class="overview-left">
-                    <div class="update-project"><a th:href="@{/toUpdateProject(id=${session.projectId})}">编辑</a></div>
-                    <div class="update-project"><a th:href="@{/deleteProject(id=${session.projectId})}">删除</a></div>
-                    <div class="project-title"><span th:text="${project.project_name}"></span></div>
+                    <div class="project-title">
+                        <span th:text="${project.project_name}"></span>
+                        <div th:unless="${session.userRole != '项目经理'}" style="display: inline-block; float: right;font-size: 0.7em;">
+                            <span><a th:href="@{/toUpdateProject(id=${session.projectId})}">编辑</a></span>&nbsp;&nbsp;
+                            <span><a th:href="@{/deleteProject(id=${session.projectId})}">删除</a></span>
+                        </div>
+                    </div>
                     <div class="creator"><span th:text="${'创建人：' + project.creator}"></span></div>
                     <div class="creation_date"><span th:text="${'创建时间：' + project.creation_date}"></span></div>
                     <div class="project-description-box">
@@ -59,19 +70,36 @@
                 </div>
 
                 <div class="overview-right">
-                    <span>项目成员</span></br>
-<!--                    <span style="color: rgba(71,149,243,1);word-wrap:break-word;" th:text="${project.project_member}"></span>-->
-                    <span th:hidden="${PMName.size()==0}">项目经理</span>
-                    <div th:each="n:${PMName}">
-                        <textarea th:text="${n}"></textarea>
-                    </div>
-                    <span th:hidden="${PMName.size()==0}">开发工程师</span>
-                    <div th:each="n:${RDName}">
-                        <textarea th:text="${n}"></textarea>
-                    </div>
-                    <span th:hidden="${PMName.size()==0}">测试工程师</span>
-                    <div th:each="n:${QAName}">
-                        <textarea th:text="${n}"></textarea>
+                    <span style="color: rgba(71,149,243,1);font-size: 1.5em;font-weight: bold; display: inline-block;margin-bottom: 10px">项目成员</span><br/>
+                    <div th:unless="${PMName.size() == 0 }">
+                        <label>项目经理</label><br/>
+                        <div class="project-member-box">
+                            <div th:each="n:${PMName}" style="display: inline-block">
+                                <label >
+                                    <span th:text="${n}" style="color:rgba(71,149,243,1);"></span><span th:unless="${n == PMName.get(PMName.size() - 1)}">,</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div><br/>
+                    <div th:unless="${RDName.size() == 0 }">
+                        <label>开发工程师</label><br/>
+                        <div class="project-member-box">
+                            <div th:each="n:${RDName}" style="display: inline-block">
+                                <label >
+                                    <span th:text="${n}" style="color:rgba(71,149,243,1);"></span><span th:unless="${n == RDName.get(RDName.size() - 1)}">,</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div><br/>
+                    <div th:unless="${QAName.size() == 0 }">
+                        <label>测试工程师</label><br/>
+                        <div class="project-member-box">
+                            <div th:each="n:${QAName}" style="display: inline-block">
+                                <label >
+                                    <span th:text="${n}" style="color:rgba(71,149,243,1);"></span><span th:unless="${n == QAName.get(QAName.size() - 1)}">,</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

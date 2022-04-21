@@ -96,4 +96,11 @@ public class DefectServiceImpl implements IDefectService {
     public void addUpdateDefect(UpdateDefect updateDefect) {
         defectMapper.addUpdateDefect(updateDefect);
     }
+
+    @Override
+    public DefectProject selectProjectMessageByDefectId(String defectId) {
+        return defectMapper.selectProjectMessageByDefectId(defectId);
+    }
+
+
 }

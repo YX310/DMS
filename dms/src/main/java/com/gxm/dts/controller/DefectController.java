@@ -3,6 +3,7 @@ package com.gxm.dts.controller;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectFile;
+import com.gxm.dts.model.domain.DefectProject;
 import com.gxm.dts.model.domain.UpdateDefect;
 import com.gxm.dts.service.implement.DefectServiceImpl;
 import com.gxm.dts.util.Constant;
@@ -125,8 +126,11 @@ public class DefectController {
                                  String id,
                                  Model model) {
         Defect defect = defectServiceImpl.getDefectId(id);
+        DefectProject defectProject =  defectServiceImpl.selectProjectMessageByDefectId(id);//根据缺陷id查找项目信息
         model.addAttribute("defect", defect);
+        model.addAttribute("defectProject",defectProject);
         session.setAttribute("defect", defect);
+        session.setAttribute("defectProject", defectProject);
         List<UpdateDefect> updateDefects = defectServiceImpl.selectUpdateDefectWithDefectId(Integer.parseInt(id));
         StringBuilder updateContent = new StringBuilder();
         for (UpdateDefect updateDefect : updateDefects) updateContent.append(updateDefect.getRecord_content());

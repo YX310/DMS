@@ -36,7 +36,7 @@
 			<div class="updateDefect-content">
 				<div class="updateDefect-left">
 					<div class="defect-title"><span th:text="${defect.defect_name}">缺陷名称</span></div>
-					<div class="creator"><span>负责人：xiaomin</span></div>
+					<div class="creator"><span th:text="${'负责人：' + defectProject.creator}"></span></div>
 					<div class="creation_date" ><span th:text="${'创建时间：' + defect.creation_time}"></span></div>
 					<br /><hr />
 					<div class="defect-description-box">
@@ -133,7 +133,7 @@
 						<div class="defect-property-list1">
 							<div class="list-content1">
 								<span>所属项目</span>
-								<input name="project_name" disabled="disabled" th:value="${defect.project_id}"/>
+								<input name="project_name" disabled="disabled" th:value="${defectProject.project_name}"/>
 							</div>
 							<div class="list-content2">
 								<span>创建者</span>
@@ -151,11 +151,14 @@
 
 				<div class="updateDefect-right" style="max-height: 814px; overflow:auto;">
 					<span style="color: rgba(71,149,243,1);font-size: 1.5em;font-weight: bold;">变更记录</span><br/>
-					<div th:each="n:${updateDefects}" ><br/>
-						<span style="font-size: 1.2em;color: gray;" th:text="${'由 ' + n.update_person + ' 更新于 '+ #dates.format(n.update_time,'yyyy-MM-dd HH:mm:ss')}"></span>
-						<textarea style="color: rgba(71,149,243,1);word-wrap: break-word;border: 0; resize: none;overflow: hidden;"
-								  cols="46"  autoHeight="true" readonly="readonly" disabled="disabled"
-								  th:text="${n.record_content}"></textarea>
+					<span th:unless="${updateDefects.size() != 0 }">暂无记录</span>
+					<div>
+						<div th:each="n:${updateDefects}" ><br/>
+							<span style="font-size: 1.2em;color: gray;" th:text="${'由 ' + n.update_person + ' 更新于 '+ #dates.format(n.update_time,'yyyy-MM-dd HH:mm:ss')}"></span>
+							<textarea style="color: rgba(71,149,243,1);word-wrap: break-word;border: 0; resize: none;overflow: hidden;"
+									  cols="46"  autoHeight="true" readonly="readonly" disabled="disabled"
+									  th:text="${n.record_content}"></textarea>
+						</div>
 					</div>
 				</div>
 			</div>

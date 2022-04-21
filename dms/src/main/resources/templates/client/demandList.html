@@ -16,8 +16,15 @@
 </head>
 <body>
 <div th:replace="/client/index::header"></div>
-    <div class="defect-box">
-
+    <!--未有需求信息-->
+    <div class="defect-box" th:unless="${(data4.list).size() != 0}">
+        <div class="defect-content">
+            <br/>
+            <h2 class="heading" >还未有需求信息哦</h2>
+            <div class="create-defect"><a th:href="@{/toAddDemand}">新建</a></div>
+        </div>
+    </div>
+    <div class="defect-box" th:unless="${(data4.list).size() == 0}">
         <div class="defect-content">
             <br/>
             <h2 class="heading" >项目需求信息表</h2>

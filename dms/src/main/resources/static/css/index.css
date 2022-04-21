@@ -203,6 +203,7 @@ a{
 
 #toolbar-container-right .toolbar-user .headimg_box{
 	display:inline-block;
+	line-height: 36px;
 	width:36px;
 	height:36px;
 	vertical-align: middle;

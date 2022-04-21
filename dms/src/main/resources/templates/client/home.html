@@ -9,6 +9,7 @@
 		<link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
 		<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
 		<script th:src="@{/js/jquery.js}"></script>
+		<script th:src="@{/js/select_input.js}"></script>
 		<style type="text/css">
 			body{font-size: 1.3em;}
 			th,td{text-align: center;font-size: 1em;}
@@ -26,17 +27,35 @@
 					</div>
 				</div>
 				
+<!--				<div id="toolbar-container-middle">-->
+<!--					<div class="toolbar-search">-->
+<!--						<div class="toolbar-search-container">-->
+<!--							<input id="toolbar-search-input" style="text-indent: 32px;"/>-->
+<!--							<button id="toolbar-search-button">-->
+<!--								<i></i>-->
+<!--								<span>搜索</span>-->
+<!--							</button>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
 				<div id="toolbar-container-middle">
 					<div class="toolbar-search">
 						<div class="toolbar-search-container">
-							<input id="toolbar-search-input" style="text-indent: 32px;"/>
-							<button id="toolbar-search-button">
+							<div id="search-input">
+								<input id="toolbar-search-input" style="text-indent: 32px;" onclick=""/>
+								<ul id="search-content-ul">
+								</ul>
+
+							</div>
+
+							<button id="toolbar-search-button" style="display: inline-block;">
 								<i></i>
 								<span>搜索</span>
 							</button>
 						</div>
 					</div>
 				</div>
+
 				<div id="toolbar-container-right">
 					<div class="toolbar-user">
 						<div class="headimg_box">
@@ -50,20 +69,28 @@
 				</div>
 			</div>
 		</div>
-		
+		<!--未加入任何项目-->
+		<div th:unless="${(data.list).size() != 0}" class="project_box">
+			<div class="project_content">
+				<div class="title">
+					<h1>您还没加入任何项目</h1>
+				</div>
+				<div th:unless="${session.userRole != '项目经理'}" class="create-project" style="margin-top: -55px;"><a href="/toAddProject">新建</a></div>
+			</div>
+		</div>
 		<!-- 项目列表 -->
-		<div class="project_box">
+		<div th:unless="${(data.list).size() == 0}" class="project_box">
 			<div class="project_content">
 				<div class="title">
 					<h1>我加入的项目</h1>
 				</div>
-				<div class="create-project" style="margin-top: -55px;"><a href="/toAddProject">新建</a></div>
+				<div th:unless="${session.userRole != '项目经理'}" class="create-project" style="margin-top: -55px;"><a href="/toAddProject">新建</a></div>
 				<div class="content">
 					<div class="model" th:each="n:${data.list}">
 						<div class="project_list">
 							<a th:href="${'/project/'+n.project_id}">
-								<p class="p1" th:text="${n.project_name}">项目：project1</p>
-								<p class="p2" th:text="${n.creator}">创建人：xiaomin</p>
+								<p class="p1" th:text="${n.project_name}"></p>
+								<p class="p2" th:text="${n.creator}"></p>
 							</a>
 						</div>
 					</div>

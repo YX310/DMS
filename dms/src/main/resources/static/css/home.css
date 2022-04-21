@@ -169,6 +169,7 @@ a{
 
 #toolbar-container-right .toolbar-user .headimg_box{
 	display:inline-block;
+	line-height: 36px;
 	width:36px;
 	height:36px;
 	vertical-align: middle;
@@ -397,6 +398,14 @@ h2.heading {
 .page a:hover{
 	background-color: rgba(71,149,243,1);
 	color: white;
+}
+#search-input{
+	display: inline-block;
+	border-radius: 3px;
+	border: 1px solid red;
+}
+ul,li{
+	list-style-type:none;
 }
 
 

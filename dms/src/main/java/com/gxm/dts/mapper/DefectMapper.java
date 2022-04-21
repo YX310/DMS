@@ -70,4 +70,8 @@ public interface DefectMapper {
     @Insert("INSERT INTO defect_update_record(defect_id, update_time, record_content,update_person) values(#{defect_id},#{update_time},#{record_content},#{update_person})")
     @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
     public void addUpdateDefect(UpdateDefect updateDefect);
+
+    //查找当前缺陷所属项目的信息
+    @Select("SELECT * FROM project WHERE project_id IN (SELECT project_id FROM defect WHERE defect_id =#{defectId})")
+    public DefectProject selectProjectMessageByDefectId(String defectId);
 }

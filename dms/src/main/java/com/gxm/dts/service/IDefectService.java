@@ -40,4 +40,7 @@ public interface IDefectService {
 
     //向defect_update_record表插入数据
     public void addUpdateDefect(UpdateDefect updateDefect);
+
+    //查找当前缺陷所属项目的信息
+    DefectProject selectProjectMessageByDefectId(String defectId);
 }

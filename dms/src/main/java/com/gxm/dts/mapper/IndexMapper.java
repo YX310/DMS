@@ -33,4 +33,6 @@ public interface IndexMapper {
 
     @Select("SELECT * FROM defect WHERE project_id=#{projectId}")
     public List<Defect> queryDefectNum(int projectId);
+
+    //查询当前用户
 }

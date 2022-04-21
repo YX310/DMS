@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -132,7 +133,6 @@ public class IndexController {
             if (user.getUser_role().equals("开发")) {RD.add(user.getUsername());}
             if (user.getUser_role().equals("测试")) {QA.add(user.getUsername());}
         }
-
         model.addAttribute("PMName", PM);
         model.addAttribute("RDName", RD);
         model.addAttribute("QAName", QA);
@@ -146,5 +146,17 @@ public class IndexController {
         request.setAttribute("data4", list); //指派给我的任务
         request.setAttribute("data5", list2);//已报告的任务
         return "client/workbench";
+    }
+
+    //用户搜索
+    @ResponseBody
+    @RequestMapping("/searchAllList")
+    public List<String> deleteProject(Model model) {
+        List<String> content = new ArrayList<>();
+        content.add("xiaomin");
+        content.add("xiaoguan");
+        model.addAttribute("content", content);
+        System.out.println("project do it");
+        return content;
     }
 }

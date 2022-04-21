@@ -33,6 +33,7 @@ public class LoginController {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("userId", user.getUser_id());
                 session.setAttribute("username", user.getUsername());
+                session.setAttribute("userRole",user.getUser_role());
                 session.setAttribute("email", user.getEmail());
                 return adminController.User(request);
             } else {
@@ -40,6 +41,7 @@ public class LoginController {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("userId", user.getUser_id());
                     session.setAttribute("username", user.getUsername());
+                    session.setAttribute("userRole",user.getUser_role());
                     session.setAttribute("email", user.getEmail());
                     return projectController.Project(request);
                 } else {

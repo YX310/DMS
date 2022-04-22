@@ -1,0 +1,85 @@
+/************start middle***************/
+#toolbar-container-middle{
+	min-width: 404px;
+	float: left;
+	width: 30%;
+	height: 100%;
+	/*overflow: scroll;*/
+	text-align: center;
+    /*border: 1px solid rgb(28, 108, 122);*/
+}
+
+.search-box{
+	/*border: 2px solid blueviolet;*/
+	margin-top: 10px;
+}
+.search_form{
+    width:404px;
+    height:42px;
+    -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/*border: 2px solid blueviolet;*/
+}
+#search-input-box{
+	display: inline-block;
+	height: 42px;
+	border: hidden;
+	/*border: 2px solid transparent;*/
+	border: 2px solid transparent;
+	border-radius: 5px 0 0 5px;
+	/*-webkit-box-sizing: border-box;
+	box-sizing: border-box;*/
+}
+
+/*左边输入框设置样式*/
+#input_text{
+    width:304px;
+    height: 42px;
+    margin: -2px;
+    border:2px solid rgba(71,149,243,1);
+    border-radius: 5px 0 0 5px;
+    padding:0;
+    text-indent: 10px;
+    /*去掉蓝色高亮框*/
+    outline: none;
+    /*用浮动解决内联元素错位及小间距的问题*/
+    float:left;
+    -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.input_sub{
+    width:100px;
+    height: 42px;
+    background: rgba(71,149,243,1);
+    line-height: 42px;
+    /*去掉submit按钮默认边框*/
+    border:0;
+    border-radius: 0 5px 5px 0;
+    float:right;
+    font-size: 1em;
+    color:white;/*搜索的字体颜色为白色*/
+    cursor:pointer;/*鼠标变为小手*/
+   -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.input_sub:hover{
+    background: rgba(45,94,240,0.9);
+}
+.input_sub:active{
+    background: rgba(45,94,240,1);
+}
+.search-ul{
+	text-align: left;
+	margin-left: -35px;
+	list-style:none;
+	padding: 0;
+	margin: 0;
+	display: none;
+}
+.search-ul li{
+	display: block;
+	width: 300px;
+	line-height: 30px;
+}
+

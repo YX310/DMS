@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
 		<link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
 		<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
+		<link th:href="@{/css/select_input.css}" rel="stylesheet"/>
 		<script th:src="@{/js/jquery.js}"></script>
 		<script th:src="@{/js/select_input.js}"></script>
 		<style type="text/css">
@@ -17,7 +18,7 @@
 		</style>
 	</head>
 	<body>
-		<div id="toolbarBox" style="min-height: 48px;">
+		<div id="toolbarBox" style="min-height: 60px;">
 			<div id="toolbar-container">
 				<div id="toolbar-container-left">
 					<div id="toolbar-logo">DTS</div>
@@ -26,12 +27,16 @@
 						<ul><a th:href="@{/homeProjectList}">我的项目</a></ul>
 					</div>
 				</div>
-				
+
 <!--				<div id="toolbar-container-middle">-->
 <!--					<div class="toolbar-search">-->
 <!--						<div class="toolbar-search-container">-->
-<!--							<input id="toolbar-search-input" style="text-indent: 32px;"/>-->
-<!--							<button id="toolbar-search-button">-->
+<!--							<div id="search-input">-->
+<!--								<input id="toolbar-search-input" style="text-indent: 32px;" onclick=""/>-->
+<!--								<ul id="search-content-ul">-->
+<!--								</ul>-->
+<!--							</div>-->
+<!--							<button id="toolbar-search-button" style="display: inline-block;">-->
 <!--								<i></i>-->
 <!--								<span>搜索</span>-->
 <!--							</button>-->
@@ -39,20 +44,23 @@
 <!--					</div>-->
 <!--				</div>-->
 				<div id="toolbar-container-middle">
-					<div class="toolbar-search">
-						<div class="toolbar-search-container">
-							<div id="search-input">
-								<input id="toolbar-search-input" style="text-indent: 32px;" onclick=""/>
-								<ul id="search-content-ul">
+					<div class="search-box">
+						<form class="search_form">
+							<div id="search-input-box" autoHeight="true">
+								<input type="text" id="input_text" placeholder="请输入搜索内容"><!-- -->
+								<ul class="search-ul">
+									<li>{1}</li>
+									<li>{2}</li>
+									<li>{3}</li>
+									<li>{4}</li>
+									<li>{5}</li>
+									<li>{n}</li>
 								</ul>
-
 							</div>
-
-							<button id="toolbar-search-button" style="display: inline-block;">
-								<i></i>
-								<span>搜索</span>
-							</button>
-						</div>
+							<!--<div style="display: inline-block; margin-left: -5px;">-->
+							<input type="submit" value="搜索" class="input_sub">
+							<!--</div>-->
+						</form>
 					</div>
 				</div>
 

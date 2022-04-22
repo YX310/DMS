@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IDemandService {
     // 分页查询缺陷列表
@@ -37,4 +38,7 @@ public interface IDemandService {
 
     //向demand_update_record表插入数据
     public void addUpdateDemand(UpdateDemand updateDemand);
+
+    // 查询所有需求标题
+    public Map<String, Integer> selectDemand();
 }

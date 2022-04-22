@@ -5,6 +5,7 @@ import com.gxm.dts.model.domain.*;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface IProjectService {
@@ -38,4 +39,7 @@ public interface IProjectService {
 
     //查询项目成员
     public List<User> findProjectMemberByProjectId(Integer projectId);
+
+    // 查询所有项目标题
+    public Map<String, Integer> selectProject();
 }

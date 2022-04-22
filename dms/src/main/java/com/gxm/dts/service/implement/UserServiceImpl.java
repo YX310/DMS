@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -69,6 +70,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public int findUserIdByUsername(String username) {
         return userMapper.findUserIdByUsername(username);
+    }
+
+    @Override
+    public Map<String, Integer> selectUser() {
+        return userMapper.selectUser();
     }
 
 }

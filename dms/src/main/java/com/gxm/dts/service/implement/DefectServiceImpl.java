@@ -3,10 +3,7 @@ package com.gxm.dts.service.implement;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DefectMapper;
-import com.gxm.dts.model.domain.Defect;
-import com.gxm.dts.model.domain.DefectFile;
-import com.gxm.dts.model.domain.DefectProject;
-import com.gxm.dts.model.domain.UpdateDefect;
+import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.IDefectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -102,5 +100,8 @@ public class DefectServiceImpl implements IDefectService {
         return defectMapper.selectProjectMessageByDefectId(defectId);
     }
 
-
+    @Override
+    public List<SearchContent> selectDefect() {
+        return defectMapper.selectDefect();
+    }
 }

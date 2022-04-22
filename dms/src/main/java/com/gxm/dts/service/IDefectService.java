@@ -3,12 +3,15 @@ package com.gxm.dts.service;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectProject;
+import com.gxm.dts.model.domain.SearchContent;
 import com.gxm.dts.model.domain.UpdateDefect;
+import javafx.util.Pair;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IDefectService {
     // 分页查询缺陷列表
@@ -43,4 +46,7 @@ public interface IDefectService {
 
     //查找当前缺陷所属项目的信息
     DefectProject selectProjectMessageByDefectId(String defectId);
+
+    // 查询所有缺陷标题
+    public List<SearchContent> selectDefect();
 }

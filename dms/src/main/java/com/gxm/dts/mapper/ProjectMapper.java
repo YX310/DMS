@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 @org.apache.ibatis.annotations.Mapper
@@ -16,9 +17,13 @@ public interface ProjectMapper {
     @Select("SELECT * FROM project AS p INNER JOIN user_and_project AS up WHERE p.project_id=up.project_id and user_id=#{userId}")
     public List<Project> selectProjectWithUserId(int userId);
 
-    // 查询所有的项目信息
-    @Select("SELECT * FROM project WHERE project_id = #{projectId}")
-    public List<Project> selectProject(Integer projectId);
+//    // 查询所有的项目信息
+//    @Select("SELECT * FROM project WHERE project_id = #{projectId}")
+//    public List<Project> selectProject(Integer projectId);
+
+    // 查询所有项目标题
+    @Select("SELECT project_name, project_id FROM project")
+    public Map<String, Integer> selectProject();
 
     // 根据项目id查询项目信息
     @Select("SELECT * FROM project WHERE project_id = #{projectId}")

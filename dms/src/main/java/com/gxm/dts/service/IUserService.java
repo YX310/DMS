@@ -3,6 +3,9 @@ package com.gxm.dts.service;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.User;
 
+import java.util.List;
+import java.util.Map;
+
 public interface IUserService {
 
     // 分页查询用户列表（后台）
@@ -23,4 +26,7 @@ public interface IUserService {
     public void updateMeWithId(User user);
 
     public int findUserIdByUsername(String username);
+
+    // 查询所有用户名
+    public Map<String, Integer> selectUser();
 }

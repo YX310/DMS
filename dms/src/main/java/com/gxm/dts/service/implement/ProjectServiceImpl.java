@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @类名 ProjectServiceImpl
@@ -90,6 +91,11 @@ public class ProjectServiceImpl implements IProjectService {
     @Override
     public List<User> findProjectMemberByProjectId(Integer projectId) {
         return projectMapper.findProjectMemberByProjectId(projectId);
+    }
+
+    @Override
+    public Map<String, Integer> selectProject() {
+        return projectMapper.selectProject();
     }
 
 }

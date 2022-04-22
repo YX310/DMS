@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 @org.apache.ibatis.annotations.Mapper
@@ -13,6 +14,10 @@ public interface UserMapper {
     // 用户查询
     @Select("SELECT * FROM user")
     public List<User> selectUserWithPage();
+
+    // 查询用户名
+    @Select("SELECT username, user_id FROM user")
+    public Map<String, Integer> selectUser();
 
     // 根据id查询用户信息
     @Select("SELECT * FROM user WHERE id=#{userId}")

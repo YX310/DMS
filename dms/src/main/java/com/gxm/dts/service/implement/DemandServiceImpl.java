@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -85,6 +86,11 @@ public class DemandServiceImpl implements IDemandService {
     @Override
     public void addUpdateDemand(UpdateDemand updateDemand) {
         demandMapper.addUpdateDemand(updateDemand);
+    }
+
+    @Override
+    public Map<String, Integer> selectDemand() {
+        return demandMapper.selectDemand();
     }
 
 

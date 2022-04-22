@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 
 /**
@@ -151,12 +152,27 @@ public class IndexController {
     //用户搜索
     @ResponseBody
     @RequestMapping("/searchAllList")
-    public List<String> deleteProject(Model model) {
-        List<String> content = new ArrayList<>();
-        content.add("xiaomin");
-        content.add("xiaoguan");
-        model.addAttribute("content", content);
-        System.out.println("project do it");
-        return content;
+    public List<SearchContent> deleteProject(String getSearchInput) {
+        System.out.println("getSearchInput: " + getSearchInput);
+        List<SearchContent> searchContentList = new ArrayList<>();
+        addContentByList(searchContentList, defectServiceImpl.selectDefect(), "toUpdateDefect");
+//        addContentByList(searchContentList, demandServiceImpl.selectDemand(), "demand");
+//        addContentByList(searchContentList, userServiceImpl.selectUser(), "user");
+//        addContentByList(searchContentList, projectServiceImpl.selectProject(), "project");
+        return searchContentList;
+    }
+
+    private void addContentByList(List<SearchContent> searchContentList, List<SearchContent> item, String type) {
+        if (item != null) {
+//            for(Map.Entry<String, Integer> entry : item.entrySet()) {
+//                entry.getKey();
+//                entry.getValue();
+//            }
+            for (SearchContent searchContent : item) {
+                searchContent.setType(type);
+                System.out.println(searchContent.toString());
+                searchContentList.add(searchContent);
+            }
+        }
     }
 }

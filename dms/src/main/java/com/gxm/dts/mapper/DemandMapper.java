@@ -9,16 +9,21 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 @org.apache.ibatis.annotations.Mapper
 public interface DemandMapper {
 
-    // 根据id查询缺陷信息
+    // 根据id查询需求信息
     @Select("SELECT * FROM demand WHERE id=#{demandId}")
     public Demand selectDemandWithId(int demandId);
 
-    //获取缺陷id
+    // 查询所有需求标题
+    @Select("SELECT demand_name, defect_id FROM demand")
+    public Map<String, Integer> selectDemand();
+
+    //获取需求id
     @Select("SELECT * FROM demand WHERE demand_id = #{demandId}")
     public Demand getDemandId(int demandId);
 

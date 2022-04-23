@@ -158,6 +158,9 @@ public class DefectController {
             defectServiceImpl.addUpdateDefect(updateDefect);
         }
 
+        // 处理搜索场景下无project id
+        Object projectID = session.getAttribute(SESSION_PROJECT_ID);
+        if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, defect.getProject_id());
         return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
     }
 

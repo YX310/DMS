@@ -153,7 +153,7 @@
 					<span style="color: rgba(71,149,243,1);font-size: 1.5em;font-weight: bold;">变更记录</span><br/>
 					<span th:unless="${updateDefects.size() != 0 }">暂无记录</span>
 					<div>
-						<div th:each="n:${updateDefects}" ><br/>
+						<div  th:each="n:${updateDefects}" th:unless="${n.record_content == '' }"><br/>
 							<span style="font-size: 1.2em;color: gray;" th:text="${'由 ' + n.update_person + ' 更新于 '+ #dates.format(n.update_time,'yyyy-MM-dd HH:mm:ss')}"></span>
 							<textarea style="color: rgba(71,149,243,1);word-wrap: break-word;border: 0; resize: none;overflow: hidden;"
 									  cols="46"  autoHeight="true" readonly="readonly" disabled="disabled"

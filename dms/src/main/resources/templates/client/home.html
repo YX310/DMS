@@ -28,37 +28,16 @@
 					</div>
 				</div>
 
-<!--				<div id="toolbar-container-middle">-->
-<!--					<div class="toolbar-search">-->
-<!--						<div class="toolbar-search-container">-->
-<!--							<div id="search-input">-->
-<!--								<input id="toolbar-search-input" style="text-indent: 32px;" onclick=""/>-->
-<!--								<ul id="search-content-ul">-->
-<!--								</ul>-->
-<!--							</div>-->
-<!--							<button id="toolbar-search-button" style="display: inline-block;">-->
-<!--								<i></i>-->
-<!--								<span>搜索</span>-->
-<!--							</button>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
 				<div id="toolbar-container-middle">
 					<div class="search-box">
-						<form class="search_form">
+						<form class="search_form" method="post" onsubmit="return handleSearchSubmit()">
 							<div id="search-input-box" autoHeight="true">
-								<input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off"><!-- -->
+								<input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">
 								<ul class="search-ul">
-<!--									<li>{1}</li>-->
-<!--									<li>{2}</li>-->
-<!--									<li>{3}</li>-->
-<!--									<li>{4}</li>-->
-<!--									<li>{5}</li>-->
-<!--									<li>{n}</li>-->
 								</ul>
 							</div>
 							<!--<div style="display: inline-block; margin-left: -5px;">-->
-							<input type="submit" value="搜索" class="input_sub">
+							<input type="submit" value="搜索" id="input_sub" class="input_sub">
 							<!--</div>-->
 						</form>
 					</div>

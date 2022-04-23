@@ -1,6 +1,31 @@
+function handleSearchSubmit() {
+	if ($(".search_form").attr("action") == undefined) {
+		alert("查找失败!")
+		return false
+	}
+}
+
 $(document).ready(function(){
 	let postFinished = false
+
 	$("#input_text").mousedown(function() {
+
+		//监听input输入
+		$(this).bind('input propertychange', function() {
+			const a = $(this).val();
+			console.log(a);
+
+			$.post(
+				"/searchAllList", // 请求路由
+				{
+					"getSearchInput": $(this).val() // 参数名: 参数值
+				}, // 请求参数
+				function(data, status) {
+					// console.log(data);
+					handleData(data);
+				})
+		});
+
 		if (!postFinished) $.post(
 			"/searchAllList", // 请求路由
 			{
@@ -10,29 +35,7 @@ $(document).ready(function(){
 				// id, title, type
 				postFinished = true
 				console.log("qqqq" + data);
-				for (let i in data) {
-					//<ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>
-					const link = "/" + data[i].type + "?id=" + data[i].id
-				// @{/toDemandListid=${session.projectId})}
-					let $newElement=$('<a href=' + link + '><li>'+ data[i].title + '</li></a>');
-					$newElement.hover(function(){        //鼠标悬停时的颜色
-						$(this).css("background-color","rgba(71,149,243,.1)");
-					})
-					$newElement.mouseout(function(){             //鼠标离开后的颜色
-						$(this).css("background-color","transparent");
-					});
-					// $newElement.click(function () {
-					// 	// $("#input_text").val(data[i])
-					// 	// toUpdateDefect(id=${n.defect_id})
-					// 	$.get(, {
-					// 		// "id": data[i].id
-					// 	}, function (data, status) {
-					// 		console.log(data)
-					// 	})
-					// })
-					$newElement.appendTo($(".search-ul"))
-
-				}
+				handleData(data)
 				$("#search-input-box").css({
 					"min-height":"100px",
 					"max-height":"200px",
@@ -54,6 +57,30 @@ $(document).ready(function(){
 			});
 
 	});
+
+	function handleData(data) {
+		$(".search-ul").children().remove();
+		for (let i in data) {
+			const link = "/" + data[i].type + "?id=" + data[i].id
+			// let $newElement=$('<a href=' + link + '><li>'+ data[i].title + '</li></a>');
+			console.log(link)
+			let $newElement=$('<li>'+ data[i].title + '</li>');
+			$newElement.hover(function(){        //鼠标悬停时的颜色
+				$(this).css("background-color","rgba(71,149,243,.1)");
+			})
+			$newElement.mouseout(function(){             //鼠标离开后的颜色
+				$(this).css("background-color","transparent");
+			});
+
+			$newElement.click(function () {
+				$("#input_text").val(data[i].title)
+				$(".search_form").attr("action", link); //修改表单action
+			})
+
+			$newElement.appendTo($(".search-ul"))
+
+		}
+	}
 
 	$(document).on('click', function(e) {
 		const tmp = $(e.target).attr('id');

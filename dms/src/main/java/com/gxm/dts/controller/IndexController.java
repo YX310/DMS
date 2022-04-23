@@ -155,7 +155,7 @@ public class IndexController {
     public List<SearchContent> deleteProject(String getSearchInput) {
         System.out.println("getSearchInput: " + getSearchInput);
         List<SearchContent> searchContentList = new ArrayList<>();
-        addContentByList(searchContentList, defectServiceImpl.selectDefect(), "toUpdateDefect");
+        addContentByList(searchContentList, defectServiceImpl.selectDefect(getSearchInput), "toUpdateDefect");
 //        addContentByList(searchContentList, demandServiceImpl.selectDemand(), "demand");
 //        addContentByList(searchContentList, userServiceImpl.selectUser(), "user");
 //        addContentByList(searchContentList, projectServiceImpl.selectProject(), "project");

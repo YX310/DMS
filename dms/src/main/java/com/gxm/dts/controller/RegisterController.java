@@ -21,7 +21,6 @@ public class RegisterController {
     @Autowired
     private ProjectController projectController;
 
-
     @PostMapping(value = "/user/register")
     public String register(HttpServletRequest request, User user) {
         // if has user

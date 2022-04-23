@@ -48,5 +48,5 @@ public interface IDefectService {
     DefectProject selectProjectMessageByDefectId(String defectId);
 
     // 查询所有缺陷标题
-    public List<SearchContent> selectDefect();
+    public List<SearchContent> selectDefect(String keyword);
 }

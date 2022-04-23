@@ -1,14 +1,12 @@
 package com.gxm.dts.mapper;
 
 import com.gxm.dts.model.domain.*;
-import javafx.util.Pair;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 
 @Component
@@ -23,9 +21,9 @@ public interface DefectMapper {
 //    @Select("SELECT * FROM defect")
 //    public List<Defect> selectDefect();
 
-    // 查询所有缺陷标题
-    @Select("SELECT defect_id, defect_name FROM defect")
-    public List<SearchContent> selectDefect();
+    // 模糊查询所有缺陷标题
+    @Select("SELECT defect_id, defect_name FROM defect WHERE  defect_name LIKE #{keyword} ORDER BY defect_id DESC LIMIT 5")
+    public List<SearchContent> selectDefect(String keyword);
 
     // 根据id查询缺陷信息
     @Select("SELECT * FROM defect WHERE id=#{defectId}")

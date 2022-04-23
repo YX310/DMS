@@ -101,7 +101,8 @@ public class DefectServiceImpl implements IDefectService {
     }
 
     @Override
-    public List<SearchContent> selectDefect() {
-        return defectMapper.selectDefect();
+    public List<SearchContent> selectDefect(String keyword) {
+        return defectMapper.selectDefect('%' + keyword + '%');
     }
+
 }

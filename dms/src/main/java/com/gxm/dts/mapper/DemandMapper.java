@@ -2,6 +2,7 @@ package com.gxm.dts.mapper;
 
 import com.gxm.dts.model.domain.Demand;
 import com.gxm.dts.model.domain.DemandFile;
+import com.gxm.dts.model.domain.SearchContent;
 import com.gxm.dts.model.domain.UpdateDemand;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
@@ -20,8 +21,8 @@ public interface DemandMapper {
     public Demand selectDemandWithId(int demandId);
 
     // 查询所有需求标题
-    @Select("SELECT demand_name, defect_id FROM demand")
-    public Map<String, Integer> selectDemand();
+    @Select("SELECT demand_id, demand_name FROM demand WHERE demand_name LIKE #{keyword} ORDER BY demand_id DESC LIMIT 5")
+    public List<SearchContent> selectDemand(String keyword);
 
     //获取需求id
     @Select("SELECT * FROM demand WHERE demand_id = #{demandId}")

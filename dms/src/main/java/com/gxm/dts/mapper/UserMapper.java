@@ -1,5 +1,6 @@
 package com.gxm.dts.mapper;
 
+import com.gxm.dts.model.domain.SearchContent;
 import com.gxm.dts.model.domain.User;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
@@ -15,13 +16,13 @@ public interface UserMapper {
     @Select("SELECT * FROM user")
     public List<User> selectUserWithPage();
 
-    // 查询用户名
-    @Select("SELECT username, user_id FROM user")
-    public Map<String, Integer> selectUser();
-
     // 根据id查询用户信息
     @Select("SELECT * FROM user WHERE id=#{userId}")
     public User selectUserWithId(Integer userId);
+
+    // 查询所有用户名
+    @Select("SELECT user_id, username FROM user WHERE username LIKE #{keyword} ORDER BY user_id DESC LIMIT 5")
+    public List<SearchContent> selectUser(String keyword);
 
     // 根据id删除用户信息
     @Select("DELETE FROM user WHERE user_id = #{userId}")
@@ -40,5 +41,5 @@ public interface UserMapper {
     public void updateMeWithId(User user);
 
     @Select("SELECT user_id FROM user WHERE username = #{username}")
-    public int findUserIdByUsername(String username);
+    public Integer findUserIdByUsername(String username);
 }

@@ -6,9 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link rel="stylesheet" th:href="@{/css/index.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+	<link th:href="@{/css/select_input.css}" rel="stylesheet"/>
 	<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/workbench.css}" />
 	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/select_input.js}"></script>
 	<style type="text/css">
 		body{font-size: 1.3em;}
 		th,td{text-align: center;font-size: 1em;}
@@ -24,16 +26,17 @@
 						<ul><a th:href="@{/homeProjectList}">我的项目</a></ul>
 					</div>
 				</div>
-				
+
 				<div id="toolbar-container-middle">
-					<div class="toolbar-search">
-						<div class="toolbar-search-container">
-							<input id="toolbar-search-input" style="text-indent: 32px;"/>
-							<button id="toolbar-search-button">
-								<i></i>
-								<span>搜索</span>
-							</button>
-						</div>
+					<div class="search-box">
+						<form class="search_form" method="post" onsubmit="return handleSearchSubmit()">
+							<div id="search-input-box" autoHeight="true">
+								<input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">
+								<ul class="search-ul">
+								</ul>
+							</div>
+							<input type="submit" value="搜索" id="input_sub" class="input_sub">
+						</form>
 					</div>
 				</div>
 				<div id="toolbar-container-right">

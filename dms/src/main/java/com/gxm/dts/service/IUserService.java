@@ -1,7 +1,9 @@
 package com.gxm.dts.service;
 
 import com.github.pagehelper.PageInfo;
+import com.gxm.dts.model.domain.SearchContent;
 import com.gxm.dts.model.domain.User;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,8 @@ public interface IUserService {
     // 根据用户id修改单个用户信息(前台)
     public void updateMeWithId(User user);
 
-    public int findUserIdByUsername(String username);
+    public Integer findUserIdByUsername(String username);
 
     // 查询所有用户名
-    public Map<String, Integer> selectUser();
+    public List<SearchContent> selectUser(String keyword);
 }

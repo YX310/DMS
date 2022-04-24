@@ -3,10 +3,7 @@ package com.gxm.dts.service.implement;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.ProjectMapper;
-import com.gxm.dts.model.domain.Project;
-import com.gxm.dts.model.domain.ProjectMember;
-import com.gxm.dts.model.domain.User;
-import com.gxm.dts.model.domain.UserProject;
+import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -94,8 +91,9 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
-    public Map<String, Integer> selectProject() {
-        return projectMapper.selectProject();
+    public List<SearchContent> selectProject(String keyword) {
+        return projectMapper.selectProject('%' + keyword + '%');
     }
+
 
 }

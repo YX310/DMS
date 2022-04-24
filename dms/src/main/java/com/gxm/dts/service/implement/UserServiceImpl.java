@@ -3,6 +3,7 @@ package com.gxm.dts.service.implement;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.UserMapper;
+import com.gxm.dts.model.domain.SearchContent;
 import com.gxm.dts.model.domain.User;
 import com.gxm.dts.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,13 +69,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public int findUserIdByUsername(String username) {
+    public Integer findUserIdByUsername(String username) {
         return userMapper.findUserIdByUsername(username);
     }
 
     @Override
-    public Map<String, Integer> selectUser() {
-        return userMapper.selectUser();
+    public List<SearchContent> selectUser(String keyword) {
+        return userMapper.selectUser('%' + keyword + '%');
     }
+
 
 }

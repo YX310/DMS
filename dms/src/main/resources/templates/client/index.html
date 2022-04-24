@@ -4,7 +4,9 @@
 		<meta charset="utf-8" />
 		<title>toolbar</title>
 		<link rel="stylesheet" th:href="@{/css/index.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+		<link th:href="@{/css/select_input.css}" rel="stylesheet"/>
+		<script th:src="@{/js/jquery.js}"></script>
+		<script th:src="@{/js/select_input.js}"></script>
 		<style type="text/css">
 			body{font-size: 1.3em;}
 			th,td{text-align: center;font-size: 1em;}
@@ -12,7 +14,7 @@
 		</style>
 	</head>
 	<body>
-		<div th:fragment="header" id="toolbarBox" style="min-height: 48px;" >
+		<div th:fragment="header" id="toolbarBox" style="min-height: 60px;" >
 			<div id="toolbar-container">
 				<div id="toolbar-container-left">
 					<div id="toolbar-logo">DTS</div>
@@ -24,16 +26,19 @@
 <!--						<ul><a th:href="@{/toMe(id=${session.user_id})}">我的</a></ul>-->
 					</div>
 				</div>
-				
+
 				<div id="toolbar-container-middle">
-					<div class="toolbar-search">
-						<div class="toolbar-search-container">
-							<input id="toolbar-search-input" style="text-indent: 32px;"/>
-							<button id="toolbar-search-button">
-								<i></i>
-								<span>搜索</span>
-							</button>
-						</div>
+					<div class="search-box">
+						<form class="search_form" method="post" onsubmit="return handleSearchSubmit()">
+							<div id="search-input-box" autoHeight="true">
+								<input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">
+								<ul class="search-ul">
+								</ul>
+							</div>
+							<!--<div style="display: inline-block; margin-left: -5px;">-->
+							<input type="submit" value="搜索" id="input_sub" class="input_sub">
+							<!--</div>-->
+						</form>
 					</div>
 				</div>
 				<div id="toolbar-container-right">

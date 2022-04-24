@@ -1,17 +1,17 @@
-body{
+body {
 	margin: 0;
 	padding: 0;
-	line-height: 1.5;
 	background-color: #f6f6f8;
 }
 
 a{
 	text-decoration:none;
+	color: inherit;
 }
 #toolbarBox{
 	position: relative;
 	width: 100%;
-	height: 60px;
+	min-height: 60px;
 	margin: 0 auto;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -22,30 +22,30 @@ a{
 
 #toolbar-container{
 	width: 100%;
-    height: 100%;
-    line-height: 60px;
-    margin: 0;
-    padding: 0;
-    /*overflow: hidden; !*清除浮动*!*/
-    /*border: 1px solid blueviolet;*/
+	height: 100%;
+	line-height: 60px;
+	margin: 0;
+	padding: 0;
+	/*border: 1px solid blueviolet;*/
 }
 
 #toolbar-container,#toolbar-container-left,#toolbar-container-left ul,#toolbar-container-middle,#toolbar-container-right{
 	-webkit-box-sizing: border-box;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
-
 /************start left***************/
 #toolbar-container-left{
 	float: left;
-	width: 53%;
+	width: 40%;
+	min-width: 500px;
 	height: 100%;
-    /*border: 1px solid orangered;*/
+	/*border: 1px solid orangered;*/
 }
 
 #toolbar-logo,#toolbar-container-left ul{
 	height: 100%;
 	float: left;
+	display: inline-block;
 }
 
 #toolbar-logo{
@@ -84,96 +84,7 @@ a{
 
 /************end left***************/
 
-
-/************start middle***************/
-
-#toolbar-container-middle{
-	float: left;
-	width: 22%;
-	height: 100%;
-	text-align: center;
-   /* border: 1px solid rgb(28, 108, 122);*/
-}
-
-#toolbar-container .toolbar-search {
-	display: inline-block;
-    width: 100%;
-    max-width: 720px;
-   -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    /*border: 1px solid blue;*/
-}
-
-#toolbar-container .toolbar-search .toolbar-search-container {
-    width: 100%;
-    height: 32px;
-    line-height: 32px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-#toolbar-container .toolbar-search .toolbar-search-container input {
-    font-size: 14px;
-    display: inline-block;
-    width: calc(100% - 70px);
-    height: 100%;
-    line-height: inherit;
-	border: 0 none;
-	outline: 0;
-	background: #f5f6f7;
-	color: #222226;
-	vertical-align: top;
-	text-indent: 32px;
-	border: 1px solid #e8e8ed;
-    border-right-color: rgb(232, 232, 237);
-    border-right-style: solid;
-    border-right-width: 1px;
-	border-right: none;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	border-radius: 16px 0 0 16px;
-}
-
-#toolbar-container .toolbar-search .toolbar-search-container button {
-	display: inline-block;
-	width: 69px;
-	height: 100%;
-	margin-left:-4px ;
-	outline: 0;
-	border: 0 none;
-	border-radius: 0 16px 16px 0;
-	font-size: 14px;
-	line-height: 32px;
-	cursor: pointer;
-	-webkit-transition: all .2s ease-in;
-	transition: all .2s ease-in;
-	background-color: rgba(71,149,243,1);
-	text-align: left;
-}
-
-#toolbar-container .toolbar-search .toolbar-search-container button i{
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background: url(../imgs/style_img/dms-white-search.png) no-repeat center center;
-    background-size: auto;
-    background-size: 100%;
-    vertical-align: middle;
-    position: relative;
-    top: -1px;
-    margin-left: -1px;
-}
-
-#toolbar-container .toolbar-search .toolbar-search-container button span {
-  display: inline-block;
-  vertical-align: top;
-  color: #fff;
-  margin-left: -2px;
-}
-/************end middle***************/
-
 /************start right***************/
-
 
 #toolbar-container-right{
 	float: right;
@@ -181,7 +92,7 @@ a{
 	height: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-    /*border: 1px solid red;*/
+	/*border: 1px solid red;*/
 }
 
 
@@ -193,12 +104,12 @@ a{
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	/*border: 1px solid yellow;*/
-	
+
 }
 
-#toolbar-container-right a{	
-	font-size:1em;      
-    vertical-align:middle;
+#toolbar-container-right a{
+	font-size:1em;
+	vertical-align:middle;
 }
 
 #toolbar-container-right .toolbar-user .headimg_box{
@@ -240,11 +151,145 @@ a{
 }
 
 #toolbar-container-right .toolbar-logout:hover{
-	 cursor:pointer;
-	 background-color: rgba(180,180,180,0.15);
-}
-#toolbar-container-right .toolbar-logout:active{
 	cursor:pointer;
-	background-color: rgba(180,180,180,0.25);
+	background-color: rgba(180,180,180,0.15);
+
 }
+
 /************end right***************/
+h2.heading {
+	font-size: 28px;
+	text-transform: uppercase;
+	text-align: center;
+	color: #077ABC;
+	padding-bottom: 3px;
+	margin-bottom: 35px;
+}
+
+/****start  project_list***/
+.project_box,.defect-box,.userlist-box, .userupdate-box{
+	margin: 0;
+	overflow: hidden;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	vertical-align:middle;
+	/*border: 1px solid blue;*/
+}
+.project_box .project_content{
+	float: left;
+	width: 98%;
+	height: 100%;
+	margin-top: 40px;
+	margin-left: 1%;
+	overflow: hidden;
+	/*border: 1px solid hotpink;*/
+}
+.defect-box .defect-content {
+	float: left;
+	width: 90%;
+	height: 100%;
+	margin-left: 5%;
+	overflow: hidden;
+	/*border: 1px solid hotpink;*/
+}
+.userlist-content ,.userupdate-content{
+	float: left;
+	width: 90%;
+	height: 100%;
+	margin-left: 5%;
+	overflow: hidden;
+	/*border: 1px solid hotpink;*/
+}
+.project_box .project_content .title {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: #999999;
+}
+.create-project,.create-defect{
+	float:right;
+	width: 60px;
+	height: 40px;
+	margin-top: -65px;
+	margin-right: 5%;
+	text-align: center;
+	border: 2px rgba(71,149,243,1) solid;
+	color: rgba(71,149,243,1);
+	line-height: 40px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.create-project:hover{
+	float:right;
+	width: 60px;
+	height: 40px;
+	margin-top: -65px;
+	margin-right: 5%;
+	text-align: center;
+	border: 2px rgba(71,149,243,1) solid;
+	color: white;
+	background-color: rgba(71,149,243,1);
+
+}
+.create-project a,.create-defect a{
+	color: rgba(71,149,243,1);
+}
+.create-project a:hover{
+	color: white;
+}
+.create-defect:hover{
+	float:right;
+	width: 60px;
+	height: 40px;
+	margin-top: -65px;
+	margin-right: 5%;
+	text-align: center;
+	border: 2px rgba(71,149,243,1) solid;
+	color: white;
+	background-color: rgba(71,149,243,1);
+
+}
+.create-defect a:hover{
+	color: white;
+}
+.more {
+	float:left;
+	width: 20%;
+	height: 40px;
+	vertical-align:middle;
+	text-align: center;
+	/*	border: 2px rgba(71,149,243,1) solid;*/
+	margin: 2% 40% ;
+	line-height: 40px;
+	font-size: 18px;
+	cursor: pointer;
+}
+.page{
+	float: left;
+	width: 100%;
+	height: 50px;
+	/*	border: 2px rgba(71,149,243,1) solid;*/
+}
+.page a{
+	text-decoration: none;
+	float: left;
+	margin-right: 20px;
+	display: block;
+	width: 40px;
+	height: 40px;
+	border: rgba(71,149,243,1) 2px solid;
+	text-align: center;
+	color: rgba(71,149,243,1);
+	line-height: 40px;
+}
+.page a:hover{
+	background-color: rgba(71,149,243,1);
+	color: white;
+}
+
+ul,li{
+	list-style-type:none;
+}

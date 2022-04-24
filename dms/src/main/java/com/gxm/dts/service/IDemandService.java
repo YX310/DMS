@@ -3,6 +3,7 @@ package com.gxm.dts.service;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Demand;
 import com.gxm.dts.model.domain.DemandFile;
+import com.gxm.dts.model.domain.SearchContent;
 import com.gxm.dts.model.domain.UpdateDemand;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
@@ -40,5 +41,5 @@ public interface IDemandService {
     public void addUpdateDemand(UpdateDemand updateDemand);
 
     // 查询所有需求标题
-    public Map<String, Integer> selectDemand();
+    public List<SearchContent> selectDemand(String keyword);
 }

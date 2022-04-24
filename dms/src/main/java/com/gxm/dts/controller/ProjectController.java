@@ -70,18 +70,35 @@ public class ProjectController {
     }
 
     @RequestMapping("/addProject")
-    public String add(Project project, UserProject userProject){
+    public String add(Project project, UserProject userProject, Model model) {
+        String[] projectMembers = project.getProject_member().split(";");
+        List<Integer> isSystemUser = new ArrayList<>();
+        List<String> isNotSystemUser = new ArrayList<>();
+        isSystemUser.add(userProject.getUser_id());
+        for (String projectMember : projectMembers) {
+            Integer userId = userServiceImpl.findUserIdByUsername(projectMember);
+            if (userId == null) {
+                isNotSystemUser.add(projectMember);
+                System.out.println(projectMember);
+                continue;
+            }
+            if (userId != userProject.getUser_id() && userId > 0) {
+                isSystemUser.add(userId);
+            }
+        }
+        if (isNotSystemUser.size() != 0) {
+            model.addAttribute("isNotSystemUser", isNotSystemUser);
+
+            return "client/addProject";
+        }
+
         projectServiceImpl.addProject(project);
         userProject.setProject_id(project.getProject_id());
         System.out.println("userProject" + userProject);
-        //向user_and_project表插入数据
-        projectServiceImpl.addProjectMember(new ProjectMember(userProject.getUser_id(), userProject.getProject_id()));
-        String[] projectMembers = project.getProject_member().split(";");
-        for (String projectMember : projectMembers) {
-            int userId = userServiceImpl.findUserIdByUsername(projectMember);
-            if (userId != userProject.getUser_id()) {
-                projectServiceImpl.addProjectMember(new ProjectMember(userId, project.getProject_id()));
-            }
+
+        for (Integer userId : isSystemUser) {
+            //向user_and_project表插入数据
+            projectServiceImpl.addProjectMember(new ProjectMember(userId, project.getProject_id()));
         }
         return "redirect:/homeProjectList";
     }

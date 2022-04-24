@@ -41,5 +41,5 @@ public interface IProjectService {
     public List<User> findProjectMemberByProjectId(Integer projectId);
 
     // 查询所有项目标题
-    public Map<String, Integer> selectProject();
+    public List<SearchContent> selectProject(String keyword);
 }

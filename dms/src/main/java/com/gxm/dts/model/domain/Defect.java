@@ -24,7 +24,7 @@ public class Defect extends Base{
     private String update_time;    //记录修改时间
 
     public String defectDiff(Defect defect) {
-        String diff = compareResult("缺陷标题:", this.defect_name, defect.getDefect_name())
+        return compareResult("缺陷标题:", this.defect_name, defect.getDefect_name())
                 + compareResult("描述:", this.defect_description, defect.getDefect_description())
                 + compareResult("优先级:", this.priority, defect.getPriority())
                 + compareResult("出现概率:", this.probability, defect.getProbability())
@@ -34,20 +34,8 @@ public class Defect extends Base{
                 + compareResult("进度:", this.progress, defect.getProgress())
                 + compareResult("关联已有缺陷:" ,  this.associated_defects, defect.getAssociated_defects())
                 + compareResult("缺陷状态:", this.defect_state, defect.getDefect_state())
-                ;
-
-        return diff;
+                + compareResult("文件", this.defect_document, defect.getDefect_document());
     }
-
-    private String compareFileString(String source, String target) {
-        String res = "";
-        if (source.length() < target.length()) {
-            res = "上传了 " + target.substring(source.length()) + "\n";
-        }
-        return res;
-    }
-
-
 
     @Override
     public String toString() {

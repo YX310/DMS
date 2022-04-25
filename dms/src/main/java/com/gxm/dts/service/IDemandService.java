@@ -1,10 +1,7 @@
 package com.gxm.dts.service;
 
 import com.github.pagehelper.PageInfo;
-import com.gxm.dts.model.domain.Demand;
-import com.gxm.dts.model.domain.DemandFile;
-import com.gxm.dts.model.domain.SearchContent;
-import com.gxm.dts.model.domain.UpdateDemand;
+import com.gxm.dts.model.domain.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -39,6 +36,9 @@ public interface IDemandService {
 
     //向demand_update_record表插入数据
     public void addUpdateDemand(UpdateDemand updateDemand);
+
+    //查找当前需求所属项目的信息
+    public DemandProject selectProjectMessageByDemandId(Integer demandId);
 
     // 查询所有需求标题
     public List<SearchContent> selectDemand(String keyword);

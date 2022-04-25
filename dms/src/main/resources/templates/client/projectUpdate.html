@@ -6,11 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>修改项目</title>
 		<link rel="stylesheet" th:href="@{/css/index.css}" />
-	<link th:href="@{/css/select_input.css}" rel="stylesheet"/>
+		<link th:href="@{/css/select_input.css}" rel="stylesheet"/>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/jquery-tagsinput.min.css}" />
 		<script th:src="@{/js/jquery.js}"></script>
-	<script th:src="@{/js/select_input.js}"></script>
+		<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+		<script th:src="@{/js/select_input.js}"></script>
 		<script th:src="@{/js/getTime.js}"></script>
+		<script th:src="@{/js/jquery-tagsinput.js}"></script>
 		<style type="text/css">
 			body{font-size: 1.3em;}
 			th,td{font-size: 1em;}
@@ -19,7 +23,7 @@
 	</head>
 	<body>
 		<div th:replace="/client/index::header"></div>
-		<div  class="container"  >
+		<div  class="container"  style="margin-top: 20px">
 			<form name="add-form" th:action="@{/updateProject}" method="post">
 				<input name="project_id" type="hidden" th:value="${session.projectId}"/>
 				<input name="project_id" type="hidden" th:value="${project.creator}"/>
@@ -38,14 +42,37 @@
 						</td>
 					</tr>
 
+<!--					<tr>-->
+<!--						<td align="center">添加成员</td>-->
+<!--						<td><input  class="form-control" name="project_member" type="text" required="required" th:value="${project.project_member}"/></td>-->
+<!--					</tr>-->
+
 					<tr>
 						<td align="center">添加成员</td>
-						<td><input  class="form-control" name="project_member" type="text" required="required" th:value="${project.project_member}"/></td>
+						<td>
+							<div class="htmleaf-container">
+
+								<div class="container">
+									<div class="row">
+										<div  class="col-sm-12">
+											<div class="form-group">
+												<input data-role='tags-input' name="project_member" type="text" required="required" th:value="${project.project_member}"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
 					</tr>
 
 				</table>
 				<button class="btn btn-primary btn-lg btn-block" type="submit">保存修改</button>
 			</form>
 		</div>
+		<script>
+			$(document).ready(function() {
+				$('[data-role="tags-input"]').tagsInput();
+			});
+		</script>
 	</body>
 </html>

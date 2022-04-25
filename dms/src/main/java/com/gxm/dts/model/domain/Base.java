@@ -1,7 +1,7 @@
 package com.gxm.dts.model.domain;
 
 public class Base {
-    String compareResult(String title, String source, String target) {
+    public String compareResult(String title, String source, String target) {
         String res = "";
         if(source == null || target == null) {
             if(source == null && target == null) return res;

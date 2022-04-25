@@ -1,6 +1,8 @@
 package com.gxm.dts.model.domain;
 
 public class UpdateDefect extends UpdateBase{
+    private int defect_id;
+
     public int getDefect_id() {
         return defect_id;
     }
@@ -9,5 +11,4 @@ public class UpdateDefect extends UpdateBase{
         this.defect_id = defect_id;
     }
 
-    private int defect_id;
 }

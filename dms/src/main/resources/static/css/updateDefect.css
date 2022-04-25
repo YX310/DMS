@@ -72,7 +72,7 @@ input{outline:none;}
 	word-wrap:break-word;/*自动换行*/
 	/*border: 1px solid red;*/
 }
-.defect-property-list1,.defect-property-list2,.defect-property-list3{
+.defect-property-list1,.defect-property-list2,.defect-property-list3,.defect-property-list4{
 	float: left;
 	width: 100%;
 	height: 50px;

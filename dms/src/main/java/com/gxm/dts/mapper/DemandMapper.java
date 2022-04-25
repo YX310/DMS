@@ -1,9 +1,6 @@
 package com.gxm.dts.mapper;
 
-import com.gxm.dts.model.domain.Demand;
-import com.gxm.dts.model.domain.DemandFile;
-import com.gxm.dts.model.domain.SearchContent;
-import com.gxm.dts.model.domain.UpdateDemand;
+import com.gxm.dts.model.domain.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -58,4 +55,8 @@ public interface DemandMapper {
     @Insert("INSERT INTO demand_update_record(demand_id, update_time, record_content,update_person) values(#{demand_id},#{update_time},#{record_content},#{update_person})")
     @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
     public void addUpdateDemand(UpdateDemand updateDemand);
+
+    //查找当前需求所属项目的信息
+    @Select("SELECT * FROM project WHERE project_id IN (SELECT project_id FROM demand WHERE demand_id =#{demandId})")
+    public DemandProject selectProjectMessageByDemandId(Integer demandId);
 }

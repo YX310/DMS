@@ -1,11 +1,9 @@
 package com.gxm.dts.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.gxm.dts.model.domain.Defect;
-import com.gxm.dts.model.domain.DefectFile;
-import com.gxm.dts.model.domain.DefectProject;
-import com.gxm.dts.model.domain.UpdateDefect;
+import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DefectServiceImpl;
+import com.gxm.dts.service.implement.FileUploadServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,12 +21,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static com.gxm.dts.util.Constant.IS_DEFECT;
 import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
 
 @Controller
 public class DefectController {
     @Autowired
     private DefectServiceImpl defectServiceImpl;
+    @Autowired
+    private FileUploadServiceImpl fileUploadServiceImpl;
 
     @Value("${web.upload-path}")
     private String uploadPath;
@@ -105,10 +106,13 @@ public class DefectController {
                     file.transferTo(new File(folder, newName));
                     String fileRes = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + format + newName;
                     if (Constant.DEBUG) System.out.println("fileRes: " + fileRes);
-                    DefectFile defectFile = new DefectFile();
-                    defectFile.setDefect_id(Integer.parseInt(defect.getDefect_id()));
-                    defectFile.setFile_path(fileRes);
-                    defectServiceImpl.addDefectFile(defectFile);
+                    FileUpload fileUpload = new FileUpload();
+                    fileUpload.setIs_defect(Constant.IS_DEFECT);
+                    fileUpload.setFile_name(oldName);
+                    fileUpload.setAssoc_id(Integer.parseInt(defect.getDefect_id()));
+                    updateRepeatFileName(fileUpload);
+                    fileUpload.setFile_path(fileRes);
+                    fileUploadServiceImpl.addFileUpload(fileUpload);
                     if (Constant.DEBUG) System.out.println("fileRes: " + ++i);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -117,6 +121,21 @@ public class DefectController {
         }
         if (Constant.DEBUG) System.out.println("defect: " + files.length);
         return "redirect:/toDefectList?id=" + defect.getProject_id();
+    }
+
+    private void updateRepeatFileName(FileUpload fileUpload) {
+        FileUpload fu = fileUploadServiceImpl.selectRepeatFileName(fileUpload);
+        String fileName = fileUpload.getFile_name();
+        int fileExtensionIndex = fileName.lastIndexOf(".");
+        String fileExtension = fileName.substring(fileExtensionIndex);
+        String firstFileName = fileName.substring(0, fileExtensionIndex);
+        int fileIndex = 1;
+        while (fu != null) {
+            // test (1).txt
+            fileUpload.setFile_name(firstFileName + "(" + fileIndex + ")" + fileExtension);
+            fu = fileUploadServiceImpl.selectRepeatFileName(fileUpload);
+            fileIndex++;
+        }
     }
 
     //更新（修改）缺陷信息
@@ -129,6 +148,8 @@ public class DefectController {
         DefectProject defectProject =  defectServiceImpl.selectProjectMessageByDefectId(id);//根据缺陷id查找项目信息
         model.addAttribute("defect", defect);
         model.addAttribute("defectProject",defectProject);
+        model.addAttribute("fileUpload", fileUploadServiceImpl.selectFileUpload(Integer.parseInt(id), IS_DEFECT));
+
         session.setAttribute("defect", defect);
         session.setAttribute("defectProject", defectProject);
         List<UpdateDefect> updateDefects = defectServiceImpl.selectUpdateDefectWithDefectId(Integer.parseInt(id));
@@ -143,7 +164,8 @@ public class DefectController {
     @RequestMapping("/updateDefect")
     public String updateDefectWithId(HttpSession session,
                                      Defect defect,
-                                     UpdateDefect updateDefect) {
+                                     UpdateDefect updateDefect,
+                                     @RequestParam("defect_file") MultipartFile[] files) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
         defect.setUpdate_time(format);
@@ -173,9 +195,6 @@ public class DefectController {
         defectServiceImpl.deleteDefectWithId(id);
         return "redirect:/toDefectList?id=" + projectId; //redirect重定向
     }
-
-    //查询变更记录
-
 
 }
 

@@ -126,7 +126,25 @@
 								<span>截止日期</span>
 								<input name="finish_date" type="date" required="required" th:value="${defect.finish_date}"/>
 							</div>
+
 						</div>
+						<span>上传的文件</span>
+						<div class="defect-property-list4">
+<!--							<div class="list-content1">-->
+							<div th:each="n:${fileUpload}">
+								<span th:text="${n.getFile_name()}"></span>
+								<a th:text="${n.getFile_path()}"></a>
+<!--								</div>-->
+							</div>
+						</div>
+						<table>
+							<tr>
+								<td align="center">文件</td>
+								<td>
+									<input id="file-zh" name="defect_file" type="file" multiple="multiple" th:multiple="multiple" data-show-caption="true">
+								</td>
+							</tr>
+						</table>
 					</div>
 					<hr />
 					<div class="defect-property-box other-information-box">
@@ -161,6 +179,8 @@
 									  th:text="${n.record_content}"></textarea>
 						</div>
 					</div>
+
+					<input id="file-zh" name="demand_file" type="file" multiple="multiple" th:multiple="multiple" data-show-caption="true">
 				</div>
 			</div>
 		</div>

@@ -1,8 +1,7 @@
 package com.gxm.dts.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.gxm.dts.model.domain.Demand;
-import com.gxm.dts.model.domain.DemandFile;
+import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DemandServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -52,7 +52,7 @@ public class DemandController {
         return "client/demandList";
     }
 
-    // 缺陷详情查询
+    // 需求详情查询
     @GetMapping(value = "/demand/{id}")
     public String getDemandById(HttpServletRequest request,
                                 @PathVariable("id") int id) {
@@ -65,7 +65,7 @@ public class DemandController {
         }
     }
 
-    //新建缺陷
+    //新建需求
     @RequestMapping("/toAddDemand")
     public String toAddDemand(){
         return "client/addDemand";
@@ -115,25 +115,53 @@ public class DemandController {
         return "redirect:/toDemandList?id=" + demand.getProject_id();
     }
 
-    //更新（修改）缺陷信息
+    //更新（修改）需求信息
     @RequestMapping("/toUpdateDemand")
-    public String toUpdateDemand(int id, Model model) {
+    public String toUpdateDemand(HttpSession session,
+                                 HttpServletRequest request,
+                                 int id,
+                                 Model model) {
         Demand demand = demandServiceImpl.getDemandId(id);
+        DemandProject demandProject =  demandServiceImpl.selectProjectMessageByDemandId(id);//根据需求id查找项目信息
         model.addAttribute("demand", demand);
+        model.addAttribute("demandProject",demandProject);
+        session.setAttribute("demand", demand);
+        session.setAttribute("demandProject", demandProject);
+        List<UpdateDemand> updateDemands = demandServiceImpl.selectUpdateDemandWithDemandId(id);
+        StringBuilder updateContent = new StringBuilder();
+        for (UpdateDemand updateDemand : updateDemands) updateContent.append(updateDemand.getRecord_content());
+        model.addAttribute("updateContent", updateContent);
+        request.setAttribute("updateDemands", updateDemands);
         return "client/demandUpdate";
     }
 
-    //修改缺陷信息
+    //修改需求信息
     @RequestMapping("/updateDemand")
-    public String updateDemandWithId(Demand demand) {
+    public String updateDemandWithId(HttpSession session,
+                                     Demand demand,
+                                     UpdateDemand updateDemand) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
         demand.setUpdate_time(format);
         demandServiceImpl.updateDemandWithId(demand);
+        updateDemand.setUpdate_time(System.currentTimeMillis());
+        Object object = session.getAttribute("demand");
+        System.out.println("id: " + updateDemand.getDemand_id());
+        System.out.println("id: " + updateDemand.getUpdate_time());
+        System.out.println("id: " + updateDemand.getRecord_content());
+        if (object != null) {
+            Demand oldDemand = (Demand) object;
+            updateDemand.setRecord_content(oldDemand.demandDiff(demand));
+            demandServiceImpl.addUpdateDemand(updateDemand);
+        }
+        System.out.println("id: " + updateDemand.getRecord_content());
+        // 处理搜索场景下无project_id
+        Object projectID = session.getAttribute(SESSION_PROJECT_ID);
+        if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, demand.getProject_id());
         return "redirect:/toDemandList?id=" + demand.getProject_id(); //redirect重定向
     }
 
-    //删除缺陷
+    //删除需求
     @RequestMapping("/deleteDemand")
     public String deleteDemand(HttpServletRequest request,
                              int id) {

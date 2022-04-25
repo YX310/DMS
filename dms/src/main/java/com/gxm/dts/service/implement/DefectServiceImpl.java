@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.IDefectService;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -56,10 +57,6 @@ public class DefectServiceImpl implements IDefectService {
         defectMapper.addDefect(defect);
     }
 
-    public void addDefectFile(DefectFile defectFile){
-        defectMapper.addDefectFile(defectFile);
-    }
-
     @Override
     public Defect getDefectId(String defectId) {
         return defectMapper.getDefectId(defectId);
@@ -104,5 +101,4 @@ public class DefectServiceImpl implements IDefectService {
     public List<SearchContent> selectDefect(String keyword) {
         return defectMapper.selectDefect('%' + keyword + '%');
     }
-
 }

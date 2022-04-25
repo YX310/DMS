@@ -1,6 +1,7 @@
 package com.gxm.dts.mapper;
 
 import com.gxm.dts.model.domain.*;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -37,11 +38,6 @@ public interface DefectMapper {
     @Insert("INSERT INTO defect(defect_name, defect_description, priority,designated_person, probability, defect_type,start_date,finish_date,defect_state,project_id,defect_creator,creation_time,update_time) VALUES(#{defect_name}, #{defect_description}, #{priority},#{designated_person}, #{probability}, #{defect_type},#{start_date},#{finish_date},#{defect_state},#{project_id},#{defect_creator},#{creation_time},#{update_time})")
     @Options(useGeneratedKeys = true, keyProperty = "defect_id",keyColumn = "defect_id")
     public void addDefect(Defect defect);
-
-    //新增文件
-    @Insert("INSERT INTO defect_and_file_path(defect_id, file_path) values(#{defect_id},#{file_path})")
-    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
-    public void addDefectFile(DefectFile defectFile);
 
     //修改缺陷信息（前台）
     @Select("UPDATE defect SET defect_name = #{defect_name}, defect_description = #{defect_description},priority = #{priority},designated_person = #{designated_person},progress = #{progress},probability = #{probability},defect_type = #{defect_type},defect_state = #{defect_state},start_date = #{start_date},finish_date = #{finish_date},update_time = #{update_time} WHERE defect_id = #{defect_id}")

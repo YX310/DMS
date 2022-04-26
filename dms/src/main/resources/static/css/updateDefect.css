@@ -126,13 +126,7 @@ input{outline:none;}
 	background: white;
 }
 
-.list-content2{
-	/*margin-left: 1%;*/
-}
-.other-information-box{
-	height: 180px;
-}
-
+/*变更内容*/
 .updateDefect-right{
 	float: right;
 	width: 32%;

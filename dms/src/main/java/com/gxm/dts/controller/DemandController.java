@@ -3,6 +3,7 @@ package com.gxm.dts.controller;
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DemandServiceImpl;
+import com.gxm.dts.service.implement.FileUploadServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,15 +21,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
+import static com.gxm.dts.util.Constant.*;
 
 @Controller
 public class DemandController {
     @Autowired
     private DemandServiceImpl demandServiceImpl;
-    @Value("${web.upload-path}")
-    private String uploadPath;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
+    @Autowired
+    private FileUploadController fileUploadController;
 
     @GetMapping(value = "/toDemandList")
     public String toDemandList(HttpServletRequest request,
@@ -79,43 +79,13 @@ public class DemandController {
         if (("").equals(demand.getFinish_date())) demand.setFinish_date(null);
         demandServiceImpl.addDemand(demand);
         if (Constant.DEBUG) System.out.println("demand: " + demand.toString());
-        // 检查是否上传文件
-        if (files.length > 0 && !("").equals(files[0].getOriginalFilename())) {
-            // 初始化日期和存储路径
-            String format = sdf.format(new Date());
-            File folder = new File(uploadPath + format);
-            if (!folder.isDirectory()) {
-                boolean res = folder.mkdirs();
-                if (Constant.DEBUG) System.out.println("folder res: " + res);
-            }
-
-            // 初始化文件路径
-            int i = 0;
-            // 遍历存储
-            for (MultipartFile file : files) {
-                if (Constant.DEBUG) System.out.println("demand: " + file.getOriginalFilename());
-                String oldName = file.getOriginalFilename();
-                if (oldName == null) oldName = "";
-                String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."));
-                try {
-                    file.transferTo(new File(folder, newName));
-                    String fileRes = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + format + newName;
-                    if (Constant.DEBUG) System.out.println("fileRes: " + fileRes);
-                    DemandFile demandFile = new DemandFile();
-                    demandFile.setDemand_id(demand.getDemand_id());
-                    demandFile.setFile_path(fileRes);
-                    demandServiceImpl.addDemandFile(demandFile);
-                    if (Constant.DEBUG) System.out.println("fileRes: " + ++i);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+        fileUploadController.saveFile(files, demand.getDemand_id(), prefix, !IS_DEFECT);
         if (Constant.DEBUG) System.out.println("demand: " + files.length);
         return "redirect:/toDemandList?id=" + demand.getProject_id();
     }
 
-    //更新（修改）需求信息
+    //查看（修改）需求信息
     @RequestMapping("/toUpdateDemand")
     public String toUpdateDemand(HttpSession session,
                                  HttpServletRequest request,
@@ -125,6 +95,8 @@ public class DemandController {
         DemandProject demandProject =  demandServiceImpl.selectProjectMessageByDemandId(id);//根据需求id查找项目信息
         model.addAttribute("demand", demand);
         model.addAttribute("demandProject",demandProject);
+        model.addAttribute("fileUpload", fileUploadController.selectFileUpload(id, !IS_DEFECT));
+
         session.setAttribute("demand", demand);
         session.setAttribute("demandProject", demandProject);
         List<UpdateDemand> updateDemands = demandServiceImpl.selectUpdateDemandWithDemandId(id);
@@ -137,9 +109,11 @@ public class DemandController {
 
     //修改需求信息
     @RequestMapping("/updateDemand")
-    public String updateDemandWithId(HttpSession session,
+    public String updateDemandWithId(HttpServletRequest request,
+                                     HttpSession session,
                                      Demand demand,
-                                     UpdateDemand updateDemand) {
+                                     UpdateDemand updateDemand,
+                                     @RequestParam("defect_file") MultipartFile[] files) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
         demand.setUpdate_time(format);
@@ -155,10 +129,20 @@ public class DemandController {
             demandServiceImpl.addUpdateDemand(updateDemand);
         }
         System.out.println("id: " + updateDemand.getRecord_content());
+        String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+        if (DEBUG) System.out.println("getDefect_id: " + demand.getDemand_id());
+        fileUploadController.saveFile(files, demand.getDemand_id(), prefix, !IS_DEFECT);
         // 处理搜索场景下无project_id
         Object projectID = session.getAttribute(SESSION_PROJECT_ID);
         if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, demand.getProject_id());
         return "redirect:/toDemandList?id=" + demand.getProject_id(); //redirect重定向
+    }
+
+    // 删除文件
+    @RequestMapping("/deleteDemandFile")
+    public String deleteDemandFile(int id, int fileId) {
+        fileUploadController.deleteFile(fileId);
+        return "redirect:/toUpdateDemand?id=" + id;
     }
 
     //删除需求

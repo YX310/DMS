@@ -31,6 +31,6 @@ public interface FileUploadMapper {
     public List<FileUpload> selectFileUpload(int assocId, boolean isDefect);
 
     // 查找特定文件
-    @Select("SELECT * FROM file_upload WHERE file_name = ${file_name} AND assoc_id = #{assoc_id} AND is_defect = ${is_defect}")
+    @Select("SELECT * FROM file_upload WHERE file_name = \"${file_name}\" AND assoc_id = #{assoc_id} AND is_defect = ${is_defect}")
     public FileUpload selectRepeatFileName(FileUpload fileUpload);
 }

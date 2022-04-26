@@ -1,5 +1,5 @@
 function handleSearchSubmit() {
-	if ($(".search_form").attr("action") == undefined) {
+	if ($(".search_form").attr("action") === undefined) {
 		alert("查找失败!")
 		return false
 	}

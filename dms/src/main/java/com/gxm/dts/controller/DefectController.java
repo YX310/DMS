@@ -21,19 +21,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import static com.gxm.dts.util.Constant.IS_DEFECT;
-import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
+import static com.gxm.dts.util.Constant.*;
 
 @Controller
 public class DefectController {
     @Autowired
     private DefectServiceImpl defectServiceImpl;
-    @Autowired
-    private FileUploadServiceImpl fileUploadServiceImpl;
 
-    @Value("${web.upload-path}")
-    private String uploadPath;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
+    @Autowired(required = false)
+    private FileUploadController fileUploadController;
 
     @GetMapping(value = "/toDefectList")
     public String toDefectList(HttpServletRequest request,
@@ -84,61 +80,13 @@ public class DefectController {
         if (("").equals(defect.getFinish_date())) defect.setFinish_date(null);
         defectServiceImpl.addDefect(defect);
         if (Constant.DEBUG) System.out.println("defect: " + defect.toString());
-        // 检查是否上传文件
-        if (files.length > 0 && !("").equals(files[0].getOriginalFilename())) {
-            // 初始化日期和存储路径
-            String format = sdf.format(new Date());
-            File folder = new File(uploadPath + format);
-            if (!folder.isDirectory()) {
-                boolean res = folder.mkdirs();
-                if (Constant.DEBUG) System.out.println("folder res: " + res);
-            }
-
-            // 初始化文件路径
-            int i = 0;
-            // 遍历存储
-            for (MultipartFile file : files) {
-                if (Constant.DEBUG) System.out.println("defect: " + file.getOriginalFilename());
-                String oldName = file.getOriginalFilename();
-                if (oldName == null) oldName = "";
-                String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."));
-                try {
-                    file.transferTo(new File(folder, newName));
-                    String fileRes = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + format + newName;
-                    if (Constant.DEBUG) System.out.println("fileRes: " + fileRes);
-                    FileUpload fileUpload = new FileUpload();
-                    fileUpload.setIs_defect(Constant.IS_DEFECT);
-                    fileUpload.setFile_name(oldName);
-                    fileUpload.setAssoc_id(Integer.parseInt(defect.getDefect_id()));
-                    updateRepeatFileName(fileUpload);
-                    fileUpload.setFile_path(fileRes);
-                    fileUploadServiceImpl.addFileUpload(fileUpload);
-                    if (Constant.DEBUG) System.out.println("fileRes: " + ++i);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+        fileUploadController.saveFile(files, Integer.parseInt(defect.getDefect_id()), prefix, IS_DEFECT);
         if (Constant.DEBUG) System.out.println("defect: " + files.length);
         return "redirect:/toDefectList?id=" + defect.getProject_id();
     }
 
-    private void updateRepeatFileName(FileUpload fileUpload) {
-        FileUpload fu = fileUploadServiceImpl.selectRepeatFileName(fileUpload);
-        String fileName = fileUpload.getFile_name();
-        int fileExtensionIndex = fileName.lastIndexOf(".");
-        String fileExtension = fileName.substring(fileExtensionIndex);
-        String firstFileName = fileName.substring(0, fileExtensionIndex);
-        int fileIndex = 1;
-        while (fu != null) {
-            // test (1).txt
-            fileUpload.setFile_name(firstFileName + "(" + fileIndex + ")" + fileExtension);
-            fu = fileUploadServiceImpl.selectRepeatFileName(fileUpload);
-            fileIndex++;
-        }
-    }
-
-    //更新（修改）缺陷信息
+    //查询（修改）缺陷信息
     @RequestMapping("/toUpdateDefect")
     public String toUpdateDefect(HttpSession session,
                                  HttpServletRequest request,
@@ -148,7 +96,7 @@ public class DefectController {
         DefectProject defectProject =  defectServiceImpl.selectProjectMessageByDefectId(id);//根据缺陷id查找项目信息
         model.addAttribute("defect", defect);
         model.addAttribute("defectProject",defectProject);
-        model.addAttribute("fileUpload", fileUploadServiceImpl.selectFileUpload(Integer.parseInt(id), IS_DEFECT));
+        model.addAttribute("fileUpload", fileUploadController.selectFileUpload(Integer.parseInt(id), IS_DEFECT));
 
         session.setAttribute("defect", defect);
         session.setAttribute("defectProject", defectProject);
@@ -162,7 +110,8 @@ public class DefectController {
 
     //修改缺陷信息
     @RequestMapping("/updateDefect")
-    public String updateDefectWithId(HttpSession session,
+    public String updateDefectWithId(HttpServletRequest request,
+                                     HttpSession session,
                                      Defect defect,
                                      UpdateDefect updateDefect,
                                      @RequestParam("defect_file") MultipartFile[] files) {
@@ -171,19 +120,29 @@ public class DefectController {
         defect.setUpdate_time(format);
         defectServiceImpl.updateDefectWithId(defect);
         updateDefect.setUpdate_time(System.currentTimeMillis());
+        //        HttpSession session = request.getSession(true);
         Object object = session.getAttribute("defect");
-        System.out.println("id: " + updateDefect.getDefect_id());
-        System.out.println("id: " + updateDefect.getUpdate_time());
+        if (DEBUG) System.out.println("id: " + updateDefect.getDefect_id());
+        if (DEBUG) System.out.println("id: " + updateDefect.getUpdate_time());
         if (object != null) {
             Defect oldDefect = (Defect) object;
             updateDefect.setRecord_content(oldDefect.defectDiff(defect));
             defectServiceImpl.addUpdateDefect(updateDefect);
         }
-
+        String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+        if (DEBUG) System.out.println("getDefect_id: " + defect.getDefect_id());
+        fileUploadController.saveFile(files, Integer.parseInt(defect.getDefect_id()), prefix, IS_DEFECT);
         // 处理搜索场景下无project id
         Object projectID = session.getAttribute(SESSION_PROJECT_ID);
         if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, defect.getProject_id());
         return "redirect:/toDefectList?id=" + defect.getProject_id(); //redirect重定向
+    }
+
+    // 删除文件
+    @RequestMapping("/deleteDefectFile")
+    public String deleteDefectFile(int id, int fileId) {
+        fileUploadController.deleteFile(fileId);
+        return "redirect:/toUpdateDefect?id=" + id;
     }
 
     //删除缺陷

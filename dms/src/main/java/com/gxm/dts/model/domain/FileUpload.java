@@ -31,9 +31,7 @@ public class FileUpload {
         this.file_path = file_path;
     }
 
-    public String getFile_name() {
-        return file_name;
-    }
+    public String getFile_name() { return file_name; }
 
     public void setFile_name(String file_name) {
         this.file_name = file_name;
@@ -46,5 +44,4 @@ public class FileUpload {
     public void setId(int id) {
         this.id = id;
     }
-
 }

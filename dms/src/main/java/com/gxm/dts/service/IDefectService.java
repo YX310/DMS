@@ -38,12 +38,6 @@ public interface IDefectService {
     //根据当前用户id查找当前用户报告的任务
     public List<DefectProject> selectDefectCreatorWithUserId(int userId);
 
-    //查询defect_update_record表
-    public List<UpdateDefect> selectUpdateDefectWithDefectId(int defectId);
-
-    //向defect_update_record表插入数据
-    public void addUpdateDefect(UpdateDefect updateDefect);
-
     //查找当前缺陷所属项目的信息
     DefectProject selectProjectMessageByDefectId(String defectId);
 

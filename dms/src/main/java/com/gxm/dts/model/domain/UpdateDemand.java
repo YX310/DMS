@@ -1,6 +1,6 @@
 package com.gxm.dts.model.domain;
 
-public class UpdateDemand extends UpdateBase{
+public class UpdateDemand {
     private int demand_id;
 
     public int getDemand_id() {

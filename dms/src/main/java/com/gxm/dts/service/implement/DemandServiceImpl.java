@@ -77,16 +77,6 @@ public class DemandServiceImpl implements IDemandService {
     }
 
     @Override
-    public List<UpdateDemand> selectUpdateDemandWithDemandId(int demandId) {
-        return demandMapper.selectUpdateDemandWithDemandId(demandId);
-    }
-
-    @Override
-    public void addUpdateDemand(UpdateDemand updateDemand) {
-        demandMapper.addUpdateDemand(updateDemand);
-    }
-
-    @Override
     public DemandProject selectProjectMessageByDemandId(Integer demandId) {
         return demandMapper.selectProjectMessageByDemandId(demandId);
     }

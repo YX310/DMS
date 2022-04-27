@@ -1,6 +1,6 @@
 package com.gxm.dts.model.domain;
 
-public class Defect extends Base{
+public class Defect extends Base {
 
     private String defect_id;             //缺陷id
     private String defect_name;        //缺陷标题
@@ -34,6 +34,7 @@ public class Defect extends Base{
                 + compareResult("进度:", this.progress, defect.getProgress())
                 + compareResult("关联已有缺陷:" ,  this.associated_defects, defect.getAssociated_defects())
                 + compareResult("缺陷状态:", this.defect_state, defect.getDefect_state())
+                + compareResult("缺陷类型:", this.defect_type, defect.getDefect_type())
                 + compareResult("文件", this.defect_document, defect.getDefect_document());
     }
 

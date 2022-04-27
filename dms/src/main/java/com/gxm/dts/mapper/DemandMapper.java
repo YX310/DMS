@@ -47,15 +47,6 @@ public interface DemandMapper {
     @Select("DELETE FROM demand WHERE demand_id = #{demandId}")
     public void deleteDemandWithId(int demandId);
 
-    //查询demand_update_record表
-    @Select("SELECT * FROM demand_update_record WHERE demand_id=#{demandId}")
-    public List<UpdateDemand> selectUpdateDemandWithDemandId(int demandId);
-
-    //向demand_update_record表插入数据
-    @Insert("INSERT INTO demand_update_record(demand_id, update_time, record_content,update_person) values(#{demand_id},#{update_time},#{record_content},#{update_person})")
-    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
-    public void addUpdateDemand(UpdateDemand updateDemand);
-
     //查找当前需求所属项目的信息
     @Select("SELECT * FROM project WHERE project_id IN (SELECT project_id FROM demand WHERE demand_id =#{demandId})")
     public DemandProject selectProjectMessageByDemandId(Integer demandId);

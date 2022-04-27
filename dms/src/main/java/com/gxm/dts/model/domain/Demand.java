@@ -18,7 +18,7 @@ public class Demand extends Base{
     private String demand_document;    //上传的文件
 
     public String demandDiff(Demand demand) {
-        String diff = compareResult("需求标题:", this.demand_name, demand.getDemand_name())
+        return compareResult("需求标题:", this.demand_name, demand.getDemand_name())
                 + compareResult("描述:", this.demand_description, demand.getDemand_description())
                 + compareResult("指派人:", this.designated_person, demand.getDesignated_person())
                 + compareResult("状态:", this.demand_state, demand.getDemand_state())
@@ -26,8 +26,7 @@ public class Demand extends Base{
                 + compareResult("进度:", this.progress, demand.getProgress())
                 + compareResult("计划开始日期:", this.start_date, demand.getStart_date())
                 + compareResult("计划完成日期:", this.finish_date, demand.getFinish_date())
-                ;
-        return diff;
+                + compareResult("文件", this.demand_document, demand.getDemand_document());
     }
 
     @Override

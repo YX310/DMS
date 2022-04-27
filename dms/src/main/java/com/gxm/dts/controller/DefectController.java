@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DefectServiceImpl;
 import com.gxm.dts.service.implement.FileUploadServiceImpl;
+import com.gxm.dts.service.implement.UpdateRecordServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,9 +28,10 @@ import static com.gxm.dts.util.Constant.*;
 public class DefectController {
     @Autowired
     private DefectServiceImpl defectServiceImpl;
-
     @Autowired(required = false)
     private FileUploadController fileUploadController;
+    @Autowired
+    private UpdateRecordServiceImpl updateRecordServiceImpl;
 
     @GetMapping(value = "/toDefectList")
     public String toDefectList(HttpServletRequest request,
@@ -100,11 +102,11 @@ public class DefectController {
 
         session.setAttribute("defect", defect);
         session.setAttribute("defectProject", defectProject);
-        List<UpdateDefect> updateDefects = defectServiceImpl.selectUpdateDefectWithDefectId(Integer.parseInt(id));
+        List<UpdateRecord> updateRecords = updateRecordServiceImpl.selectUpdateRecordWithAssocId(Integer.parseInt(id));
         StringBuilder updateContent = new StringBuilder();
-        for (UpdateDefect updateDefect : updateDefects) updateContent.append(updateDefect.getRecord_content());
+        for (UpdateRecord updateRecord : updateRecords) updateContent.append(updateRecord.getRecord_content());
         model.addAttribute("updateContent", updateContent);
-        request.setAttribute("updateDefects", updateDefects);
+        request.setAttribute("updateDefects", updateRecords);
         return "client/defectUpdate";
     }
 
@@ -113,25 +115,35 @@ public class DefectController {
     public String updateDefectWithId(HttpServletRequest request,
                                      HttpSession session,
                                      Defect defect,
-                                     UpdateDefect updateDefect,
+                                     UpdateRecord updateRecord,
                                      @RequestParam("defect_file") MultipartFile[] files) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
         defect.setUpdate_time(format);
         defectServiceImpl.updateDefectWithId(defect);
-        updateDefect.setUpdate_time(System.currentTimeMillis());
+        updateRecord.setUpdate_time(System.currentTimeMillis());
         //        HttpSession session = request.getSession(true);
+        updateRecord.setAssoc_id(Integer.parseInt(defect.getDefect_id()));
+        updateRecord.setIs_defect(IS_DEFECT);
+        updateRecord.setProject_id(Integer.parseInt(defect.getProject_id()));
+        updateRecord.setAssoc_title(defect.getDefect_name());
+        if (DEBUG) System.out.println("id: " + updateRecord.getAssoc_id());
+        if (DEBUG) System.out.println("id: " + updateRecord.getUpdate_time());
         Object object = session.getAttribute("defect");
-        if (DEBUG) System.out.println("id: " + updateDefect.getDefect_id());
-        if (DEBUG) System.out.println("id: " + updateDefect.getUpdate_time());
-        if (object != null) {
-            Defect oldDefect = (Defect) object;
-            updateDefect.setRecord_content(oldDefect.defectDiff(defect));
-            defectServiceImpl.addUpdateDefect(updateDefect);
-        }
+
         String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
         if (DEBUG) System.out.println("getDefect_id: " + defect.getDefect_id());
-        fileUploadController.saveFile(files, Integer.parseInt(defect.getDefect_id()), prefix, IS_DEFECT);
+        defect.setDefect_document(fileUploadController.saveFile(files, Integer.parseInt(defect.getDefect_id()), prefix, IS_DEFECT));
+        if (object != null) {
+            Defect oldDefect = (Defect) object;
+            if (DEBUG) System.out.println(oldDefect.getDefect_document());
+            if (DEBUG) System.out.println(defect.getDefect_document());
+            String updateContent = oldDefect.defectDiff(defect);
+            if (!("").equals(updateContent)) {
+                updateRecord.setRecord_content(updateContent);
+                updateRecordServiceImpl.addUpdateRecord(updateRecord);
+            }
+        }
         // 处理搜索场景下无project id
         Object projectID = session.getAttribute(SESSION_PROJECT_ID);
         if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, defect.getProject_id());

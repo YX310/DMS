@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DemandServiceImpl;
 import com.gxm.dts.service.implement.FileUploadServiceImpl;
+import com.gxm.dts.service.implement.UpdateRecordServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,8 @@ public class DemandController {
     private DemandServiceImpl demandServiceImpl;
     @Autowired
     private FileUploadController fileUploadController;
+    @Autowired
+    private UpdateRecordServiceImpl updateRecordServiceImpl;
 
     @GetMapping(value = "/toDemandList")
     public String toDemandList(HttpServletRequest request,
@@ -99,11 +102,11 @@ public class DemandController {
 
         session.setAttribute("demand", demand);
         session.setAttribute("demandProject", demandProject);
-        List<UpdateDemand> updateDemands = demandServiceImpl.selectUpdateDemandWithDemandId(id);
+        List<UpdateRecord> updateRecords = updateRecordServiceImpl.selectUpdateRecordWithAssocId(id);
         StringBuilder updateContent = new StringBuilder();
-        for (UpdateDemand updateDemand : updateDemands) updateContent.append(updateDemand.getRecord_content());
+        for (UpdateRecord updateRecord : updateRecords) updateContent.append(updateRecord.getRecord_content());
         model.addAttribute("updateContent", updateContent);
-        request.setAttribute("updateDemands", updateDemands);
+        request.setAttribute("updateDemands", updateRecords);
         return "client/demandUpdate";
     }
 
@@ -112,26 +115,34 @@ public class DemandController {
     public String updateDemandWithId(HttpServletRequest request,
                                      HttpSession session,
                                      Demand demand,
-                                     UpdateDemand updateDemand,
+                                     UpdateRecord updateRecord,
                                      @RequestParam("defect_file") MultipartFile[] files) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(new Date());
         demand.setUpdate_time(format);
         demandServiceImpl.updateDemandWithId(demand);
-        updateDemand.setUpdate_time(System.currentTimeMillis());
+        updateRecord.setUpdate_time(System.currentTimeMillis());
         Object object = session.getAttribute("demand");
-        System.out.println("id: " + updateDemand.getDemand_id());
-        System.out.println("id: " + updateDemand.getUpdate_time());
-        System.out.println("id: " + updateDemand.getRecord_content());
-        if (object != null) {
-            Demand oldDemand = (Demand) object;
-            updateDemand.setRecord_content(oldDemand.demandDiff(demand));
-            demandServiceImpl.addUpdateDemand(updateDemand);
-        }
-        System.out.println("id: " + updateDemand.getRecord_content());
+        updateRecord.setAssoc_id(demand.getDemand_id());
+        updateRecord.setIs_defect(!IS_DEFECT);
+        updateRecord.setProject_id(demand.getProject_id());
+        updateRecord.setAssoc_title(demand.getDemand_name());
+        System.out.println("id: " + updateRecord.getAssoc_id());
+        System.out.println("id: " + updateRecord.getUpdate_time());
+        System.out.println("id: " + updateRecord.getRecord_content());
+        System.out.println("id: " + updateRecord.getRecord_content());
         String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
         if (DEBUG) System.out.println("getDefect_id: " + demand.getDemand_id());
-        fileUploadController.saveFile(files, demand.getDemand_id(), prefix, !IS_DEFECT);
+        demand.setDemand_document(fileUploadController.saveFile(files, demand.getDemand_id(), prefix, !IS_DEFECT));//把修改的文件名存到文档修改的变量里
+
+        if (object != null) {
+            Demand oldDemand = (Demand) object;
+            String updateContent = oldDemand.demandDiff(demand);
+            if (!("").equals(updateContent)) {
+                updateRecord.setRecord_content(updateContent);
+                updateRecordServiceImpl.addUpdateRecord(updateRecord);
+            }
+        }
         // 处理搜索场景下无project_id
         Object projectID = session.getAttribute(SESSION_PROJECT_ID);
         if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, demand.getProject_id());
@@ -154,6 +165,4 @@ public class DemandController {
         demandServiceImpl.deleteDemandWithId(id);
         return "redirect:/toDemandList?id=" + projectId; //redirect重定向
     }
-
-
 }

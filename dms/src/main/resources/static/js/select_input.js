@@ -107,11 +107,11 @@ $(document).ready(function(){
 	     	$(".search-ul").children().remove();
 		}
  	});
-	$("li").hover(function(){        //鼠标悬停时的颜色
+	$(".search-ul li").hover(function(){        //鼠标悬停时的颜色
 		$(this).css("background-color","rgba(71,149,243,.1)");
 	});
 
-	$("li").mouseout(function(){             //鼠标离开后的颜色
+	$(".search-ul li").mouseout(function(){             //鼠标离开后的颜色
 		$(this).css("background-color","transparent");
 	});
 });

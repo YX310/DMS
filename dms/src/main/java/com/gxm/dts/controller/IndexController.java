@@ -2,10 +2,7 @@ package com.gxm.dts.controller;
 import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.mapper.ProjectMapper;
 import com.gxm.dts.model.domain.*;
-import com.gxm.dts.service.implement.DefectServiceImpl;
-import com.gxm.dts.service.implement.DemandServiceImpl;
-import com.gxm.dts.service.implement.ProjectServiceImpl;
-import com.gxm.dts.service.implement.UserServiceImpl;
+import com.gxm.dts.service.implement.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +36,8 @@ public class IndexController {
     private ProjectController projectController;
     @Autowired
     private DemandServiceImpl demandServiceImpl;
+    @Autowired
+    private UpdateRecordServiceImpl updateRecordServiceImpl;
 
     @GetMapping(value = {"","/login"})
     public String toLogin(){
@@ -134,6 +133,8 @@ public class IndexController {
         model.addAttribute("PMName", PM);
         model.addAttribute("RDName", RD);
         model.addAttribute("QAName", QA);
+
+        model.addAttribute("allUpdateRecord", updateRecordServiceImpl.selectUpdateRecordWithProjectId(project.getProject_id()));
         return "client/overview";
     }
 

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
 @Component
 @org.apache.ibatis.annotations.Mapper
 public interface DefectMapper {
@@ -58,15 +57,6 @@ public interface DefectMapper {
     //根据当前项目Id查找缺陷
     @Select("SELECT * FROM defect WHERE project_id=#{projectId}")
     public List<Defect> selectDefectWithProjectId(int projectId);
-
-    //查询defect_update_record表
-    @Select("SELECT * FROM defect_update_record WHERE defect_id=#{defectId}")
-    public List<UpdateDefect> selectUpdateDefectWithDefectId(int defectId);
-
-    //向defect_update_record表插入数据
-    @Insert("INSERT INTO defect_update_record(defect_id, update_time, record_content,update_person) values(#{defect_id},#{update_time},#{record_content},#{update_person})")
-    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
-    public void addUpdateDefect(UpdateDefect updateDefect);
 
     //查找当前缺陷所属项目的信息
     @Select("SELECT * FROM project WHERE project_id IN (SELECT project_id FROM defect WHERE defect_id =#{defectId})")

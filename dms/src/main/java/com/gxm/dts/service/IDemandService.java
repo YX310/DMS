@@ -31,12 +31,6 @@ public interface IDemandService {
     // 根据id删除需求信息
     public void deleteDemandWithId(int demandId);
 
-    //查询demand_update_record表
-    public List<UpdateDemand> selectUpdateDemandWithDemandId(int demandId);
-
-    //向demand_update_record表插入数据
-    public void addUpdateDemand(UpdateDemand updateDemand);
-
     //查找当前需求所属项目的信息
     public DemandProject selectProjectMessageByDemandId(Integer demandId);
 

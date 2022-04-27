@@ -176,7 +176,7 @@
 								</div>
 								<div class="ah-tab-content-wrapper">
 									<div class="ah-tab-content" data-ah-tab-active="true">
-										<div  th:each="n:${updateDefects}" th:unless="${n.record_content == ''}">
+										<div th:each="n:${updateDefects}" th:unless="${n.record_content == ''}">
 											<span style="font-size: 1.2em;color: gray;" th:text="${'记录由 ' + n.update_person + ' 更新于 '+ #dates.format(n.update_time,'yyyy-MM-dd HH:mm:ss')}"></span>
 											<textarea style="color: rgba(71,149,243,1);word-wrap: break-word;border: 0; resize: none;overflow: hidden;width: 100%"
 													  autoHeight="true" readonly="readonly" disabled="disabled"
@@ -184,7 +184,7 @@
 										</div>
 									</div>
 									<div class="ah-tab-content">
-										<div  th:each="n:${fileUpload}" th:unless="${fileUpload.size() == 0}">
+										<div th:each="n:${fileUpload}" th:unless="${fileUpload.size() == 0}">
 											<div class="">
 												<a th:text="${n.getFile_name()}" th:href="${n.getFile_path()}" target="_blank" style="word-wrap:break-word;"></a><span style="color: #ac2925"><a th:href="@{/deleteDefectFile(id=${defect.defect_id}, fileId=${n.id})}"> x</a></span>
 											</div>

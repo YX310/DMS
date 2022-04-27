@@ -4,12 +4,14 @@
         <meta charset="utf-8" />
         <title>概述</title>
         <link rel="stylesheet" th:href="@{/css/index.css}" />
-        <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
-        <link th:href="@{/css/select_input.css}" rel="stylesheet"/>
+        <link rel="stylesheet" th:href="@{/back/css/bootstrap.css}" />
+        <link rel="stylesheet" th:href="@{/css/select_input.css}" />
         <link rel="stylesheet" th:href="@{/css/overview.css}" />
+        <link rel="stylesheet" th:href="@{/css/activity.css}" />
         <script th:src="@{/js/jquery.js}"></script>
         <script th:src="@{/js/select_input.js}"></script>
         <script th:src="@{/js/autoHeight.js}"></script>
+        <script th:src="@{/js/jquery.simpleLoadMore.js}"></script>
         <style type="text/css">
             body{font-size: 1.3em;}
             th,td{text-align: center;font-size: 1em;}
@@ -27,7 +29,7 @@
 
         <div id="overview-box">
             <div class="overview-content">
-                <div class="overview-left">
+                <div class="overview-left" style="margin-bottom: 20px">
                     <div class="project-title">
                         <span th:text="${project.project_name}"></span>
                         <div th:unless="${session.userRole != '项目经理'}" style="display: inline-block; float: right;font-size: 0.7em;">
@@ -68,6 +70,83 @@
                             </table>
                         </div>
                     </div>
+                    <hr />
+                    <div class="project-activities">
+                        <h2 style="color:rgba(71,149,243,1) ;">活动</h2>
+                        <div class="main record-list">
+                            <ul class="cbp_tmtimeline" th:each="n, allUpdateRecordStat:${allUpdateRecord}">
+                                <li class="item" title="查看详情">
+<!--                                    <time class="cbp_tmtime" datetime="2014-10-30 18:30"><span th:text="${#dates.format(n.update_time, 'yyyy-MM-dd')}" ></span></time>-->
+                                    <time class="cbp_tmtime" datetime="2014-10-30 18:30">
+                                        <span th:text="${#dates.format(n.update_time, 'yyyy-MM-dd')}"
+                                              th:if="${allUpdateRecordStat.index == 0
+                                              || #dates.format(n.update_time, 'yyyy-MM-dd')
+                                              ne #dates.format(allUpdateRecord[allUpdateRecordStat.index - 1].update_time, 'yyyy-MM-dd')}">
+                                        </span>
+                                    </time>
+                                    <div class="cbp_tmicon"><span th:text="${allUpdateRecordStat.index + 1}"></span></div>
+                                    <div class="cbp_tmlabel">
+                                        <h3><a th:href="@{${n.is_defect ? '/toUpdateDefect':'/toUpdateDemand'}(id=${n.assoc_id})}"  th:text="${n.assoc_title}"></a><span style="display: inline-block;float: right;font-size: 0.7em;" th:text="${#dates.format(n.update_time, 'yyyy-MM-dd HH:mm:ss')}"></span></h3>
+                                        <p th:text="${n.record_content}"></p>
+                                    </div>
+                                </li>
+
+<!--                                <li class="item" title="查看详情">-->
+<!--                                    &lt;!&ndash;<time class="cbp_tmtime" datetime="2014-10-30 18:30"><span>2014</span><span>10-30</span></time>&ndash;&gt;-->
+<!--                                    <div class="cbp_tmicon"><span>记录</span></div>-->
+<!--                                    <div class="cbp_tmlabel">-->
+<!--                                        <h3>需求标题</h3>-->
+<!--                                        <p>修改的内容</p>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+
+<!--                                <li class="item">-->
+<!--                                    <time class="cbp_tmtime" datetime="2014-11-06 09:56"><span ></span></time>-->
+<!--                                    <div class="cbp_tmicon cbp_tmicon-phone"><span>记录</span></div>-->
+<!--                                    <div class="cbp_tmlabel">-->
+<!--                                        <h3><a href="#">缺陷标题</a><span style="display: inline-block;float: right;font-size: 0.7em;">更新于2014-10-30 18:30 </span></h3>-->
+<!--                                        <p>lalalal</p>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+
+<!--                                <li class="item">-->
+<!--                                    <time class="cbp_tmtime" datetime="2014-11-06 09:56"><span>2014</span><span>10-02</span></time>-->
+<!--                                    <div class="cbp_tmicon cbp_tmicon-phone"><span>记录</span></div>-->
+<!--                                    <div class="cbp_tmlabel">-->
+<!--                                        <h3><a href="#">缺陷标题</a><span style="display: inline-block;float: right;font-size: 0.7em;">更新于2014-10-30 18:30 </span></h3>-->
+<!--                                        <p>lalalal</p>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+
+<!--                                <li class="item">-->
+<!--                                    <time class="cbp_tmtime" datetime="2014-11-06 09:56"><span>2014</span><span>10-02</span></time>-->
+<!--                                    <div class="cbp_tmicon cbp_tmicon-phone"><span>记录</span></div>-->
+<!--                                    <div class="cbp_tmlabel">-->
+<!--                                        <h3><a href="#">缺陷标题</a><span style="display: inline-block;float: right;font-size: 0.7em;">更新于2014-10-30 18:30 </span></h3>-->
+<!--                                        <p>lalalal</p>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+
+<!--                                <li class="item">-->
+<!--                                    <time class="cbp_tmtime" datetime="2014-11-06 09:56"><span>2014</span><span>10-02</span></time>-->
+<!--                                    <div class="cbp_tmicon cbp_tmicon-phone"><span>记录</span></div>-->
+<!--                                    <div class="cbp_tmlabel">-->
+<!--                                        <h3><a href="#">缺陷标题</a><span style="display: inline-block;float: right;font-size: 0.7em;">更新于2014-10-30 18:30 </span></h3>-->
+<!--                                        <p>lalalal</p>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+
+<!--                                <li class="item">-->
+<!--                                    <time class="cbp_tmtime" datetime="2014-11-06 09:56"><span>2014</span><span>10-02</span></time>-->
+<!--                                    <div class="cbp_tmicon cbp_tmicon-phone"><span>记录</span></div>-->
+<!--                                    <div class="cbp_tmlabel">-->
+<!--                                        <h3><a href="#">缺陷标题</a><span style="display: inline-block;float: right;font-size: 0.7em;">更新于2014-10-30 18:30 </span></h3>-->
+<!--                                        <p>lalalal</p>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+                            </ul>
+                        </div>
+                    </div><!--project-activities-->
                 </div>
 
                 <div class="overview-right">
@@ -105,5 +184,11 @@
                 </div>
             </div>
         </div>
+        <script>
+            $('.record-list').simpleLoadMore({
+                item: 'li.item',
+                count: 5
+            });
+        </script>
     </body>
 </html>

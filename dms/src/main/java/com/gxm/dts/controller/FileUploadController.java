@@ -24,7 +24,9 @@ public class FileUploadController {
     private String uploadPath;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 
-    public void saveFile(MultipartFile[] files, int assocId, String prefix, boolean isDefect) {
+    public String saveFile(MultipartFile[] files, int assocId, String prefix, boolean isDefect) {
+        // 初始化上传文件名
+        StringBuilder uploadFileName = new StringBuilder();
         // 检查是否上传文件
         if (files.length > 0 && !("").equals(files[0].getOriginalFilename())) {
             // 初始化日期和存储路径
@@ -54,12 +56,14 @@ public class FileUploadController {
                     updateRepeatFileName(fileUpload);
                     fileUpload.setFile_path(fileRes);
                     fileUploadServiceImpl.addFileUpload(fileUpload);
+                    uploadFileName.append(fileUpload.getFile_name()).append(",");
                     if (Constant.DEBUG) System.out.println("fileRes: " + ++i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+        return uploadFileName.length() > 0 ? uploadFileName.deleteCharAt(uploadFileName.length() - 1).toString() : "";
     }
 
     private void updateRepeatFileName(FileUpload fileUpload) {

@@ -2,12 +2,8 @@ package com.gxm.dts.service;
 
 import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.*;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-import java.util.Map;
 
 public interface IDemandService {
     // 分页查询缺陷列表
@@ -22,8 +18,6 @@ public interface IDemandService {
 
     //新建需求
     public void addDemand(Demand demand);
-
-    public void addDemandFile(DemandFile demandFile);
 
     //修改需求信息
     public void updateDemandWithId(Demand demand);

@@ -1,6 +1,8 @@
 package com.gxm.dts.model.domain;
 
-public class Defect extends Base {
+import static com.gxm.dts.util.Utils.compareResult;
+
+public class Defect {
 
     private String defect_id;             //缺陷id
     private String defect_name;        //缺陷标题

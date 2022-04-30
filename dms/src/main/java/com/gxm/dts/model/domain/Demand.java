@@ -1,6 +1,8 @@
 package com.gxm.dts.model.domain;
 
-public class Demand extends Base{
+import static com.gxm.dts.util.Utils.compareResult;
+
+public class Demand {
     private int demand_id;             //需求id
     private int project_id;            //所属项目的id
     private String demand_name;        //需求标题

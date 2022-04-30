@@ -62,11 +62,6 @@ public class DemandServiceImpl implements IDemandService {
     }
 
     @Override
-    public void addDemandFile(DemandFile demandFile) {
-        demandMapper.addDemandFile(demandFile);
-    }
-
-    @Override
     public void updateDemandWithId(Demand demand) {
         demandMapper.updateDemandWithId(demand);
     }

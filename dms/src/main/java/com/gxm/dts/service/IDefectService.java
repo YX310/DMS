@@ -4,14 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectProject;
 import com.gxm.dts.model.domain.SearchContent;
-import com.gxm.dts.model.domain.UpdateDefect;
-import javafx.util.Pair;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-import java.util.Map;
 
 public interface IDefectService {
     // 分页查询缺陷列表

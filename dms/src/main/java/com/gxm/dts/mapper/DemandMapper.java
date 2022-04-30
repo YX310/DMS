@@ -34,11 +34,6 @@ public interface DemandMapper {
     @Options(useGeneratedKeys = true, keyProperty = "demand_id",keyColumn = "demand_id")
     public void addDemand(Demand demand);
 
-    //新增文件
-    @Insert("INSERT INTO demand_and_file_path(demand_id, file_path) values(#{demand_id},#{file_path})")
-    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
-    public void addDemandFile(DemandFile demandFile);
-
     //修改需求信息
     @Select("UPDATE demand SET demand_name = #{demand_name}, demand_description = #{demand_description},designated_person = #{designated_person},demand_state = #{demand_state},priority = #{priority},progress = #{progress},start_date = #{start_date},finish_date = #{finish_date},update_time = #{update_time} WHERE demand_id = #{demand_id}")
     public void updateDemandWithId(Demand demand);

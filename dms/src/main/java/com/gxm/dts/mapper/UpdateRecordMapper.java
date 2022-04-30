@@ -1,6 +1,5 @@
 package com.gxm.dts.mapper;
 
-import com.gxm.dts.model.domain.UpdateDefect;
 import com.gxm.dts.model.domain.UpdateRecord;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;

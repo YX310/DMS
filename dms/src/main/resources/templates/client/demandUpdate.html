@@ -29,7 +29,7 @@
 	<body>
 	<div th:replace="/client/index::header"></div>
 
-	<form th:action="@{/updateDemand}" method="post" onsubmit="uploadFile()" enctype="multipart/form-data">
+	<form th:action="@{/updateDemand}" method="post" onsubmit="return true" enctype="multipart/form-data">
 		<input name="demand_id" type="hidden" th:value="${demand.demand_id}"/>
 		<input name="project_id" type="hidden" th:value="${session.projectId}"/>
 		<input name="demand_name" type="hidden" th:value="${demand.demand_name}"/>

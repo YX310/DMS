@@ -19,7 +19,7 @@ public class Defect {
     private String progress;           //进度
     private String associated_defects; //关联已有缺陷
     private String defect_document;    //上传的文件
-    private String project_id;    //所属项目的id
+    private int project_id;    //所属项目的id
     private String defect_state;    //缺陷状态
     private String creation_time;    //创建时间
     private String defect_record;    //记录修改内容
@@ -186,11 +186,11 @@ public class Defect {
     public void setDefect_document(String defect_document) {
         this.defect_document = defect_document;
     }
-    public String getProject_id() {
+    public int getProject_id() {
         return project_id;
     }
 
-    public void setProject_id(String project_id) {
+    public void setProject_id(int project_id) {
         this.project_id = project_id;
     }
 

@@ -107,6 +107,10 @@ public class DefectController {
         for (UpdateRecord updateRecord : updateRecords) updateContent.append(updateRecord.getRecord_content());
         model.addAttribute("updateContent", updateContent);
         request.setAttribute("updateDefects", updateRecords);
+        // 处理搜索场景下无project_id
+        Object projectID = session.getAttribute(SESSION_PROJECT_ID);
+        System.out.println("SESSION_PROJECT_ID"+SESSION_PROJECT_ID);
+        if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, defect.getProject_id());
         return "client/defectUpdate";
     }
 
@@ -125,7 +129,7 @@ public class DefectController {
         //        HttpSession session = request.getSession(true);
         updateRecord.setAssoc_id(Integer.parseInt(defect.getDefect_id()));
         updateRecord.setIs_defect(IS_DEFECT);
-        updateRecord.setProject_id(Integer.parseInt(defect.getProject_id()));
+        updateRecord.setProject_id(defect.getProject_id());
         updateRecord.setAssoc_title(defect.getDefect_name());
         if (DEBUG) System.out.println("id: " + updateRecord.getAssoc_id());
         if (DEBUG) System.out.println("id: " + updateRecord.getUpdate_time());

@@ -2,7 +2,7 @@ package com.gxm.dts.model.domain;
 
 public class DefectProject extends Defect {
     private String project_name;
-    private String project_id;
+    private int project_id;
     private String creator;
 
     public String getProject_name() {
@@ -14,12 +14,12 @@ public class DefectProject extends Defect {
     }
 
     @Override
-    public String getProject_id() {
+    public int getProject_id() {
         return project_id;
     }
 
     @Override
-    public void setProject_id(String project_id) {
+    public void setProject_id(int project_id) {
         this.project_id = project_id;
     }
 

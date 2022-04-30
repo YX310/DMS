@@ -107,6 +107,10 @@ public class DemandController {
         for (UpdateRecord updateRecord : updateRecords) updateContent.append(updateRecord.getRecord_content());
         model.addAttribute("updateContent", updateContent);
         request.setAttribute("updateDemands", updateRecords);
+        // 处理搜索场景下无project_id
+        Object projectID = session.getAttribute(SESSION_PROJECT_ID);
+        System.out.println("SESSION_PROJECT_ID"+SESSION_PROJECT_ID);
+        if (projectID == null) session.setAttribute(SESSION_PROJECT_ID, demand.getProject_id());
         return "client/demandUpdate";
     }
 

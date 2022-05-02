@@ -42,4 +42,7 @@ public interface IProjectService {
 
     // 查询所有项目标题
     public List<SearchContent> selectProject(String keyword);
+
+    // 查询项目成员id
+    public Integer selectMemberId(String member, int projectId);
 }

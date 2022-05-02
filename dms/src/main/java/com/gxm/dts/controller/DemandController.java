@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DemandServiceImpl;
 import com.gxm.dts.service.implement.FileUploadServiceImpl;
+import com.gxm.dts.service.implement.ProjectServiceImpl;
 import com.gxm.dts.service.implement.UpdateRecordServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class DemandController {
     private FileUploadController fileUploadController;
     @Autowired
     private UpdateRecordServiceImpl updateRecordServiceImpl;
+    @Autowired
+    private ProjectServiceImpl projectServiceImpl;
 
     @GetMapping(value = "/toDemandList")
     public String toDemandList(HttpServletRequest request,
@@ -80,6 +83,9 @@ public class DemandController {
                       @RequestParam("demand_file") MultipartFile[] files) {
         if (("").equals(demand.getStart_date())) demand.setStart_date(null);
         if (("").equals(demand.getFinish_date())) demand.setFinish_date(null);
+        if (projectServiceImpl.selectMemberId(demand.getDesignated_person(), demand.getProject_id()) == null){
+            return "redirect:/toAddDemand";
+        }
         demandServiceImpl.addDemand(demand);
         if (Constant.DEBUG) System.out.println("demand: " + demand.toString());
         String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";

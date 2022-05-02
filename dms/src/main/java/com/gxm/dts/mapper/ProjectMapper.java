@@ -59,4 +59,8 @@ public interface ProjectMapper {
     //查询项目成员
     @Select("SELECT * FROM USER WHERE user_id IN (SELECT user_id FROM user_and_project WHERE project_id = #{project_id})")
     public List<User> findProjectMemberByProjectId(Integer projectId);
+
+    // 查询项目成员id
+    @Select("SELECT up.user_id FROM user_and_project AS up INNER JOIN user AS u WHERE u.user_id=up.user_id AND u.username=#{member} AND up.project_id=#{projectId}")
+    public Integer selectMemberId(String member, int projectId);
 }

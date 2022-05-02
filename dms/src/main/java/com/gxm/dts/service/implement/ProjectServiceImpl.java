@@ -95,5 +95,8 @@ public class ProjectServiceImpl implements IProjectService {
         return projectMapper.selectProject('%' + keyword + '%');
     }
 
-
+    @Override
+    public Integer selectMemberId(String member, int projectId) {
+        return projectMapper.selectMemberId(member, projectId);
+    }
 }

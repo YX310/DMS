@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.DefectServiceImpl;
 import com.gxm.dts.service.implement.FileUploadServiceImpl;
+import com.gxm.dts.service.implement.ProjectServiceImpl;
 import com.gxm.dts.service.implement.UpdateRecordServiceImpl;
 import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class DefectController {
     private FileUploadController fileUploadController;
     @Autowired
     private UpdateRecordServiceImpl updateRecordServiceImpl;
+    @Autowired
+    private ProjectServiceImpl projectServiceImpl;
 
     @GetMapping(value = "/toDefectList")
     public String toDefectList(HttpServletRequest request,
@@ -80,6 +83,9 @@ public class DefectController {
                       @RequestParam("defect_file") MultipartFile[] files) {
         if (("").equals(defect.getStart_date())) defect.setStart_date(null);
         if (("").equals(defect.getFinish_date())) defect.setFinish_date(null);
+        if (projectServiceImpl.selectMemberId(defect.getDesignated_person(), defect.getProject_id()) == null) {
+            return "redirect:/toAddDefect";
+        }
         defectServiceImpl.addDefect(defect);
         if (Constant.DEBUG) System.out.println("defect: " + defect.toString());
         String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";

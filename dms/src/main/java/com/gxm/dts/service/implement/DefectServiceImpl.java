@@ -73,8 +73,8 @@ public class DefectServiceImpl implements IDefectService {
     }
 
     @Override
-    public List<DefectProject> selectDesignatedPersonWithUserId(int userId) {
-        return defectMapper.selectDesignatedPersonWithUserId(userId);
+    public List<DefectProject> selectDefectDesignatedPersonWithUserId(int userId) {
+        return defectMapper.selectDefectDesignatedPersonWithUserId(userId);
     }
 
     @Override

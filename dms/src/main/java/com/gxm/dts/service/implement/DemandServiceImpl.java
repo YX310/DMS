@@ -77,6 +77,16 @@ public class DemandServiceImpl implements IDemandService {
     }
 
     @Override
+    public List<DemandProject> selectDemandDesignatedPersonWithUserId(int userId) {
+        return demandMapper.selectDemandDesignatedPersonWithUserId(userId);
+    }
+
+    @Override
+    public List<DemandProject> selectDemandCreatorWithUserId(int userId) {
+        return demandMapper.selectDemandCreatorWithUserId(userId);
+    }
+
+    @Override
     public List<SearchContent> selectDemand(String keyword) {
         return demandMapper.selectDemand('%' + keyword + '%');
     }

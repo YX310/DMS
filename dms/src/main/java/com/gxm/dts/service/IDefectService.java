@@ -26,10 +26,10 @@ public interface IDefectService {
     // 根据缺陷id删除单个缺陷信息
     public void deleteDefectWithId(String defectId);
 
-    //根据当前用户id查找被指派的任务
-    public List<DefectProject> selectDesignatedPersonWithUserId(int userId);
+    //根据当前用户id查找被指派的缺陷
+    public List<DefectProject> selectDefectDesignatedPersonWithUserId(int userId);
 
-    //根据当前用户id查找当前用户报告的任务
+    //根据当前用户id查找当前用户报告的缺陷
     public List<DefectProject> selectDefectCreatorWithUserId(int userId);
 
     //查找当前缺陷所属项目的信息

@@ -45,11 +45,11 @@ public interface DefectMapper {
     @Select("DELETE FROM defect WHERE defect_id = #{defectId}")
     public void deleteDefectWithId(String defectId);
 
-    //根据当前用户id查找被指派的任务
-    @Select("SELECT * FROM project AS p INNER JOIN defect AS d INNER JOIN USER AS u WHERE d.designated_person=u.username AND p.project_id=d.project_id AND user_id=#{userId} ORDER BY defect_id DESC  LIMIT 10")
-    public List<DefectProject> selectDesignatedPersonWithUserId(int userId);
+    //根据当前用户id查找被指派的缺陷
+    @Select("SELECT * FROM project AS p INNER JOIN defect AS d INNER JOIN USER AS u WHERE d.designated_person=u.username AND p.project_id=d.project_id AND user_id=#{userId} ORDER BY defect_id DESC LIMIT 10")
+    public List<DefectProject> selectDefectDesignatedPersonWithUserId(int userId);
 
-    //根据当前用户id查找当前用户报告的任务
+    //根据当前用户id查找当前用户报告的缺陷
     @Select("SELECT * FROM project AS p INNER JOIN defect AS d INNER JOIN user AS u WHERE d.defect_creator=u.username and p.project_id=d.project_id and user_id=#{userId} ORDER BY defect_id DESC LIMIT 10")
     public List<DefectProject> selectDefectCreatorWithUserId(int userId);
 

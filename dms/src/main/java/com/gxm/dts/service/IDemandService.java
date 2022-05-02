@@ -25,6 +25,12 @@ public interface IDemandService {
     // 根据id删除需求信息
     public void deleteDemandWithId(int demandId);
 
+    //根据当前用户id查找被指派的需求
+    public List<DemandProject> selectDemandDesignatedPersonWithUserId(int userId);
+
+    //根据当前用户id查找被指派的需求
+    public List<DemandProject> selectDemandCreatorWithUserId(int userId);
+
     //查找当前需求所属项目的信息
     public DemandProject selectProjectMessageByDemandId(Integer demandId);
 

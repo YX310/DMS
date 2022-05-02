@@ -11,10 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 
@@ -140,11 +137,55 @@ public class IndexController {
 
     @GetMapping(value = "/toWorkbench")
     public String toWorkbench(HttpServletRequest request, Integer id) {
-        List<DefectProject> list = defectServiceImpl.selectDesignatedPersonWithUserId(id);
-        List<DefectProject> list2 = defectServiceImpl.selectDefectCreatorWithUserId(id);
-        request.setAttribute("data4", list); //指派给我的任务
-        request.setAttribute("data5", list2);//已报告的任务
+        List<TaskProfile> list = new ArrayList<>();
+        list.addAll(extractTask(defectServiceImpl.selectDefectDesignatedPersonWithUserId(id)));
+        list.addAll(extractTask(demandServiceImpl.selectDemandDesignatedPersonWithUserId(id)));
+        Collections.sort(list);
+
+        List<TaskProfile> list2 = new ArrayList<>();
+        list2.addAll(extractTask(demandServiceImpl.selectDemandCreatorWithUserId(id)));
+        list2.addAll(extractTask(defectServiceImpl.selectDefectCreatorWithUserId(id)));
+        Collections.sort(list2);
+
+        request.setAttribute("data4", subList(list, 10)); //指派给我的任务
+        request.setAttribute("data5", subList(list2, 10));//已报告的任务
         return "client/workbench";
+    }
+
+    private List<TaskProfile> subList(List<TaskProfile> list, int size) {
+        if (list.size() >= 10) return list.subList(0, 10);
+        return list;
+    }
+
+    /** Extract task from DefectProject and DemandProject.
+     *
+     * @param list any list can be resolved.
+     *
+     * @return a resolved list.
+     */
+
+    private List<TaskProfile> extractTask(List<?> list) {
+        if (list.size() == 0) return Collections.emptyList();
+        List<TaskProfile> res = new ArrayList<>();
+        list.forEach(item -> {
+            if (item instanceof DefectProject) {
+                DefectProject defectProject = (DefectProject) item;
+                res.add(new TaskProfile(Integer.parseInt(defectProject.getDefect_id()),
+                        defectProject.getProject_id(),
+                        defectProject.getProject_name(),
+                        defectProject.getDefect_name(),
+                        defectProject.getDefect_state()));
+            }
+            if (item instanceof DemandProject) {
+                DemandProject demandProject = (DemandProject) item;
+                res.add(new TaskProfile(demandProject.getDemand_id(),
+                        demandProject.getProject_id(),
+                        demandProject.getProject_name(),
+                        demandProject.getDemand_name(),
+                        demandProject.getDemand_state()));
+            }
+        });
+        return res;
     }
 
     //用户搜索

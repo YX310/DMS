@@ -186,7 +186,7 @@
 									<div class="ah-tab-content">
 										<div th:each="n:${fileUpload}" th:unless="${fileUpload.size() == 0}">
 											<div class="">
-												<a th:text="${n.getFile_name()}" th:href="${n.getFile_path()}" target="_blank" style="word-wrap:break-word;"></a><span style="color: #ac2925"><a th:href="@{/deleteDefectFile(id=${defect.defect_id}, fileId=${n.id})}"> x</a></span>
+												<a th:text="${n.getFile_name()}" th:href="${n.getFile_path()}" target="_blank" style="word-wrap:break-word;"></a><a th:href="@{/deleteDefectFile(id=${defect.defect_id}, fileId=${n.id})}" th:title="删除文件"><img style="width: 20px;height: 20px" src="../imgs/style_img/delete1.png"></a>
 											</div>
 										</div>
 									</div>

@@ -11,29 +11,29 @@
                 <div id="toolbar-container-left">
                     <div id="toolbar-logo">DTS</div>
                     <div class="toolbar-f1">
-                        <ul>我的工作台</ul>
-                        <ul>
-                        </ul>
-                        <ul>需求</ul>
-                        <ul>缺陷</ul>
-                        <ul>我的</ul>
+                        <ul>后台管理中心</ul>
+<!--                        <ul>-->
+<!--                        </ul>-->
+<!--                        <ul>需求</ul>-->
+<!--                        <ul>缺陷</ul>-->
+<!--                        <ul>我的</ul>-->
                     </div>
                 </div>
                 <div id="toolbar-container-middle">
-                    <div class="toolbar-search">
-                        <div class="toolbar-search-container">
-                            <input id="toolbar-search-input" style="text-indent: 32px;"/>
-                            <button id="toolbar-search-button">
-                                <i></i>
-                                <span>搜索</span>
-                            </button>
-                        </div>
-                    </div>
+<!--                    <div class="toolbar-search">-->
+<!--                        <div class="toolbar-search-container">-->
+<!--                            <input id="toolbar-search-input" style="text-indent: 32px;"/>-->
+<!--                            <button id="toolbar-search-button">-->
+<!--                                <i></i>-->
+<!--                                <span>搜索</span>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
                 <div id="toolbar-container-right">
                     <div class="toolbar-user">
                         <div class="headimg_box">
-                            <img src="../imgs/style_img/logimg.jpg"/>
+                            <img th:src="@{(${session.head_img})}" alt="我的头像"/>
                         </div>
                         <span th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg"></span>
 <!--                        <span ><a th:if="${(session.user_id)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.user_id})}"></a></span>-->

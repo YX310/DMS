@@ -42,7 +42,7 @@
 				<div id="toolbar-container-right">
 					<div class="toolbar-user">
 						<div class="headimg_box">
-							<img src="../imgs/style_img/logimg.jpg"/>
+							<img th:src="@{(${session.head_img})}" alt="我的头像"/>
 						</div>
 						<span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
 					</div>

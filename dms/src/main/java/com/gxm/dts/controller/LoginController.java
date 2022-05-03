@@ -35,6 +35,7 @@ public class LoginController {
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("userRole",user.getUser_role());
                 session.setAttribute("email", user.getEmail());
+                session.setAttribute("head_img", user.getHead_img());
                 return adminController.User(request);
             } else {
                 if (userRole.equals("项目经理") || userRole.equals("开发") || userRole.equals("测试")){
@@ -43,6 +44,7 @@ public class LoginController {
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("userRole",user.getUser_role());
                     session.setAttribute("email", user.getEmail());
+                    session.setAttribute("head_img", user.getHead_img());
                     return projectController.Project(request);
                 } else {
                     return "client/login";

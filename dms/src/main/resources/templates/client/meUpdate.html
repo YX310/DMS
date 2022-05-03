@@ -10,6 +10,7 @@
     <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/select_input.js}"></script>
+    <script th:src="@{/js/meupdate.js}"></script>
     <style type="text/css">
         body{font-size: 1.3em;}
         th,td{font-size: 1em;}
@@ -19,103 +20,149 @@
 <body>
 <!--    <div th:replace="/client/index::header"></div>-->
     <div id="toolbarBox" style="min-height: 48px;">
-    <div id="toolbar-container">
-        <div id="toolbar-container-left">
-            <div id="toolbar-logo">DTS</div>
-            <div class="toolbar-f1">
-                <ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>
-                <ul><a th:href="@{/homeProjectList}">我的项目</a></ul>
-            </div>
-        </div>
-        <div id="toolbar-container-middle">
-            <div class="search-box">
-                <form class="search_form" method="post" onsubmit="return handleSearchSubmit()">
-                    <div id="search-input-box" autoHeight="true">
-                        <input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">
-                        <ul class="search-ul">
-                        </ul>
-                    </div>
-                    <input type="submit" value="搜索" id="input_sub" class="input_sub">
-                </form>
-            </div>
-        </div>
-        <div id="toolbar-container-right">
-            <div class="toolbar-user">
-                <div class="headimg_box">
-                    <img src="../imgs/style_img/logimg.jpg"/>
+        <div id="toolbar-container">
+            <div id="toolbar-container-left">
+                <div id="toolbar-logo">DTS</div>
+                <div class="toolbar-f1">
+                    <ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>
+                    <ul><a th:href="@{/homeProjectList}">我的项目</a></ul>
                 </div>
-                <span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
             </div>
-            <div class="toolbar-logout">
-                <a href="/login">退出</a>
+            <div id="toolbar-container-middle">
+                <div class="search-box">
+                    <form class="search_form" method="post" onsubmit="return handleSearchSubmit()">
+                        <div id="search-input-box" autoHeight="true">
+                            <input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">
+                            <ul class="search-ul">
+                            </ul>
+                        </div>
+                        <input type="submit" value="搜索" id="input_sub" class="input_sub">
+                    </form>
+                </div>
+            </div>
+            <div id="toolbar-container-right">
+                <div class="toolbar-user">
+                    <div class="headimg_box">
+                        <img th:src="@{(${session.head_img})}" alt="我的头像"/>
+                    </div>
+                    <span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
+                </div>
+                <div class="toolbar-logout">
+                    <a href="/login">退出</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
     <!--me_content-->
-    <div id="main_me">
-        <div id="me_content">
+<!--    <div id="main_me">-->
+<!--        <div id="me_content">-->
 
-            <div id="contentLeft">
-                <div id="top">
-                    <span>个人中心</span>
-                </div>
-                <ul id="leftNavigation">
+<!--            <div id="contentLeft">-->
+<!--                <div id="top">-->
+<!--                    <span>个人中心</span>-->
+<!--                </div>-->
+<!--                <ul id="leftNavigation">-->
 
-                    <li>
-                        <a th:href="@{/toMe(id=${session.user_id})}">我的信息</a>
-                    </li>
-                    <li >
-                        <a th:href="@{/toUpdateMe(id=${session.user_id})}">修改信息</a>
-                    </li>
-                    <li >
-                        <a href="#">退出登录</a>
-                    </li>
-                </ul>
+<!--                    <li>-->
+<!--                        <a th:href="@{/toMe(id=${session.user_id})}">我的信息</a>-->
+<!--                    </li>-->
+<!--                    <li >-->
+<!--                        <a th:href="@{/toUpdateMe(id=${session.user_id})}">修改信息</a>-->
+<!--                    </li>-->
+<!--                    <li >-->
+<!--                        <a href="#">退出登录</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
 
-            </div>
+<!--            </div>-->
 
-            <div id="contentRight">
-                <form th:action="@{/updateMe}" method="post">
-                    <h2>账户信息</h2>
+<!--            <div id="contentRight">-->
+<!--                <form th:action="@{/updateMe}" method="post">-->
+<!--                    <h2>账户信息</h2>-->
+<!--                    <input name="user_id" type="hidden" th:value="${user.user_id}"/>-->
+<!--                    <div id="right_top">-->
+<!--                        <div class="head_img ui-form-row">-->
+<!--                            <div class="ui-form-label">头像</div>-->
+<!--                            <div class="ui-form-element">-->
+<!--                                <img src="../imgs/style_img/logimg.jpg" style="width:30px;height: 30px;"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="username ui-form-row">-->
+<!--                            <div class="ui-form-label">用户名</div>-->
+<!--                            <div class="ui-form-element">-->
+<!--                                <div class="text-input ui-input"><input name="username" placeholder="请输入用户名" th:value="${user.username}"/></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="username ui-form-row">-->
+<!--                            <div class="ui-form-label">职位</div>-->
+<!--                            <div class="ui-form-element">-->
+<!--                                <div class="text-input ui-input"><input name="user_position" th:value="${user.user_position}"/></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="username ui-form-row">-->
+<!--                            <div class="ui-form-label">工号</div>-->
+<!--                            <div class="ui-form-element">-->
+<!--                                <div class="text-input ui-input"><input name="employee_number" placeholder="请输入工号" th:value="${user.employee_number}"/></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="username ui-form-row">-->
+<!--                            <div class="ui-form-label">邮箱</div>-->
+<!--                            <div class="ui-form-element">-->
+<!--                                <div class="text-input ui-input"><input name="email" placeholder="请输入邮箱" th:value="${user.email}"/></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <button type="submit">保存修改</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div id="meupdate-box">
+        <div class="meupdate-content">
+            <form th:action="@{/updateMe}" method="post">
+                <div class="meupdate-left">
+                    <h3>编辑个人信息</h3>
                     <input name="user_id" type="hidden" th:value="${user.user_id}"/>
-                    <div id="right_top">
-                        <div class="head_img ui-form-row">
-                            <div class="ui-form-label">头像</div>
-                            <div class="ui-form-element">
-                                <img src="../imgs/style_img/logimg.jpg" style="width:30px;height: 30px;"/>
-                            </div>
+                    <span>昵称：</span><input name="nickname" placeholder="请输入昵称" th:value="${user.nickname}"/><br/>
+                    <span>密码：</span><input name="password" placeholder="请输入密码" th:value="${user.password}"/><br/>
+                    <span>邮箱：</span><input name="email" placeholder="请输入邮箱" th:value="${user.email}"/>
+                    <div class="meupdate-button">
+                        <button style="float: left;" type="submit">保存</button>
+                        <button style="float: right;" type="reset">重置</button>
+                    </div>
+                </div>
+                <form>
+                    <div class="select-headimg">
+                        <span>修改头像</span><span class="select-headimg-cancel">X</span>
+                        <span style="font-size: 0.8em;display: block;">请选择任一图片作为头像~</span>
+                        <div class="headimg-box">
+                            <img src="../imgs/headimgs/headimg01.jpg" alt="我的头像"/>
+                            <img src="../imgs/headimgs/headimg02.jpg" alt="我的头像"/>
+                            <img src="../imgs/headimgs/headimg03.jpg" alt="我的头像"/>
+                            <img src="../imgs/headimgs/headimg04.jpg" alt="我的头像"/>
+                            <img src="../imgs/headimgs/headimg05.jpg" alt="我的头像"/>
+                            <img src="../imgs/headimgs/headimg06.jpg" alt="我的头像"/>
                         </div>
-
-                        <div class="username ui-form-row">
-                            <div class="ui-form-label">用户名</div>
-                            <div class="ui-form-element">
-                                <div class="text-input ui-input"><input name="username" placeholder="请输入用户名" th:value="${user.username}"/></div>
-                            </div>
+                        <div class="preview">
+                            <img src="../imgs/headimgs/headimg01.jpg" alt="我的头像"/>
+                            <p>头像预览</p>
                         </div>
-
-                        <div class="username ui-form-row">
-                            <div class="ui-form-label">职位</div>
-                            <div class="ui-form-element">
-                                <div class="text-input ui-input"><input name="user_position" th:value="${user.user_position}"/></div>
-                            </div>
-                        </div>
-                        <div class="username ui-form-row">
-                            <div class="ui-form-label">工号</div>
-                            <div class="ui-form-element">
-                                <div class="text-input ui-input"><input name="employee_number" placeholder="请输入工号" th:value="${user.employee_number}"/></div>
-                            </div>
-                        </div>
-                        <div class="username ui-form-row">
-                            <div class="ui-form-label">邮箱</div>
-                            <div class="ui-form-element">
-                                <div class="text-input ui-input"><input name="email" placeholder="请输入邮箱" th:value="${user.email}"/></div>
-                            </div>
+                        <div class="select-headimg-button">
+                            <button type="submit">确定</button>
+                            <button type="reset">重置</button>
                         </div>
                     </div>
-                    <button type="submit">保存修改</button>
                 </form>
-            </div>
+                <div class="meupdate-right">
+                    <div class="meupdate-right-content">
+                        <div class="update-headimg"><img th:src="@{(${session.head_img})}" alt="我的头像"/></div>
+                        <div class="meupdate-headimg">修改头像</div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

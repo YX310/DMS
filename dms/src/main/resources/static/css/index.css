@@ -293,3 +293,13 @@ h2.heading {
 ul,li{
 	list-style-type:none;
 }
+
+
+.upload-file-td > .file-input {
+	margin-top: 5px;
+	width: 400%;
+}
+
+.upload-file-td > .file-input > .file-caption-main > .input-group-btn > .btn-file {
+	margin-top: -15px;
+}

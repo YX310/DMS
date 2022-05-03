@@ -55,7 +55,10 @@ public class IndexController {
     @RequestMapping("/toMe")
     public String toMe(Integer id, Model model){
         User user = userServiceImpl.getUserId(id);
+        String updatePerson = user.getUsername();
+        List<UpdateRecord> updateRecords = updateRecordServiceImpl.selectUpdateRecordWithUpdatePerson(updatePerson);
         model.addAttribute("user", user);
+        model.addAttribute("updateRecords",updateRecords);
         return "client/me";
     }
 

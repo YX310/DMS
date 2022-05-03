@@ -27,6 +27,11 @@ public class UpdateRecordServiceImpl implements IUpdateRecordService {
     }
 
     @Override
+    public List<UpdateRecord> selectUpdateRecordWithUpdatePerson(String updatePerson) {
+        return updateRecordMapper.selectUpdateRecordWithUpdatePerson(updatePerson);
+    }
+
+    @Override
     public void addUpdateRecord(UpdateRecord updateRecord) {
         updateRecordMapper.addUpdateRecord(updateRecord);
     }

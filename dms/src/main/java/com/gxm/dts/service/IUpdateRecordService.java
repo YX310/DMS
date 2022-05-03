@@ -19,4 +19,7 @@ public interface IUpdateRecordService {
 
     //根据project_id记录
     public List<UpdateRecord> selectUpdateRecordWithProjectId(int projectId);
+
+    //根据当前用户名查询update_record表
+    public List<UpdateRecord> selectUpdateRecordWithUpdatePerson(String updatePerson);
 }

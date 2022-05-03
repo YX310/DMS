@@ -20,6 +20,10 @@ public interface UpdateRecordMapper {
     @Select("SELECT * FROM update_record WHERE project_id=#{projectId} ORDER BY update_time DESC")
     public List<UpdateRecord> selectUpdateRecordWithProjectId(int projectId);
 
+    //根据当前用户名查询update_record表
+    @Select("SELECT * FROM update_record WHERE update_person=#{updatePerson} ORDER BY update_time DESC")
+    public List<UpdateRecord> selectUpdateRecordWithUpdatePerson(String updatePerson);
+
     //向update_record表插入数据
     @Insert("INSERT INTO update_record(assoc_id, update_time, record_content, update_person, is_defect, project_id, assoc_title)" +
             " values(#{assoc_id},#{update_time},#{record_content},#{update_person},#{is_defect},#{project_id},#{assoc_title})")

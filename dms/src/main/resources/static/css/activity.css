@@ -188,4 +188,14 @@ h3 a{
 	padding-top: 10px;
 	display: inline-block;
 }
+/*个人信息动态*/
+.person-activities{
+	float: left;
+	width: 100%;
+
+}
+.person-activities .main {
+	max-width: 69em;
+	padding: 0 1.875em 3.125em;
+}
 

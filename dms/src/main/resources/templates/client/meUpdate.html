@@ -134,28 +134,6 @@
                         <button style="float: right;" type="reset">重置</button>
                     </div>
                 </div>
-                <form>
-                    <div class="select-headimg">
-                        <span>修改头像</span><span class="select-headimg-cancel">X</span>
-                        <span style="font-size: 0.8em;display: block;">请选择任一图片作为头像~</span>
-                        <div class="headimg-box">
-                            <img src="../imgs/headimgs/headimg01.jpg" alt="我的头像"/>
-                            <img src="../imgs/headimgs/headimg02.jpg" alt="我的头像"/>
-                            <img src="../imgs/headimgs/headimg03.jpg" alt="我的头像"/>
-                            <img src="../imgs/headimgs/headimg04.jpg" alt="我的头像"/>
-                            <img src="../imgs/headimgs/headimg05.jpg" alt="我的头像"/>
-                            <img src="../imgs/headimgs/headimg06.jpg" alt="我的头像"/>
-                        </div>
-                        <div class="preview">
-                            <img src="../imgs/headimgs/headimg01.jpg" alt="我的头像"/>
-                            <p>头像预览</p>
-                        </div>
-                        <div class="select-headimg-button">
-                            <button type="submit">确定</button>
-                            <button type="reset">重置</button>
-                        </div>
-                    </div>
-                </form>
                 <div class="meupdate-right">
                     <div class="meupdate-right-content">
                         <div class="update-headimg"><img th:src="@{(${session.head_img})}" alt="我的头像"/></div>
@@ -165,6 +143,31 @@
             </form>
         </div>
     </div>
+    <!--select-headimg-box-->
+    <form>
+        <div class="select-headimg-box">
+            <div class="select-headimg">
+                <span>修改头像</span><span class="select-headimg-cancel">X</span>
+                <span style="font-size: 0.8em;display: block;">请选择任一图片作为头像~</span>
+                <div class="headimg-box">
+                    <img src="../imgs/headimgs/headimg01.jpg"/>
+                    <img src="../imgs/headimgs/headimg02.jpg"/>
+                    <img src="../imgs/headimgs/headimg03.jpg"/>
+                    <img src="../imgs/headimgs/headimg04.jpg"/>
+                    <img src="../imgs/headimgs/headimg05.jpg"/>
+                    <img src="../imgs/headimgs/headimg06.jpg"/>
+                </div>
+                <div class="preview">
+                    <img src="../imgs/headimgs/headimg01.jpg"/>
+                    <p>头像预览</p>
+                </div>
+                <div class="select-headimg-button">
+                    <button type="submit">确定</button>
+                    <button type="reset">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
 
 </body>
 </html>

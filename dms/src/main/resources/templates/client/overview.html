@@ -76,7 +76,6 @@
                         <div class="main record-list">
                             <ul class="cbp_tmtimeline" th:each="n, allUpdateRecordStat:${allUpdateRecord}">
                                 <li class="item" title="查看详情">
-<!--                                    <time class="cbp_tmtime" datetime="2014-10-30 18:30"><span th:text="${#dates.format(n.update_time, 'yyyy-MM-dd')}" ></span></time>-->
                                     <time class="cbp_tmtime" datetime="2014-10-30 18:30">
                                         <span th:text="${#dates.format(n.update_time, 'yyyy-MM-dd')}"
                                               th:if="${allUpdateRecordStat.index == 0

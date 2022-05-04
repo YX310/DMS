@@ -22,7 +22,7 @@
                 <div class="search-box" th:unless="${session.userRole=='管理员'}">
                     <form class="search_form" method="post" onsubmit="return handleSearchSubmit()">
                         <div id="search-input-box" autoHeight="true">
-                            <input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">
+                            <input type="text" id="input_text" placeholder="请输入搜索内容" maxlength="30" autocomplete="off" onsubmit="return false">
                             <ul class="search-ul">
                             </ul>
                         </div>
@@ -44,41 +44,5 @@
             </div>
         </div>
     </div>
-<!--    <div class="header" th:fragment="header">-->
-<!--        <div id="toolbarBox" style="min-height: 48px;">-->
-<!--            <div id="toolbar-container">-->
-<!--                <div id="toolbar-container-left">-->
-<!--                    <div id="toolbar-logo">DTS</div>-->
-<!--                    <div class="toolbar-f1">-->
-<!--                        <ul><a th:href="@{/toUserList}">后台管理中心</a></ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="toolbar-container-middle">-->
-<!--                &lt;!&ndash; 保留，完善管理员对用户进行搜索&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div class="toolbar-search">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="toolbar-search-container">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <input id="toolbar-search-input" style="text-indent: 32px;"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <button id="toolbar-search-button">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <i></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <span>搜索</span>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </button>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div id="toolbar-container-right">-->
-<!--                    <div class="toolbar-user">-->
-<!--                        <div class="headimg_box">-->
-<!--                            <img th:src="@{(${session.head_img})}" alt="我的头像"/>-->
-<!--                        </div>-->
-<!--&lt;!&ndash;                        <span th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg"></span>&ndash;&gt;-->
-<!--                        <span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>-->
-<!--                    </div>-->
-<!--                    <div class="toolbar-logout">-->
-<!--                        <a href="/login">退出</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 </body>
 </html>

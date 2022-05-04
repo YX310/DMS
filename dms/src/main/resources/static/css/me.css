@@ -67,9 +67,10 @@
 
 .edit-data{
 	float: right;
-	height: 25px;
+	height: 35px;
 	line-height: 25px;
-	font-size: 0.75em;
+	margin-top: 8px;
+	font-size: 8em;
 	padding: 5px;
 	border: 1px solid silver;
 	border-radius: 17px;

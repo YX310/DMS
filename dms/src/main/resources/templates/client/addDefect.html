@@ -27,7 +27,7 @@
 <div th:replace="/client/index::header"></div>
 <div class="defect-box">
     <div class="defect-content">
-        <div  class="container" style="width:100%;height:100%;margin-left:0px;" >
+        <div  class="container" style="width:100%;height:100%; margin-bottom: 20px" >
             <form name="add-form" th:action="@{/addDefect}" onsubmit="uploadFile()" method="post" enctype="multipart/form-data">
                 <input name="project_id" type="hidden" th:value="${session.projectId}"/>
                 <input name="defect_creator" type="hidden" th:value="${session.username}"/>
@@ -39,7 +39,7 @@
                 <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
                     <tr>
                         <td width="20%" align="center">标题</td>
-                        <td><input id="postinput" class="form-control" name="defect_name"  required="required" value="sda"/></td>
+                        <td><input id="postinput" class="form-control" name="defect_name" maxlength="30" required="required" value="sda"/></td>
                     </tr>
                     <tr>
                         <td align="center">描述</td>

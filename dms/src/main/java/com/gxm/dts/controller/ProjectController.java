@@ -130,12 +130,12 @@ public class ProjectController {
             return "client/addProject";
         }
         projectServiceImpl.updateProjectWithId(project);
+
         projectServiceImpl.deleteProjectMember(projectId);
         for (Integer userId : isSystemUser) {
             //向user_and_project表插入数据
             projectServiceImpl.addProjectMember(new ProjectMember(userId, project.getProject_id()));
         }
-
         System.out.println("执行了" + project);
         return "redirect:/toOverview?id=" + projectId; //redirect重定向
     }

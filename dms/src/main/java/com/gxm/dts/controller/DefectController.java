@@ -83,6 +83,8 @@ public class DefectController {
                       @RequestParam("defect_file") MultipartFile[] files) {
         if (("").equals(defect.getStart_date())) defect.setStart_date(null);
         if (("").equals(defect.getFinish_date())) defect.setFinish_date(null);
+        System.out.println(defect.getDesignated_person());
+        System.out.println(defect.getProject_id());
         if (projectServiceImpl.selectMemberId(defect.getDesignated_person(), defect.getProject_id()) == null) {
             return "redirect:/toAddDefect";
         }

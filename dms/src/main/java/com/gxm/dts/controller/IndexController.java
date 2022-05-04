@@ -85,7 +85,7 @@ public class IndexController {
     public String updateUserWithId(User user){
         userServiceImpl.updateMeWithId(user);
         System.out.println(user);
-        return "client/me";
+        return "redirect:/toMe?id=" + user.getUser_id();
     }
 
     //获取当前所选项目id

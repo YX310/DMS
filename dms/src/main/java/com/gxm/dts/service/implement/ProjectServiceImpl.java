@@ -105,4 +105,14 @@ public class ProjectServiceImpl implements IProjectService {
     public boolean checkUserInProject(int userId, int projectId) {
         return projectMapper.checkUserInProject(userId, projectId) == 1;
     }
+
+    @Override
+    public void deleteProjectMember(int projectId) {
+        projectMapper.deleteProjectMember(projectId);
+    }
+
+    @Override
+    public String selectCreator(int projectId) {
+        return projectMapper.selectCreator(projectId);
+    }
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
+import static com.gxm.dts.util.Constant.DEBUG;
 import static com.gxm.dts.util.Constant.ERROR_INFO;
 
 
@@ -120,8 +121,9 @@ public class IndexController {
         model.addAttribute("closedDefectNum", closedDefectNum);
         model.addAttribute("allDemandNum", allDemandNum);
         model.addAttribute("closedDemandNum", closedDemandNum);
-        System.out.println(project);
+        if (DEBUG) System.out.println(project);
         List<User> projectMember = projectServiceImpl.findProjectMemberByProjectId(id);
+        if (DEBUG) System.out.println("projectMember.size" + projectMember.size());
         List<String> PM = new ArrayList<>();
         List<String> RD = new ArrayList<>();
         List<String> QA = new ArrayList<>();

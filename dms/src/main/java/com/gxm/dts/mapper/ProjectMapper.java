@@ -67,4 +67,12 @@ public interface ProjectMapper {
     // 查询项目是否存在成员
     @Select("SELECT count(*) FROM user_and_project WHERE user_id=#{userId} AND project_id=#{projectId} LIMIT 1")
     public Integer checkUserInProject(int userId, int projectId);
+
+    // 删除项目成员
+    @Select("DELETE FROM user_and_project WHERE project_id=#{projectId}")
+    public void deleteProjectMember(int projectId);
+
+    // 查询项目创建者
+    @Select("SELECT creator FROM project WHERE project_id=#{projectId}")
+    public String selectCreator(int projectId);
 }

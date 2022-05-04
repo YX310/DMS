@@ -74,20 +74,10 @@ public class ProjectController {
         List<Integer> isSystemUser = new ArrayList<>();
         List<String> isNotSystemUser = new ArrayList<>();
         isSystemUser.add(userProject.getUser_id());
-        for (String projectMember : projectMembers) {
-            Integer userId = userServiceImpl.findUserIdByUsername(projectMember);
-            if (userId == null) {
-                isNotSystemUser.add(projectMember);
-                System.out.println(projectMember);
-                continue;
-            }
-            if (userId != userProject.getUser_id() && userId > 0) {
-                isSystemUser.add(userId);
-            }
-        }
+        filterUser(isSystemUser, isNotSystemUser, projectMembers, userProject.getUser_id());
+
         if (isNotSystemUser.size() != 0) {
             model.addAttribute("isNotSystemUser", isNotSystemUser);
-
             return "client/addProject";
         }
 
@@ -102,6 +92,20 @@ public class ProjectController {
         return "redirect:/homeProjectList";
     }
 
+    private void filterUser(List<Integer> isSystemUser, List<String> isNotSystemUser, String[] projectMembers, int projectId) {
+        for (String projectMember : projectMembers) {
+            Integer userId = userServiceImpl.findUserIdByUsername(projectMember);
+            if (userId == null) {
+                isNotSystemUser.add(projectMember);
+                System.out.println(projectMember);
+                continue;
+            }
+            if (userId != projectId && userId > 0) {
+                isSystemUser.add(userId);
+            }
+        }
+    }
+
     //更新（修改）项目信息
     @RequestMapping("/toUpdateProject")
     public String toUpdateProject(int id, Model model) {
@@ -112,11 +116,28 @@ public class ProjectController {
 
     //修改项目信息
     @RequestMapping("/updateProject")
-    public String updateDefectWithId(Project project) {
-        Integer id = project.getProject_id();
+    public String updateDefectWithId(Project project, Model model) {
+        int projectId = project.getProject_id();
+        String[] projectMembers = project.getProject_member().split(";");
+        List<Integer> isSystemUser = new ArrayList<>();
+        List<String> isNotSystemUser = new ArrayList<>();
+        System.out.println("project.getCreator:" + project.getCreator());
+        int creatorId = userServiceImpl.findUserIdByUsername(projectServiceImpl.selectCreator(projectId));
+        isSystemUser.add(creatorId);
+        filterUser(isSystemUser, isNotSystemUser, projectMembers, creatorId);
+        if (isNotSystemUser.size() != 0) {
+            model.addAttribute("isNotSystemUser", isNotSystemUser);
+            return "client/addProject";
+        }
         projectServiceImpl.updateProjectWithId(project);
+        projectServiceImpl.deleteProjectMember(projectId);
+        for (Integer userId : isSystemUser) {
+            //向user_and_project表插入数据
+            projectServiceImpl.addProjectMember(new ProjectMember(userId, project.getProject_id()));
+        }
+
         System.out.println("执行了" + project);
-        return "redirect:/toOverview?id=" + id; //redirect重定向
+        return "redirect:/toOverview?id=" + projectId; //redirect重定向
     }
 
     //删除项目信息
@@ -125,6 +146,4 @@ public class ProjectController {
         projectServiceImpl.deleteProjectWithId(id);
         return "redirect:/homeProjectList"; //redirect重定向
     }
-
-
 }

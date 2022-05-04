@@ -48,4 +48,10 @@ public interface IProjectService {
 
     // 查询项目是否存在成员
     public boolean checkUserInProject(int userId, int projectId);
+
+    // 删除项目成员
+    public void deleteProjectMember(int projectId);
+
+    // 查询项目创建者
+    public String selectCreator(int projectId);
 }

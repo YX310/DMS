@@ -127,7 +127,7 @@ public class ProjectController {
         filterUser(isSystemUser, isNotSystemUser, projectMembers, creatorId);
         if (isNotSystemUser.size() != 0) {
             model.addAttribute("isNotSystemUser", isNotSystemUser);
-            return "client/addProject";
+            return "client/projectUpdate";
         }
         projectServiceImpl.updateProjectWithId(project);
 

@@ -48,7 +48,7 @@
 					<div class="headimg_box">
 						<img src="../imgs/style_img/logimg.jpg"/>
 					</div>
-					<span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
+					<span><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
 				</div>
 				<div class="toolbar-logout">
 					<a href="/login">退出</a>
@@ -74,7 +74,8 @@
 				<table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
 					<tr>
 						<td width="20%" align="center">标题</td>
-						<td><input id="postinput" class="form-control" name="project_name" maxlength="30" required="required"/></td>
+						<td><input id="postinput" class="form-control" name="project_name"  required="required"/></td>
+						<td><input id="postinput" class="form-control" name="project_name" maxlength="30" required/></td>
 					</tr>
 					<tr>
 						<td align="center">描述</td>
@@ -92,7 +93,7 @@
 									<div class="row">
 										<div  class="col-sm-12">
 											<div class="form-group">
-												<input data-role='tags-input' required="required" name="project_member" value=""/>
+												<input data-role='tags-input' name="project_member" value="" required/>
 											</div>
 										</div>
 									</div>

@@ -37,7 +37,7 @@ public interface UserMapper {
     public void updateUserWithId(User user);
 
     //修改用户信息（前台）
-    @Select("UPDATE user SET nickname = #{nickname}, password = #{password},email = #{email} WHERE user_id = #{user_id}")
+    @Select("UPDATE user SET nickname = #{nickname}, password = #{password},head_img = #{head_img}, email = #{email} WHERE user_id = #{user_id}")
     public void updateMeWithId(User user);
 
     @Select("SELECT user_id FROM user WHERE username = #{username}")

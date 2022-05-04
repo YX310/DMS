@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-    <link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
     <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
     <link th:href="@{/css/select_input.css}" rel="stylesheet"/>
     <script th:src="@{/js/jquery.js}"></script>
@@ -57,10 +56,9 @@
     </div>
 </div>
 
-<!-- 无权限界面 -->
-<div class="project_box">
-    <p>暂无无权限访问当前界面！</p><br />
-    <p th:text="${errorInfo}"></p>
+<!-- 访问错误 -->
+<div class="project_box" style="color: #bc1b21;font-weight: bold;text-align: center; " >
+    <p>访问错误！</p>
 </div>
 
 </body>

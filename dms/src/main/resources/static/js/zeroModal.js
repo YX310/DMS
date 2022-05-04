@@ -30,11 +30,11 @@
         content: '', //显示内容
         url: false, //如果输入url，将会根据url返回的内容显示在弹出层中
         iframe: false, //是否需要嵌入iframe，默认false，该参数需要和url一起使用
-        width: '500px', //宽度（px、pt、%）
-        height: '300px', //高度（px、pt、%）
+        width: '400px', //宽度（px、pt、%）
+        height: '200px', //高度（px、pt、%）
         transition: false, //是否需要出场动画，默认false
         opacity: 0.2, // 遮罩层的透明度
-        overlay: true, //是否需要显示遮罩层，默认true
+        overlay: false, //是否需要显示遮罩层，默认true
         overlayClose: false, //是否允许点击遮罩层直接关闭弹出层，默认否
         max: false, // 是否允许最大化
         resize: false, // 是否允许调整大小
@@ -124,167 +124,6 @@
         });
 
         _tmp_variate_ishow = false;
-    };
-
-
-    /**
-     * 显示等待框
-     * @return {[type]} [description]
-     */
-    zeroModal.loading = function(type) {
-        var params = _initParams();
-        _buildOverlay(params);
-
-        _tmp_last_zindex++;
-
-        // 重新定位top值
-        var _top = $(window).scrollTop() + Math.ceil($(window).height() / 3);
-
-        if (type === undefined) {
-            type = 1;
-        }
-        if (type === 1 || type === 2) {
-            var loadClass = 'zeromodal-loading' + type;
-            $('body').append('<div role="zeromodal-loading" zero-unique-loading="' + params.unique + '" class="' + loadClass + '" style="z-index:' + _tmp_last_zindex + ';top:' + _top + 'px;"></div>');
-
-        } else if (_isIn([3, 4, 5, 6], type)) {
-            var loader = {};
-
-            switch (type) {
-                case 3:
-                    loader.className = 'pacman';
-                    loader.containerCount = 5;
-                    break;
-                case 4:
-                    loader.className = 'line-scale-pulse-out';
-                    loader.containerCount = 5;
-                    break;
-                case 5:
-                    loader.className = 'line-spin-fade-loader';
-                    loader.containerCount = 8;
-                    break;
-                case 6:
-                    loader.className = 'square-spin';
-                    loader.containerCount = 1;
-                    break;
-            }
-
-            var _html = '<div role="zeromodal-loading" zero-unique-loading="' + params.unique + '" class="' + loader.className + '" style="z-index:' + _tmp_last_zindex + ';left:46%;top:' + _top + 'px;">';
-            for (var i = 0; i < loader.containerCount; i++) {
-                _html += '  <div></div>';
-            }
-            _html += '  </div>';
-            $('body').append(_html);
-        }
-        return params.unique;
-    };
-
-    zeroModal.progress = function(type, opt) {
-        var params = _initParams();
-        _buildOverlay(params);
-
-        _tmp_last_zindex++;
-
-        if (type === undefined) {
-            type = 3;
-        }
-        // 重新定位top值
-        var _top = $(window).scrollTop() + Math.ceil($(window).height() / 3);
-
-        var loader = {};
-        switch (type) {
-            case 3:
-                loader.className = 'pacman';
-                loader.containerCount = 5;
-                break;
-            case 4:
-                loader.className = 'line-scale-pulse-out';
-                loader.containerCount = 5;
-                break;
-            case 5:
-                loader.className = 'line-spin-fade-loader';
-                loader.containerCount = 8;
-                break;
-            case 6:
-                loader.className = 'square-spin';
-                loader.containerCount = 1;
-                break;
-        }
-
-        var _html = '<div zero-unique-loading="' + params.unique + '" class="' + loader.className + '" style="z-index:' + _tmp_last_zindex + ';left:46%;top:' + _top + 'px;">';
-        for (var i = 0; i < loader.containerCount; i++) {
-            _html += '  <div></div>';
-        }
-        _html += '  </div>';
-        _html += '  <div zero-unique-loading="' + params.unique + '" class="zeromodal-progress-content" style="z-index:' + _tmp_last_zindex + ';top:' + (_top + 64) + 'px;"><span id="progess_content_' + params.unique + '"></span></div>';
-        _html += '';
-        $('body').append(_html);
-
-        var _loadCount = 0;
-        var _timer = setInterval(function() {
-            $.ajax({
-                url: opt.getProgressUrl + "?_=" + new Date().getTime(),
-                dataType: 'json',
-                type: 'get',
-                success: function(data) {
-                    $('#progess_content_' + params.unique).html(data.progress);
-                    if (data.progress === 'finish') {
-                        clearInterval(_timer);
-                        $.get(opt.clearProgressUrl);
-                        zeroModal.close(params.unique);
-                    }
-                }
-            });
-            _loadCount++;
-            if (_loadCount >= 500) {
-                clearInterval(_timer);
-                //zeroModal.close(params.unique);
-            }
-        }, 500);
-
-        return params.unique;
-    };
-
-    /**
-     * 显示进度条
-     * @param  {[type]} speed [description]
-     * @return {[type]}       [description]
-     */
-    zeroModal.progress_old = function(speed) {
-        var params = _initParams();
-        _buildOverlay(params);
-
-        _tmp_last_zindex++;
-
-        var _top = $(window).scrollTop() + Math.ceil($(window).height() / 3);
-        var _left = $(window).width() / 2 - 200;
-        var _speed = 1;
-        if (speed !== undefined && speed > _speed && speed < 10) {
-            _speed = speed;
-        }
-
-        var _html = '<div class="zeromodal-progress" style="top:' + _top + 'px;left:' + _left + 'px;z-index:' + _tmp_last_zindex + '">';
-        _html += '      <div zeromodal-progress-bar="' + params.unique + '" class="zeromodal-progress-bar" style="width: 0%; background: #92c26a;">';
-        _html += '          <span class="zeromodal-progress-icon zeromodal-fa zeromodal-fa-check" style="border-color:#92c26a; color:#92c26a;"><div zeromodal-progress-val="' + params.unique + '" class="zeromodal-progress-val">&nbsp;0%</div></span>';
-        _html += '      </div>';
-        _html += '  </div>';
-        $('body').append(_html);
-
-        var _progress = 0;
-        var jProgressBar = $('[zeromodal-progress-bar="' + params.unique + '"]');
-        var jProgressVal = $('[zeromodal-progress-val="' + params.unique + '"]');
-        var _timer = setInterval(function() {
-            _progress += 1;
-            jProgressBar.css("width", _progress + "%");
-            jProgressVal.html((_progress > 9 ? _progress : '&nbsp;' + _progress) + '%');
-
-            if (_progress >= 100) {
-                jProgressVal.html('<span class="line tip"></span><span class="line long"></span>');
-                clearInterval(_timer);
-            }
-        }, _speed * 100);
-
-        return params.unique;
     };
 
     /**
@@ -631,8 +470,8 @@
         }
 
         var params = _initParams(opt);
-        params.width = '260px';
-        params.height = '140px';
+        // params.width = '260px';
+        // params.height = '140px';
         params.esc = true;
         params.ok = true;
         params.buttonTopLine = false;
@@ -747,21 +586,6 @@
             jobj.animate({ left: left + 2 }, 50);
         }
         jobj.animate({ left: left }, 50);
-    }
-
-    /**
-     * 判断基本类型的值是否存在于数组中
-     * @param  {[type]}  arr [description]
-     * @param  {[type]}  r   [description]
-     * @return {Boolean}     [description]
-     */
-    function _isIn(arr, r) {
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i] === r) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

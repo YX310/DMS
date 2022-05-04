@@ -30,7 +30,7 @@
 <div class="defect-box">
     <div class="defect-content">
         <div  class="container" style="width:100%;height:100%;margin-left:0px;" >
-            <form name="add-form" th:action="@{/addDemand}" onsubmit="uploadFile()" method="post" enctype="multipart/form-data">
+            <form name="add-form" th:action="@{/addDemand}" onsubmit="return true" method="post" enctype="multipart/form-data">
                 <input name="project_id" type="hidden" th:value="${session.projectId}"/>
                 <input name="demand_creator" type="hidden" th:value="${session.username}"/>
                 <input name="start_date" type="hidden" value=""/>
@@ -66,7 +66,7 @@
 
                     <tr>
                         <td align="center">指派人</td>
-                        <td><input  class="form-control" name="designated_person" type="text" required="required" value="xiaoguan"/></td>
+                        <td><input  class="form-control" name="designated_person" type="text" required="required" value="xiaomin"/></td>
                     </tr>
 
                     <tr>
@@ -91,8 +91,8 @@
                         </td>
                     </tr>
                 </table>
-<!--                <button class="btn btn-primary btn-lg btn-block" type="submit">创建</button>-->
-                <button class="btn btn-primary btn-lg btn-block" type="submit"><a href="javascript:_confirm2()">创建</a></button>
+                <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">创建</button>
+<!--                <button class="btn btn-primary btn-lg btn-block" type="submit"><a href="javascript:">创建</a></button>-->
             </form>
         </div>
     </div>
@@ -115,12 +115,11 @@
             content: '确定提交修改吗？',
             contentDetail: '提交后将不能进行修改。',
             okFn: function() {
-                alert('操作成功！');
+                $("[name='add-form']").submit()
             },
-            cancelFn: function() {
-                alert('您已取消~');
-            }
+            cancelFn: function() {}
         });
+        console.log("success")
     }
 </script>
 </body>

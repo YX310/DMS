@@ -1,6 +1,7 @@
 package com.gxm.dts.controller;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.*;
+import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,10 @@ public class IndexController {
     private UpdateRecordServiceImpl updateRecordServiceImpl;
 
     @GetMapping(value = {"","/login"})
-    public String toLogin(){
+    public String toLogin(HttpSession session, Model model) {
+        if (DEBUG) System.out.println("ERROR_INFO");
+        model.addAttribute(ERROR_INFO, session.getAttribute(ERROR_INFO));
+        session.setAttribute(ERROR_INFO, null);
         return "client/login";
     }
 
@@ -46,7 +50,8 @@ public class IndexController {
     }
 
     @GetMapping(value = {"/register"})
-    public String toRegister(){
+    public String toRegister(Model model) {
+        model.addAttribute(ERROR_INFO, null);
         return "client/register";
     }
 

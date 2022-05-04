@@ -63,4 +63,8 @@ public interface ProjectMapper {
     // 查询项目成员id
     @Select("SELECT up.user_id FROM user_and_project AS up INNER JOIN user AS u WHERE u.user_id=up.user_id AND u.username=#{member} AND up.project_id=#{projectId}")
     public Integer selectMemberId(String member, int projectId);
+
+    // 查询项目是否存在成员
+    @Select("SELECT count(*) FROM user_and_project WHERE user_id=#{userId} AND project_id=#{projectId} LIMIT 1")
+    public Integer checkUserInProject(int userId, int projectId);
 }

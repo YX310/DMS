@@ -45,4 +45,7 @@ public interface IProjectService {
 
     // 查询项目成员id
     public Integer selectMemberId(String member, int projectId);
+
+    // 查询项目是否存在成员
+    public boolean checkUserInProject(int userId, int projectId);
 }

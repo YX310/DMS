@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link th:href="@{/back/css/back1.css}" rel="stylesheet"/>
+    <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/select_input.css}" rel="stylesheet"/>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/select_input.js}"></script>
+    <style type="text/css">
+        body{font-size: 1.3em;}
+        th,td{text-align: center;font-size: 1em;}
+        a{text-decoration:none;color: inherit;}
+    </style>
+</head>
+<body>
+<div id="toolbarBox" style="min-height: 60px;">
+    <div id="toolbar-container">
+        <div id="toolbar-container-left">
+            <div id="toolbar-logo">DTS</div>
+            <div class="toolbar-f1">
+                <ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>
+                <ul><a th:href="@{/homeProjectList}">我的项目</a></ul>
+            </div>
+        </div>
+
+        <div id="toolbar-container-middle">
+            <div class="search-box">
+                <form class="search_form" method="post" onsubmit="return handleSearchSubmit()">
+                    <div id="search-input-box" autoHeight="true">
+                        <input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">
+                        <ul class="search-ul">
+                        </ul>
+                    </div>
+                    <!--<div style="display: inline-block; margin-left: -5px;">-->
+                    <input type="submit" value="搜索" id="input_sub" class="input_sub">
+                    <!--</div>-->
+                </form>
+            </div>
+        </div>
+
+        <div id="toolbar-container-right">
+            <div class="toolbar-user">
+                <div class="headimg_box">
+                    <img th:src="@{(${session.head_img})}" alt="我的头像"/>
+                </div>
+                <span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>
+            </div>
+            <div class="toolbar-logout">
+                <a href="/login">退出</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 无权限界面 -->
+<div class="project_box">
+    <p>暂无无权限访问当前界面！</p><br />
+    <p th:text="${errorInfo}"></p>
+</div>
+
+</body>
+</html>

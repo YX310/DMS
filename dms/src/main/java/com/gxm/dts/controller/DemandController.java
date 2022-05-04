@@ -100,7 +100,11 @@ public class DemandController {
                                  HttpServletRequest request,
                                  int id,
                                  Model model) {
+        Object userId = session.getAttribute(SESSION_USER_ID);
         Demand demand = demandServiceImpl.getDemandId(id);
+        if (userId == null || !projectServiceImpl.checkUserInProject((Integer) userId, demand.getProject_id())) {
+            return "redirect:/unauthorizedPage";
+        }
         DemandProject demandProject =  demandServiceImpl.selectProjectMessageByDemandId(id);//根据需求id查找项目信息
         model.addAttribute("demand", demand);
         model.addAttribute("demandProject",demandProject);

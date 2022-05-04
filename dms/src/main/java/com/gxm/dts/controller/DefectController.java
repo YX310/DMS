@@ -100,7 +100,11 @@ public class DefectController {
                                  HttpServletRequest request,
                                  String id,
                                  Model model) {
+        Object userId = session.getAttribute(SESSION_USER_ID);
         Defect defect = defectServiceImpl.getDefectId(id);
+        if (userId == null || !projectServiceImpl.checkUserInProject((Integer) userId, defect.getProject_id())) {
+            return "redirect:/unauthorizedPage";
+        }
         DefectProject defectProject =  defectServiceImpl.selectProjectMessageByDefectId(id);//根据缺陷id查找项目信息
         model.addAttribute("defect", defect);
         model.addAttribute("defectProject",defectProject);

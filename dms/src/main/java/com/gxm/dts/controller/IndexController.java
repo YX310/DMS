@@ -3,6 +3,7 @@ import com.gxm.dts.mapper.DefectMapper;
 import com.gxm.dts.mapper.ProjectMapper;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.*;
+import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.function.BiConsumer;
+
+import static com.gxm.dts.util.Constant.ERROR_INFO;
 
 
 /**
@@ -49,6 +52,12 @@ public class IndexController {
     @GetMapping(value = {"/register"})
     public String toRegister(){
         return "client/register";
+    }
+
+    @GetMapping(value = {"/unauthorizedPage"})
+    public String toUnauthorizedPage(Model model) {
+        model.addAttribute(ERROR_INFO, "需要先进入项目！");
+        return "client/unauthorizedPage";
     }
 
     //(前台)用户信息

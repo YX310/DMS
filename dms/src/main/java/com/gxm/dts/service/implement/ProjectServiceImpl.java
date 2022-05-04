@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.ProjectMapper;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.IProjectService;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -98,5 +99,10 @@ public class ProjectServiceImpl implements IProjectService {
     @Override
     public Integer selectMemberId(String member, int projectId) {
         return projectMapper.selectMemberId(member, projectId);
+    }
+
+    @Override
+    public boolean checkUserInProject(int userId, int projectId) {
+        return projectMapper.checkUserInProject(userId, projectId) == 1;
     }
 }

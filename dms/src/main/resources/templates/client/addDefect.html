@@ -9,6 +9,7 @@
     <link th:href="@{/css/select_input.css}" rel="stylesheet"/>
     <link th:href="@{/css/bootstrap-markdown.min.css}" rel="stylesheet" />
     <link th:href="@{/css/fileinput.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/zeroModal.css}" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/select_input.js}"></script>
@@ -16,6 +17,7 @@
     <script th:src="@{/js/fileinput.min.js}"></script>
     <script th:src="@{/js/zh.js}"></script>
     <script th:src="@{/js/getTime.js}"></script>
+    <script th:src="@{/js/zeroModal.js}"></script>
     <style type="text/css">
         body{font-size: 1.3em;}
         th,td{font-size: 1em;}
@@ -28,7 +30,7 @@
 <div class="defect-box">
     <div class="defect-content">
         <div  class="container" style="width:100%;height:100%; margin-bottom: 20px" >
-            <form name="add-form" th:action="@{/addDefect}" onsubmit="uploadFile()" method="post" enctype="multipart/form-data">
+            <form name="add-form" th:action="@{/addDefect}" onsubmit="return true" method="post" enctype="multipart/form-data" id="addDefectForm">
                 <input name="project_id" type="hidden" th:value="${session.projectId}"/>
                 <input name="defect_creator" type="hidden" th:value="${session.username}"/>
                 <input name="start_date" type="hidden" value=""/>
@@ -68,7 +70,7 @@
 
                     <tr>
                         <td align="center">指派人</td>
-                        <td><input  class="form-control" name="designated_person" type="text" required="required" value="xiaoguan"/></td>
+                        <td><input  class="form-control" name="designated_person" type="text" required="required" value="xiaomin"/></td>
                     </tr>
 
                     <tr>
@@ -131,7 +133,7 @@
                         </td>
                     </tr>
                 </table>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">创建</button>
+                <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">创建</button>
             </form>
         </div>
     </div>
@@ -148,6 +150,21 @@
         showUpload: false,
         showPreview: false,
     });
+    /*<![CDATA[*/
+    function _confirm2() {
+        zeroModal.confirm({
+            content: '确定提交新建吗？',
+            contentDetail: "",
+            okFn: function() {
+                // alert('新建成功！');
+                $("#addDefectForm").submit();
+            },
+            cancelFn: function() {
+                // alert('您已取消！');
+            }
+        });
+    /*]]>*/
+    }
 </script>
 </body>
 </html>

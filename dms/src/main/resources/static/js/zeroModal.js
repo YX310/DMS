@@ -134,7 +134,7 @@
     zeroModal.alert = function(content) {
         var _opt = {
             iconClass: 'show-zero2 zeromodal-icon-info',
-            iconText: '!'
+            iconText: ''
         };
 
         var params = {};

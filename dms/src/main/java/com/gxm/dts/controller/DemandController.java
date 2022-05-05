@@ -172,11 +172,12 @@ public class DemandController {
 
     //删除需求
     @RequestMapping("/deleteDemand")
-    public String deleteDemand(HttpServletRequest request,
+    public String deleteDemand(HttpSession session,
                              int id) {
-        Object object = request.getSession().getAttribute(SESSION_PROJECT_ID);
+        Object object = session.getAttribute(SESSION_PROJECT_ID);
         int projectId = object != null ? (int) object : Integer.parseInt("");
         demandServiceImpl.deleteDemandWithId(id);
+        session.setAttribute(SUCCESS_INFO, "");
         return "redirect:/toDemandList?id=" + projectId; //redirect重定向
     }
 }

@@ -57,7 +57,7 @@
                     <td th:text="${n.progress}"></td>
                     <td>
                         <a class="btn btn-primary" th:href="@{/toUpdateDefect(id=${n.defect_id})}">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-danger" th:onclick="_confirm2([[${n.defect_id}]])" >删除</a>
+                        <a class="btn btn-danger" th:onclick="_confirm2([[${n.defect_id}]])">删除</a>
                     </td>
                 </tr>
             </table>
@@ -83,7 +83,7 @@
                     location.href="/deleteDefect?id="+id ;
                 },
                 cancelFn: function() {
-                    alert('您已取消！');
+                    // alert('您已取消！');
                 }
             });
         }

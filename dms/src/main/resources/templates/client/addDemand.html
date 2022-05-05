@@ -92,7 +92,6 @@
                     </tr>
                 </table>
                 <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">创建</button>
-<!--                <button class="btn btn-primary btn-lg btn-block" type="submit"><a href="javascript:">创建</a></button>-->
             </form>
         </div>
     </div>
@@ -112,8 +111,8 @@
     });
     function _confirm2() {
         zeroModal.confirm({
-            content: '确定提交修改吗？',
-            contentDetail: '提交后将不能进行修改。',
+            content: '确定提交新建吗？',
+            contentDetail: '',
             okFn: function() {
                 $("[name='add-form']").submit()
             },

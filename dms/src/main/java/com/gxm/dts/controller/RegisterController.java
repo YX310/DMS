@@ -24,17 +24,20 @@ public class RegisterController {
     @PostMapping(value = "/user/register")
     public String register(HttpServletRequest request,
                            User user,
+                           HttpSession session,
                            Model model) {
         // if has user
         if (indexMapper.checkUser(user.getUsername()) != null) {
-            model.addAttribute(Constant.ERROR_INFO, "用户已存在!");
-            return "client/register";
+            session.setAttribute(Constant.ERROR_INFO, "用户已存在!");
+
+            if (Constant.DEBUG) System.out.println(Constant.ERROR_INFO);
+            return "redirect:/register";
         }
 
         // check email
         if (!Utils.checkEmail(user.getEmail())) {
-            model.addAttribute(Constant.ERROR_INFO, "邮箱错误!");
-            return "client/register";
+            session.setAttribute(Constant.ERROR_INFO, "邮箱错误!");
+            return "redirect:/register";
         }
 
         // register
@@ -45,7 +48,6 @@ public class RegisterController {
         if (role.equals("管理员")) {
             return adminController.User(request);
         } else {
-            HttpSession session = request.getSession(true);
             if (role.equals("项目经理") || role.equals("开发") || role.equals("测试")) {
                 session.setAttribute("userId", user.getUser_id());
                 session.setAttribute("username", user.getUsername());
@@ -54,7 +56,7 @@ public class RegisterController {
                 return projectController.Project(request);
             }
         }
-        model.addAttribute(Constant.ERROR_INFO, "未知错误!");
-        return "client/register";
+        session.setAttribute(Constant.ERROR_INFO, "未知错误!");
+        return "redirect:/register";
     }
 }

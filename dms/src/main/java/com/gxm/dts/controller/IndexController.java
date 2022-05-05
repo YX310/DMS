@@ -51,8 +51,9 @@ public class IndexController {
     }
 
     @GetMapping(value = {"/register"})
-    public String toRegister(Model model) {
-        model.addAttribute(ERROR_INFO, null);
+    public String toRegister(HttpSession session,Model model) {
+        model.addAttribute(ERROR_INFO, session.getAttribute(ERROR_INFO));
+        session.setAttribute(ERROR_INFO, null);
         return "client/register";
     }
 
@@ -84,14 +85,11 @@ public class IndexController {
     //(前台)修改用户信息
     @RequestMapping("/updateMe")
     public String updateUserWithId(HttpServletRequest request,
-                                   User user,
-                                   Model model){
+                                   User user){
         HttpSession session = request.getSession(true);
         userServiceImpl.updateMeWithId(user);
         session.setAttribute("head_img", user.getHead_img());
         System.out.println(user);
-//        session.setAttribute(Constant.CONFIRM_INFO, "啦啦啦！");
-//        model.addAttribute(Constant.CONFIRM_INFO, "啦啦啦");
         return "redirect:/toMe?id=" + user.getUser_id();
     }
 

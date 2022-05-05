@@ -7,8 +7,10 @@
     <link th:href="@{/css/select_input.css}" rel="stylesheet"/>
     <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
     <link th:href="@{/back/css/page.css}" rel="stylesheet"/>
+    <link th:href="@{/css/zeroModal.css}" rel="stylesheet" />
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/select_input.js}"></script>
+    <script th:src="@{/js/zeroModal.js}"></script>
     <style type="text/css">
         body{font-size: 1.3em;}
         th,td{text-align: center;font-size: 1em;}
@@ -53,7 +55,7 @@
                     <td th:text="${n.progress}"></td>
                     <td >
                         <a class="btn btn-primary" th:href="@{/toUpdateDemand(id=${n.demand_id})}">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-danger" th:href="@{/deleteDemand(id=${n.demand_id})}">删除</a>
+                        <a class="btn btn-danger" th:onclick="_confirm2([[${n.demand_id}]])">删除</a>
                     </td>
                 </tr>
             </table>
@@ -68,6 +70,34 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function _confirm2(id) {
+            console.log(id);
+            zeroModal.confirm({
+                content: '确定删除信息吗？',
+                contentDetail: "",
+                okFn: function() {
+                    location.href="/deleteDemand?id="+id ;
+                },
+                cancelFn: function() {
+                    // alert('您已取消！');
+                }
+            });
+        }
+
+        function confirm_success(successInfo) {
+            console.log("successInfo" + successInfo);
+            if (successInfo != null) {
+                zeroModal.success({
+                    content: '删除成功！',
+                    contentDetail: successInfo,
+                });
+            }
+        }
+        confirm_success([[${successInfo}]])
+        /*]]>*/
+    </script>
 
 </body>
 </html>

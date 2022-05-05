@@ -5,6 +5,7 @@ public class Constant {
     public static final String SESSION_USER_ID = "userId";
     public static final String ERROR_INFO = "errorInfo";
     public static final String CONFIRM_INFO = "confirmInfo";
+    public static final String SUCCESS_INFO = "successInfo";
     public static final boolean DEBUG = true;
     public static final boolean IS_DEFECT = true;
 }

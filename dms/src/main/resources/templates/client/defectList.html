@@ -55,15 +55,9 @@
                     <td th:text="${n.designated_person}"></td>
                     <td th:text="${n.defect_state}"></td>
                     <td th:text="${n.progress}"></td>
-                    <td >
+                    <td>
                         <a class="btn btn-primary" th:href="@{/toUpdateDefect(id=${n.defect_id})}">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                        <a class="btn btn-danger" th:href="@{/deleteDefect(id=${n.defect_id})}">删除</a>-->
-<!--                         <a class="btn btn-danger"  th:attr="defect_id=${n.defect_id}" th:onclick="|_confirm2(this.getAttribute('defect_id')|" >删除</a>-->
-
-                        <!-- start 这里这里，靠哥哥了,现在进入缺陷是炸的-->
-                        <a class="btn btn-danger" th:onclick="|_confirm2(${n.defect_id})|" >删除</a>
-                        <!-- end -->
-
+                        <a class="btn btn-danger" th:onclick="_confirm2([[${n.defect_id}]])" >删除</a>
                     </td>
                 </tr>
             </table>
@@ -78,14 +72,14 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
+    <script th:inline="javascript">
         /*<![CDATA[*/
         function _confirm2(id) {
+            console.log(id);
             zeroModal.confirm({
                 content: '确定删除信息吗？',
                 contentDetail: "",
                 okFn: function() {
-                    alert('删除成功！');
                     location.href="/deleteDefect?id="+id ;
                 },
                 cancelFn: function() {
@@ -93,6 +87,17 @@
                 }
             });
         }
+
+        function confirm_success(successInfo) {
+            console.log("successInfo" + successInfo);
+            if (successInfo != null) {
+                zeroModal.success({
+                    content: '删除成功！',
+                    contentDetail: successInfo,
+                });
+            }
+        }
+        confirm_success([[${successInfo}]])
         /*]]>*/
     </script>
 </body>

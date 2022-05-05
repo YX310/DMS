@@ -6,6 +6,7 @@ import com.gxm.dts.model.domain.ProjectMember;
 import com.gxm.dts.model.domain.UserProject;
 import com.gxm.dts.service.implement.ProjectServiceImpl;
 import com.gxm.dts.service.implement.UserServiceImpl;
+import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,7 +84,7 @@ public class ProjectController {
 
         projectServiceImpl.addProject(project);
         userProject.setProject_id(project.getProject_id());
-        System.out.println("userProject" + userProject);
+        if (Constant.DEBUG) System.out.println("userProject" + userProject);
 
         for (Integer userId : isSystemUser) {
             //向user_and_project表插入数据

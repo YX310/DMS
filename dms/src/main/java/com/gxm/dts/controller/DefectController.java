@@ -38,10 +38,18 @@ public class DefectController {
 
     @GetMapping(value = "/toDefectList")
     public String toDefectList(HttpServletRequest request,
-                               Integer id) {
+                               Integer id,
+                               Model model) {
         if (Constant.DEBUG) System.out.println("project id: " + id);
         List<Defect> list = defectServiceImpl.selectDefectWithProjectId(id);
         request.setAttribute("data3", list);
+
+        // add for delete tips
+        Object object = request.getSession(true).getAttribute(SUCCESS_INFO);
+        if (object != null) {
+            model.addAttribute(SUCCESS_INFO, object);
+            request.getSession(true).setAttribute(SUCCESS_INFO, null);
+        }
         return this.Defect(request, 1, 5);
     }
 
@@ -175,11 +183,12 @@ public class DefectController {
 
     //删除缺陷
     @RequestMapping("/deleteDefect")
-    public String deleteDefect(HttpServletRequest request,
+    public String deleteDefect(HttpSession session,
                              String id) {
-        Object object = request.getSession().getAttribute(SESSION_PROJECT_ID);
+        Object object = session.getAttribute(SESSION_PROJECT_ID);
         int projectId = object != null ? (int) object : Integer.parseInt("");
         defectServiceImpl.deleteDefectWithId(id);
+        session.setAttribute(SUCCESS_INFO, "");
         return "redirect:/toDefectList?id=" + projectId; //redirect重定向
     }
 

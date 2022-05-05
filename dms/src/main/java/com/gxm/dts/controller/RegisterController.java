@@ -16,8 +16,6 @@ import javax.servlet.http.HttpSession;
 public class RegisterController {
     @Autowired
     private IndexMapper indexMapper;
-    @Autowired
-    private IndexController indexController;
     @Autowired(required = false)
     private AdminController adminController;
     @Autowired

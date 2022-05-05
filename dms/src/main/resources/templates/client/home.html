@@ -18,44 +18,6 @@
 	</head>
 	<body>
 		<div th:replace="/public/header::header"></div>
-<!--		<div id="toolbarBox" style="min-height: 60px;">-->
-<!--			<div id="toolbar-container">-->
-<!--				<div id="toolbar-container-left">-->
-<!--					<div id="toolbar-logo">DTS</div>-->
-<!--					<div class="toolbar-f1">-->
-<!--						<ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>-->
-<!--						<ul><a th:href="@{/homeProjectList}">我的项目</a></ul>-->
-<!--					</div>-->
-<!--				</div>-->
-
-<!--				<div id="toolbar-container-middle">-->
-<!--					<div class="search-box">-->
-<!--						<form class="search_form" method="post" onsubmit="return handleSearchSubmit()">-->
-<!--							<div id="search-input-box" autoHeight="true">-->
-<!--								<input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">-->
-<!--								<ul class="search-ul">-->
-<!--								</ul>-->
-<!--							</div>-->
-<!--							&lt;!&ndash;<div style="display: inline-block; margin-left: -5px;">&ndash;&gt;-->
-<!--							<input type="submit" value="搜索" id="input_sub" class="input_sub">-->
-<!--							&lt;!&ndash;</div>&ndash;&gt;-->
-<!--						</form>-->
-<!--					</div>-->
-<!--				</div>-->
-
-<!--				<div id="toolbar-container-right">-->
-<!--					<div class="toolbar-user">-->
-<!--						<div class="headimg_box">-->
-<!--							<img th:src="@{(${session.head_img})}" alt="我的头像"/>-->
-<!--						</div>-->
-<!--						<span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>-->
-<!--					</div>-->
-<!--					<div class="toolbar-logout">-->
-<!--						<a href="/login">退出</a>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
 		<!--未加入任何项目-->
 		<div th:unless="${(data.list).size() != 0}" class="project_box">
 			<div class="project_content">

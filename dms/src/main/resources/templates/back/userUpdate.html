@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>用户信息修改</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+    <link th:href="@{/css/home.css}" rel="stylesheet" />
+    <link th:href="@{/css/index.css}" rel="stylesheet" />
     <link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
     <link th:href="@{/back/css/page.css}" rel="stylesheet"/>
+    <link th:href="@{/css/zeroModal.css}" rel="stylesheet"/>
     <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/zeroModal.js}"></script>
     <style type="text/css">
         body{font-size: 1.3em;}
         th,td{text-align: center;font-size: 1em;}
@@ -19,7 +21,7 @@
     <div th:replace="/public/header::header"></div>
         <div class="userupdate-box">
             <div class="userupdate-content">
-                <form th:action="@{/update}" method="post">
+                <form th:action="@{/update}" method="post" id="updateForm">
                     <h2 class="heading" >修改用户信息</h2>
                     <input name="user_id" type="hidden" th:value="${user.user_id}"/>
                     <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
@@ -45,9 +47,26 @@
                         </tr>
 
                     </table>
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">保存修改</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">保存修改</button>
                 </form>
             </div>
         </div>
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        function _confirm2() {
+            zeroModal.confirm({
+                content: '确定提交修改吗？',
+                contentDetail: "",
+                okFn: function() {
+                    alert('修改成功！');
+                    $("#updateForm").submit();
+                },
+                cancelFn: function() {
+                    alert('您已取消！');
+                }
+            });
+        }
+        /*]]>*/
+    </script>
 </body>
 </html>

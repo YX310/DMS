@@ -1,6 +1,8 @@
 package com.gxm.dts.controller;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.*;
+import com.gxm.dts.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,11 +83,15 @@ public class IndexController {
 
     //(前台)修改用户信息
     @RequestMapping("/updateMe")
-    public String updateUserWithId(HttpServletRequest request, User user){
-        userServiceImpl.updateMeWithId(user);
+    public String updateUserWithId(HttpServletRequest request,
+                                   User user,
+                                   Model model){
         HttpSession session = request.getSession(true);
+        userServiceImpl.updateMeWithId(user);
         session.setAttribute("head_img", user.getHead_img());
         System.out.println(user);
+//        session.setAttribute(Constant.CONFIRM_INFO, "啦啦啦！");
+//        model.addAttribute(Constant.CONFIRM_INFO, "啦啦啦");
         return "redirect:/toMe?id=" + user.getUser_id();
     }
 

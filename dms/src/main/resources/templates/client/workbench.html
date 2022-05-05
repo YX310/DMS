@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<title>我的工作台</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<link rel="stylesheet" th:href="@{/css/index.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+	<link th:href="@{/css/index.css}" rel="stylesheet"/>
+	<link th:href="@{/css/home.css}" rel="stylesheet"/>
 	<link th:href="@{/css/select_input.css}" rel="stylesheet"/>
 	<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/workbench.css}" />
+	<link th:href="@{/css/workbench.css}" rel="stylesheet" type="text/css" />
 	<script th:src="@{/js/jquery.js}"></script>
 	<script th:src="@{/js/select_input.js}"></script>
 	<style type="text/css">
@@ -18,42 +18,6 @@
 	</style>
 	<body>
 		<div th:replace="/public/header::header"></div>
-<!--		<div id="toolbarBox" style="min-height: 48px;">-->
-<!--			<div id="toolbar-container">-->
-<!--				<div id="toolbar-container-left">-->
-<!--					<div id="toolbar-logo">DTS</div>-->
-<!--					<div class="toolbar-f1">-->
-<!--						<ul><a th:href="@{/toWorkbench(id=${session.userId})}">我的工作台</a></ul>-->
-<!--						<ul><a th:href="@{/homeProjectList}">我的项目</a></ul>-->
-<!--					</div>-->
-<!--				</div>-->
-
-<!--				<div id="toolbar-container-middle">-->
-<!--					<div class="search-box">-->
-<!--						<form class="search_form" method="post" onsubmit="return handleSearchSubmit()">-->
-<!--							<div id="search-input-box" autoHeight="true">-->
-<!--								<input type="text" id="input_text" placeholder="请输入搜索内容" autocomplete="off" onsubmit="return false">-->
-<!--								<ul class="search-ul">-->
-<!--								</ul>-->
-<!--							</div>-->
-<!--							<input type="submit" value="搜索" id="input_sub" class="input_sub">-->
-<!--						</form>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--				<div id="toolbar-container-right">-->
-<!--					<div class="toolbar-user">-->
-<!--						<div class="headimg_box">-->
-<!--							<img th:src="@{(${session.head_img})}" alt="我的头像"/>-->
-<!--						</div>-->
-<!--						<span ><a th:if="${(session.userId)}!=null " th:text="${session.username}" class="usermsg" th:href="@{/toMe(id=${session.userId})}"></a></span>-->
-<!--					</div>-->
-<!--					<div class="toolbar-logout">-->
-<!--						<a href="/login">退出</a>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-		
 		<div id="workbench-box">
 			<div class="workbench-content">
 				<div class="workbench-content-left" style="margin-bottom:20px;">

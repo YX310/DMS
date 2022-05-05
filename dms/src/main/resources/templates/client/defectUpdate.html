@@ -5,12 +5,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>更新缺陷</title>
-	<link rel="stylesheet" th:href="@{/css/index.css}" />
-	<link rel="stylesheet" th:href="@{/css/select_input.css}"/>
-	<link rel="stylesheet" th:href="@{/css/updateDefect.css}"/>
-	<link rel="stylesheet" th:href="@{/css/bootstrap-markdown.min.css}"/>
-	<link rel="stylesheet" th:href="@{/css/fileinput.min.css}"/>
-	<link rel="stylesheet" th:href="@{/css/jquery.horizontalmenu.css}"/>
+	<link th:href="@{/css/index.css}" rel="stylesheet"/>
+	<link th:href="@{/css/select_input.css}" rel="stylesheet" />
+	<link th:href="@{/css/updateDefect.css}" rel="stylesheet" />
+	<link th:href="@{/css/bootstrap-markdown.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/fileinput.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/jquery.horizontalmenu.css}" rel="stylesheet" />
+	<link th:href="@{/css/zeroModal.css}" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<script th:src="@{/js/jquery.js}"></script>
 	<script th:src="@{/js/select_input.js}"></script>
@@ -19,6 +20,7 @@
 	<script th:src="@{/js/fileinput.min.js}"></script>
 	<script th:src="@{/js/autoHeight.js}"></script>
 	<script th:src="@{/js/jquery.horizontalmenu.js}"></script>
+	<script th:src="@{/js/zeroModal.js}"></script>
 	<style type="text/css">
 		body{font-size: 1.3em;}
 		th,td{font-size: 1em;}
@@ -28,7 +30,7 @@
 	<body>
 	<div th:replace="/client/index::header"></div>
 
-	<form th:action="@{/updateDefect}" method="post" onsubmit="return true" enctype="multipart/form-data">
+	<form th:action="@{/updateDefect}" method="post" onsubmit="return true" enctype="multipart/form-data" id="updateDefectForm">
 		<input name="defect_id" type="hidden" th:value="${defect.defect_id}"/>
 		<input name="project_id" type="hidden" th:value="${session.projectId}"/>
 		<input name="defect_name" type="hidden" th:value="${defect.defect_name}"/>
@@ -158,7 +160,7 @@
 							</div>
 						</div>
 						<button class="btn btn-primary btn-lg btn-block" style="width: 130px; float: left;margin-top: 50px;margin-left: 26%" type="reset">重置</button>
-						<button class="btn btn-primary btn-lg btn-block" style="width: 130px; float: left;margin-top: 50px;margin-left: 20%;"type="submit">保存</button>
+						<button class="btn btn-primary btn-lg btn-block" style="width: 130px; float: left;margin-top: 50px;margin-left: 20%;"type="button" onclick="_confirm2()">保存</button>
 					</div>
 				</div>
 
@@ -224,8 +226,21 @@
 			showPreview: false,
 			browseLabel: "",
 		});
-
-
+		/*<![CDATA[*/
+		function _confirm2() {
+			zeroModal.confirm({
+				content: '确定提交修改吗？',
+				contentDetail: "",
+				okFn: function() {
+					alert('修改成功！');
+					$("#updateDefectForm").submit();
+				},
+				cancelFn: function() {
+					alert('您已取消！');
+				}
+			});
+		}
+		/*]]>*/
 	</script>
 	</body>
 </html>

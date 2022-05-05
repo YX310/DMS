@@ -40,6 +40,11 @@ public interface UserMapper {
     @Select("UPDATE user SET nickname = #{nickname}, password = #{password},head_img = #{head_img}, email = #{email} WHERE user_id = #{user_id}")
     public void updateMeWithId(User user);
 
+    //查询用户id（前台）
     @Select("SELECT user_id FROM user WHERE username = #{username}")
     public Integer findUserIdByUsername(String username);
+
+    //查询用户username（前台）
+    @Select("SELECT username FROM user WHERE user_id = #{userId}")
+    public String findUsernameById(int userId);
 }

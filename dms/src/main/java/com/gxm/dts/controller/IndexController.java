@@ -3,6 +3,7 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.implement.*;
 import com.gxm.dts.util.Constant;
+import com.gxm.dts.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-import static com.gxm.dts.util.Constant.DEBUG;
-import static com.gxm.dts.util.Constant.ERROR_INFO;
+import static com.gxm.dts.util.Constant.*;
+import static com.gxm.dts.util.Utils.applyInfo;
 
 
 /**
@@ -42,6 +43,7 @@ public class IndexController {
         if (DEBUG) System.out.println("ERROR_INFO");
         model.addAttribute(ERROR_INFO, session.getAttribute(ERROR_INFO));
         session.setAttribute(ERROR_INFO, null);
+
         return "client/login";
     }
 
@@ -108,7 +110,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = {"/toOverview"})
-    public String toOverView(Integer id, Model model){
+    public String toOverView(HttpSession session, Integer id, Model model){
         Project project = projectServiceImpl.getProjectId(id);
         model.addAttribute("project", project);
         List<Defect> defects = defectServiceImpl.selectDefectWithProjectId(id);
@@ -152,6 +154,9 @@ public class IndexController {
         model.addAttribute("QAName", QA);
 
         model.addAttribute("allUpdateRecord", updateRecordServiceImpl.selectUpdateRecordWithProjectId(project.getProject_id()));
+
+        // for edit project
+        applyInfo(session, model, UPDATE_INFO);
         return "client/overview";
     }
 

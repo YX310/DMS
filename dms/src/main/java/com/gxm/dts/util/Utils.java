@@ -1,5 +1,8 @@
 package com.gxm.dts.util;
 
+import org.springframework.ui.Model;
+
+import javax.servlet.http.HttpSession;
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -22,4 +25,11 @@ public class Utils {
         return res;
     }
 
+    public static void applyInfo(HttpSession session, Model model, String info) {
+        Object object = session.getAttribute(info);
+        if (object != null) {
+            model.addAttribute(info, object);
+            session.setAttribute(info, null);
+        }
+    }
 }

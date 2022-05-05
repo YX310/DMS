@@ -27,7 +27,7 @@ public class UserServiceImpl implements IUserService {
     public PageInfo<User> selectUserWithPage(Integer page2, Integer count) {
         PageHelper.startPage(page2, count);
         List<User> userList = userMapper.selectUserWithPage();//需要修改
-        PageInfo<User> pageInfo=new PageInfo<>(userList);
+        PageInfo<User> pageInfo = new PageInfo<>(userList);
         return pageInfo;
     }
 
@@ -71,6 +71,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public Integer findUserIdByUsername(String username) {
         return userMapper.findUserIdByUsername(username);
+    }
+
+    @Override
+    public String findUsernameById(int userId) {
+        return userMapper.findUsernameById(userId);
     }
 
     @Override

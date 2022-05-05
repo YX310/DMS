@@ -53,7 +53,7 @@ public class RegisterController {
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("email", user.getEmail());
                 // Now the page we return is the login page, but also can jump to the index page.
-                return projectController.Project(request);
+                return projectController.Project(request, model);
             }
         }
         session.setAttribute(Constant.ERROR_INFO, "未知错误!");

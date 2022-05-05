@@ -8,8 +8,10 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
 		<link th:href="@{/back/css/bootstrap.css}" rel="stylesheet"/>
 		<link th:href="@{/css/select_input.css}" rel="stylesheet"/>
+		<link th:href="@{/css/zeroModal.css}" rel="stylesheet" />
 		<script th:src="@{/js/jquery.js}"></script>
 		<script th:src="@{/js/select_input.js}"></script>
+		<script th:src="@{/js/zeroModal.js}"></script>
 		<style type="text/css">
 			body{font-size: 1.3em;}
 			th,td{text-align: center;font-size: 1em;}
@@ -54,6 +56,20 @@
 				</div>
 			</div>
 		</div>
-
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+			function _showInfo(title, info) {
+				console.log(info);
+				if (info != null) {
+					zeroModal.success({
+						content: title,
+						contentDetail: info,
+					});
+				}
+			}
+			_showInfo("创建成功", [[${createInfo}]]);
+			_showInfo("项目删除成功！", [[${deleteInfo}]]);
+			/*]]>*/
+		</script>
 	</body>
 </html>

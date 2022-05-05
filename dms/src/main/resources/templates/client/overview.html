@@ -8,10 +8,12 @@
         <link th:href="@{/css/select_input.css}" rel="stylesheet" />
         <link th:href="@{/css/overview.css}" rel="stylesheet" />
         <link th:href="@{/css/activity.css}" rel="stylesheet" />
+        <link th:href="@{/css/zeroModal.css}" rel="stylesheet" />
         <script th:src="@{/js/jquery.js}"></script>
         <script th:src="@{/js/select_input.js}"></script>
         <script th:src="@{/js/autoHeight.js}"></script>
         <script th:src="@{/js/jquery.simpleLoadMore.js}"></script>
+        <script th:src="@{/js/zeroModal.js}"></script>
         <style type="text/css">
             body{font-size: 1.3em;}
             th,td{text-align: center;font-size: 1em;}
@@ -34,7 +36,7 @@
                         <span th:text="${project.project_name}"></span>
                         <div th:unless="${session.userRole != '项目经理'}" style="display: inline-block; float: right;font-size: 0.7em;">
                             <span><a th:href="@{/toUpdateProject(id=${session.projectId})}">编辑</a></span>&nbsp;&nbsp;
-                            <span><a th:href="@{/deleteProject(id=${session.projectId})}">删除</a></span>
+                            <span><a th:onclick="_confirm2([[${session.projectId}]])">删除</a></span>
                         </div>
                     </div>
                     <div class="creator"><span th:text="${'创建人：' + project.creator}"></span></div>
@@ -129,11 +131,33 @@
                 </div>
             </div>
         </div>
-        <script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
             $('.record-list').simpleLoadMore({
                 item: 'li.item',
                 count: 5
             });
+            function _confirm2(id) {
+                console.log(id);
+                zeroModal.confirm({
+                    content: '是否删除项目？',
+                    okFn: function() {
+                        location.href="/deleteProject?id="+id ;
+                    },
+                });
+            }
+
+            function _confirm(errorInfo) {
+                console.log(errorInfo);
+                if (errorInfo != null) {
+                    zeroModal.error({
+                        content: '信息修改成功！',
+                        contentDetail: errorInfo,
+                    });
+                }
+            }
+            _confirm([[${updateInfo}]])
+            /*]]>*/
         </script>
     </body>
 </html>

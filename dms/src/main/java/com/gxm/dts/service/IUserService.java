@@ -27,7 +27,11 @@ public interface IUserService {
     // 根据用户id修改单个用户信息(前台)
     public void updateMeWithId(User user);
 
+    //查询用户id（前台）
     public Integer findUserIdByUsername(String username);
+
+    //查询用户username（前台）
+    public String findUsernameById(int userId);
 
     // 查询所有用户名
     public List<SearchContent> selectUser(String keyword);

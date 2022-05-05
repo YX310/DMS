@@ -63,14 +63,6 @@
 				<input name="creation_date" type="hidden" id="time" value=""/>
 				<h2 class="heading" >新建项目</h2>
 
-				<!--系统成员不存在-->
-				<div th:unless="${isNotSystemUser == null || isNotSystemUser.size() == 0}">
-					<div th:each="n:${isNotSystemUser}">
-						<span th:text="${n}"><span th:unless="${n == isNotSystemUser.get(isNotSystemUser.size() - 1)}">,</span></span>
-					</div>
-					<span>不存在</span>
-				</div>
-
 				<table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
 					<tr>
 						<td width="20%" align="center">标题</td>
@@ -110,18 +102,6 @@
 			$(document).ready(function() {
 				$('[data-role="tags-input"]').tagsInput();
 			});
-			function _confirm2(errorInfo) {
-				console.log(errorInfo);
-				if (errorInfo != null) {
-					zeroModal.error({
-						content: '创建失败',
-						contentDetail: errorInfo,
-						okFn: function() {},
-						cancelFn: function() {}
-					});
-				}
-			}
-			_confirm2([[${errorInfo}]])
 			/*]]>*/
 		</script>
 	</body>

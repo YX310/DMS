@@ -52,7 +52,7 @@ public class LoginController {
                 session.setAttribute("head_img", user.getHead_img());
                 model.addAttribute(Constant.ERROR_INFO, null);
                 if (userRole.equals("管理员")) return adminController.User(request);
-                else return projectController.Project(request);
+                else return projectController.Project(request, model);
             } else {
                 session.setAttribute(Constant.ERROR_INFO, "角色异常，请重试");
                 return "redirect:/login";

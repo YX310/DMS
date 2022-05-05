@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.gxm.dts.util.Constant.SESSION_PROJECT_ID;
+import static com.gxm.dts.util.Constant.*;
+import static com.gxm.dts.util.Utils.applyInfo;
 
 @Controller
 public class ProjectController {
@@ -31,7 +33,10 @@ public class ProjectController {
 
     // home页面（分页展示）
     @GetMapping(value = "/homeProjectList")
-    String Project(HttpServletRequest request) {
+    String Project(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(true);
+        applyInfo(session, model, CREATE_INFO);
+        applyInfo(session, model, DELETE_INFO);
         return this.Project(request, 1, 10);
     }
 
@@ -63,6 +68,14 @@ public class ProjectController {
         }
     }
 
+    private void setNotSystemUser(List<String> isNotSystemUser, HttpSession session, String info) {
+        if (isNotSystemUser.size() != 0) {
+            StringBuilder tmp = new StringBuilder("不存在用户：");
+            for (String item : isNotSystemUser) tmp.append(item).append(",");
+            session.setAttribute(info, tmp.deleteCharAt(tmp.length() - 1));
+        }
+    }
+
     //新建项目
     @RequestMapping("/toAddProject")
     public String toAddProject(){
@@ -70,17 +83,22 @@ public class ProjectController {
     }
 
     @RequestMapping("/addProject")
-    public String add(Project project, UserProject userProject, Model model) {
+    public String add(HttpSession session,
+                      Project project,
+                      UserProject userProject) {
+        String creator = userServiceImpl.findUsernameById(userProject.getUser_id());
+        if (!project.getProject_member().contains(creator)) {
+            project.setProject_member(creator + ";" + project.getProject_member());
+        }
         String[] projectMembers = project.getProject_member().split(";");
         List<Integer> isSystemUser = new ArrayList<>();
         List<String> isNotSystemUser = new ArrayList<>();
         isSystemUser.add(userProject.getUser_id());
-        filterUser(isSystemUser, isNotSystemUser, projectMembers, userProject.getUser_id());
+        List<String> existMember = filterUser(isSystemUser, isNotSystemUser, projectMembers, userProject.getUser_id());
 
-        if (isNotSystemUser.size() != 0) {
-            model.addAttribute("isNotSystemUser", isNotSystemUser);
-            return "client/addProject";
-        }
+        StringBuilder recordMember = new StringBuilder();
+        for (String item : existMember) recordMember.append(item).append(";");
+        project.setProject_member(recordMember.deleteCharAt(recordMember.length() - 1).toString());
 
         projectServiceImpl.addProject(project);
         userProject.setProject_id(project.getProject_id());
@@ -90,21 +108,27 @@ public class ProjectController {
             //向user_and_project表插入数据
             projectServiceImpl.addProjectMember(new ProjectMember(userId, project.getProject_id()));
         }
+        session.setAttribute(CREATE_INFO, "");
+        setNotSystemUser(isNotSystemUser, session, CREATE_INFO);
         return "redirect:/homeProjectList";
     }
 
-    private void filterUser(List<Integer> isSystemUser, List<String> isNotSystemUser, String[] projectMembers, int projectId) {
+    private List<String> filterUser(List<Integer> isSystemUser, List<String> isNotSystemUser, String[] projectMembers, int creatorId) {
+        List<String> existMember = new ArrayList<>();
         for (String projectMember : projectMembers) {
             Integer userId = userServiceImpl.findUserIdByUsername(projectMember);
             if (userId == null) {
                 isNotSystemUser.add(projectMember);
                 System.out.println(projectMember);
                 continue;
+            } else {
+                existMember.add(projectMember);
             }
-            if (userId != projectId && userId > 0) {
+            if (userId != creatorId && userId > 0) {
                 isSystemUser.add(userId);
             }
         }
+        return existMember;
     }
 
     //更新（修改）项目信息
@@ -117,34 +141,43 @@ public class ProjectController {
 
     //修改项目信息
     @RequestMapping("/updateProject")
-    public String updateDefectWithId(Project project, Model model) {
+    public String updateDefectWithId(HttpSession session,
+                                     Project project) {
         int projectId = project.getProject_id();
+        int creatorId = userServiceImpl.findUserIdByUsername(projectServiceImpl.selectCreator(projectId));
+        String creator = userServiceImpl.findUsernameById(creatorId);
+        if (!project.getProject_member().contains(creator)) {
+            project.setProject_member(creator + ";" + project.getProject_member());
+        }
         String[] projectMembers = project.getProject_member().split(";");
         List<Integer> isSystemUser = new ArrayList<>();
         List<String> isNotSystemUser = new ArrayList<>();
         System.out.println("project.getCreator:" + project.getCreator());
-        int creatorId = userServiceImpl.findUserIdByUsername(projectServiceImpl.selectCreator(projectId));
         isSystemUser.add(creatorId);
-        filterUser(isSystemUser, isNotSystemUser, projectMembers, creatorId);
-        if (isNotSystemUser.size() != 0) {
-            model.addAttribute("isNotSystemUser", isNotSystemUser);
-            return "client/projectUpdate";
-        }
-        projectServiceImpl.updateProjectWithId(project);
+        List<String> existMember = filterUser(isSystemUser, isNotSystemUser, projectMembers, creatorId);
 
+        StringBuilder recordMember = new StringBuilder();
+        for (String item : existMember) recordMember.append(item).append(";");
+        project.setProject_member(recordMember.deleteCharAt(recordMember.length() - 1).toString());
+
+        projectServiceImpl.updateProjectWithId(project);
         projectServiceImpl.deleteProjectMember(projectId);
         for (Integer userId : isSystemUser) {
             //向user_and_project表插入数据
             projectServiceImpl.addProjectMember(new ProjectMember(userId, project.getProject_id()));
         }
+        session.setAttribute(UPDATE_INFO, "");
+        setNotSystemUser(isNotSystemUser, session, UPDATE_INFO);
         System.out.println("执行了" + project);
         return "redirect:/toOverview?id=" + projectId; //redirect重定向
     }
 
     //删除项目信息
     @RequestMapping("/deleteProject")
-    public String deleteProject(int id) {
+    public String deleteProject(HttpSession session,
+                                int id) {
         projectServiceImpl.deleteProjectWithId(id);
+        session.setAttribute(DELETE_INFO, "");
         return "redirect:/homeProjectList"; //redirect重定向
     }
 }

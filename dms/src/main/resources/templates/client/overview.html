@@ -75,6 +75,10 @@
                     <hr />
                     <div class="project-activities">
                         <h2 style="color:rgba(71,149,243,1) ;">活动</h2>
+                        <!--未有动态-->
+                        <div class="main record-list" th:unless="${allUpdateRecord.size() != 0}">
+                            <p style="font-size: 1.2em;" >尚未有活动喔~</p>
+                        </div>
                         <div class="main record-list">
                             <ul class="cbp_tmtimeline" th:each="n, allUpdateRecordStat:${allUpdateRecord}">
                                 <li class="item" title="查看详情">

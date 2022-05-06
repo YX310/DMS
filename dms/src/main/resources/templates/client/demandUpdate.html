@@ -12,7 +12,7 @@
 	<link th:href="@{/css/fileinput.min.css}" rel="stylesheet" />
 	<link th:href="@{/css/jquery.horizontalmenu.css}" rel="stylesheet" />
 	<link th:href="@{/css/zeroModal.css}" rel="stylesheet" />
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 	<script th:src="@{/js/jquery.js}"></script>
 	<script th:src="@{/js/select_input.js}"></script>
 	<script th:src="@{/js/bootstrap-markdown.js}"></script>
@@ -126,11 +126,11 @@
 						</div>
 						<button class="btn btn-primary btn-lg btn-block" style="width: 130px; float: left;margin-top: 50px;margin-left: 26%" type="reset">重置</button>
 						<button class="btn btn-primary btn-lg btn-block" style="width: 130px; float: left;margin-top: 50px;margin-left: 20%;"type="button" onclick="_confirm2()" ()>保存</button>
+						<button style="display: none;" type="submit" id="submit-btn">保存</button>
 					</div>
 				</div>
 
 				<div class="updateDefect-right" style="max-height: 814px; overflow:auto;">
-					<span th:unless="${updateDemands.size() != 0 }">暂无记录</span>
 					<div class="update-container">
 						<div class="htmleaf-container">
 							<div class="content">
@@ -142,6 +142,7 @@
 								</div>
 								<div class="ah-tab-content-wrapper">
 									<div class="ah-tab-content" data-ah-tab-active="true">
+										<span th:unless="${updateDemands.size() != 0 }">暂无记录</span>
 										<div  th:each="n:${updateDemands}" th:unless="${n.record_content == ''}">
 											<span style="font-size: 1.2em;color: gray;" th:text="${'记录由 ' + n.update_person + ' 更新于 '+ #dates.format(n.update_time,'yyyy-MM-dd HH:mm:ss')}"></span>
 											<textarea style="color: rgba(71,149,243,1);word-wrap: break-word;border: 0; resize: none;overflow: hidden;width: 100%"
@@ -150,6 +151,7 @@
 										</div>
 									</div>
 									<div class="ah-tab-content">
+										<span th:unless="${fileUpload.size() != 0 }">暂无上传文件</span>
 										<div  th:each="n:${fileUpload}" th:unless="${fileUpload.size() == 0}">
 											<div class="file-name">
 												<a th:text="${n.getFile_name()}" th:href="${n.getFile_path()}" target="_blank" style="word-wrap:break-word;"></a><a th:href="@{/deleteDemandFile(id=${demand.demand_id}, fileId=${n.id})}" th:title="删除文件"><img style="width: 20px;height: 20px" src="../imgs/style_img/delete1.png"></a>
@@ -196,12 +198,9 @@
 				content: '确定提交修改吗？',
 				contentDetail: "",
 				okFn: function() {
-					alert('修改成功！');
-					$("#updateDemandForm").submit();
+					$("#submit-btn").click();
 				},
-				cancelFn: function() {
-					alert('您已取消！');
-				}
+				cancelFn: function() {}
 			});
 		}
 		/*]]>*/

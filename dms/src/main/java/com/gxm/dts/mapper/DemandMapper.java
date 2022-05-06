@@ -1,6 +1,7 @@
 package com.gxm.dts.mapper;
 
 import com.gxm.dts.model.domain.*;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -31,7 +32,7 @@ public interface DemandMapper {
 
     //新建需求
     @Insert("INSERT INTO demand(project_id, demand_name, demand_description,designated_person, demand_state, priority,start_date,finish_date,creation_time,demand_record,update_time,demand_creator) VALUES(#{project_id}, #{demand_name}, #{demand_description},#{designated_person}, #{demand_state}, #{priority},#{start_date},#{finish_date},#{creation_time},#{demand_record},#{update_time},#{demand_creator})")
-    @Options(useGeneratedKeys = true, keyProperty = "demand_id",keyColumn = "demand_id")
+    @Options(useGeneratedKeys = true, keyProperty = "demand_id", keyColumn = "demand_id")
     public void addDemand(Demand demand);
 
     //修改需求信息
@@ -51,6 +52,11 @@ public interface DemandMapper {
     public void deleteDemandWithId(int demandId);
 
     //查找当前需求所属项目的信息
-    @Select("SELECT * FROM project WHERE project_id IN (SELECT project_id FROM demand WHERE demand_id =#{demandId})")
+    @Select("SELECT * FROM project WHERE project_id IN (SELECT project_id FROM demand WHERE demand_id=#{demandId})")
     public DemandProject selectProjectMessageByDemandId(Integer demandId);
+
+    // 根据项目Id删除所有需求
+    @Select("DELETE FROM demand WHERE project_id=#{projectId}")
+    public void deleteDemandWithProjectId(int projectId);
+
 }

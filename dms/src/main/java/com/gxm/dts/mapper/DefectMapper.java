@@ -60,4 +60,8 @@ public interface DefectMapper {
     //查找当前缺陷所属项目的信息
     @Select("SELECT * FROM project WHERE project_id IN (SELECT project_id FROM defect WHERE defect_id =#{defectId})")
     public DefectProject selectProjectMessageByDefectId(String defectId);
+
+    // 根据项目id删除所有缺陷信息
+    @Select("DELETE FROM defect WHERE project_id = #{projectId}")
+    public void deleteDefectWithProjectId(int projectId);
 }

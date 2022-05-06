@@ -11,6 +11,7 @@
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/select_input.js}"></script>
     <script th:src="@{/js/zeroModal.js}"></script>
+    <script th:inline="javascript" th:src="@{/js/zeroModalTips.js}"></script>
     <style type="text/css">
         body{font-size: 1.3em;}
         th,td{text-align: center;font-size: 1em;}
@@ -82,22 +83,11 @@
                 okFn: function() {
                     location.href="/deleteDefect?id="+id ;
                 },
-                cancelFn: function() {
-                    // alert('您已取消！');
-                }
             });
         }
-
-        function confirm_success(successInfo) {
-            console.log("successInfo" + successInfo);
-            if (successInfo != null) {
-                zeroModal.success({
-                    content: '删除成功！',
-                    contentDetail: successInfo,
-                });
-            }
-        }
-        confirm_success([[${successInfo}]])
+        _showInfo("缺陷删除成功", [[${deleteInfo}]]);
+        _showInfo("缺陷新建成功", [[${createInfo}]]);
+        _showInfo("缺陷编辑成功", [[${updateInfo}]]);
         /*]]>*/
     </script>
 </body>

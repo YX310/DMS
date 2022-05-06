@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Defect;
 import com.gxm.dts.model.domain.DefectProject;
 import com.gxm.dts.model.domain.SearchContent;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -37,6 +38,9 @@ public interface IDefectService {
 
     // 查询所有缺陷标题
     public List<SearchContent> selectDefect(String keyword);
+
+    // 根据项目id删除所有缺陷信息
+    public void deleteDefectWithProjectId(int projectId);
 
 
 }

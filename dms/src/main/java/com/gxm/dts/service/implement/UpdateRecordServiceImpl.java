@@ -17,8 +17,8 @@ public class UpdateRecordServiceImpl implements IUpdateRecordService {
     private UpdateRecordMapper updateRecordMapper;
 
     @Override
-    public List<UpdateRecord> selectUpdateRecordWithAssocId(int assocId) {
-        return updateRecordMapper.selectUpdateRecordWithAssocId(assocId);
+    public List<UpdateRecord> selectUpdateRecordWithAssocId(int assocId, boolean isDefect) {
+        return updateRecordMapper.selectUpdateRecordWithAssocId(assocId, isDefect);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class UpdateRecordServiceImpl implements IUpdateRecordService {
     }
 
     @Override
-    public void deleteUpdateRecordWithAssocId(int id) {
-        updateRecordMapper.deleteUpdateRecordWithAssocId(id);
+    public void deleteUpdateRecordWithAssocId(int id, boolean isDefect) {
+        updateRecordMapper.deleteUpdateRecordWithAssocId(id, isDefect);
     }
 }

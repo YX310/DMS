@@ -13,8 +13,8 @@ import java.util.List;
 public interface UpdateRecordMapper {
 
     //根据缺陷/需求id查询update_record表
-    @Select("SELECT * FROM update_record WHERE assoc_id=#{assocId}")
-    public List<UpdateRecord> selectUpdateRecordWithAssocId(int assocId);
+    @Select("SELECT * FROM update_record WHERE assoc_id=#{assocId} AND is_defect=#{isDefect}")
+    public List<UpdateRecord> selectUpdateRecordWithAssocId(int assocId, boolean isDefect);
 
     //根据项目id查询update_record表
     @Select("SELECT * FROM update_record WHERE project_id=#{projectId} ORDER BY update_time DESC")
@@ -31,6 +31,6 @@ public interface UpdateRecordMapper {
     public void addUpdateRecord(UpdateRecord updateRecord);
 
     //根据id删除update_record记录
-    @Select("DELETE FROM update_record WHERE id=#{id}")
-    public void deleteUpdateRecordWithAssocId(int id);
+    @Select("DELETE FROM update_record WHERE assoc_id=#{assocId} AND is_defect=#{isDefect}")
+    public void deleteUpdateRecordWithAssocId(int assocId, boolean isDefect);
 }

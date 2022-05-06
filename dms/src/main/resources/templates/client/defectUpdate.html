@@ -21,6 +21,7 @@
 	<script th:src="@{/js/autoHeight.js}"></script>
 	<script th:src="@{/js/jquery.horizontalmenu.js}"></script>
 	<script th:src="@{/js/zeroModal.js}"></script>
+	<script th:inline="javascript" th:src="@{/js/zeroModalTips.js}"></script>
 	<style type="text/css">
 		body{font-size: 1.3em;}
 		th,td{font-size: 1em;}
@@ -204,7 +205,7 @@
 
 </form>
 
-	<script type="text/javascript">
+	<script th:inline="javascript">
 		$(function(){
 			$('.ah-tab-wrapper').horizontalmenu({
 				itemClick : function(item) {
@@ -232,13 +233,12 @@
 		function _confirm2() {
 			zeroModal.confirm({
 				content: '确定提交修改吗？',
-				contentDetail: "",
 				okFn: function() {
 					$("#submit-btn").click();
 				},
-				cancelFn: function() {}
 			});
 		}
+		_showInfo("更新缺陷失败", [[${errorInfo}]])
 		/*]]>*/
 	</script>
 	</body>

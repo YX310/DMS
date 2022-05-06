@@ -91,4 +91,10 @@ public class DefectServiceImpl implements IDefectService {
     public List<SearchContent> selectDefect(String keyword) {
         return defectMapper.selectDefect('%' + keyword + '%');
     }
+
+    @Override
+    public void deleteDefectWithProjectId(int projectId) {
+        defectMapper.deleteDefectWithProjectId(projectId);
+    }
+
 }

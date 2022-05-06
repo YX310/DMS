@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.mapper.DemandMapper;
 import com.gxm.dts.model.domain.*;
 import com.gxm.dts.service.IDemandService;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -91,5 +92,8 @@ public class DemandServiceImpl implements IDemandService {
         return demandMapper.selectDemand('%' + keyword + '%');
     }
 
-
+    @Override
+    public void deleteDemandWithProjectId(int projectId) {
+        demandMapper.deleteDemandWithProjectId(projectId);
+    }
 }

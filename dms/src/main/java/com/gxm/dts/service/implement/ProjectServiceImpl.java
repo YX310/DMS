@@ -103,7 +103,7 @@ public class ProjectServiceImpl implements IProjectService {
 
     @Override
     public boolean checkUserInProject(int userId, int projectId) {
-        return projectMapper.checkUserInProject(userId, projectId) == 1;
+        return projectMapper.checkUserInProject(userId, projectId) > 0;
     }
 
     @Override

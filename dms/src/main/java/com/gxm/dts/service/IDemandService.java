@@ -36,4 +36,7 @@ public interface IDemandService {
 
     // 查询所有需求标题
     public List<SearchContent> selectDemand(String keyword);
+
+    // 根据项目Id删除所有需求
+    public void deleteDemandWithProjectId(int projectId);
 }

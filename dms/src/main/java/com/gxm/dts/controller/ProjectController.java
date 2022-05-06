@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.gxm.dts.model.domain.Project;
 import com.gxm.dts.model.domain.ProjectMember;
 import com.gxm.dts.model.domain.UserProject;
+import com.gxm.dts.service.implement.DefectServiceImpl;
+import com.gxm.dts.service.implement.DemandServiceImpl;
 import com.gxm.dts.service.implement.ProjectServiceImpl;
 import com.gxm.dts.service.implement.UserServiceImpl;
 import com.gxm.dts.util.Constant;
@@ -30,6 +32,10 @@ public class ProjectController {
     private ProjectServiceImpl projectServiceImpl;
     @Autowired
     private UserServiceImpl userServiceImpl;
+    @Autowired
+    private DemandServiceImpl demandServiceImpl;
+    @Autowired
+    private DefectServiceImpl defectServiceImpl;
 
     // home页面（分页展示）
     @GetMapping(value = "/homeProjectList")
@@ -177,6 +183,8 @@ public class ProjectController {
     public String deleteProject(HttpSession session,
                                 int id) {
         projectServiceImpl.deleteProjectWithId(id);
+        defectServiceImpl.deleteDefectWithProjectId(id);
+        demandServiceImpl.deleteDemandWithProjectId(id);
         session.setAttribute(DELETE_INFO, "");
         return "redirect:/homeProjectList"; //redirect重定向
     }

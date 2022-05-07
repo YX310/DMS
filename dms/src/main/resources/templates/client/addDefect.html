@@ -141,7 +141,7 @@
 
 </div>
 
-<script type="text/javascript">
+<script th:inline="javascript">
     $(function(){
         $("#editor-zh").markdown({language:'zh'})
     })
@@ -160,9 +160,9 @@
                 $("#addDefectForm").submit();
             },
         });
-        _showInfo("缺陷新增失败", [[${errorInfo}]]);
-    /*]]>*/
     }
+    _showInfo("缺陷新增失败", [[${errorInfo}]]);
+    /*]]>*/
 </script>
 </body>
 </html>

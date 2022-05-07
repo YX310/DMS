@@ -45,7 +45,6 @@ public class DefectController {
         applyInfo(session, model, CREATE_INFO);
         applyInfo(session, model, UPDATE_INFO);
         applyInfo(session, model, DELETE_INFO);
-        applyInfo(session, model, ERROR_INFO);
         return this.Defect(request, 1, 5);
     }
 
@@ -77,7 +76,9 @@ public class DefectController {
 
     //新建缺陷
     @RequestMapping("/toAddDefect")
-    public String toAddDefect(){
+    public String toAddDefect(HttpSession session,
+                              Model model) {
+        applyInfo(session, model, ERROR_INFO);
         return "client/addDefect";
     }
 

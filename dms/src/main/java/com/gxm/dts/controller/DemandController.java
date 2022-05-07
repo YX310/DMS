@@ -45,7 +45,6 @@ public class DemandController {
         applyInfo(session, model, CREATE_INFO);
         applyInfo(session, model, UPDATE_INFO);
         applyInfo(session, model, DELETE_INFO);
-        applyInfo(session, model, ERROR_INFO);
         return this.Demand(request, 1, 5);
     }
 
@@ -77,7 +76,9 @@ public class DemandController {
 
     //新建需求
     @RequestMapping("/toAddDemand")
-    public String toAddDemand(){
+    public String toAddDemand(HttpSession session,
+                              Model model) {
+        applyInfo(session, model, ERROR_INFO);
         return "client/addDemand";
     }
 

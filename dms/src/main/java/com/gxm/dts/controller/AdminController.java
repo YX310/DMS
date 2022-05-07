@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import static com.gxm.dts.util.Constant.*;
 
 @Controller
 public class AdminController {
@@ -30,7 +33,7 @@ public class AdminController {
         PageInfo<User> list = userServiceImpl.selectUserWithPage(page2, count);
         request.setAttribute("data2", list);
         request.setAttribute("page2", page2);
-        request.setAttribute("count",userServiceImpl.selectUserWithPage(page2, count).getPages());
+        request.setAttribute("count", list.getPages());
         return "back/userList";
     }
 
@@ -63,8 +66,18 @@ public class AdminController {
 
     //删除用户
     @RequestMapping("/delete")
-    public String deleteUser(Integer id){
+    public String deleteUser(HttpSession session,
+                             Integer id) {
         userServiceImpl.deleteUserWithId(id);
+        Object object = session.getAttribute(SESSION_USER_ID);
+        if (object != null && id == object) {
+            session.setAttribute(SESSION_USER_ID, null);
+            session.setAttribute(SESSION_USER_NAME, null);
+            session.setAttribute(SESSION_USER_ROLE, null);
+            session.setAttribute(SESSION_USER_EMAIL, null);
+            session.setAttribute(SESSION_USER_HEAD_IMG, null);
+            return "redirect:/login";
+        }
         return "redirect:/toUserList"; //redirect重定向
     }
 

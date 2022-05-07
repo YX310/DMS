@@ -72,7 +72,7 @@ public class IndexController {
         String updatePerson = user.getUsername();
         List<UpdateRecord> updateRecords = updateRecordServiceImpl.selectUpdateRecordWithUpdatePerson(updatePerson);
         model.addAttribute("user", user);
-        model.addAttribute("updateRecords",updateRecords);
+        model.addAttribute("updateRecords", updateRecords);
         return "client/me";
     }
 

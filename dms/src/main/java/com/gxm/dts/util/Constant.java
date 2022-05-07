@@ -3,6 +3,10 @@ package com.gxm.dts.util;
 public class Constant {
     public static final String SESSION_PROJECT_ID = "projectId";
     public static final String SESSION_USER_ID = "userId";
+    public static final String SESSION_USER_NAME = "username";
+    public static final String SESSION_USER_ROLE = "userRole";
+    public static final String SESSION_USER_EMAIL = "email";
+    public static final String SESSION_USER_HEAD_IMG = "head_img";
     public static final String ERROR_INFO = "errorInfo";
     public static final String CONFIRM_INFO = "confirmInfo";
     public static final String UPDATE_INFO = "updateInfo";

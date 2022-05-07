@@ -31,6 +31,7 @@
             <div class="register-form">
                 <form th:action="@{/user/register}" method="post" onsubmit="return validateCode()">
                     <table cellpadding="0" cellspacing="0" border="0" class="form_table" id="table1">
+                        <input type="text" class="inputgri" name="head_img" value="../imgs/headimgs/headimg01.jpg" hidden/>
                         <tr>
                             <td valign="middle" align="right">
                                 用户名:

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.gxm.dts.util.Constant.*;
+
 @Controller
 public class RegisterController {
     @Autowired
@@ -45,13 +47,15 @@ public class RegisterController {
         // jump
         String role = user.getUser_role();
         model.addAttribute(Constant.ERROR_INFO, null);
+        session.setAttribute(SESSION_USER_ID, user.getUser_id());
+        session.setAttribute(SESSION_USER_NAME, user.getUsername());
+        session.setAttribute(SESSION_USER_ROLE,user.getUser_role());
+        session.setAttribute(SESSION_USER_EMAIL, user.getEmail());
+        session.setAttribute(SESSION_USER_HEAD_IMG, user.getHead_img());
         if (role.equals("管理员")) {
             return adminController.User(request);
         } else {
             if (role.equals("项目经理") || role.equals("开发") || role.equals("测试")) {
-                session.setAttribute("userId", user.getUser_id());
-                session.setAttribute("username", user.getUsername());
-                session.setAttribute("email", user.getEmail());
                 // Now the page we return is the login page, but also can jump to the index page.
                 return projectController.Project(request, model);
             }

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.gxm.dts.util.Constant.*;
+
 
 @Controller
 public class LoginController {
@@ -45,11 +47,11 @@ public class LoginController {
                     ||userRole.equals("项目经理")
                     || userRole.equals("开发")
                     || userRole.equals("测试")) {
-                session.setAttribute("userId", user.getUser_id());
-                session.setAttribute("username", user.getUsername());
-                session.setAttribute("userRole",user.getUser_role());
-                session.setAttribute("email", user.getEmail());
-                session.setAttribute("head_img", user.getHead_img());
+                session.setAttribute(SESSION_USER_ID, user.getUser_id());
+                session.setAttribute(SESSION_USER_NAME, user.getUsername());
+                session.setAttribute(SESSION_USER_ROLE,user.getUser_role());
+                session.setAttribute(SESSION_USER_EMAIL, user.getEmail());
+                session.setAttribute(SESSION_USER_HEAD_IMG, user.getHead_img());
                 model.addAttribute(Constant.ERROR_INFO, null);
                 if (userRole.equals("管理员")) return adminController.User(request);
                 else return projectController.Project(request, model);

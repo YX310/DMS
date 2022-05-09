@@ -294,12 +294,15 @@ ul,li{
 	list-style-type:none;
 }
 
-
 .upload-file-td > .file-input {
 	margin-top: 5px;
-	width: 400%;
+	width: 300px;
 }
 
 .upload-file-td > .file-input > .file-caption-main > .input-group-btn > .btn-file {
+	margin-top: -15px;
+}
+
+.upload-file-td > .file-input > .file-caption-main > .input-group-btn > .fileinput-remove-button {
 	margin-top: -15px;
 }

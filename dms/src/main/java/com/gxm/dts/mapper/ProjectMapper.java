@@ -75,4 +75,8 @@ public interface ProjectMapper {
     // 查询项目创建者
     @Select("SELECT creator FROM project WHERE project_id=#{projectId}")
     public String selectCreator(int projectId);
+
+    // 查询项目是否存在
+    @Select("SELECT count(*) FROM project WHERE project_name=#{projectName}")
+    public int selectProjectIdByProjectName(String projectName);
 }

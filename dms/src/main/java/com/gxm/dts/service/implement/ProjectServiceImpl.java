@@ -115,4 +115,9 @@ public class ProjectServiceImpl implements IProjectService {
     public String selectCreator(int projectId) {
         return projectMapper.selectCreator(projectId);
     }
+
+    @Override
+    public boolean checkProjectIsExist(String projectName) {
+        return projectMapper.selectProjectIdByProjectName(projectName) > 0;
+    }
 }

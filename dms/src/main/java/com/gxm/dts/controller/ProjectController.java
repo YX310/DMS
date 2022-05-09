@@ -84,7 +84,8 @@ public class ProjectController {
 
     //新建项目
     @RequestMapping("/toAddProject")
-    public String toAddProject(){
+    public String toAddProject(HttpSession session, Model model) {
+        applyInfo(session, model, ERROR_INFO);
         return "client/addProject";
     }
 
@@ -92,6 +93,10 @@ public class ProjectController {
     public String add(HttpSession session,
                       Project project,
                       UserProject userProject) {
+        if (projectServiceImpl.checkProjectIsExist(userProject.getProject_name())) {
+            session.setAttribute(ERROR_INFO, "项目已存在");
+            return "redirect:/toAddProject";
+        }
         String creator = userServiceImpl.findUsernameById(userProject.getUser_id());
         if (!project.getProject_member().contains(creator)) {
             project.setProject_member(creator + ";" + project.getProject_member());

@@ -68,11 +68,10 @@
 								<select name="demand_state">
 									<option th:selected="${demand.demand_state} eq '新建'">新建</option>
 									<option th:selected="${demand.demand_state} eq '进行中'">进行中</option>
-									<option th:selected="${demand.demand_state} eq '已解决'">已解决</option>
-									<option th:selected="${demand.demand_state} eq '无法解决'">无法解决</option>
-									<option th:selected="${demand.demand_state} eq '待反馈'">待反馈</option>
+									<option th:selected="${demand.demand_state} eq '已实现'">已实现</option>
+									<option th:selected="${demand.demand_state} eq '未验证'">未验证</option>
+									<option th:selected="${demand.demand_state} eq '已验证'">已验证</option>
 									<option th:selected="${demand.demand_state} eq '已拒绝'">已拒绝</option>
-									<option th:selected="${demand.demand_state} eq '继续跟踪'">继续跟踪</option>
 									<option th:selected="${demand.demand_state} eq '已关闭'">已关闭</option>
 								</select>
 							</div>

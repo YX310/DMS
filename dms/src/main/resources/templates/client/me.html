@@ -27,10 +27,10 @@
     <div id="me-box">
         <div class="me-content">
             <div class="me-top">
-                <div class="me-top-left user-headimg"><img th:src="@{(${session.head_img})}" alt="我的头像"/></div>
+                <div class="me-top-left user-headimg"><img th:src="@{(${user.head_img})}" alt="我的头像"/></div>
                 <div class="me-top-right">
                     <div class="right-username"><span th:text="${user.username}"></span></div>
-                    <div class="edit-data"><a th:unless="${user.user_id != session.userId}" th:href="@{/toUpdateMe(id=${user.user_id})}">编辑我的资料</a></div>
+                    <div class="edit-data" th:unless="${user.user_id != session.userId}"><a th:href="@{/toUpdateMe(id=${user.user_id})}">编辑我的资料</a></div>
                     <div class="right-message">
                         <div class="nickname">昵称:<span th:text="${user.nickname}"></span></div>
                         <div class="user-position">我的职位:<span th:text="${user.user_position}"></span></div>
@@ -43,13 +43,15 @@
                 <div class="me-middle-content">
                     <!--未有动态-->
                     <div class="person-activities" th:unless="${updateRecords.size() != 0}">
-                        <h2 style="color:rgba(71,149,243,1) ;">我的动态</h2>
+                        <h2 style="color:rgba(71,149,243,1) ;" th:unless="${user.user_id == session.userId}" th:text="${user.username + '的动态'}"></h2>
+                        <h2 style="color:rgba(71,149,243,1) ;" th:unless="${user.user_id != session.userId}">我的动态</h2>
                         <p style="font-size: 1.2em;" th:unless="${session.userRole != '管理员'}">该功能尚未开放，敬请期待~</p>
                         <p style="font-size: 1.2em;" th:unless="${session.userRole == '管理员'}">您还没有动态喔~</p>
                     </div>
                     <!--有动态-->
                     <div class="person-activities" th:unless="${updateRecords.size() == 0}">
-                        <h2 style="color:rgba(71,149,243,1) ;">我的动态</h2>
+                        <h2 style="color:rgba(71,149,243,1) ;" th:unless="${user.user_id == session.userId}" th:text="${user.username + '的动态'}"></h2>
+                        <h2 style="color:rgba(71,149,243,1) ;" th:unless="${user.user_id != session.userId}">我的动态</h2>
                         <p style="font-size: 1.2em;" th:unless="${session.userRole != '管理员'}">该功能尚未开放，敬请期待~</p>
                         <div class="main record-list">
                             <ul class="cbp_tmtimeline" th:each="n, allUpdateRecordStat:${updateRecords}">

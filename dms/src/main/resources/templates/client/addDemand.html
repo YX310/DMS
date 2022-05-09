@@ -42,12 +42,12 @@
                 <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
                     <tr>
                         <td width="20%" align="center">标题</td>
-                        <td><input id="postinput" class="form-control" name="demand_name" maxlength="30" required="required" value="sda"/></td>
+                        <td><input id="postinput" class="form-control" name="demand_name" maxlength="30" required="required" value="测试新建需求"/></td>
                     </tr>
                     <tr>
                         <td align="center">描述</td>
                         <td >
-                            <textarea  name="demand_description" data-provide="markdown" rows="10" cols="140">
+                            <textarea  name="demand_description" data-provide="markdown" rows="10" cols="140">测试新建需求
                             </textarea>
                         </td>
                     </tr>
@@ -102,7 +102,7 @@
 <script th:inline="javascript">
     $(function(){
         $("#editor-zh").markdown({language:'zh'})
-    })
+    });
 
     $('#file-zh').fileinput({
         language: 'zh',

@@ -54,4 +54,7 @@ public interface IProjectService {
 
     // 查询项目创建者
     public String selectCreator(int projectId);
+
+    // 查询项目是否存在
+    public boolean checkProjectIsExist(String projectName);
 }

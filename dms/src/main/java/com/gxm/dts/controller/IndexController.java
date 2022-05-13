@@ -112,6 +112,7 @@ public class IndexController {
     @RequestMapping(value = {"/toOverview"})
     public String toOverView(HttpSession session, Integer id, Model model){
         Project project = projectServiceImpl.getProjectId(id);
+        session.setAttribute("projectId", id);
         model.addAttribute("project", project);
         List<Defect> defects = defectServiceImpl.selectDefectWithProjectId(id);
         List<Demand> demands = demandServiceImpl.selectDemandWithProjectId(id);

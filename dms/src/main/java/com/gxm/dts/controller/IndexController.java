@@ -67,7 +67,7 @@ public class IndexController {
 
     //(前台)用户信息
     @RequestMapping("/toMe")
-    public String toMe(Integer id, Model model){
+    public String toMe(Integer id, Model model) {
         User user = userServiceImpl.getUserId(id);
         String updatePerson = user.getUsername();
         List<UpdateRecord> updateRecords = updateRecordServiceImpl.selectUpdateRecordWithUpdatePerson(updatePerson);
@@ -78,7 +78,7 @@ public class IndexController {
 
     //(前台)用户信息
     @GetMapping("/toUpdateMe")
-    public String toUpdateMe(Integer id, Model model){
+    public String toUpdateMe(Integer id, Model model) {
         User user = userServiceImpl.getUserId(id);
         model.addAttribute("user", user);
         return "client/meUpdate";
@@ -87,7 +87,7 @@ public class IndexController {
     //(前台)修改用户信息
     @RequestMapping("/updateMe")
     public String updateUserWithId(HttpServletRequest request,
-                                   User user){
+                                   User user) {
         HttpSession session = request.getSession(true);
         userServiceImpl.updateMeWithId(user);
         session.setAttribute("head_img", user.getHead_img());
@@ -110,7 +110,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = {"/toOverview"})
-    public String toOverView(HttpSession session, Integer id, Model model){
+    public String toOverView(HttpSession session, Integer id, Model model) {
         Project project = projectServiceImpl.getProjectId(id);
         session.setAttribute("projectId", id);
         model.addAttribute("project", project);

@@ -306,3 +306,53 @@ ul,li{
 .upload-file-td > .file-input > .file-caption-main > .input-group-btn > .fileinput-remove-button {
 	margin-top: -15px;
 }
+
+/*footer-css*/
+#footer-box{
+	float: left;
+	width: 100%;
+	background-color: #f6f9fa;
+	height: 120px;
+}
+#footer-box a{
+	text-decoration: none;
+	color: #99a2aa;
+}
+#footer-box .some-link{
+	margin-top: 20px;
+}
+#footer-box ul{
+	width:fit-content;
+	height: 30px;
+	line-height: 30px;
+	display: block;
+	margin: 0 auto;
+	list-style: none;
+}
+#footer-box li{
+	float: left;
+	list-style: none;
+	padding: 0 5px;
+	color: #99a2aa;
+}
+#footer-box li:first-child{
+	margin-left: -40px;
+}
+#footer-box a:hover ,#footer-box li:hover{
+	color: rgba(71,149,243,1);
+}
+/*li+li{
+    padding: 0 4px;
+    border-left: 1.5px solid #4169E1;
+}*/
+.beian-box{
+	width: fit-content;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	margin: 0 auto;
+	font-size: 0.9em;
+}
+#footer-box span{
+	text-align: center;
+}

@@ -27,77 +27,77 @@
 
 </head>
 <body>
-<div th:replace="/client/index::header"></div>
-<div class="defect-box">
-    <div class="defect-content">
-        <div  class="container" style="width:100%;height:100%;margin-left:0px;" >
-            <form name="add-form" th:action="@{/addDemand}" onsubmit="return true" method="post" enctype="multipart/form-data">
-                <input name="project_id" type="hidden" th:value="${session.projectId}"/>
-                <input name="demand_creator" type="hidden" th:value="${session.username}"/>
-                <input name="start_date" type="hidden" value=""/>
-                <input name="finish_date" type="hidden" value=""/>
-                <input name="creation_time" type="hidden" id="time" value=""/>
-                <input name="update_time" type="hidden" id="time2" value=""/>
-                <h2 class="heading" >新建需求</h2>
-                <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
-                    <tr>
-                        <td width="20%" align="center">标题</td>
-                        <td><input id="postinput" class="form-control" name="demand_name" maxlength="30" required="required" value="测试新建需求"/></td>
-                    </tr>
-                    <tr>
-                        <td align="center">描述</td>
-                        <td >
-                            <textarea  name="demand_description" data-provide="markdown" rows="10" cols="140">测试新建需求
-                            </textarea>
-                        </td>
-                    </tr>
+    <div th:replace="/client/index::header"></div>
+    <div class="defect-box">
+        <div class="defect-content">
+            <div  class="container" style="width:100%;height:100%;margin-left:0px;" >
+                <form name="add-form" th:action="@{/addDemand}" onsubmit="return true" method="post" enctype="multipart/form-data">
+                    <input name="project_id" type="hidden" th:value="${session.projectId}"/>
+                    <input name="demand_creator" type="hidden" th:value="${session.username}"/>
+                    <input name="start_date" type="hidden" value=""/>
+                    <input name="finish_date" type="hidden" value=""/>
+                    <input name="creation_time" type="hidden" id="time" value=""/>
+                    <input name="update_time" type="hidden" id="time2" value=""/>
+                    <h2 class="heading" >新建需求</h2>
+                    <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
+                        <tr>
+                            <td width="20%" align="center">标题</td>
+                            <td><input id="postinput" class="form-control" name="demand_name" maxlength="30" required="required" value="测试新建需求"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center">描述</td>
+                            <td >
+                                <textarea  name="demand_description" data-provide="markdown" rows="10" cols="140">测试新建需求
+                                </textarea>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td align="center">优先级</td>
-                        <td>
-                            <select required="required" name="priority">
-                                <option value="最高" >最高</option>
-                                <option value="较高">较高</option>
-                                <option value="普通" selected="selected">普通</option>
-                                <option value="较低">较低</option>
-                                <option value="最低">最低</option>
-                            </select>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td align="center">优先级</td>
+                            <td>
+                                <select required="required" name="priority">
+                                    <option value="最高" >最高</option>
+                                    <option value="较高">较高</option>
+                                    <option value="普通" selected="selected">普通</option>
+                                    <option value="较低">较低</option>
+                                    <option value="最低">最低</option>
+                                </select>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td align="center">指派人</td>
-                        <td><input  class="form-control" name="designated_person" type="text" required="required" value="xiaomin"/></td>
-                    </tr>
+                        <tr>
+                            <td align="center">指派人</td>
+                            <td><input  class="form-control" name="designated_person" type="text" required="required" value="xiaomin"/></td>
+                        </tr>
 
-                    <tr>
-                        <td align="center">状态</td>
-                        <td>
-                            <select name="demand_state">
-                                <option value="新建" selected="selected">新建</option>
-                                <option value="进行中">进行中</option>
-                                <option value="已解决">已解决</option>
-                                <option value="无法解决">无法解决</option>
-                                <option value="待反馈">待反馈</option>
-                                <option value="已拒绝">已拒绝</option>
-                                <option value="继续跟踪">继续跟踪</option>
-                                <option value="已关闭">已关闭</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center">文件</td>
-                        <td>
-                            <input id="file-zh" name="demand_file" type="file" multiple="multiple" th:multiple="multiple" data-show-caption="true">
-                        </td>
-                    </tr>
-                </table>
-                <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">创建</button>
-            </form>
+                        <tr>
+                            <td align="center">状态</td>
+                            <td>
+                                <select name="demand_state">
+                                    <option value="新建" selected="selected">新建</option>
+                                    <option value="进行中">进行中</option>
+                                    <option value="已解决">已解决</option>
+                                    <option value="无法解决">无法解决</option>
+                                    <option value="待反馈">待反馈</option>
+                                    <option value="已拒绝">已拒绝</option>
+                                    <option value="继续跟踪">继续跟踪</option>
+                                    <option value="已关闭">已关闭</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">文件</td>
+                            <td>
+                                <input id="file-zh" name="demand_file" type="file" multiple="multiple" th:multiple="multiple" data-show-caption="true">
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">创建</button>
+                </form>
+            </div>
         </div>
     </div>
-
-</div>
+    <div th:replace="/public/footer::footer"></div>
 
 <script th:inline="javascript">
     $(function(){

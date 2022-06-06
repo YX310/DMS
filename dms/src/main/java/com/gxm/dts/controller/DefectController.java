@@ -162,7 +162,7 @@ public class DefectController {
         if (DEBUG) System.out.println("id: " + updateRecord.getUpdate_time());
         Object object = session.getAttribute("defect");
 
-        String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+        String prefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";// 协议，域名/ip，端口
         if (DEBUG) System.out.println("getDefect_id: " + defect.getDefect_id());
         defect.setDefect_document(fileUploadController.saveFile(files, Integer.parseInt(defect.getDefect_id()), prefix, IS_DEFECT));
         if (object != null) {

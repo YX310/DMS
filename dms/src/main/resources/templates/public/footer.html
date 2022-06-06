@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>footer</title>
+	</head>
+	<style type="text/css">
+		#footer-box{
+			float: left;
+			width: 100%;
+			background-color: #f6f9fa;
+			height: 120px;
+		}
+		a{
+			text-decoration: none;
+			color: #99a2aa;
+		}
+		.some-link{
+			margin-top: 20px;
+		}
+		ul{
+			width:fit-content;
+			height: 30px;
+			line-height: 30px;
+			display: block;
+			margin: 0 auto;
+			list-style: none;
+		}
+		li{
+			float: left;
+			list-style: none;
+			padding: 0 5px;
+			color: #99a2aa;
+		}
+		li:first-child{
+			margin-left: -40px;
+		}
+		a:hover ,li:hover{
+			color: rgba(71,149,243,1);
+		}
+		/*li+li{
+			padding: 0 4px;
+			border-left: 1.5px solid #4169E1;
+		}*/
+		.beian-box{
+			width: fit-content;
+			text-align: center;
+			height: 20px;
+			line-height: 20px;
+			margin: 0 auto;
+			font-size: 0.9em;
+		}
+		span{
+			text-align: center;
+		}
+	</style>
+	<body>
+		<div th:fragment="footer" id="footer-box">
+			<div class="some-link">
+				<ul>
+					<li>关于我们</li>
+					<li>联系我们</li>
+					<li>加入我们</li>
+					<li>友情链接</li>
+				</ul>
+			</div><br/>
+			<div class="beian-box">
+				<span style="float: left;"><a href="https://beian.miit.gov.cn/" target="_blank">备案号：粤ICP备 2022059980号</a></span>
+	
+			 	<span style="display:inline-block; margin-left: 15px;float: left;">
+			 		<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44180302000152" style="height: 20px;line-height: 20px;">
+			 			<img src="../imgs/style_img/beianimg.png" style="float:left;"/>
+			 			<p style="float:left;margin: 0px 5px;">粤公网安备 44180302000152号</p>
+			 		</a>
+			 	</span>
+		    </div>
+		</div>
+	</body>
+</html>

@@ -19,38 +19,39 @@
 <body>
 
     <div th:replace="/public/header::header"></div>
-        <div class="userupdate-box">
-            <div class="userupdate-content">
-                <form th:action="@{/update}" method="post" id="updateForm">
-                    <h2 class="heading" >修改用户信息</h2>
-                    <input name="user_id" type="hidden" th:value="${user.user_id}"/>
-                    <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
-                        <tr>
-                            <td width="17%" align="center">用户名</td>
-                            <td>
-                            <input  class="form-control" name="username" type="text" required="required" th:value="${user.username}"/></td>
-                        </tr>
+    <div class="userupdate-box">
+        <div class="userupdate-content">
+            <form th:action="@{/update}" method="post" id="updateForm">
+                <h2 class="heading" >修改用户信息</h2>
+                <input name="user_id" type="hidden" th:value="${user.user_id}"/>
+                <table class="table table-striped table-bordered table-hover table-condensed" border="0" cellspacing="0" width="80%" height="100%" >
+                    <tr>
+                        <td width="17%" align="center">用户名</td>
+                        <td>
+                        <input  class="form-control" name="username" type="text" required="required" th:value="${user.username}"/></td>
+                    </tr>
 
-                        <tr>
-                            <td align="center">用户角色</td>
-                            <td><input class="form-control" name="user_role" type="text" required="required" th:value="${user.user_role}"/></td>
-                        </tr>
+                    <tr>
+                        <td align="center">用户角色</td>
+                        <td><input class="form-control" name="user_role" type="text" required="required" th:value="${user.user_role}"/></td>
+                    </tr>
 
-                        <tr>
-                            <td align="center">用户职位</td>
-                            <td><input class="form-control" name="user_position" type="text" required="required" th:value="${user.user_position}"/></td>
-                        </tr>
+                    <tr>
+                        <td align="center">用户职位</td>
+                        <td><input class="form-control" name="user_position" type="text" required="required" th:value="${user.user_position}"/></td>
+                    </tr>
 
-                        <tr>
-                            <td align="center">邮箱</td>
-                            <td><input  class="form-control" name="email" type="text" required="required" th:value="${user.email}"/></td>
-                        </tr>
+                    <tr>
+                        <td align="center">邮箱</td>
+                        <td><input  class="form-control" name="email" type="text" required="required" th:value="${user.email}"/></td>
+                    </tr>
 
-                    </table>
-                    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">保存修改</button>
-                </form>
-            </div>
+                </table>
+                <button class="btn btn-primary btn-lg btn-block" type="button" onclick="_confirm2()">保存修改</button>
+            </form>
         </div>
+    </div>
+    <div th:replace="/public/footer::footer"></div>
     <script type="text/javascript">
         /*<![CDATA[*/
         function _confirm2() {
